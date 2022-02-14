@@ -19,7 +19,7 @@ solana-program = { path = "../../../../sdk/program", version = "=1.14.17" }
 solana-logger = { path = "../../../../logger", version = "=1.14.17" }
 solana-program-test = { path = "../../../../program-test", version = "=1.14.17" }
 solana-sdk = { path = "../../../../sdk", version = "=1.14.17" }
-solana-validator = { path = "../../../../validator", version = "=1.14.17" }
+renec-validator = { path = "../../../../validator", version = "=1.14.17" }
 
 [lib]
 crate-type = ["cdylib", "lib"]

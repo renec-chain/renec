@@ -6420,7 +6420,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-validator"
+name = "renec-validator"
 version = "1.14.17"
 dependencies = [
  "chrono",

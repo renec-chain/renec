@@ -4515,7 +4515,7 @@ dependencies = [
  "solana-program 1.14.17",
  "solana-program-test",
  "solana-sdk 1.14.17",
- "solana-validator",
+ "renec-validator",
 ]
 
 [[package]]
@@ -5727,7 +5727,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-validator"
+name = "renec-validator"
 version = "1.14.17"
 dependencies = [
  "chrono",

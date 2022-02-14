@@ -351,7 +351,7 @@ impl Rocks {
                 }
             }
         };
-        // this is only needed for LedgerCleanupService. so guard with PrimaryOnly (i.e. running solana-validator)
+        // this is only needed for LedgerCleanupService. so guard with PrimaryOnly (i.e. running renec-validator)
         if matches!(access_type, AccessType::PrimaryOnly) {
             for cf_name in cf_names {
                 // these special column families must be excluded from LedgerCleanupService's rocksdb

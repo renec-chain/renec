@@ -28,7 +28,7 @@ solana-runtime = { path = "../runtime", version = "=1.10.41" }
 solana-sdk = { path = "../sdk", version = "=1.10.41" }
 solana-send-transaction-service = { path = "../send-transaction-service", version = "=1.10.41" }
 solana-streamer = { path = "../streamer", version = "=1.10.41" }
-solana-validator = { path = "../validator", version = "=1.10.41" }
+renec-validator = { path = "../validator", version = "=1.10.41" }
 solana-version = { path = "../version", version = "=1.10.41" }
 
 [dev-dependencies]

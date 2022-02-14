@@ -22,7 +22,7 @@ use {
     solana_runtime::accounts_index::AccountSecondaryIndexes,
     solana_sdk::{exit::Exit, pubkey::Pubkey, signature::Signer},
     solana_streamer::socket::SocketAddrSpace,
-    solana_validator::port_range_validator,
+    renec_validator::port_range_validator,
     std::{
         collections::HashSet,
         env,
@@ -146,7 +146,7 @@ pub fn main() {
                 .long("rpc-port")
                 .value_name("PORT")
                 .takes_value(true)
-                .validator(solana_validator::port_validator)
+                .validator(renec_validator::port_validator)
                 .help("Enable JSON RPC on this port, and the next port for the RPC websocket"),
         )
         .arg(
@@ -365,7 +365,7 @@ pub fn main() {
     };
     let socket_addr_space = SocketAddrSpace::new(matches.is_present("allow_private_addr"));
 
-    let _logger_thread = solana_validator::redirect_stderr_to_file(logfile);
+    let _logger_thread = renec_validator::redirect_stderr_to_file(logfile);
 
     let (cluster_info, rpc_contact_info, snapshot_info) = replica_util::get_rpc_peer_info(
         identity_keypair,

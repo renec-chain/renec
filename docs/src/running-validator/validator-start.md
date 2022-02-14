@@ -29,7 +29,7 @@ detail on cluster activity.
 ## Enabling CUDA
 
 If your machine has a GPU with CUDA installed \(Linux-only currently\), include
-the `--cuda` argument to `solana-validator`.
+the `--cuda` argument to `renec-validator`.
 
 When your validator is started look for the following log message to indicate
 that CUDA is enabled: `"[<timestamp> solana::validator] CUDA is enabled"`
@@ -264,7 +264,7 @@ Read more about [creating and managing a vote account](vote-accounts.md).
 ## Known validators
 
 If you know and respect other validator operators, you can specify this on the command line with the `--known-validator <PUBKEY>`
-argument to `solana-validator`. You can specify multiple ones by repeating the argument `--known-validator <PUBKEY1> --known-validator <PUBKEY2>`.
+argument to `renec-validator`. You can specify multiple ones by repeating the argument `--known-validator <PUBKEY1> --known-validator <PUBKEY2>`.
 This has two effects, one is when the validator is booting with `--only-known-rpc`, it will only ask that set of
 known nodes for downloading genesis and snapshot data. Another is that in combination with the `--halt-on-known-validators-accounts-hash-mismatch` option,
 it will monitor the merkle root hash of the entire accounts state of other known nodes on gossip and if the hashes produce any mismatch,
@@ -280,13 +280,13 @@ account state divergence.
 Connect to the cluster by running:
 
 ```bash
-solana-validator \
+renec-validator \
   --identity ~/validator-keypair.json \
   --vote-account ~/vote-account-keypair.json \
   --rpc-port 8899 \
   --entrypoint entrypoint.devnet.solana.com:8001 \
   --limit-ledger-size \
-  --log ~/solana-validator.log
+  --log ~/renec-validator.log
 ```
 
 To force validator logging to the console add a `--log -` argument, otherwise
@@ -299,7 +299,7 @@ The ledger will be placed in the `ledger/` directory by default, use the
 > [paper wallet seed phrase](../wallet-guide/paper-wallet.md)
 > for your `--identity` and/or
 > `--authorized-voter` keypairs. To use these, pass the respective argument as
-> `solana-validator --identity ASK ... --authorized-voter ASK ...`
+> `renec-validator --identity ASK ... --authorized-voter ASK ...`
 > and you will be prompted to enter your seed phrases and optional passphrase.
 
 Confirm your validator is connected to the network by opening a new terminal and
@@ -315,7 +315,7 @@ If your validator is connected, its public key and IP address will appear in the
 
 By default the validator will dynamically select available network ports in the
 8000-10000 range, and may be overridden with `--dynamic-port-range`. For
-example, `solana-validator --dynamic-port-range 11000-11020 ...` will restrict
+example, `renec-validator --dynamic-port-range 11000-11020 ...` will restrict
 the validator to ports 11000-11020.
 
 ### Limiting ledger size to conserve disk space
@@ -327,7 +327,7 @@ out of disk space.
 
 The default value attempts to keep the ledger disk usage under 500GB. More or
 less disk usage may be requested by adding an argument to `--limit-ledger-size`
-if desired. Check `solana-validator --help` for the default limit value used by
+if desired. Check `renec-validator --help` for the default limit value used by
 `--limit-ledger-size`. More information about
 selecting a custom limit value is [available
 here](https://github.com/solana-labs/solana/blob/36167b032c03fc7d1d8c288bb621920aaf903311/core/src/ledger_cleanup_service.rs#L23-L34).
@@ -362,8 +362,8 @@ WantedBy=multi-user.target
 ```
 
 Now create `/home/sol/bin/validator.sh` to include the desired
-`solana-validator` command-line. Ensure that the 'exec' command is used to
-start the validator process (i.e. "exec solana-validator ...").  This is
+`renec-validator` command-line. Ensure that the 'exec' command is used to
+start the validator process (i.e. "exec renec-validator ...").  This is
 important because without it, logrotate will end up killing the validator
 every time the logs are rotated.
 
@@ -390,14 +390,14 @@ to be reverted and the issue reproduced before help can be provided.
 
 #### Log rotation
 
-The validator log file, as specified by `--log ~/solana-validator.log`, can get
+The validator log file, as specified by `--log ~/renec-validator.log`, can get
 very large over time and it's recommended that log rotation be configured.
 
 The validator will re-open its when it receives the `USR1` signal, which is the
 basic primitive that enables log rotation.
 
 If the validator is being started by a wrapper shell script, it is important to
-launch the process with `exec` (`exec solana-validator ...`) when using logrotate.
+launch the process with `exec` (`exec renec-validator ...`) when using logrotate.
 This will prevent the `USR1` signal from being sent to the script's process
 instead of the validator's, which will kill them both.
 
@@ -405,13 +405,13 @@ instead of the validator's, which will kill them both.
 
 An example setup for the `logrotate`, which assumes that the validator is
 running as a systemd service called `sol.service` and writes a log file at
-/home/sol/solana-validator.log:
+/home/sol/renec-validator.log:
 
 ```bash
 # Setup log rotation
 
 cat > logrotate.sol <<EOF
-/home/sol/solana-validator.log {
+/home/sol/renec-validator.log {
   rotate 7
   daily
   missingok
@@ -426,7 +426,7 @@ systemctl restart logrotate.service
 
 As mentioned earlier, be sure that if you use logrotate, any script you create
 which starts the solana validator process uses "exec" to do so (example: "exec
-solana-validator ..."); otherwise, when logrotate sends its signal to the
+renec-validator ..."); otherwise, when logrotate sends its signal to the
 validator, the enclosing script will die and take the validator process with
 it.
 
@@ -434,7 +434,7 @@ it.
 
 Once your validator is operating normally, you can reduce the time it takes to
 restart your validator by adding the `--no-port-check` flag to your
-`solana-validator` command-line.
+`renec-validator` command-line.
 
 ### Using a ramdisk with spill-over into swap for the accounts database to reduce SSD wear
 
@@ -467,7 +467,7 @@ Example configuration:
 5. Enable swap with `sudo swapon -a` and mount the tmpfs with `sudo mount /mnt/solana-accounts/`
 6. Confirm swap is active with `free -g` and the tmpfs is mounted with `mount`
 
-Now add the `--accounts /mnt/solana-accounts` argument to your `solana-validator`
+Now add the `--accounts /mnt/solana-accounts` argument to your `renec-validator`
 command-line arguments and restart the validator.
 
 ### Account indexing

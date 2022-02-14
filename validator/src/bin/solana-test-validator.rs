@@ -25,7 +25,7 @@ use {
     },
     solana_streamer::socket::SocketAddrSpace,
     solana_test_validator::*,
-    solana_validator::{
+    renec_validator::{
         admin_rpc_service, dashboard::Dashboard, ledger_lockfile, lock_ledger, println_name_value,
         redirect_stderr_to_file,
     },
@@ -142,7 +142,7 @@ fn main() {
                 .value_name("PORT")
                 .takes_value(true)
                 .default_value(&default_faucet_port)
-                .validator(solana_validator::port_validator)
+                .validator(renec_validator::port_validator)
                 .help("Enable the faucet on this port"),
         )
         .arg(
@@ -151,7 +151,7 @@ fn main() {
                 .value_name("PORT")
                 .takes_value(true)
                 .default_value(&default_rpc_port)
-                .validator(solana_validator::port_validator)
+                .validator(renec_validator::port_validator)
                 .help("Enable JSON RPC on this port, and the next port for the RPC websocket"),
         )
         .arg(
@@ -245,7 +245,7 @@ fn main() {
                 .long("dynamic-port-range")
                 .value_name("MIN_PORT-MAX_PORT")
                 .takes_value(true)
-                .validator(solana_validator::port_range_validator)
+                .validator(renec_validator::port_range_validator)
                 .help(
                     "Range to use for dynamically assigned ports \
                     [default: 1024-65535]",

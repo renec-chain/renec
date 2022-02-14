@@ -1,12 +1,12 @@
 [package]
 name = "renec-genesis-utils"
 version = "1.9.29"
-description = "Solana Genesis Utils"
-authors = ["Solana Maintainers <maintainers@solana.foundation>"]
-repository = "https://github.com/solana-labs/solana"
+description = "RENEC Genesis Utils"
+authors = ["RENEC Maintainers <dev@remitano.com>"]
+repository = "https://github.com/remitano/renec"
 license = "Apache-2.0"
-homepage = "https://solana.com/"
-documentation = "https://docs.rs/solana-download-utils"
+homepage = "https://remitano.com/"
+documentation = "https://docs.rs/renec-genesis-utils"
 edition = "2021"
 
 [dependencies]

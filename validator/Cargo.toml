@@ -1,14 +1,14 @@
 [package]
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 edition = "2021"
-name = "solana-validator"
+name = "renec-validator"
 description = "Blockchain, Rebuilt for Scale"
 version = "1.9.29"
 repository = "https://github.com/solana-labs/solana"
 license = "Apache-2.0"
-homepage = "https://solana.com/"
-documentation = "https://docs.rs/solana-validator"
-default-run = "solana-validator"
+homepage = "https://remitano.com/"
+documentation = "https://docs.rs/renec-validator"
+default-run = "renec-validator"
 
 [dependencies]
 chrono = { version = "0.4.11", features = ["serde"] }

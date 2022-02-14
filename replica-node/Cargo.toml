@@ -28,7 +28,7 @@ solana-sdk = { path = "../sdk", version = "=1.9.29" }
 solana-send-transaction-service = { path = "../send-transaction-service", version = "=1.9.29" }
 solana-streamer = { path = "../streamer", version = "=1.9.29" }
 solana-version = { path = "../version", version = "=1.9.29" }
-solana-validator = { path = "../validator", version = "=1.9.29" }
+renec-validator = { path = "../validator", version = "=1.9.29" }
 
 [dev-dependencies]
 serial_test = "0.5.1"

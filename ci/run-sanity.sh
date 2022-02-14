@@ -29,7 +29,7 @@ while [[ $($solana_cli --url http://localhost:8899 slot --commitment processed) 
   echo "Checking slot"
 done
 
-$solana_validator --ledger config/ledger exit --force || true
+$renec_validator --ledger config/ledger exit --force || true
 
 wait $pid
 

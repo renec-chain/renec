@@ -95,7 +95,7 @@ else
     solana-log-analyzer
     solana-net-shaper
     solana-sys-tuner
-    solana-validator
+    renec-validator
     rbpf-cli
   )
 

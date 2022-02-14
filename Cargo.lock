@@ -5984,7 +5984,7 @@ dependencies = [
  "solana-sdk 1.13.6",
  "solana-send-transaction-service",
  "solana-streamer",
- "solana-validator",
+ "renec-validator",
  "solana-version",
  "tempfile",
  "tonic-build 0.7.0",
@@ -6524,7 +6524,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-validator"
+name = "renec-validator"
 version = "1.13.6"
 dependencies = [
  "chrono",

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Fetches the latest SPL programs and produces the solana-genesis command-line
+# Fetches the latest SPL programs and produces the renec-genesis command-line
 # arguments needed to install them
 #
 
@@ -51,5 +51,5 @@ echo "Available SPL programs:"
 ls -l spl_*.so
 
 echo
-echo "solana-genesis command-line arguments (spl-genesis-args.sh):"
+echo "renec-genesis command-line arguments (spl-genesis-args.sh):"
 cat spl-genesis-args.sh

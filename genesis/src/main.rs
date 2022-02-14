@@ -12,7 +12,7 @@ use {
         },
     },
     solana_entry::poh::compute_hashes_per_tick,
-    solana_genesis::{genesis_accounts::add_genesis_accounts, Base64Account},
+    renec_genesis::{genesis_accounts::add_genesis_accounts, Base64Account},
     solana_ledger::{blockstore::create_new_ledger, blockstore_db::AccessType},
     solana_runtime::hardened_unpack::MAX_GENESIS_ARCHIVE_UNPACKED_SIZE,
     solana_sdk::{

@@ -5,7 +5,7 @@ use {
         bench::{do_bench_tps, generate_and_fund_keypairs, generate_keypairs},
         cli,
     },
-    solana_genesis::Base64Account,
+    renec_genesis::Base64Account,
     solana_gossip::gossip_service::{discover_cluster, get_client, get_multi_client},
     solana_sdk::{
         fee_calculator::FeeRateGovernor,

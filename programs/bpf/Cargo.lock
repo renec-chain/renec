@@ -4586,7 +4586,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-cli-config"
+name = "renec-cli-config"
 version = "1.14.17"
 dependencies = [
  "dirs-next",
@@ -4616,7 +4616,7 @@ dependencies = [
  "serde_json",
  "solana-account-decoder",
  "solana-clap-utils",
- "solana-cli-config",
+ "renec-cli-config",
  "solana-client",
  "solana-sdk 1.14.17",
  "solana-transaction-status",
@@ -4800,7 +4800,7 @@ dependencies = [
  "serde",
  "serde_derive",
  "solana-clap-utils",
- "solana-cli-config",
+ "renec-cli-config",
  "solana-logger 1.14.17",
  "solana-metrics",
  "solana-sdk 1.14.17",
@@ -5750,7 +5750,7 @@ dependencies = [
  "serde_json",
  "signal-hook",
  "solana-clap-utils",
- "solana-cli-config",
+ "renec-cli-config",
  "solana-client",
  "solana-core",
  "solana-download-utils",

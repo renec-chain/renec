@@ -8,7 +8,7 @@ use {
         input_parsers::unix_timestamp_from_rfc3339_datetime,
         input_validators::{is_amount, is_rfc3339_datetime, is_valid_pubkey, is_valid_signer},
     },
-    solana_cli_config::CONFIG_FILE,
+    renec_cli_config::CONFIG_FILE,
     solana_sdk::native_token::sol_to_lamports,
     std::{ffi::OsString, process::exit},
 };

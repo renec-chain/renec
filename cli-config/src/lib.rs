@@ -40,9 +40,9 @@
 //!
 //! ```no_run
 //! use anyhow::anyhow;
-//! use solana_cli_config::{CONFIG_FILE, Config};
+//! use renec_cli_config::{CONFIG_FILE, Config};
 //!
-//! let config_file = solana_cli_config::CONFIG_FILE.as_ref()
+//! let config_file = renec_cli_config::CONFIG_FILE.as_ref()
 //!     .ok_or_else(|| anyhow!("unable to get config file path"))?;
 //! let mut cli_config = Config::load(&config_file)?;
 //! // Set the RPC URL to devnet

@@ -21,7 +21,7 @@ pickledb = { version = "0.5.1", default-features = false, features = ["yaml"] }
 serde = { version = "1.0", features = ["derive"] }
 solana-account-decoder = { path = "../account-decoder", version = "=1.14.17" }
 solana-clap-utils = { path = "../clap-utils", version = "=1.14.17" }
-solana-cli-config = { path = "../cli-config", version = "=1.14.17" }
+renec-cli-config = { path = "../cli-config", version = "=1.14.17" }
 solana-client = { path = "../client", version = "=1.14.17" }
 solana-remote-wallet = { path = "../remote-wallet", version = "=1.14.17" }
 solana-sdk = { path = "../sdk", version = "=1.14.17" }

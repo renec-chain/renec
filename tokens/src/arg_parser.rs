@@ -11,7 +11,7 @@ use {
         input_validators::{is_amount, is_valid_pubkey, is_valid_signer},
         keypair::{pubkey_from_path, signer_from_path},
     },
-    solana_cli_config::CONFIG_FILE,
+    renec_cli_config::CONFIG_FILE,
     solana_remote_wallet::remote_wallet::maybe_wallet_manager,
     solana_sdk::native_token::sol_to_lamports,
     std::{error::Error, ffi::OsString, process::exit},

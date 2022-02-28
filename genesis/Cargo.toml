@@ -16,7 +16,7 @@ serde = "1.0.130"
 serde_json = "1.0.72"
 serde_yaml = "0.8.21"
 solana-clap-utils = { path = "../clap-utils", version = "=1.9.29" }
-solana-cli-config = { path = "../cli-config", version = "=1.9.29" }
+renec-cli-config = { path = "../cli-config", version = "=1.9.29" }
 solana-entry = { path = "../entry", version = "=1.9.29" }
 solana-ledger = { path = "../ledger", version = "=1.9.29" }
 solana-logger = { path = "../logger", version = "=1.9.29" }

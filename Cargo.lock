@@ -3882,7 +3882,7 @@ dependencies = [
  "serde_json",
  "serde_yaml",
  "solana-clap-utils",
- "solana-cli-config",
+ "renec-cli-config",
  "solana-exchange-program",
  "solana-ledger",
  "solana-logger 1.8.14",
@@ -4832,7 +4832,7 @@ dependencies = [
  "solana-account-decoder",
  "solana-bpf-loader-program",
  "solana-clap-utils",
- "solana-cli-config",
+ "renec-cli-config",
  "solana-cli-output",
  "solana-client",
  "solana-config-program",
@@ -4854,7 +4854,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-cli-config"
+name = "renec-cli-config"
 version = "1.9.29"
 dependencies = [
  "anyhow",
@@ -5111,7 +5111,7 @@ dependencies = [
  "serde",
  "serde_derive",
  "solana-clap-utils",
- "solana-cli-config",
+ "renec-cli-config",
  "solana-logger 1.9.29",
  "solana-metrics",
  "solana-sdk",
@@ -6001,7 +6001,7 @@ version = "1.9.29"
 dependencies = [
  "clap 2.33.3",
  "solana-clap-utils",
- "solana-cli-config",
+ "renec-cli-config",
  "solana-client",
  "solana-remote-wallet",
  "solana-runtime",
@@ -6159,10 +6159,10 @@ dependencies = [
  "indexmap",
  "indicatif",
  "pickledb",
+ "renec-cli-config",
  "serde",
  "solana-account-decoder",
  "solana-clap-utils",
- "solana-cli-config",
  "solana-client",
  "solana-logger 1.9.29",
  "solana-remote-wallet",
@@ -6327,8 +6327,8 @@ dependencies = [
  "clap 2.33.3",
  "humantime",
  "log 0.4.14",
+ "renec-cli-config",
  "solana-clap-utils",
- "solana-cli-config",
  "solana-cli-output",
  "solana-client",
  "solana-logger 1.9.29",

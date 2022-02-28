@@ -29,7 +29,7 @@ serde_json = "1.0.72"
 solana-account-decoder = { path = "../account-decoder", version = "=1.9.29" }
 solana-bpf-loader-program = { path = "../programs/bpf_loader", version = "=1.9.29" }
 solana-clap-utils = { path = "../clap-utils", version = "=1.9.29" }
-solana-cli-config = { path = "../cli-config", version = "=1.9.29" }
+renec-cli-config = { path = "../cli-config", version = "=1.9.29" }
 solana-cli-output = { path = "../cli-output", version = "=1.9.29" }
 solana-client = { path = "../client", version = "=1.9.29" }
 solana-config-program = { path = "../programs/config", version = "=1.9.29" }

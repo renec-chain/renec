@@ -4460,7 +4460,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-cli-config"
+name = "renec-cli-config"
 version = "1.9.29"
 dependencies = [
  "dirs-next",
@@ -4645,7 +4645,7 @@ dependencies = [
  "serde",
  "serde_derive",
  "solana-clap-utils",
- "solana-cli-config",
+ "renec-cli-config",
  "solana-logger 1.9.29",
  "solana-metrics",
  "solana-sdk",

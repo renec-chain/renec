@@ -7,7 +7,7 @@ use {
     console::style,
     serde::{Deserialize, Deserializer, Serialize, Serializer},
     solana_clap_utils::{input_parsers::*, input_validators::*, keypair::*},
-    solana_cli_output::{QuietDisplay, VerboseDisplay},
+    renec_cli_output::{QuietDisplay, VerboseDisplay},
     solana_client::{
         client_error::ClientError, rpc_client::RpcClient, rpc_request::MAX_MULTIPLE_ACCOUNTS,
     },

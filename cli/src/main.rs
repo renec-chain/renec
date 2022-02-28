@@ -11,7 +11,7 @@ use {
         cli::{parse_command, process_command, CliCommandInfo, CliConfig},
     },
     renec_cli_config::{Config, ConfigInput},
-    solana_cli_output::{
+    renec_cli_output::{
         display::{println_name_value, println_name_value_or},
         OutputFormat,
     },

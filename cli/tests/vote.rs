@@ -5,7 +5,7 @@ use {
         cli::{process_command, request_and_confirm_airdrop, CliCommand, CliConfig},
         spend_utils::SpendAmount,
     },
-    solana_cli_output::{parse_sign_only_reply_string, OutputFormat},
+    renec_cli_output::{parse_sign_only_reply_string, OutputFormat},
     solana_client::{
         blockhash_query::{self, BlockhashQuery},
         rpc_client::RpcClient,

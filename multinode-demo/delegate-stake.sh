@@ -102,7 +102,7 @@ if ((airdrops_enabled)); then
     echo "--keypair argument must be provided"
     exit 1
   fi
-  $solana_cli \
+  $renec_cli \
     "${common_args[@]}" --keypair "$SOLANA_CONFIG_DIR/faucet.json" \
     transfer --allow-unfunded-recipient "$keypair" "$stake_sol"
 fi
@@ -118,10 +118,10 @@ else
 fi
 
 set -x
-$solana_cli "${common_args[@]}" \
+$renec_cli "${common_args[@]}" \
   vote-account "$vote_account"
-$solana_cli "${common_args[@]}" \
+$renec_cli "${common_args[@]}" \
   create-stake-account "$stake_account" "$stake_sol"
-$solana_cli "${common_args[@]}" \
+$renec_cli "${common_args[@]}" \
   delegate-stake $maybe_force "$stake_account" "$vote_account"
-$solana_cli "${common_args[@]}" stakes "$stake_account"
+$renec_cli "${common_args[@]}" stakes "$stake_account"

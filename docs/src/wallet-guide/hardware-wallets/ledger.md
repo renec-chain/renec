@@ -8,7 +8,7 @@ using the command line tools.
 ## Before You Begin
 
 - [Set up a Nano with the Solana App](https://support.ledger.com/hc/en-us/articles/360016265659-Solana-SOL-?docs=true)
-- [Install the Solana command-line tools](../../cli/install-solana-cli-tools.md)
+- [Install the Renec command-line tools](../../cli/install-renec-cli-tools.md)
 
 ## Use Ledger Nano with Solana CLI
 

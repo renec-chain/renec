@@ -2,7 +2,7 @@
 
 use {
     serde_json::Value,
-    solana_cli::{
+    renec_cli::{
         cli::{process_command, CliCommand, CliConfig},
         program::{ProgramCliCommand, CLOSE_PROGRAM_WARNING},
     },

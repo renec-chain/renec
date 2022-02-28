@@ -24,7 +24,7 @@ and high TPS. For specific requirements, please see
 
 To run an api node:
 
-1. [Install the Solana command-line tool suite](../cli/install-solana-cli-tools.md)
+1. [Install the Solana command-line tool suite](../cli/install-renec-cli-tools.md)
 2. Start the validator with at least the following parameters:
 
 ```bash

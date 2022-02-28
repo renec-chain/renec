@@ -1,7 +1,7 @@
 #![allow(clippy::integer_arithmetic)]
 use {
     log::*,
-    solana_cli_output::CliAccount,
+    renec_cli_output::CliAccount,
     solana_client::{
         connection_cache::{DEFAULT_TPU_CONNECTION_POOL_SIZE, DEFAULT_TPU_USE_QUIC},
         nonblocking,

@@ -22,7 +22,7 @@ regex = "1"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0.79"
 solana-clap-utils = { path = "../clap-utils", version = "=1.10.41" }
-solana-cli-output = { path = "../cli-output", version = "=1.10.41" }
+renec-cli-output = { path = "../cli-output", version = "=1.10.41" }
 solana-core = { path = "../core", version = "=1.10.41" }
 solana-entry = { path = "../entry", version = "=1.10.41" }
 solana-ledger = { path = "../ledger", version = "=1.10.41" }

@@ -6,7 +6,7 @@ use {
         spend_utils::SpendAmount,
         test_utils::check_ready,
     },
-    solana_cli_output::{parse_sign_only_reply_string, OutputFormat},
+    renec_cli_output::{parse_sign_only_reply_string, OutputFormat},
     solana_client::{
         blockhash_query::{self, BlockhashQuery},
         nonce_utils,

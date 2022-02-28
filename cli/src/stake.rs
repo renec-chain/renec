@@ -20,7 +20,7 @@ use {
         offline::*,
         ArgConstant,
     },
-    solana_cli_output::{
+    renec_cli_output::{
         return_signers_with_config, CliEpochReward, CliStakeHistory, CliStakeHistoryEntry,
         CliStakeState, CliStakeType, OutputFormat, ReturnSignersConfig,
     },

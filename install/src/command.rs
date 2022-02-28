@@ -537,7 +537,7 @@ pub fn init(
     explicit_release: Option<ExplicitRelease>,
 ) -> Result<(), String> {
     let config = {
-        // Write new config file only if different, so that running |solana-install init|
+        // Write new config file only if different, so that running |renec-install init|
         // repeatedly doesn't unnecessarily re-download
         let mut current_config = Config::load(config_file).unwrap_or_default();
         current_config.current_update_manifest = None;
@@ -605,7 +605,7 @@ pub fn info(config_file: &str, local_info_only: bool, eval: bool) -> Result<(), 
 
     if eval {
         println!(
-            "SOLANA_INSTALL_ACTIVE_RELEASE={}",
+            "RENEC_INSTALL_ACTIVE_RELEASE={}",
             &config.active_release_dir().to_str().unwrap_or("")
         );
         config
@@ -615,7 +615,7 @@ pub fn info(config_file: &str, local_info_only: bool, eval: bool) -> Result<(), 
                 ExplicitRelease::Channel(channel) => channel,
             })
             .and_then(|channel| {
-                println!("SOLANA_INSTALL_ACTIVE_CHANNEL={}", channel,);
+                println!("RENEC_INSTALL_ACTIVE_CHANNEL={}", channel,);
                 Option::<String>::None
             });
         return Ok(());
@@ -870,7 +870,7 @@ fn check_for_newer_github_release(
     let mut page = 1;
     const PER_PAGE: usize = 100;
     let client = reqwest::blocking::Client::builder()
-        .user_agent("solana-install")
+        .user_agent("renec-install")
         .build()?;
     let mut all_releases = vec![];
     let mut releases = vec![];

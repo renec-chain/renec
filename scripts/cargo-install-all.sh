@@ -74,8 +74,8 @@ if [[ $CI_OS_NAME = windows ]]; then
     cargo-build-bpf
     cargo-test-bpf
     solana
-    solana-install
-    solana-install-init
+    renec-install
+    renec-install-init
     renec-keygen
     solana-stake-accounts
     solana-test-validator
@@ -89,7 +89,7 @@ else
     solana-bench-tps
     solana-faucet
     solana-gossip
-    solana-install
+    renec-install
     renec-keygen
     solana-ledger-tool
     solana-log-analyzer
@@ -105,7 +105,7 @@ else
       cargo-build-bpf
       cargo-test-bpf
       solana-dos
-      solana-install-init
+      renec-install-init
       solana-stake-accounts
       solana-test-validator
       solana-tokens

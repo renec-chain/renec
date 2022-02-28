@@ -5145,7 +5145,7 @@ dependencies = [
  "solana-metrics",
  "solana-runtime",
  "solana-sdk 1.14.17",
- "solana-sys-tuner",
+ "renec-sys-tuner",
  "thiserror",
 ]
 
@@ -5661,7 +5661,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-sys-tuner"
+name = "renec-sys-tuner"
 version = "1.14.17"
 dependencies = [
  "clap 2.33.3",

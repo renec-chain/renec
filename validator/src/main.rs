@@ -2970,7 +2970,7 @@ pub fn main() {
         if SystemMonitorService::check_os_network_limits() {
             info!("OS network limits test passed.");
         } else {
-            eprintln!("OS network limit test failed. See: https://docs.solana.com/running-validator/validator-start#system-tuning");
+            eprintln!("OS network limit test failed. See: https://docs.renec.foundation/running-validator/validator-start#system-tuning");
             exit(1);
         }
     }

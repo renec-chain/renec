@@ -103,7 +103,7 @@ else
     solana-ledger-tool
     solana-log-analyzer
     solana-net-shaper
-    solana-sys-tuner
+    renec-sys-tuner
     renec-validator
     rbpf-cli
   )

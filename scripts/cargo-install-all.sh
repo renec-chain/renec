@@ -85,7 +85,7 @@ if [[ $CI_OS_NAME = windows ]]; then
     solana
     solana-install
     solana-install-init
-    solana-keygen
+    renec-keygen
     solana-stake-accounts
     solana-test-validator
     solana-tokens
@@ -99,7 +99,7 @@ else
     solana-faucet
     solana-gossip
     solana-install
-    solana-keygen
+    renec-keygen
     solana-ledger-tool
     solana-log-analyzer
     solana-net-shaper

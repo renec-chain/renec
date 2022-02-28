@@ -1,12 +1,12 @@
 [package]
-authors = ["Solana Maintainers <maintainers@solana.foundation>"]
+authors = ["RENEC Maintainers <dev@remitano.com>"]
 edition = "2021"
 name = "solana-cli"
 description = "Blockchain, Rebuilt for Scale"
 version = "1.9.29"
-repository = "https://github.com/solana-labs/solana"
+repository = "https://github.com/remitano/renec"
 license = "Apache-2.0"
-homepage = "https://solana.com/"
+homepage = "https://remitano.com/"
 documentation = "https://docs.rs/solana-cli"
 
 [dependencies]
@@ -30,7 +30,7 @@ solana-account-decoder = { path = "../account-decoder", version = "=1.9.29" }
 solana-bpf-loader-program = { path = "../programs/bpf_loader", version = "=1.9.29" }
 solana-clap-utils = { path = "../clap-utils", version = "=1.9.29" }
 renec-cli-config = { path = "../cli-config", version = "=1.9.29" }
-solana-cli-output = { path = "../cli-output", version = "=1.9.29" }
+renec-cli-output = { path = "../cli-output", version = "=1.9.29" }
 solana-client = { path = "../client", version = "=1.9.29" }
 solana-config-program = { path = "../programs/config", version = "=1.9.29" }
 solana-faucet = { path = "../faucet", version = "=1.9.29" }

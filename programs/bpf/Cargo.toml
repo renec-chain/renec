@@ -30,7 +30,7 @@ solana-bpf-rust-invoke = { path = "rust/invoke", version = "=1.9.29"}
 solana-bpf-loader-program = { path = "../bpf_loader", version = "=1.9.29"}
 solana-bpf-rust-realloc = { path = "rust/realloc", version = "=1.9.29"}
 solana-bpf-rust-realloc-invoke = { path = "rust/realloc_invoke", version = "=1.9.29"}
-solana-cli-output = { path = "../../cli-output", version = "=1.9.29" }
+renec-cli-output = { path = "../../cli-output", version = "=1.9.29" }
 solana-logger = { path = "../../logger", version = "=1.9.29" }
 solana-measure = { path = "../../measure", version = "=1.9.29" }
 solana_rbpf = "=0.2.24"

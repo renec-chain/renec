@@ -17,7 +17,7 @@ use {
         memo::{memo_arg, MEMO_ARG},
         nonce::*,
     },
-    solana_cli_output::CliNonceAccount,
+    renec_cli_output::CliNonceAccount,
     solana_client::{nonce_utils::*, rpc_client::RpcClient},
     solana_remote_wallet::remote_wallet::RemoteWalletManager,
     solana_sdk::{

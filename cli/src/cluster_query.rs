@@ -12,7 +12,7 @@ use {
         keypair::DefaultSigner,
         offline::{blockhash_arg, BLOCKHASH_ARG},
     },
-    solana_cli_output::{
+    renec_cli_output::{
         display::{
             build_balance_message, format_labeled_address, new_spinner_progress_bar,
             println_transaction, unix_timestamp_to_string, writeln_name_value,

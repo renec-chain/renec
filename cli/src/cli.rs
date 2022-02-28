@@ -8,7 +8,7 @@ use {
     num_traits::FromPrimitive,
     serde_json::{self, Value},
     solana_clap_utils::{self, input_parsers::*, input_validators::*, keypair::*},
-    solana_cli_output::{
+    renec_cli_output::{
         display::println_name_value, CliSignature, CliValidatorsSortOrder, OutputFormat,
     },
     solana_client::{

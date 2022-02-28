@@ -4833,7 +4833,7 @@ dependencies = [
  "solana-bpf-loader-program",
  "solana-clap-utils",
  "renec-cli-config",
- "solana-cli-output",
+ "renec-cli-output",
  "solana-client",
  "solana-config-program",
  "solana-faucet",
@@ -4867,7 +4867,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-cli-output"
+name = "renec-cli-output"
 version = "1.9.29"
 dependencies = [
  "Inflector",
@@ -5340,12 +5340,12 @@ dependencies = [
  "itertools 0.10.3",
  "log 0.4.14",
  "regex",
+ "renec-cli-output",
  "serde",
  "serde_json",
  "serde_yaml",
  "signal-hook",
  "solana-clap-utils",
- "solana-cli-output",
  "solana-core",
  "solana-entry",
  "solana-ledger",
@@ -6328,8 +6328,8 @@ dependencies = [
  "humantime",
  "log 0.4.14",
  "renec-cli-config",
+ "renec-cli-output",
  "solana-clap-utils",
- "solana-cli-output",
  "solana-client",
  "solana-logger 1.9.29",
  "solana-metrics",

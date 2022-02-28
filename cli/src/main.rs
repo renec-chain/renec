@@ -11,7 +11,7 @@ use {
         cli::{parse_command, process_command, CliCommandInfo, CliConfig, SettingType},
     },
     renec_cli_config::Config,
-    solana_cli_output::{display::println_name_value, OutputFormat},
+    renec_cli_output::{display::println_name_value, OutputFormat},
     solana_client::rpc_config::RpcSendTransactionConfig,
     solana_remote_wallet::remote_wallet::RemoteWalletManager,
     std::{collections::HashMap, error, path::PathBuf, sync::Arc, time::Duration},

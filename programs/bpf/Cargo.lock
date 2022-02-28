@@ -4083,7 +4083,7 @@ dependencies = [
  "solana-bpf-rust-invoke",
  "solana-bpf-rust-realloc",
  "solana-bpf-rust-realloc-invoke",
- "solana-cli-output",
+ "renec-cli-output",
  "solana-logger 1.9.29",
  "solana-measure",
  "solana-program-runtime",
@@ -4472,7 +4472,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-cli-output"
+name = "renec-cli-output"
 version = "1.9.29"
 dependencies = [
  "Inflector",

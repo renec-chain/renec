@@ -8,7 +8,7 @@ use {
         input_parsers::pubkeys_of,
         input_validators::{is_parsable, is_pubkey_or_keypair, is_url},
     },
-    solana_cli_output::display::format_labeled_address,
+    renec_cli_output::display::format_labeled_address,
     solana_client::{client_error, rpc_client::RpcClient, rpc_response::RpcVoteAccountStatus},
     solana_metrics::{datapoint_error, datapoint_info},
     solana_notifier::Notifier,

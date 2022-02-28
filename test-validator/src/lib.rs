@@ -1,7 +1,7 @@
 #![allow(clippy::integer_arithmetic)]
 use {
     log::*,
-    solana_cli_output::CliAccount,
+    renec_cli_output::CliAccount,
     solana_client::rpc_client::RpcClient,
     solana_core::{
         tower_storage::TowerStorage,

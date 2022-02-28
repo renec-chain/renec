@@ -6,7 +6,7 @@ use {
         keypair::{CliSigners, DefaultSigner},
         DisplayError,
     },
-    solana_cli::{
+    renec_cli::{
         clap_app::get_clap_app,
         cli::{parse_command, process_command, CliCommandInfo, CliConfig, SettingType},
     },

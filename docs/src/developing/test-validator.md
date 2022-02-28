@@ -22,7 +22,7 @@ starts a full-featured, single-node cluster on the developer's workstation.
 ## Installation
 
 The `solana-test-validator` binary ships with the Solana CLI Tool Suite.
-[Install](/cli/install-solana-cli-tools) before continuing.
+[Install](/cli/install-renec-cli-tools) before continuing.
 
 ## Running
 

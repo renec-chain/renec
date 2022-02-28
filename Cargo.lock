@@ -4810,7 +4810,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-cli"
+name = "renec-cli"
 version = "1.9.29"
 dependencies = [
  "bincode",

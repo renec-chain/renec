@@ -286,7 +286,7 @@ trap 'kill_node_and_exit' INT TERM ERR
 wallet() {
   (
     set -x
-    $solana_cli --keypair "$identity" --url "$rpc_url" "$@"
+    $renec_cli --keypair "$identity" --url "$rpc_url" "$@"
   )
 }
 
@@ -302,7 +302,7 @@ setup_validator_accounts() {
       echo "Adding $node_sol to validator identity account:"
       (
         set -x
-        $solana_cli \
+        $renec_cli \
           --keypair "$SOLANA_CONFIG_DIR/faucet.json" --url "$rpc_url" \
           transfer --allow-unfunded-recipient "$identity" "$node_sol"
       ) || return $?

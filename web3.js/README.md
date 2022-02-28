@@ -51,7 +51,7 @@ $ npm install --save @solana/web3.js
 
 ## Development Environment Setup
 
-Install the latest Solana release from https://docs.solana.com/cli/install-solana-cli-tools
+Install the latest Solana release from https://docs.solana.com/cli/install-renec-cli-tools
 
 ### Run test validator
 

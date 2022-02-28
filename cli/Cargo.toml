@@ -1,13 +1,13 @@
 [package]
 authors = ["RENEC Maintainers <dev@remitano.com>"]
 edition = "2021"
-name = "solana-cli"
+name = "renec-cli"
 description = "Blockchain, Rebuilt for Scale"
 version = "1.9.29"
 repository = "https://github.com/remitano/renec"
 license = "Apache-2.0"
 homepage = "https://remitano.com/"
-documentation = "https://docs.rs/solana-cli"
+documentation = "https://docs.rs/renec-cli"
 
 [dependencies]
 bincode = "1.3.3"
@@ -52,7 +52,7 @@ solana-test-validator = { path = "../test-validator", version = "=1.9.29" }
 tempfile = "3.2.0"
 
 [[bin]]
-name = "solana"
+name = "renec"
 path = "src/main.rs"
 
 [package.metadata.docs.rs]

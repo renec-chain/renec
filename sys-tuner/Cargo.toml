@@ -1,13 +1,13 @@
 [package]
-authors = ["Solana Maintainers <maintainers@solana.foundation>"]
-edition = "2021"
-name = "solana-sys-tuner"
-description = "The solana cluster system tuner daemon"
+authors = ["RENEC Maintainers <dev@remitano.com>"]
+edition = "2018"
+name = "renec-sys-tuner"
+description = "The RENEC cluster system tuner daemon"
 version = "1.9.29"
-repository = "https://github.com/solana-labs/solana"
+repository = "https://github.com/remitano/renec"
 license = "Apache-2.0"
-homepage = "https://solana.com/"
-documentation = "https://docs.rs/solana-sys-tuner"
+homepage = "https://remitano.com/"
+documentation = "https://docs.rs/renec-sys-tuner"
 publish = true
 
 [dependencies]
@@ -24,10 +24,10 @@ nix = "0.23.0"
 sysctl = "0.4.3"
 
 [lib]
-name = "solana_sys_tuner"
+name = "renec_sys_tuner"
 
 [[bin]]
-name = "solana-sys-tuner"
+name = "renec-sys-tuner"
 path = "src/main.rs"
 
 [package.metadata.docs.rs]

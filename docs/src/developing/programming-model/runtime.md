@@ -160,7 +160,7 @@ used to activate a feature, which marks it pending, once marked pending the
 feature will be activated at the next epoch.
 
 To determine which features are activated use the [Solana command-line
-tools](cli/install-solana-cli-tools.md):
+tools](cli/install-renec-cli-tools.md):
 
 ```bash
 solana feature status
@@ -168,4 +168,4 @@ solana feature status
 
 If you encounter problems, first ensure that the Solana tools version you are
 using match the version returned by `solana cluster-version`. If they do not
-match, [install the correct tool suite](cli/install-solana-cli-tools.md).
+match, [install the correct tool suite](cli/install-renec-cli-tools.md).

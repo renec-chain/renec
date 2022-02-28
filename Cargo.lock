@@ -4917,7 +4917,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-cli"
+name = "renec-cli"
 version = "1.10.41"
 dependencies = [
  "bincode",
@@ -6473,7 +6473,7 @@ dependencies = [
  "rand 0.7.3",
  "rayon",
  "solana-clap-utils",
- "solana-cli",
+ "renec-cli",
  "solana-client",
  "solana-core",
  "solana-faucet",

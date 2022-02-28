@@ -24,7 +24,7 @@ come to the right place.
 
 ## Before You Begin
 
-- [Install the Solana command-line tools](../cli/install-solana-cli-tools.md)
+- [Install the Solana command-line tools](../cli/install-renec-cli-tools.md)
 
 ### Check your installation
 
@@ -127,7 +127,7 @@ renec-keygen pubkey --help
 
 ### Hierarchical Derivation
 
-The solana-cli supports
+The renec-cli supports
 [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki) and
 [BIP44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki)
 hierarchical derivation of private keys from your seed phrase and passphrase by

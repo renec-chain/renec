@@ -11,7 +11,7 @@ on your computer system's filesystem.
 ## Before you Begin
 
 Make sure you have
-[installed the Solana Command Line Tools](../cli/install-solana-cli-tools.md)
+[installed the Solana Command Line Tools](../cli/install-renec-cli-tools.md)
 
 ## Generate a File System Wallet Keypair
 

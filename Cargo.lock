@@ -5465,7 +5465,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-keygen"
+name = "renec-keygen"
 version = "1.10.41"
 dependencies = [
  "bs58",

@@ -39,7 +39,7 @@ test-stable-bpf)
   # rustfilt required for dumping BPF assembly listings
   "$cargo" install rustfilt
 
-  # solana-keygen required when building C programs
+  # renec-keygen required when building C programs
   _ "$cargo" build --manifest-path=keygen/Cargo.toml
 
   export PATH="$PWD/target/debug":$PATH

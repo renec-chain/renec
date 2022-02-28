@@ -83,11 +83,23 @@ solana genesis-hash
 ```
 solana balance
 ```
+<<<<<<< HEAD
 
 - **NOTE:** `Error: No such file or directory (os error 2)` means that the default
   wallet does not yet exist. Create it with `solana-keygen new`.
 - **NOTE:** If the wallet has a zero SOL balance, airdrop some localnet SOL with
   `solana airdrop 10`
+||||||| parent of 687c6d5240 (Rebuild renec-keygen package)
+* **NOTE:** `Error: No such file or directory (os error 2)` means that the default
+wallet does not yet exist. Create it with `solana-keygen new`.
+* **NOTE:** If the wallet has a zero SOL balance, airdrop some localnet SOL with
+`solana airdrop 10`
+=======
+* **NOTE:** `Error: No such file or directory (os error 2)` means that the default
+wallet does not yet exist. Create it with `renec-keygen new`.
+* **NOTE:** If the wallet has a zero SOL balance, airdrop some localnet SOL with
+`solana airdrop 10`
+>>>>>>> 687c6d5240 (Rebuild renec-keygen package)
 
 #### Perform a basic transfer transaction
 

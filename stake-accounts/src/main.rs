@@ -10,7 +10,7 @@ use {
             resolve_command, AuthorizeArgs, Command, MoveArgs, NewArgs, RebaseArgs, SetLockupArgs,
         },
     },
-    solana_cli_config::Config,
+    renec_cli_config::Config,
     solana_client::{client_error::ClientError, rpc_client::RpcClient},
     solana_sdk::{
         message::Message,

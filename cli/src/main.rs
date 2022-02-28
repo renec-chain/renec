@@ -10,7 +10,7 @@ use {
         clap_app::get_clap_app,
         cli::{parse_command, process_command, CliCommandInfo, CliConfig},
     },
-    solana_cli_config::{Config, ConfigInput},
+    renec_cli_config::{Config, ConfigInput},
     solana_cli_output::{
         display::{println_name_value, println_name_value_or},
         OutputFormat,

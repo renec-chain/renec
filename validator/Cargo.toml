@@ -29,7 +29,7 @@ rand = "0.7.0"
 serde = "1.0.136"
 serde_json = "1.0.79"
 solana-clap-utils = { path = "../clap-utils", version = "=1.13.6" }
-solana-cli-config = { path = "../cli-config", version = "=1.13.6" }
+renec-cli-config = { path = "../cli-config", version = "=1.13.6" }
 solana-client = { path = "../client", version = "=1.13.6" }
 solana-core = { path = "../core", version = "=1.13.6" }
 solana-download-utils = { path = "../download-utils", version = "=1.13.6" }

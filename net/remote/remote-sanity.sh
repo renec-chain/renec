@@ -63,7 +63,7 @@ case $deployMethod in
 local|tar|skip)
   PATH="$HOME"/.cargo/bin:"$PATH"
   export USE_INSTALL=1
-  solana_cli=solana
+  renec_cli=solana
   solana_gossip=solana-gossip
   renec_install=renec-install
   ;;
@@ -85,7 +85,7 @@ fi
 echo "--- $sanityTargetIp: validators"
 (
   set -x
-  $solana_cli --url http://"$sanityTargetIp":8899 validators
+  $renec_cli --url http://"$sanityTargetIp":8899 validators
 )
 
 echo "--- $sanityTargetIp: node count ($numSanityNodes expected)"

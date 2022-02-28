@@ -21,7 +21,7 @@ Some important crates:
 - [`solana-client`] &mdash; For interacting with a Solana node via the
   [JSON RPC API](jsonrpc-api).
 
-- [`solana-cli-config`] &mdash; Loading and saving the Solana CLI configuration
+- [`renec-cli-config`] &mdash; Loading and saving the Renec CLI configuration
   file.
 
 - [`solana-clap-utils`] &mdash; Routines for setting up a CLI, using [`clap`],
@@ -31,6 +31,6 @@ Some important crates:
 [`solana-program`]: https://docs.rs/solana-program
 [`solana-sdk`]: https://docs.rs/solana-sdk
 [`solana-client`]: https://docs.rs/solana-client
-[`solana-cli-config`]: https://docs.rs/solana-cli-config
+[`renec-cli-config`]: https://docs.rs/renec-cli-config
 [`solana-clap-utils`]: https://docs.rs/solana-clap-utils
 [`clap`]: https://docs.rs/clap

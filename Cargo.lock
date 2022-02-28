@@ -5340,7 +5340,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-install"
+name = "renec-install"
 version = "1.14.17"
 dependencies = [
  "atty",

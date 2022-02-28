@@ -6,7 +6,7 @@ use {
         cli::{process_command, CliCommand, CliConfig},
         program::{ProgramCliCommand, CLOSE_PROGRAM_WARNING},
     },
-    solana_cli_output::OutputFormat,
+    renec_cli_output::OutputFormat,
     solana_client::rpc_client::RpcClient,
     solana_faucet::faucet::run_local_faucet,
     solana_sdk::{

@@ -4186,7 +4186,7 @@ dependencies = [
  "solana-bpf-rust-invoke",
  "solana-bpf-rust-realloc",
  "solana-bpf-rust-realloc-invoke",
- "solana-cli-output",
+ "renec-cli-output",
  "solana-ledger",
  "solana-logger 1.14.17",
  "solana-measure",
@@ -4600,7 +4600,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-cli-output"
+name = "renec-cli-output"
 version = "1.14.17"
 dependencies = [
  "Inflector",
@@ -5683,7 +5683,7 @@ dependencies = [
  "log",
  "serde_derive",
  "serde_json",
- "solana-cli-output",
+ "renec-cli-output",
  "solana-client",
  "solana-core",
  "solana-gossip",

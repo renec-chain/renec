@@ -9,7 +9,7 @@ use {
     serde_json::{self, Value},
     solana_clap_utils::{self, input_parsers::*, keypair::*},
     renec_cli_config::ConfigInput,
-    solana_cli_output::{
+    renec_cli_output::{
         display::println_name_value, CliSignature, CliValidatorsSortOrder, OutputFormat,
     },
     solana_client::{

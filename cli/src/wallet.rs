@@ -21,7 +21,7 @@ use {
         nonce::*,
         offline::*,
     },
-    solana_cli_output::{
+    renec_cli_output::{
         display::{build_balance_message, BuildBalanceMessageConfig},
         return_signers_with_config, CliAccount, CliBalance, CliSignatureVerificationStatus,
         CliTransaction, CliTransactionConfirmation, OutputFormat, ReturnSignersConfig,

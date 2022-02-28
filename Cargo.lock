@@ -4845,7 +4845,7 @@ dependencies = [
  "solana-bpf-loader-program",
  "solana-clap-utils",
  "renec-cli-config",
- "solana-cli-output",
+ "renec-cli-output",
  "solana-client",
  "solana-config-program",
  "solana-faucet",
@@ -4881,7 +4881,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-cli-output"
+name = "renec-cli-output"
 version = "1.14.17"
 dependencies = [
  "Inflector",
@@ -5466,11 +5466,11 @@ dependencies = [
  "itertools",
  "log",
  "regex",
+ "renec-cli-output",
  "serde",
  "serde_json",
  "signal-hook",
  "solana-clap-utils",
- "solana-cli-output",
  "solana-core",
  "solana-entry",
  "solana-ledger",
@@ -6311,7 +6311,7 @@ dependencies = [
  "log",
  "serde_derive",
  "serde_json",
- "solana-cli-output",
+ "renec-cli-output",
  "solana-client",
  "solana-core",
  "solana-gossip",
@@ -6515,7 +6515,6 @@ dependencies = [
  "humantime",
  "log",
  "solana-clap-utils",
- "solana-cli-output",
  "solana-client",
  "solana-logger 1.14.17",
  "solana-metrics",

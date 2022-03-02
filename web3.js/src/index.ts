@@ -26,6 +26,6 @@ export * from './util/send-and-confirm-raw-transaction';
 export * from './util/cluster';
 
 /**
- * There are 1-billion lamports in one SOL
+ * There are 1-billion lamports in one RENEC
  */
 export const LAMPORTS_PER_SOL = 1000000000;

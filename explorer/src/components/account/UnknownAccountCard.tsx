@@ -34,7 +34,7 @@ export function UnknownAccountCard({ account }: { account: Account }) {
           </tr>
         )}
         <tr>
-          <td>Balance (SOL)</td>
+          <td>Balance (RENEC)</td>
           <td className="text-lg-end">
             <SolBalance lamports={lamports} />
           </td>

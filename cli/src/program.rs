@@ -174,7 +174,7 @@ impl ProgramSubCommands for App<'_, '_> {
                             Arg::with_name("allow_excessive_balance")
                                 .long("allow-excessive-deploy-account-balance")
                                 .takes_value(false)
-                                .help("Use the designated program id even if the account already holds a large balance of SOL")
+                                .help("Use the designated program id even if the account already holds a large balance of RENEC")
                         ),
                 )
                 .subcommand(
@@ -318,7 +318,7 @@ impl ProgramSubCommands for App<'_, '_> {
                             Arg::with_name("lamports")
                                 .long("lamports")
                                 .takes_value(false)
-                                .help("Display balance in lamports instead of SOL"),
+                                .help("Display balance in lamports instead of RENEC"),
                         ),
                 )
                 .subcommand(
@@ -378,7 +378,7 @@ impl ProgramSubCommands for App<'_, '_> {
                             Arg::with_name("lamports")
                                 .long("lamports")
                                 .takes_value(false)
-                                .help("Display balance in lamports instead of SOL"),
+                                .help("Display balance in lamports instead of RENEC"),
                         ),
                 )
         )
@@ -413,7 +413,7 @@ impl ProgramSubCommands for App<'_, '_> {
                     Arg::with_name("allow_excessive_balance")
                         .long("allow-excessive-deploy-account-balance")
                         .takes_value(false)
-                        .help("Use the designated program id, even if the account already holds a large balance of SOL")
+                        .help("Use the designated program id, even if the account already holds a large balance of RENEC")
                 )
                 .arg(
                     Arg::with_name("skip_fee_check")

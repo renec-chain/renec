@@ -16,14 +16,14 @@ $ renec-keygen pubkey
 <PUBKEY>
 ```
 
-### Airdrop SOL/Lamports
+### Airdrop RENEC/Lamports
 
 ```bash
 // Command
 $ solana airdrop 1
 
 // Return
-"1 SOL"
+"1 RENEC"
 ```
 
 ### Get Balance
@@ -33,7 +33,7 @@ $ solana airdrop 1
 $ solana balance
 
 // Return
-"3.00050001 SOL"
+"3.00050001 RENEC"
 ```
 
 ### Confirm Transaction

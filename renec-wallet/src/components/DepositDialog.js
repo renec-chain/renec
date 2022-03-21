@@ -133,12 +133,12 @@ export default function DepositDialog({
             <DialogContentText variant="body2">
               <Link
                 href={
-                  `https://solscan.io/account/${depositAddressStr}` + urlSuffix
+                  `https://explorer.renec.foundation/address/${depositAddressStr}` + urlSuffix
                 }
                 target="_blank"
                 rel="noopener"
               >
-                View on Solscan
+                View on explorer
               </Link>
             </DialogContentText>
           </>

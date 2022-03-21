@@ -70,7 +70,7 @@ export function useSolanaExplorerUrlSuffix() {
   const endpoint = context.endpoint;
   if (endpoint === clusterApiUrl('devnet')) {
     return '?cluster=devnet';
-  } else if (endpoint === clusterApiUrl('testnet')) {
+  } else if (endpoint === TESTNET_URL) {
     return '?cluster=testnet';
   }
   return '';

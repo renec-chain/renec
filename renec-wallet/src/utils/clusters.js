@@ -10,7 +10,7 @@ export const CLUSTERS = [
   // },
   {
     name: 'testnet',
-    apiUrl: "http://54.163.176.84:8899",
+    apiUrl: "https://api-testnet.renec.foundation:8899",
     label: 'Testnet',
     clusterSlug: 'testnet',
   },

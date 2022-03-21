@@ -628,12 +628,12 @@ function BalanceListItemDetails({
           <Typography variant="body2">
             <Link
               href={
-                `https://solscan.io/account/${publicKey.toBase58()}` + urlSuffix
+                `https://explorer.renec.foundation/address/${publicKey.toBase58()}` + urlSuffix
               }
               target="_blank"
               rel="noopener"
             >
-              View on Solscan
+              View on explorer
             </Link>
           </Typography>
           {market && (

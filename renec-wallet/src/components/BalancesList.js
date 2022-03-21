@@ -258,14 +258,14 @@ export default function BalancesList() {
             </IconButton>
           </Tooltip>
           <DomainsList open={showDomains} setOpen={setShowDomains} />
-          <Tooltip title="Migrate Tokens" arrow>
+          {/* <Tooltip title="Migrate Tokens" arrow>
             <IconButton
               size={iconSize}
               onClick={() => setShowMergeAccounts(true)}
             >
               <MergeType />
             </IconButton>
-          </Tooltip>
+          </Tooltip> */}
           <Tooltip title="Add Token" arrow>
             <IconButton
               size={iconSize}

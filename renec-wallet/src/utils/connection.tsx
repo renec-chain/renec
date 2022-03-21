@@ -17,13 +17,14 @@ const ConnectionContext = React.createContext<{
 } | null>(null);
 
 export const MAINNET_URL = 'https://solana-api.projectserum.com';
+export const TESTNET_URL = 'https://api-testnet.renec.foundation:8899';
 // No backup url for now. Leave the variable to not break wallets that
 // have saved the url in their local storage, previously.
 export const MAINNET_BACKUP_URL = 'https://solana-api.projectserum.com/';
 export function ConnectionProvider({ children }) {
   const [endpoint, setEndpoint] = useLocalStorageState(
     'connectionEndpoint',
-    MAINNET_URL,
+    TESTNET_URL,
   );
 
   const connection = useMemo(() => new Connection(endpoint, 'recent'), [

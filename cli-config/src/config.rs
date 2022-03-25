@@ -18,7 +18,7 @@ lazy_static! {
     /// [lazy_static]: https://docs.rs/lazy_static
     pub static ref CONFIG_FILE: Option<String> = {
         dirs_next::home_dir().map(|mut path| {
-            path.extend(&[".config", "solana", "cli", "config.yml"]);
+            path.extend(&[".config", "renec", "cli", "config.yml"]);
             path.to_str().unwrap().to_string()
         })
     };
@@ -70,10 +70,10 @@ impl Default for Config {
     fn default() -> Self {
         let keypair_path = {
             let mut keypair_path = dirs_next::home_dir().expect("home directory");
-            keypair_path.extend(&[".config", "solana", "id.json"]);
+            keypair_path.extend(&[".config", "renec", "id.json"]);
             keypair_path.to_str().unwrap().to_string()
         };
-        let json_rpc_url = "https://api.mainnet-beta.solana.com".to_string();
+        let json_rpc_url = "https://api-testnet.renec.foundation".to_string();
 
         // Empty websocket_url string indicates the client should
         // `Config::compute_websocket_url(&json_rpc_url)`
@@ -177,13 +177,13 @@ mod test {
     #[test]
     fn compute_websocket_url() {
         assert_eq!(
-            Config::compute_websocket_url("http://api.devnet.solana.com"),
-            "ws://api.devnet.solana.com/".to_string()
+            Config::compute_websocket_url("http://api-testnet.renec.foundation"),
+            "ws://api-testnet.renec.foundation/".to_string()
         );
 
         assert_eq!(
-            Config::compute_websocket_url("https://api.devnet.solana.com"),
-            "wss://api.devnet.solana.com/".to_string()
+            Config::compute_websocket_url("https://api-testnet.renec.foundation"),
+            "wss://api-testnet.renec.foundation/".to_string()
         );
 
         assert_eq!(

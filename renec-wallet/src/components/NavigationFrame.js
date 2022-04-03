@@ -78,7 +78,7 @@ export default function NavigationFrame({ children }) {
       <AppBar position="static" color="primary">
         <Toolbar>
           <Typography variant="h6" className={classes.title} component="h1">
-            {isExtensionWidth ? 'RENEC' : 'Remitano Network SPL Token Wallet'}
+            {isExtensionWidth ? 'RENEC' : 'Remitano Network Wallet'}
           </Typography>
           <NavigationButtons />
         </Toolbar>

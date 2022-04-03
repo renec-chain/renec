@@ -2,12 +2,12 @@ import { clusterApiUrl } from '@solana/web3.js';
 import { MAINNET_URL, MAINNET_BACKUP_URL } from '../utils/connection';
 
 export const CLUSTERS = [
-  // {
-  //   name: 'mainnet-beta',
-  //   apiUrl: MAINNET_URL,
-  //   label: 'Mainnet Beta',
-  //   clusterSlug: 'mainnet-beta',
-  // },
+  {
+    name: 'mainnet-beta',
+    apiUrl: MAINNET_URL,
+    label: 'Mainnet Beta',
+    clusterSlug: 'mainnet-beta',
+  },
   {
     name: 'testnet',
     apiUrl: "https://api-testnet.renec.foundation:8899",

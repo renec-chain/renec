@@ -68,7 +68,7 @@ function isSafeInstruction(publicKeys, owner, txInstructions) {
             unsafe = true;
           }
         } else if (instruction.type === 'initializeAccount') {
-          // New SPL token accounts are only considered safe if they are owned by this wallet and newly created
+          // New RPL token accounts are only considered safe if they are owned by this wallet and newly created
           let { ownerPubkey, accountPubkey } = instruction.data;
           if (
             owner &&

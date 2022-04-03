@@ -9,13 +9,13 @@ import { useListener } from '../utils';
 import { clusterForEndpoint } from '../clusters';
 import { useCallback } from 'react';
 import { PublicKey } from '@solana/web3.js';
-import { TokenListProvider } from '@solana/spl-token-registry';
+import { TokenListProvider } from '@ngocbv/rpl-token-registry';
 
 // This list is used for deciding what to display in the popular tokens list
 // in the `AddTokenDialog`.
 //
 // Icons, names, and symbols are fetched not from here, but from the
-// @solana/spl-token-registry. To add an icon or token name to the wallet,
+// @ngocbv/rpl-token-registry. To add an icon or token name to the wallet,
 // add the mints to that package. To add a token to the `AddTokenDialog`,
 // add the `mintAddress` here. The rest of the fields are not used.
 const POPULAR_TOKENS = {
@@ -299,7 +299,6 @@ export function TokenRegistryProvider(props) {
   const { endpoint } = useConnectionConfig();
   const [tokenInfos, setTokenInfos] = useState(null);
   useEffect(() => {
-    if (endpoint !== MAINNET_BACKUP_URL && endpoint !== MAINNET_URL) return;
     const tokenListProvider = new TokenListProvider();
     tokenListProvider.resolve().then((tokenListContainer) => {
       const cluster = clusterForEndpoint(endpoint);

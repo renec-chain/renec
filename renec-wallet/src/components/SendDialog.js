@@ -82,14 +82,14 @@ export default function SendDialog({ open, onClose, publicKey, balanceInfo }) {
   const getTabs = (mint) => {
     if (mint?.equals(WUSDC_MINT)) {
       return [
-        <Tab label="SPL WUSDC" key="spl" value="spl" />,
-        <Tab label="SPL USDC" key="wusdcToSplUsdc" value="wusdcToSplUsdc" />,
+        <Tab label="RPL WUSDC" key="spl" value="spl" />,
+        <Tab label="RPL USDC" key="wusdcToSplUsdc" value="wusdcToSplUsdc" />,
         <Tab label="ERC20 USDC" key="swap" value="swap" />,
       ];
     } else if (mint?.equals(WUSDT_MINT)) {
       return [
-        <Tab label="SPL WUSDT" key="spl" value="spl" />,
-        <Tab label="SPL USDT" key="wusdtToSplUsdt" value="wusdtToSplUsdt" />,
+        <Tab label="RPL WUSDT" key="spl" value="spl" />,
+        <Tab label="RPL USDT" key="wusdtToSplUsdt" value="wusdtToSplUsdt" />,
         <Tab label="ERC20 USDT" key="swap" value="swap" />,
       ];
     } else if (
@@ -97,8 +97,8 @@ export default function SendDialog({ open, onClose, publicKey, balanceInfo }) {
       mint?.equals(USDC_MINT)
     ) {
       return [
-        <Tab label="SPL USDC" key="spl" value="spl" />,
-        <Tab label="SPL WUSDC" key="usdcToSplWUsdc" value="usdcToSplWUsdc" />,
+        <Tab label="RPL USDC" key="spl" value="spl" />,
+        <Tab label="RPL WUSDC" key="usdcToSplWUsdc" value="usdcToSplWUsdc" />,
         <Tab label="ERC20 USDC" key="swap" value="swap" />,
       ];
     } else {
@@ -112,7 +112,7 @@ export default function SendDialog({ open, onClose, publicKey, balanceInfo }) {
         />
       );
       const tabs = [
-        <Tab label={`SPL ${swapCoinInfo.ticker}`} key="spl" value="spl" />,
+        <Tab label={`RPL ${swapCoinInfo.ticker}`} key="spl" value="spl" />,
       ];
       if (
         !DISABLED_ERC20_MINTS.has(mint.toString()) ||
@@ -215,7 +215,7 @@ function SendSplDialog({ onClose, publicKey, balanceInfo, onSubmitRef }) {
   const defaultAddressHelperText =
     !balanceInfo.mint || balanceInfo.mint.equals(WRAPPED_SOL_MINT)
       ? 'Enter Remitano Network Address'
-      : 'Enter SPL token or Remitano Network address';
+      : 'Enter RPL token or Remitano Network address';
   const wallet = useWallet();
   const [sendTransaction, sending] = useSendTransaction();
   const [addressHelperText, setAddressHelperText] = useState(
@@ -300,7 +300,7 @@ function SendSplDialog({ onClose, publicKey, balanceInfo, onSubmitRef }) {
           );
           if (accountInfo.mint.toBase58() === mintString) {
             setPassValidation(true);
-            setAddressHelperText('Address is a valid SPL token address');
+            setAddressHelperText('Address is a valid RPL token address');
           } else {
             setPassValidation(false);
             setAddressHelperText('Destination address mint does not match');
@@ -551,11 +551,11 @@ function SendSwapDialog({
     <>
       <DialogContent style={{ paddingTop: 16 }}>
         <DialogContentText>
-          SPL {tokenName} can be converted to{' '}
+          RPL {tokenName} can be converted to{' '}
           {blockchain === 'eth' && swapCoinInfo.erc20Contract
             ? 'ERC20'
             : blockchain === 'sol' && swapCoinInfo.splMint
-            ? 'SPL'
+            ? 'RPL'
             : 'native'}{' '}
           {swapCoinInfo.ticker}
           {needMetamask ? ' via MetaMask' : null}.

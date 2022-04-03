@@ -58,7 +58,7 @@ export default function DepositDialog({
 
   let tabs = null;
   if (swapInfo) {
-    let firstTab = `SPL ${tokenSymbol ?? swapInfo.coin.ticker}`;
+    let firstTab = `RPL ${tokenSymbol ?? swapInfo.coin.ticker}`;
     let secondTab = swapInfo.coin.ticker;
     if (!mint) {
       firstTab = 'RENEC';
@@ -199,7 +199,7 @@ function SolletSwapDepositAddress({ balanceInfo, swapInfo, ethAccount }) {
     return (
       <>
         <DialogContentText>
-          Native BTC can be converted to SPL {tokenName} by sending it to the
+          Native BTC can be converted to RPL {tokenName} by sending it to the
           following address:
         </DialogContentText>
         <CopyableDisplay
@@ -217,7 +217,7 @@ function SolletSwapDepositAddress({ balanceInfo, swapInfo, ethAccount }) {
       <>
         <DialogContentText>
           {coin.erc20Contract ? 'ERC20' : 'Native'} {coin.ticker} can be
-          converted to {mint ? 'SPL' : 'native'} {tokenName} via MetaMask. To
+          converted to {mint ? 'RPL' : 'native'} {tokenName} via MetaMask. To
           convert, you must already have RENEC in your wallet.
         </DialogContentText>
         <DialogContentText>

@@ -120,7 +120,7 @@ function SeedWordsForm({ mnemonicAndSeed, goForward }) {
             Create New Wallet
           </Typography>
           <Typography paragraph>
-            Create a new wallet to hold RENEC and SPL tokens.
+            Create a new wallet to hold RENEC and RPL tokens.
           </Typography>
           <Typography>
             Please write down the following twenty four words and keep them in a

@@ -19,7 +19,7 @@ import {
 } from "@solana/web3.js";
 import { Cluster } from "providers/cluster";
 import { SerumMarketRegistry } from "serumMarketRegistry";
-import { TokenInfoMap } from "@solana/spl-token-registry";
+import { TokenInfoMap } from "@ngocbv/rpl-token-registry";
 
 export enum PROGRAM_NAMES {
   // native built-ins

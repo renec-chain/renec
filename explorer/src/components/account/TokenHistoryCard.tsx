@@ -48,7 +48,7 @@ import { useCluster, Cluster } from "providers/cluster";
 import { Link } from "react-router-dom";
 import { Location } from "history";
 import { useQuery } from "utils/url";
-import { TokenInfoMap } from "@solana/spl-token-registry";
+import { TokenInfoMap } from "@ngocbv/rpl-token-registry";
 import { useTokenRegistry } from "providers/mints/token-registry";
 import { getTokenProgramInstructionName } from "utils/instruction";
 import {

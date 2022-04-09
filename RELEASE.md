@@ -99,6 +99,17 @@ Alternatively use the Github UI.
 
 ## Steps to Create a Release
 
+### Generate release files
+#### MacOS 
+```
+CI_OS_NAME=osx CI_TAG=v1.8.14 ./ci/publish-tarball.sh
+```
+
+#### Linux
+```
+CI_OS_NAME=linux CI_TAG=v1.8.14 ./ci/publish-tarball.sh
+```
+
 ### Create the Release Tag on GitHub
 
 1. Go to [GitHub Releases](https://github.com/solana-labs/solana/releases) for tagging a release.

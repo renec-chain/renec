@@ -16,9 +16,9 @@
 { # this ensures the entire script is downloaded #
 
 if [ -z "$RENEC_DOWNLOAD_ROOT" ]; then
-    RENEC_DOWNLOAD_ROOT="https://github.com/remitano/renec/releases/download/"
+    RENEC_DOWNLOAD_ROOT="https://github.com/ngocbv/renec/releases/download/"
 fi
-GH_LATEST_RELEASE="https://api.github.com/repos/remitano/renec/releases/latest"
+GH_LATEST_RELEASE="https://api.github.com/repos/ngocbv/renec/releases/latest"
 
 set -e
 

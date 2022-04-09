@@ -2,7 +2,7 @@
 set -e
 
 cd "$(dirname "$0")"/..
-cargo="$(readlink -f "./cargo")"
+cargo="$(readlink -n "./cargo")"
 
 "$cargo" build --package renec-install
 export PATH=$PWD/target/debug:$PATH

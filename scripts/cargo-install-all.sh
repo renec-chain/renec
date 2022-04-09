@@ -82,7 +82,7 @@ if [[ $CI_OS_NAME = windows ]]; then
     cargo-build-sbf
     cargo-test-bpf
     cargo-test-sbf
-    solana
+    renec
     renec-install
     renec-install-init
     renec-keygen
@@ -94,7 +94,7 @@ else
   ./fetch-perf-libs.sh
 
   BINS=(
-    solana
+    renec
     solana-bench-tps
     solana-faucet
     solana-gossip

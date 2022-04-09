@@ -194,7 +194,7 @@ fn load_release_version(version_yml: &Path) -> Result<ReleaseVersion, String> {
 /// Reads the supported TARGET triple for the given release
 fn load_release_target(release_dir: &Path) -> Result<String, String> {
     let mut version_yml = PathBuf::from(release_dir);
-    version_yml.push("solana-release");
+    version_yml.push("renec-release");
     version_yml.push("version.yml");
 
     let version = load_release_version(&version_yml)?;
@@ -301,7 +301,7 @@ fn check_env_path_for_bin_dir(config: &Config) {
 
     if !found {
         println!(
-            "\nPlease update your PATH environment variable to include the solana programs:\n    PATH=\"{}:$PATH\"\n",
+            "\nPlease update your PATH environment variable to include the renec programs:\n    PATH=\"{}:$PATH\"\n",
             config.active_release_bin_dir().to_str().unwrap()
         );
     }
@@ -568,8 +568,9 @@ pub fn init(
 }
 
 fn github_release_download_url(release_semver: &str) -> String {
+    // TODO Change repo ngocbv/renec to remitano/renec
     format!(
-        "https://github.com/solana-labs/solana/releases/download/v{}/solana-release-{}.tar.bz2",
+        "https://github.com/ngocbv/renec/releases/download/v{}/renec-release-{}.tar.bz2",
         release_semver,
         crate::build_env::TARGET
     )
@@ -577,7 +578,7 @@ fn github_release_download_url(release_semver: &str) -> String {
 
 fn release_channel_download_url(release_channel: &str) -> String {
     format!(
-        "https://release.solana.com/{}/solana-release-{}.tar.bz2",
+        "https://github.com/ngocbv/renec/releases/download/v{}/renec-release-{}.tar.bz2",
         release_channel,
         crate::build_env::TARGET
     )
@@ -585,7 +586,7 @@ fn release_channel_download_url(release_channel: &str) -> String {
 
 fn release_channel_version_url(release_channel: &str) -> String {
     format!(
-        "https://release.solana.com/{}/solana-release-{}.yml",
+        "https://github.com/ngocbv/renec/releases/download/v{}/renec-release-{}.yml",
         release_channel,
         crate::build_env::TARGET
     )
@@ -876,8 +877,9 @@ fn check_for_newer_github_release(
     let mut releases = vec![];
 
     while page == 1 || releases.len() == PER_PAGE {
+        // TODO Change repo ngocbv/renec to remitano/renec
         let url = reqwest::Url::parse_with_params(
-            "https://api.github.com/repos/solana-labs/solana/releases",
+            "https://api.github.com/repos/ngocbv/renec/releases",
             &[
                 ("per_page", &format!("{}", PER_PAGE)),
                 ("page", &format!("{}", page)),
@@ -1006,7 +1008,7 @@ pub fn init_or_update(config_file: &str, is_init: bool, check_only: bool) -> Res
                 let release_id = format!("{}-{}", release_channel, update_release_version.commit);
                 let release_dir = config.release_dir(&release_id);
                 let current_release_version_yml =
-                    release_dir.join("solana-release").join("version.yml");
+                    release_dir.join("renec-release").join("version.yml");
 
                 let download_url = release_channel_download_url(release_channel);
 
@@ -1143,7 +1145,7 @@ pub fn init_or_update(config_file: &str, is_init: bool, check_only: bool) -> Res
 
     let _ = fs::remove_dir_all(config.active_release_dir());
     symlink_dir(
-        release_dir.join("solana-release"),
+        release_dir.join("renec-release"),
         config.active_release_dir(),
     )
     .map_err(|err| {

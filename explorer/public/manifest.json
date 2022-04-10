@@ -1,6 +1,6 @@
 {
-  "short_name": "Solana Explorer",
-  "name": "Explorer for Solana clusters",
+  "short_name": "Renec Explorer",
+  "name": "Explorer for Renec clusters",
   "icons": [
     {
       "src": "favicon.ico",

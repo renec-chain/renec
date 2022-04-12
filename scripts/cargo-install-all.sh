@@ -77,26 +77,26 @@ if [[ $CI_OS_NAME = windows ]]; then
     renec-install
     renec-install-init
     renec-keygen
-    solana-stake-accounts
-    solana-test-validator
-    solana-tokens
+    # solana-stake-accounts
+    # solana-test-validator
+    # solana-tokens
   )
 else
   ./fetch-perf-libs.sh
 
   BINS=(
     renec
-    solana-bench-tps
-    solana-faucet
-    solana-gossip
     renec-install
     renec-keygen
-    solana-ledger-tool
-    solana-log-analyzer
-    solana-net-shaper
     renec-sys-tuner
     renec-validator
     rbpf-cli
+    # solana-bench-tps
+    # solana-faucet
+    # solana-gossip
+    # solana-ledger-tool
+    # solana-log-analyzer
+    # solana-net-shaper
   )
 
   # Speed up net.sh deploys by excluding unused binaries
@@ -104,12 +104,12 @@ else
     BINS+=(
       cargo-build-bpf
       cargo-test-bpf
-      solana-dos
       renec-install-init
-      solana-stake-accounts
-      solana-test-validator
-      solana-tokens
-      solana-watchtower
+      # solana-stake-accounts
+      # solana-test-validator
+      # solana-tokens
+      # solana-dos
+      # solana-watchtower
     )
   fi
 
@@ -130,10 +130,10 @@ mkdir -p "$installDir/bin"
   # shellcheck disable=SC2086 # Don't want to double quote $rust_version
   "$cargo" $maybeRustVersion build $maybeReleaseFlag "${binArgs[@]}"
 
-  # Exclude `spl-token` binary for net.sh builds
+  # Exclude `rpl-token` binary for net.sh builds
   if [[ -z "$validatorOnly" ]]; then
     # shellcheck disable=SC2086 # Don't want to double quote $rust_version
-    "$cargo" $maybeRustVersion install --locked spl-token-cli --root "$installDir"
+    "$cargo" $maybeRustVersion install --locked rpl-token-cli --root "$installDir"
   fi
 )
 

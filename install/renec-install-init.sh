@@ -1,3 +1,5 @@
+# RENEC_RELEASE=v1.8.14
+# RENEC_INSTALL_INIT_ARGS=v1.8.14
 #!/bin/sh
 # Copyright 2016 The Rust Project Developers. See the COPYRIGHT
 # file at the top-level directory of this distribution and at
@@ -117,7 +119,7 @@ main() {
 
     if [ -z "$1" ]; then
       #shellcheck disable=SC2086
-      ignore "$renec_install_init" $renec_install_INIT_ARGS
+      ignore "$renec_install_init" $RENEC_INSTALL_INIT_ARGS
     else
       ignore "$renec_install_init" "$@"
     fi

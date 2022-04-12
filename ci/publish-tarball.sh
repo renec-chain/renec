@@ -148,9 +148,9 @@ if [[ -n $DO_NOT_PUBLISH_TAR ]]; then
   echo "Skipping publishing install wrapper"
 elif [[ -n $BUILDKITE ]]; then
   cat > release.solana.com-install <<EOF
-SOLANA_RELEASE=$CHANNEL_OR_TAG
-renec_install_INIT_ARGS=$CHANNEL_OR_TAG
-SOLANA_DOWNLOAD_ROOT=https://release.solana.com
+RENEC_RELEASE=$CHANNEL_OR_TAG
+RENEC_INSTALL_INIT_ARGS=$CHANNEL_OR_TAG
+RENEC_DOWNLOAD_ROOT=https://release.renec.foundation
 EOF
   cat install/renec-install-init.sh >> release.solana.com-install
 

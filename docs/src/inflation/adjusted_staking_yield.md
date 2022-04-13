@@ -16,7 +16,7 @@ Due to this relative change in representation, the proportion of stake of any to
 
 Of initial interest, however, is the _dilution of **un-staked** tokens_, or $D_{us}$. In the case of un-staked tokens, token dilution is only a function of the _Inflation Schedule_ because the amount of un-staked tokens doesn't change over time.
 
-This can be seen by explicitly calculating un-staked dilution as $D_{us}$. The un-staked proportion of the token pool at time $t$ is $P_{us}(t_{N})$ and $I_{t}$ is the incremental inflation rate applied between any two consecutive time points. $SOL_{us}(t)$ and $SOL_{total}(t)$ is the amount of un-staked and total SOL on the network, respectively, at time $t$. Therefore $P_{us}(t) = SOL_{us}(t)/SOL_{total}(t)$.
+This can be seen by explicitly calculating un-staked dilution as $D_{us}$. The un-staked proportion of the token pool at time $t$ is $P_{us}(t_{N})$ and $I_{t}$ is the incremental inflation rate applied between any two consecutive time points. $SOL_{us}(t)$ and $SOL_{total}(t)$ is the amount of un-staked and total RENEC on the network, respectively, at time $t$. Therefore $P_{us}(t) = SOL_{us}(t)/SOL_{total}(t)$.
 
 $$
 \begin{aligned}
@@ -64,7 +64,7 @@ $$
 	Y_{adj} = \frac{P_s(t_2) - P_s(t_1)}{P_s(t_1)}\\
 $$
 
-As seen in the plot above, the proportion of staked tokens increases with inflation issuance. Letting $SOL_s(t)$ and $SOL_{\text{total}}(t)$ represent the amount of staked and total SOL at time $t$ respectively:
+As seen in the plot above, the proportion of staked tokens increases with inflation issuance. Letting $SOL_s(t)$ and $SOL_{\text{total}}(t)$ represent the amount of staked and total RENEC at time $t$ respectively:
 
 $$
 	P_s(t_2) = \frac{SOL_s(t_1) + SOL_{\text{total}}(t_1)\times I(t_1)}{SOL_{\text{total}}(t_1)\times (1 + I(t_1))}\\

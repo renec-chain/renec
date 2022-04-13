@@ -2,17 +2,17 @@
 title: Starting a Validator
 ---
 
-## Configure Solana CLI
+## Configure Renec CLI
 
-The solana cli includes `get` and `set` configuration commands to automatically
+The renec cli includes `get` and `set` configuration commands to automatically
 set the `--url` argument for cli commands. For example:
 
 ```bash
-solana config set --url http://api.devnet.solana.com
+renec config set --url https://api-testnet.renec.foundation:8899
 ```
 
-While this section demonstrates how to connect to the Devnet cluster, the steps
-are similar for the other [Solana Clusters](../clusters.md).
+While this section demonstrates how to connect to the Testnet cluster, the steps
+are similar for the other [Renec Clusters](../clusters.md).
 
 ## Confirm The Cluster Is Reachable
 
@@ -20,11 +20,11 @@ Before attaching a validator node, sanity check that the cluster is accessible
 to your machine by fetching the transaction count:
 
 ```bash
-solana transaction-count
+renec transaction-count
 ```
 
-View the [metrics dashboard](https://metrics.solana.com:3000/d/monitor/cluster-telemetry) for more
-detail on cluster activity.
+<!-- View the [metrics dashboard](https://metrics.renec.com:3000/d/monitor/cluster-telemetry) for more
+detail on cluster activity. -->
 
 ## Enabling CUDA
 
@@ -32,7 +32,7 @@ If your machine has a GPU with CUDA installed \(Linux-only currently\), include
 the `--cuda` argument to `renec-validator`.
 
 When your validator is started look for the following log message to indicate
-that CUDA is enabled: `"[<timestamp> solana::validator] CUDA is enabled"`
+that CUDA is enabled: `"[<timestamp> renec::validator] CUDA is enabled"`
 
 ## System Tuning
 
@@ -40,10 +40,10 @@ that CUDA is enabled: `"[<timestamp> solana::validator] CUDA is enabled"`
 
 #### Automatic
 
-The solana repo includes a daemon to adjust system settings to optimize performance
+The renec repo includes a daemon to adjust system settings to optimize performance
 (namely by increasing the OS UDP buffer and file mapping limits).
 
-The daemon (`renec-sys-tuner`) is included in the solana binary release. Restart
+The daemon (`renec-sys-tuner`) is included in the renec binary release. Restart
 it, _before_ restarting your validator, after each software upgrade to ensure that
 the latest recommended settings are applied.
 
@@ -51,70 +51,6 @@ To run it:
 
 ```bash
 sudo $(command -v renec-sys-tuner) --user $(whoami) > sys-tuner.log 2>&1 &
-```
-
-#### Manual
-
-If you would prefer to manage system settings on your own, you may do so with
-the following commands.
-
-##### **Increase UDP buffers**
-
-```bash
-sudo bash -c "cat >/etc/sysctl.d/20-solana-udp-buffers.conf <<EOF
-# Increase UDP buffer size
-net.core.rmem_default = 134217728
-net.core.rmem_max = 134217728
-net.core.wmem_default = 134217728
-net.core.wmem_max = 134217728
-EOF"
-```
-
-```bash
-sudo sysctl -p /etc/sysctl.d/20-solana-udp-buffers.conf
-```
-
-##### **Increased memory mapped files limit**
-
-```bash
-sudo bash -c "cat >/etc/sysctl.d/20-solana-mmaps.conf <<EOF
-# Increase memory mapped files limit
-vm.max_map_count = 1000000
-EOF"
-```
-
-```bash
-sudo sysctl -p /etc/sysctl.d/20-solana-mmaps.conf
-```
-
-Add
-
-```
-LimitNOFILE=1000000
-```
-
-to the `[Service]` section of your systemd service file, if you use one,
-otherwise add
-
-```
-DefaultLimitNOFILE=1000000
-```
-
-to the `[Manager]` section of `/etc/systemd/system.conf`.
-
-```bash
-sudo systemctl daemon-reload
-```
-
-```bash
-sudo bash -c "cat >/etc/security/limits.d/90-solana-nofiles.conf <<EOF
-# Increase process file descriptor count limit
-* - nofile 1000000
-EOF"
-```
-
-```bash
-### Close all open sessions (log out then, in again) ###
 ```
 
 ## Generate identity
@@ -180,54 +116,54 @@ network. **It is crucial to back-up this information.**
 
 If you don’t back up this information, you WILL NOT BE ABLE TO RECOVER YOUR
 VALIDATOR if you lose access to it. If this happens, YOU WILL LOSE YOUR
-ALLOCATION OF SOL TOO.
+ALLOCATION OF RENEC TOO.
 
 To back-up your validator identify keypair, **back-up your
 "validator-keypair.json” file or your seed phrase to a secure location.**
 
-## More Solana CLI Configuration
+## More Renec CLI Configuration
 
-Now that you have a keypair, set the solana configuration to use your validator
+Now that you have a keypair, set the renec configuration to use your validator
 keypair for all following commands:
 
 ```bash
-solana config set --keypair ~/validator-keypair.json
+renec config set --keypair ~/validator-keypair.json
 ```
 
 You should see the following output:
 
 ```text
-Config File: /home/solana/.config/solana/cli/config.yml
-RPC URL: http://api.devnet.solana.com
-WebSocket URL: ws://api.devnet.solana.com/ (computed)
-Keypair Path: /home/solana/validator-keypair.json
+Config File: /home/renec/.config/renec/cli/config.yml
+RPC URL: http://api.devnet.renec.com
+WebSocket URL: ws://api.devnet.renec.com/ (computed)
+Keypair Path: /home/renec/validator-keypair.json
 Commitment: confirmed
 ```
 
 ## Airdrop & Check Validator Balance
 
-Airdrop yourself some SOL to get started:
+Airdrop yourself some RENEC to get started:
 
 ```bash
-solana airdrop 1
+renec airdrop 1
 ```
 
-Note that airdrops are only available on Devnet and Testnet. Both are limited
-to 1 SOL per request.
+Note that airdrops are only available on Testnet. Limited
+to 1 RENEC per request.
 
 To view your current balance:
 
 ```text
-solana balance
+renec balance
 ```
 
 Or to see in finer detail:
 
 ```text
-solana balance --lamports
+renec balance --lamports
 ```
 
-Read more about the [difference between SOL and lamports here](../introduction.md#what-are-sols).
+Read more about the [difference between RENEC and lamports here](../introduction.md#what-are-sols).
 
 ## Create Authorized Withdrawer Account
 
@@ -250,7 +186,7 @@ renec-keygen new -o ~/authorized-withdrawer-keypair.json
 
 If you haven’t already done so, create a vote-account keypair and create the
 vote account on the network. If you have completed this step, you should see the
-“vote-account-keypair.json” in your Solana runtime directory:
+“vote-account-keypair.json” in your Renec runtime directory:
 
 ```bash
 renec-keygen new -o ~/vote-account-keypair.json
@@ -260,7 +196,7 @@ The following command can be used to create your vote account on the blockchain
 with all the default options:
 
 ```bash
-solana create-vote-account ~/vote-account-keypair.json ~/validator-keypair.json ~/authorized-withdrawer-keypair.json
+renec create-vote-account ~/vote-account-keypair.json ~/validator-keypair.json ~/authorized-withdrawer-keypair.json
 ```
 
 Remember to move your authorized withdrawer keypair into a very secure location after running the above command.
@@ -290,7 +226,7 @@ renec-validator \
   --identity ~/validator-keypair.json \
   --vote-account ~/vote-account-keypair.json \
   --rpc-port 8899 \
-  --entrypoint entrypoint.devnet.solana.com:8001 \
+  --entrypoint 54.208.172.26:8001 \
   --limit-ledger-size \
   --log ~/renec-validator.log
 ```
@@ -312,7 +248,7 @@ Confirm your validator is connected to the network by opening a new terminal and
 running:
 
 ```bash
-solana gossip
+renec gossip
 ```
 
 If your validator is connected, its public key and IP address will appear in the list.
@@ -336,19 +272,19 @@ less disk usage may be requested by adding an argument to `--limit-ledger-size`
 if desired. Check `renec-validator --help` for the default limit value used by
 `--limit-ledger-size`. More information about
 selecting a custom limit value is [available
-here](https://github.com/solana-labs/solana/blob/583cec922b6107e0f85c7e14cb5e642bc7dfb340/core/src/ledger_cleanup_service.rs#L15-L26).
+here](https://github.com/renec-labs/renec/blob/583cec922b6107e0f85c7e14cb5e642bc7dfb340/core/src/ledger_cleanup_service.rs#L15-L26).
 
 ### Systemd Unit
 
 Running the validator as a systemd unit is one easy way to manage running in the
 background.
 
-Assuming you have a user called `sol` on your machine, create the file `/etc/systemd/system/sol.service` with
+Assuming you have a user called `renec` on your machine, create the file `/etc/systemd/system/renec.service` with
 the following:
 
 ```
 [Unit]
-Description=Solana Validator
+Description=Renec Validator
 After=network.target
 Wants=renec-sys-tuner.service
 StartLimitIntervalSec=0
@@ -357,29 +293,29 @@ StartLimitIntervalSec=0
 Type=simple
 Restart=always
 RestartSec=1
-User=sol
+User=renec
 LimitNOFILE=1000000
 LogRateLimitIntervalSec=0
-Environment="PATH=/bin:/usr/bin:/home/sol/.local/share/solana/install/active_release/bin"
-ExecStart=/home/sol/bin/validator.sh
+Environment="PATH=/bin:/usr/bin:/home/renec/.local/share/renec/install/active_release/bin"
+ExecStart=/home/renec/bin/validator.sh
 
 [Install]
 WantedBy=multi-user.target
 ```
 
-Now create `/home/sol/bin/validator.sh` to include the desired
+Now create `/home/renec/bin/validator.sh` to include the desired
 `renec-validator` command-line. Ensure that the 'exec' command is used to
 start the validator process (i.e. "exec renec-validator ...").  This is
 important because without it, logrotate will end up killing the validator
 every time the logs are rotated.
 
-Ensure that running `/home/sol/bin/validator.sh` manually starts
-the validator as expected. Don't forget to mark it executable with `chmod +x /home/sol/bin/validator.sh`
+Ensure that running `/home/renec/bin/validator.sh` manually starts
+the validator as expected. Don't forget to mark it executable with `chmod +x /home/renec/bin/validator.sh`
 
 Start the service with:
 
 ```bash
-$ sudo systemctl enable --now sol
+$ sudo systemctl enable --now renec
 ```
 
 ### Logging
@@ -410,28 +346,28 @@ instead of the validator's, which will kill them both.
 #### Using logrotate
 
 An example setup for the `logrotate`, which assumes that the validator is
-running as a systemd service called `sol.service` and writes a log file at
-/home/sol/renec-validator.log:
+running as a systemd service called `renec.service` and writes a log file at
+/home/renec/renec-validator.log:
 
 ```bash
 # Setup log rotation
 
-cat > logrotate.sol <<EOF
-/home/sol/renec-validator.log {
+cat > logrotate.renec <<EOF
+/home/renec/renec-validator.log {
   rotate 7
   daily
   missingok
   postrotate
-    systemctl kill -s USR1 sol.service
+    systemctl kill -s USR1 renec.service
   endscript
 }
 EOF
-sudo cp logrotate.sol /etc/logrotate.d/sol
+sudo cp logrotate.renec /etc/logrotate.d/renec
 systemctl restart logrotate.service
 ```
 
 As mentioned earlier, be sure that if you use logrotate, any script you create
-which starts the solana validator process uses "exec" to do so (example: "exec
+which starts the renec validator process uses "exec" to do so (example: "exec
 renec-validator ..."); otherwise, when logrotate sends its signal to the
 validator, the enclosing script will die and take the validator process with
 it.
@@ -456,9 +392,9 @@ partition.
 
 Example configuration:
 
-1. `sudo mkdir /mnt/solana-accounts`
-2. Add a 300GB tmpfs parition by adding a new line containing `tmpfs /mnt/solana-accounts tmpfs rw,size=300G,user=sol 0 0` to `/etc/fstab`
-   (assuming your validator is running under the user "sol"). **CAREFUL: If you
+1. `sudo mkdir /mnt/renec-accounts`
+2. Add a 300GB tmpfs parition by adding a new line containing `tmpfs /mnt/renec-accounts tmpfs rw,size=300G,user=renec 0 0` to `/etc/fstab`
+   (assuming your validator is running under the user "renec"). **CAREFUL: If you
    incorrectly edit /etc/fstab your machine may no longer boot**
 3. Create at least 250GB of swap space
 
@@ -470,10 +406,10 @@ Example configuration:
 - Format the device for usage as swap with `sudo mkswap SWAPDEV`
 
 4. Add the swap file to `/etc/fstab` with a new line containing `SWAPDEV swap swap defaults 0 0`
-5. Enable swap with `sudo swapon -a` and mount the tmpfs with `sudo mount /mnt/solana-accounts/`
+5. Enable swap with `sudo swapon -a` and mount the tmpfs with `sudo mount /mnt/renec-accounts/`
 6. Confirm swap is active with `free -g` and the tmpfs is mounted with `mount`
 
-Now add the `--accounts /mnt/solana-accounts` argument to your `renec-validator`
+Now add the `--accounts /mnt/renec-accounts` argument to your `renec-validator`
 command-line arguments and restart the validator.
 
 ### Account indexing

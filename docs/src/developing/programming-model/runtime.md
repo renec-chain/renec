@@ -69,8 +69,8 @@ parent. If an invoked program consume the budget or exceeds a bound the entire
 invocation chain is halted.
 
 The current [compute
-budget](https://github.com/solana-labs/solana/blob/0224a8b127ace4c6453dd6492a38c66cb999abd2/sdk/src/compute_budget.rs#L102)
-can be found in the Solana SDK.
+budget](https://github.com/remitano/renec/blob/0224a8b127ace4c6453dd6492a38c66cb999abd2/sdk/src/compute_budget.rs#L102)
+can be found in the Renec SDK.
 
 For example, if the current budget is:
 
@@ -121,7 +121,7 @@ existing per-instruction cap to avoid breaking existing client behavior.
 
 There are a lot of uses cases that require more than 200k units
 transaction-wide.  To enable these uses cases transactions can include a
-[``ComputeBudgetInstruction`](https://github.com/solana-labs/solana/blob/0224a8b127ace4c6453dd6492a38c66cb999abd2/sdk/src/compute_budget.rs#L44)
+[``ComputeBudgetInstruction`](https://github.com/remitano/renec/blob/0224a8b127ace4c6453dd6492a38c66cb999abd2/sdk/src/compute_budget.rs#L44)
 requesting a higher compute unit cap.  Higher compute caps will be charged
 higher fees.
 
@@ -137,25 +137,25 @@ let instruction = ComputeBudgetInstruction::request_units(300_000);
 
 ## New Features
 
-As Solana evolves, new features or patches may be introduced that changes the
+As Renec evolves, new features or patches may be introduced that changes the
 behavior of the cluster and how programs run. Changes in behavior must be
 coordinated between the various nodes of the cluster, if nodes do not coordinate
-then these changes can result in a break-down of consensus. Solana supports a
+then these changes can result in a break-down of consensus. Renec supports a
 mechanism called runtime features to facilitate the smooth adoption of changes.
 
 Runtime features are epoch coordinated events where one or more behavior changes
-to the cluster will occur. New changes to Solana that will change behavior are
-wrapped with feature gates and disabled by default. The Solana tools are then
+to the cluster will occur. New changes to Renec that will change behavior are
+wrapped with feature gates and disabled by default. The Renec tools are then
 used to activate a feature, which marks it pending, once marked pending the
 feature will be activated at the next epoch.
 
-To determine which features are activated use the [Solana command-line
+To determine which features are activated use the [Renec command-line
 tools](cli/install-renec-cli-tools.md):
 
 ```bash
-solana feature status
+renec feature status
 ```
 
-If you encounter problems first ensure that the Solana tools version you are
-using match the version returned by `solana cluster-version`. If they do not
+If you encounter problems first ensure that the Renec tools version you are
+using match the version returned by `renec cluster-version`. If they do not
 match [install the correct tool suite](cli/install-renec-cli-tools.md).

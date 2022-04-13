@@ -2,9 +2,9 @@
 title: Cluster Software Installation and Updates
 ---
 
-Currently users are required to build the solana cluster software themselves from the git repository and manually update it, which is error prone and inconvenient.
+Currently users are required to build the renec cluster software themselves from the git repository and manually update it, which is error prone and inconvenient.
 
-This document proposes an easy to use software install and updater that can be used to deploy pre-built binaries for supported platforms. Users may elect to use binaries supplied by Solana or any other party provider. Deployment of updates is managed using an on-chain update manifest program.
+This document proposes an easy to use software install and updater that can be used to deploy pre-built binaries for supported platforms. Users may elect to use binaries supplied by Renec or any other party provider. Deployment of updates is managed using an on-chain update manifest program.
 
 ## Motivating Examples
 
@@ -30,7 +30,7 @@ $ curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v1.0.0/install/
 With a well-known release URL, a pre-built binary can be obtained for supported platforms:
 
 ```bash
-$ curl -o renec-install-init https://github.com/solana-labs/solana/releases/download/v1.0.0/renec-install-init-x86_64-apple-darwin
+$ curl -o renec-install-init https://github.com/remitano/renec/releases/download/v1.0.0/renec-install-init-x86_64-apple-darwin
 $ chmod +x ./renec-install-init
 $ ./renec-install-init --help
 ```
@@ -40,14 +40,14 @@ $ ./renec-install-init --help
 If a pre-built binary is not available for a given platform, building the installer from source is always an option:
 
 ```bash
-$ git clone https://github.com/solana-labs/solana.git
+$ git clone https://github.com/remitano/renec.git
 $ cd solana/install
 $ cargo run -- --help
 ```
 
 ### Deploy a new update to a cluster
 
-Given a solana release tarball \(as created by `ci/publish-tarball.sh`\) that has already been uploaded to a publicly accessible URL, the following commands will deploy the update:
+Given a renec release tarball \(as created by `ci/publish-tarball.sh`\) that has already been uploaded to a publicly accessible URL, the following commands will deploy the update:
 
 ```bash
 $ renec-keygen new -o update-manifest.json  # <-- only generated once, the public key is shared with users
@@ -65,7 +65,7 @@ $ renec-install run renec-validator ...  # <-- runs a validator, restarting it a
 
 ## On-chain Update Manifest
 
-An update manifest is used to advertise the deployment of new release tarballs on a solana cluster. The update manifest is stored using the `config` program, and each update manifest account describes a logical update channel for a given target triple \(eg, `x86_64-apple-darwin`\). The account public key is well-known between the entity deploying new updates and users consuming those updates.
+An update manifest is used to advertise the deployment of new release tarballs on a renec cluster. The update manifest is stored using the `config` program, and each update manifest account describes a logical update channel for a given target triple \(eg, `x86_64-apple-darwin`\). The account public key is well-known between the entity deploying new updates and users consuming those updates.
 
 The update tarball itself is hosted elsewhere, off-chain and can be fetched from the specified `download_url`.
 
@@ -87,7 +87,7 @@ pub struct SignedUpdateManifest {
 }
 ```
 
-Note that the `manifest` field itself contains a corresponding signature \(`manifest_signature`\) to guard against man-in-the-middle attacks between the `renec-install` tool and the solana cluster RPC API.
+Note that the `manifest` field itself contains a corresponding signature \(`manifest_signature`\) to guard against man-in-the-middle attacks between the `renec-install` tool and the renec cluster RPC API.
 
 To guard against rollback attacks, `renec-install` will refuse to install an update with an older `timestamp_secs` than what is currently installed.
 
@@ -123,7 +123,7 @@ It manages the following files and directories in the user's home directory:
 
 ```text
 renec-install 0.16.0
-The solana cluster software installer
+The renec cluster software installer
 
 USAGE:
     renec-install [OPTIONS] <SUBCOMMAND>
@@ -156,7 +156,7 @@ FLAGS:
 
 OPTIONS:
     -d, --data_dir <PATH>    Directory to store install data [default: .../Library/Application Support/solana]
-    -u, --url <URL>          JSON RPC URL for the solana cluster [default: http://api.devnet.solana.com]
+    -u, --url <URL>          JSON RPC URL for the renec cluster [default: http://api.devnet.solana.com]
     -p, --pubkey <PUBKEY>    Public key of the update manifest [default: 9XX329sPuskWhH4DQh6k16c87dHKhXLBZTL3Gxmve8Gp]
 ```
 
@@ -183,7 +183,7 @@ FLAGS:
     -h, --help    Prints help information
 
 ARGS:
-    <download_url>               URL to the solana release archive
+    <download_url>               URL to the renec release archive
     <update_manifest_keypair>    Keypair file for the update manifest (/path/to/keypair.json)
 ```
 

@@ -2,9 +2,9 @@
 title: Web3 JavaScript API
 ---
 
-## What is Solana-Web3.js?
+## What is Renec-Web3.js?
 
-The Solana-Web3.js library aims to provide complete coverage of Solana. The library was built on top of the [Solana JSON RPC API](https://docs.solana.com/developing/clients/jsonrpc-api).
+The Renec-Web3.js library aims to provide complete coverage of Renec. The library was built on top of the [Renec JSON RPC API](https://docs.renec.foundation/developing/clients/jsonrpc-api).
 
 ## Common Terminology
 
@@ -14,7 +14,7 @@ The Solana-Web3.js library aims to provide complete coverage of Solana. The libr
 | Instruction | The smallest unit of a program that a client can include in a transaction. Within its processing code, an instruction may contain one or more cross-program invocations. |
 | Transaction | One or more instructions signed by the client using one or more Keypairs and executed atomically with only two possible outcomes: success or failure. |
 
-For the full list of terms, see [Solana terminology](https://docs.solana.com/terminology#cross-program-invocation)
+For the full list of terms, see [Renec terminology](https://docs.renec.foundation/terminology#cross-program-invocation)
 
 ## Getting Started
 
@@ -71,7 +71,7 @@ console.log(solanaWeb3);
 
 ### Connecting to a Wallet
 
-To allow users to use your dApp or application on Solana, they will need to get access to their Keypair. A Keypair is a private key with a matching public key, used to sign transactions.
+To allow users to use your dApp or application on Renec, they will need to get access to their Keypair. A Keypair is a private key with a matching public key, used to sign transactions.
 
 There are two ways to obtain a Keypair:
 1. Generate a new Keypair
@@ -108,9 +108,9 @@ Many wallets today allow users to bring their Keypair using a variety of extensi
 
 ### Creating and Sending Transactions
 
-To interact with programs on Solana, you create, sign, and send transactions to the network. Transactions are collections of instructions with signatures. The order that instructions exist in a transaction determines the order they are executed.
+To interact with programs on Renec, you create, sign, and send transactions to the network. Transactions are collections of instructions with signatures. The order that instructions exist in a transaction determines the order they are executed.
 
-A transaction in Solana-Web3.js is created using the [`Transaction`](javascript-api.md#Transaction) object and adding desired messages, addresses, or instructions.
+A transaction in Renec-Web3.js is created using the [`Transaction`](javascript-api.md#Transaction) object and adding desired messages, addresses, or instructions.
 
 Take the example of a transfer transaction:
 
@@ -147,13 +147,13 @@ sendAndConfirmTransaction(
 );
 ```
 
-The above code takes in a `TransactionInstruction` using `SystemProgram`, creates a `Transaction`, and sends it over the network. You use `Connection` in order to define which Solana network you are connecting to, namely `mainnet-beta`, `testnet`, or `devnet`.
+The above code takes in a `TransactionInstruction` using `SystemProgram`, creates a `Transaction`, and sends it over the network. You use `Connection` in order to define with Renec network you are connecting to, namely `mainnet-beta`, `testnet`, or `devnet`.
 
 ### Interacting with Custom Programs
 
-The previous section visits sending basic transactions. In Solana everything you do interacts with different programs, including the previous section's transfer transaction. At the time of writing programs on Solana are either written in Rust or C.
+The previous section visits sending basic transactions. In Renec everything you do interacts with different programs, including the previous section's transfer transaction. At the time of writing programs on Renec are either written in Rust or C.
 
-Let's look at the `SystemProgram`. The method signature for allocating space in your account on Solana in Rust looks like this:
+Let's look at the `SystemProgram`. The method signature for allocating space in your account on Renec in Rust looks like this:
 
 ```rust
 pub fn allocate(
@@ -162,7 +162,7 @@ pub fn allocate(
 ) -> Instruction
 ```
 
-In Solana when you want to interact with a program you must first know all the accounts you will be interacting with.
+In Renec when you want to interact with a program you must first know all the accounts you will be interacting with.
 
 You must always provide every account that the program will be interacting within the instruction. Not only that, but you must provide whether or not the account is `isSigner` or `isWritable`.
 
@@ -183,7 +183,7 @@ let airdropSignature = await connection.requestAirdrop(
 await connection.confirmTransaction(airdropSignature);
 ```
 
-First, we set up the account Keypair and connection so that we have an account to make allocate on the testnet. We also create a payer Keypair and airdrop some sol so we can pay for the allocate transaction.
+First, we set up the account Keypair and connection so that we have an account to make allocate on the testnet. We also create a payer Keypair and airdrop some renec so we can pay for the allocate transaction.
 
 ```javascript
 let allocateTransaction = new web3.Transaction({
@@ -205,7 +205,7 @@ let allocateStruct = {
 };
 ```
 
-The above is created using using u32 and ns64 from `@solana/buffer-layout` to facilitate the payload creation. The `allocate` function takes in the parameter `space`. To interact with the function we must provide the data as a Buffer format. The `buffer-layout` library helps with allocating the buffer and encoding it correctly for Rust programs on Solana to interpret.
+The above is created using using u32 and ns64 from `@solana/buffer-layout` to facilitate the payload creation. The `allocate` function takes in the parameter `space`. To interact with the function we must provide the data as a Buffer format. The `buffer-layout` library helps with allocating the buffer and encoding it correctly for Rust programs on Renec to interpret.
 
 Let's break down this struct.
 
@@ -222,7 +222,7 @@ Let's break down this struct.
 `index` is set to 8 because the function `allocate` is in the 8th position in the instruction enum for `SystemProgram`.
 
 ```rust
-/* https://github.com/solana-labs/solana/blob/21bc43ed58c63c827ba4db30426965ef3e807180/sdk/program/src/system_instruction.rs#L142-L305 */
+/* https://github.com/remitano/renec/blob/21bc43ed58c63c827ba4db30426965ef3e807180/sdk/program/src/system_instruction.rs#L142-L305 */
 pub enum SystemInstruction {
     /** 0 **/CreateAccount {/**/},
     /** 1 **/Assign {/**/},

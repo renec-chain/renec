@@ -1,12 +1,12 @@
 ---
-title: Staking on Solana
+title: Staking on Renec
 ---
 
 _Note before reading: All references to increases in values are in absolute
-terms with regards to balance of SOL.
-This document makes no suggestion as to the monetary value of SOL at any time._
+terms with regards to balance of RENEC.
+This document makes no suggestion as to the monetary value of RENEC at any time._
 
-By staking your SOL tokens, you help secure the network and
+By staking your RENEC tokens, you help secure the network and
 [earn rewards](implemented-proposals/staking-rewards.md) while doing so.
 
 You can stake by delegating your tokens to validators who process transactions and run the network.
@@ -46,9 +46,9 @@ Rewards and slashing align validator and token holder interests which helps keep
 secure, robust and performant.
 
 
-## How do I stake my SOL tokens?
+## How do I stake my RENEC tokens?
 
-You can stake SOL by moving your tokens
+You can stake RENEC by moving your tokens
 into a wallet that supports staking.   The wallet provides steps to create a stake account
 and do the delegation.
 
@@ -57,11 +57,10 @@ and do the delegation.
 Many web and mobile wallets support Solana staking operations. Please check with
 your favorite wallet's maintainers regarding status
 
-#### Solana command line tools
-- Solana command line tools can perform all stake operations in conjunction
+- Renec command line tools can perform all stake operations in conjunction
   with a CLI-generated keypair file wallet, a paper wallet, or with a connected
   Ledger Nano.
-  [Staking commands using the Solana Command Line Tools](cli/delegate-stake.md).
+  [Staking commands using the Renec Command Line Tools](cli/delegate-stake.md).
 
 #### Create a Stake Account
 
@@ -72,10 +71,10 @@ will be of a different type than one used to simply send and receive tokens.
 
 Follow the wallet's instructions for selecting a validator.  You can get
 information about potentially performant validators from the links below.
-The Solana Foundation does not recommend any particular validator.
+The Renec Foundation does not recommend any particular validator.
 
 The Mainnet Beta validators introduce themselves and their services on this
-Solana Forum thread:
+Renec Forum thread:
 
 - https://forums.solana.com/t/validator-information-thread
 
@@ -86,12 +85,12 @@ performance statistics about each one.
 
 - https://solanabeach.io
 
-To view block production statistics, use the Solana command-line tools:
+To view block production statistics, use the Renec command-line tools:
 
-- `solana validators`
-- `solana block-production`
+- `renec validators`
+- `renec block-production`
 
-The Solana team does not make recommendations on how to interpret this
+The Renec team does not make recommendations on how to interpret this
 information. Do your own due diligence.
 
 #### Delegate your Stake

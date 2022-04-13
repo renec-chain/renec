@@ -2,20 +2,20 @@
 title: Benchmark a Cluster
 ---
 
-The Solana git repository contains all the scripts you might need to spin up your own local testnet. Depending on what you're looking to achieve, you may want to run a different variation, as the full-fledged, performance-enhanced multinode testnet is considerably more complex to set up than a Rust-only, singlenode testnode. If you are looking to develop high-level features, such as experimenting with smart contracts, save yourself some setup headaches and stick to the Rust-only singlenode demo. If you're doing performance optimization of the transaction pipeline, consider the enhanced singlenode demo. If you're doing consensus work, you'll need at least a Rust-only multinode demo. If you want to reproduce our TPS metrics, run the enhanced multinode demo.
+The Renec git repository contains all the scripts you might need to spin up your own local testnet. Depending on what you're looking to achieve, you may want to run a different variation, as the full-fledged, performance-enhanced multinode testnet is considerably more complex to set up than a Rust-only, singlenode testnode. If you are looking to develop high-level features, such as experimenting with smart contracts, save yourself some setup headaches and stick to the Rust-only singlenode demo. If you're doing performance optimization of the transaction pipeline, consider the enhanced singlenode demo. If you're doing consensus work, you'll need at least a Rust-only multinode demo. If you want to reproduce our TPS metrics, run the enhanced multinode demo.
 
-For all four variations, you'd need the latest Rust toolchain and the Solana source code:
+For all four variations, you'd need the latest Rust toolchain and the Renec source code:
 
-First, setup Rust, Cargo and system packages as described in the Solana [README](https://github.com/solana-labs/solana#1-install-rustc-cargo-and-rustfmt)
+First, setup Rust, Cargo and system packages as described in the Renec [README](https://github.com/remitano/renec#1-install-rustc-cargo-and-rustfmt)
 
 Now checkout the code from github:
 
 ```bash
-git clone https://github.com/solana-labs/solana.git
+git clone https://github.com/remitano/renec.git
 cd solana
 ```
 
-The demo code is sometimes broken between releases as we add new low-level features, so if this is your first time running the demo, you'll improve your odds of success if you check out the [latest release](https://github.com/solana-labs/solana/releases) before proceeding:
+The demo code is sometimes broken between releases as we add new low-level features, so if this is your first time running the demo, you'll improve your odds of success if you check out the [latest release](https://github.com/remitano/renec/releases) before proceeding:
 
 ```bash
 TAG=$(git describe --tags $(git rev-list --tags --max-count=1))

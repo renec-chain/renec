@@ -43,11 +43,11 @@ called Loom.
 
 Around the same time, Ethereum-based project Loom Network sprung up and many
 people were confused about whether they were the same project. The Loom team
-decided it would rebrand. They chose the name Solana, a nod to a small beach
-town North of San Diego called Solana Beach, where Anatoly, Greg and Stephen
+decided it would rebrand. They chose the name Renec, a nod to a small beach
+town North of San Diego called Renec Beach, where Anatoly, Greg and Stephen
 lived and surfed for three years when they worked for Qualcomm. On March 28th,
-the team created the Solana GitHub organization and renamed Greg's prototype
-Silk to Solana.
+the team created the Renec GitHub organization and renamed Greg's prototype
+Silk to Renec.
 
 In June of 2018, the team scaled up the technology to run on cloud-based
 networks and on July 19th, published a 50-node, permissioned, public testnet

@@ -1,20 +1,20 @@
 ---
-title: Using Solana CLI
+title: Using Renec CLI
 ---
 
-Before running any Solana CLI commands, let's go over some conventions that
-you will see across all commands. First, the Solana CLI is actually a collection
+Before running any Renec CLI commands, let's go over some conventions that
+you will see across all commands. First, the Renec CLI is actually a collection
 of different commands for each action you might want to take. You can view the list
 of all possible commands by running:
 
 ```bash
-solana --help
+renec --help
 ```
 
 To zoom in on how to use a particular command, run:
 
 ```bash
-solana <COMMAND> --help
+renec <COMMAND> --help
 ```
 
 where you replace the text `<COMMAND>` with the name of the command you want

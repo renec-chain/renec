@@ -2,6 +2,6 @@
 title: Running a Validator
 ---
 
-This section describes how to run a Solana validator node.
+This section describes how to run a Renec validator node.
 
-There are several clusters available to connect to; see [choosing a Cluster](cli/choose-a-cluster.md) for an overview of each.
+Currently, we only have testnet cluster, about mainnet cluster we will launch it as plan.

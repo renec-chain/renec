@@ -149,12 +149,12 @@ module.exports = {
           items: [
             {
               label: "GitHub",
-              href: "https://github.com/solana-labs/solana",
+              href: "https://github.com/remitano/renec",
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Solana Foundation`,
+      copyright: `Copyright © ${new Date().getFullYear()} Renec Foundation`,
     },
   },
   presets: [

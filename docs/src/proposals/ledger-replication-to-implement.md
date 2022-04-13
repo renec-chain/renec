@@ -4,7 +4,7 @@ title: Ledger Replication
 
 Note: this ledger replication solution was partially implemented, but not
 completed. The partial implementation was removed by
-https://github.com/solana-labs/solana/pull/9992 in order to prevent the security
+https://github.com/remitano/renec/pull/9992 in order to prevent the security
 risk of unused code. The first part of this design document reflects the
 once-implemented parts of ledger replication. The
 [second part of this document](#ledger-replication-not-implemented) describes the
@@ -12,7 +12,7 @@ parts of the solution never implemented.
 
 ## Proof of Replication
 
-At full capacity on a 1gbps network solana will generate 4 petabytes of data per year. To prevent the network from centralizing around validators that have to store the full data set this protocol proposes a way for mining nodes to provide storage capacity for pieces of the data.
+At full capacity on a 1gbps network renec will generate 4 petabytes of data per year. To prevent the network from centralizing around validators that have to store the full data set this protocol proposes a way for mining nodes to provide storage capacity for pieces of the data.
 
 The basic idea to Proof of Replication is encrypting a dataset with a public symmetric key using CBC encryption, then hash the encrypted dataset. The main problem with the naive approach is that a dishonest storage node can stream the encryption and delete the data as it's hashed. The simple solution is to periodically regenerate the hash based on a signed PoH value. This ensures that all the data is present during the generation of the proof and it also requires validators to have the entirety of the encrypted data present for verification of every proof of every identity. So the space required to validate is `number_of_proofs * data_size`
 
@@ -24,7 +24,7 @@ Our improvement on this approach is to randomly sample the encrypted segments fa
 
 Validators for PoRep are the same validators that are verifying transactions. If an archiver can prove that a validator verified a fake PoRep, then the validator will not receive a reward for that storage epoch.
 
-Archivers are specialized _light clients_. They download a part of the ledger \(a.k.a Segment\) and store it, and provide PoReps of storing the ledger. For each verified PoRep archivers earn a reward of sol from the mining pool.
+Archivers are specialized _light clients_. They download a part of the ledger \(a.k.a Segment\) and store it, and provide PoReps of storing the ledger. For each verified PoRep archivers earn a reward of renec from the mining pool.
 
 ## Constraints
 

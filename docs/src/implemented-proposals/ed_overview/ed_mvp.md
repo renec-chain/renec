@@ -6,7 +6,7 @@ title: Economic Design MVP
 
 The preceding sections, outlined in the
 [Economic Design Overview](ed_overview.md),
-describe a long-term vision of a sustainable Solana economy.
+describe a long-term vision of a sustainable Renec economy.
 Of course, we don't expect the final implementation to perfectly match what has
 been described above. We intend to fully engage with network stakeholders
 throughout the implementation phases \(i.e. pre-testnet, testnet, mainnet\)

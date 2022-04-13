@@ -1,8 +1,8 @@
 ---
-title: Add Solana to Your Exchange
+title: Add Renec to Your Exchange
 ---
 
-This guide describes how to add Solana's native token SOL to your cryptocurrency
+This guide describes how to add Renec's native token RENEC to your cryptocurrency
 exchange.
 
 ## Node Setup
@@ -13,18 +13,18 @@ operations with a bundled monitoring tool.
 
 This setup enables you:
 
-- to have a self-administered gateway to the Solana mainnet-beta cluster to get
+- to have a self-administered gateway to the Renec mainnet-beta cluster to get
   data and submit withdrawal transactions
 - to have full control over how much historical block data is retained
 - to maintain your service availability even if one node fails
 
-Solana nodes demand relatively high computing power to handle our fast blocks
+Renec nodes demand relatively high computing power to handle our fast blocks
 and high TPS. For specific requirements, please see
 [hardware recommendations](../running-validator/validator-reqs.md).
 
 To run an api node:
 
-1. [Install the Solana command-line tool suite](../cli/install-renec-cli-tools.md)
+1. [Install the Renec command-line tool suite](../cli/install-renec-cli-tools.md)
 2. Start the validator with at least the following parameters:
 
 ```bash
@@ -54,7 +54,7 @@ under 500GB. More or less disk usage may be requested by adding an argument to
 `--limit-ledger-size` if desired. Check `renec-validator --help` for the
 default limit value used by `--limit-ledger-size`. More information about
 selecting a custom limit value is [available
-here](https://github.com/solana-labs/solana/blob/583cec922b6107e0f85c7e14cb5e642bc7dfb340/core/src/ledger_cleanup_service.rs#L15-L26).
+here](https://github.com/remitano/renec/blob/583cec922b6107e0f85c7e14cb5e642bc7dfb340/core/src/ledger_cleanup_service.rs#L15-L26).
 
 Specifying one or more `--known-validator` parameters can protect you from booting from a malicious snapshot. [More on the value of booting with known validators](../running-validator/validator-start.md#known-validators)
 
@@ -66,11 +66,11 @@ Optional parameters to consider:
 ### Automatic Restarts and Monitoring
 
 We recommend configuring each of your nodes to restart automatically on exit, to
-ensure you miss as little data as possible. Running the solana software as a
+ensure you miss as little data as possible. Running the renec software as a
 systemd service is one great option.
 
 For monitoring, we provide
-[`solana-watchtower`](https://github.com/solana-labs/solana/blob/master/watchtower/README.md),
+[`solana-watchtower`](https://github.com/remitano/renec/blob/master/watchtower/README.md),
 which can monitor your validator and detect with the `renec-validator` process
 is unhealthy. It can directly be configured to alert you via Slack, Telegram,
 Discord, or Twillio. For details, run `solana-watchtower --help`.
@@ -118,9 +118,9 @@ historical ledger data that cannot be filled.
 ### Minimizing Validator Port Exposure
 
 The validator requires that various UDP and TCP ports be open for inbound
-traffic from all other Solana validators. While this is the most efficient mode of
+traffic from all other Renec validators. While this is the most efficient mode of
 operation, and is strongly recommended, it is possible to restrict the
-validator to only require inbound traffic from one other Solana validator.
+validator to only require inbound traffic from one other Renec validator.
 
 First add the `--restricted-repair-only-mode` argument. This will cause the
 validator to operate in a restricted mode where it will not receive pushes from
@@ -147,14 +147,14 @@ validators and only on the _Gossip_, _Repair_ and _ServeR_ ports.
 
 ## Setting up Deposit Accounts
 
-Solana accounts do not require any on-chain initialization; once they contain
-some SOL, they exist. To set up a deposit account for your exchange, simply
-generate a Solana keypair using any of our [wallet tools](../wallet-guide/cli.md).
+Renec accounts do not require any on-chain initialization; once they contain
+some RENEC, they exist. To set up a deposit account for your exchange, simply
+generate a Renec keypair using any of our [wallet tools](../wallet-guide/cli.md).
 
 We recommend using a unique deposit account for each of your users.
 
-Solana accounts must be made rent-exempt by containing 2-years worth of
-[rent](developing/programming-model/accounts.md#rent) in SOL. In order to find
+Renec accounts must be made rent-exempt by containing 2-years worth of
+[rent](developing/programming-model/accounts.md#rent) in RENEC. In order to find
 the minimum rent-exempt balance for your deposit accounts, query the
 [`getMinimumBalanceForRentExemption` endpoint](developing/clients/jsonrpc-api.md#getminimumbalanceforrentexemption):
 
@@ -167,19 +167,19 @@ curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc": "2.0","id":1,"m
 ### Offline Accounts
 
 You may wish to keep the keys for one or more collection accounts offline for
-greater security. If so, you will need to move SOL to hot accounts using our
+greater security. If so, you will need to move RENEC to hot accounts using our
 [offline methods](../offline-signing.md).
 
 ## Listening for Deposits
 
-When a user wants to deposit SOL into your exchange, instruct them to send a
+When a user wants to deposit RENEC into your exchange, instruct them to send a
 transfer to the appropriate deposit address.
 
 ### Poll for Blocks
 
 To track all the deposit accounts for your exchange, poll for each confirmed
 block and inspect for addresses of interest, using the JSON-RPC service of your
-Solana API node.
+Renec API node.
 
 - To identify which blocks are available, send a [`getBlocks` request](developing/clients/jsonrpc-api.md#getblocks),
   passing the last block you have already processed as the start-slot parameter:
@@ -264,12 +264,12 @@ list the starting and ending balances of each account in
 [lamports](../terminology.md#lamport), indexed to the `accountKeys` list. For
 example, if the deposit address if interest is
 `47Sbuv6jL7CViK9F2NMW51aQGhfdpUu7WNvKyH645Rfi`, this transaction represents a
-transfer of 218099990000 - 207099990000 = 11000000000 lamports = 11 SOL
+transfer of 218099990000 - 207099990000 = 11000000000 lamports = 11 RENEC
 
 If you need more information about the transaction type or other specifics, you
 can request the block from RPC in binary format, and parse it using either our
-[Rust SDK](https://github.com/solana-labs/solana) or
-[Javascript SDK](https://github.com/solana-labs/solana-web3.js).
+[Rust SDK](https://github.com/remitano/renec) or
+[Javascript SDK](https://github.com/remitano/renec-web3.js).
 
 ### Address History
 
@@ -373,25 +373,25 @@ curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc": "2.0","id":1,"m
 
 ## Sending Withdrawals
 
-To accommodate a user's request to withdraw SOL, you must generate a Solana
+To accommodate a user's request to withdraw RENEC, you must generate a Renec
 transfer transaction, and send it to the api node to be forwarded to your
 cluster.
 
 ### Synchronous
 
-Sending a synchronous transfer to the Solana cluster allows you to easily ensure
+Sending a synchronous transfer to the Renec cluster allows you to easily ensure
 that a transfer is successful and finalized by the cluster.
 
-Solana's command-line tool offers a simple command, `solana transfer`, to
+Renec's command-line tool offers a simple command, `renec transfer`, to
 generate, submit, and confirm transfer transactions. By default, this method
 will wait and track progress on stderr until the transaction has been finalized
 by the cluster. If the transaction fails, it will report any transaction errors.
 
 ```bash
-solana transfer <USER_ADDRESS> <AMOUNT> --allow-unfunded-recipient --keypair <KEYPAIR> --url http://localhost:8899
+renec transfer <USER_ADDRESS> <AMOUNT> --allow-unfunded-recipient --keypair <KEYPAIR> --url http://localhost:8899
 ```
 
-The [Solana Javascript SDK](https://github.com/solana-labs/solana-web3.js)
+The [Renec Javascript SDK](https://github.com/remitano/renec-web3.js)
 offers a similar approach for the JS ecosystem. Use the `SystemProgram` to build
 a transfer transaction, and submit it using the `sendAndConfirmTransaction`
 method.
@@ -413,14 +413,14 @@ First, get a recent blockhash using the [`getFees` endpoint](developing/clients/
 or the CLI command:
 
 ```bash
-solana fees --url http://localhost:8899
+renec fees --url http://localhost:8899
 ```
 
 In the command-line tool, pass the `--no-wait` argument to send a transfer
 asynchronously, and include your recent blockhash with the `--blockhash` argument:
 
 ```bash
-solana transfer <USER_ADDRESS> <AMOUNT> --no-wait --allow-unfunded-recipient --blockhash <RECENT_BLOCKHASH> --keypair <KEYPAIR> --url http://localhost:8899
+renec transfer <USER_ADDRESS> <AMOUNT> --no-wait --allow-unfunded-recipient --blockhash <RECENT_BLOCKHASH> --keypair <KEYPAIR> --url http://localhost:8899
 ```
 
 You can also build, sign, and serialize the transaction manually, and fire it off to
@@ -482,14 +482,14 @@ prevent accidental loss of user funds.
 
 #### Basic verfication
 
-Solana addresses a 32-byte array, encoded with the bitcoin base58 alphabet. This
+Renec addresses a 32-byte array, encoded with the bitcoin base58 alphabet. This
 results in an ASCII text string matching the following regular expression:
 
 ```
 [1-9A-HJ-NP-Za-km-z]{32,44}
 ```
 
-This check is insufficient on its own as Solana addresses are not checksummed, so
+This check is insufficient on its own as Renec addresses are not checksummed, so
 typos cannot be detected. To further validate the user's input, the string can be
 decoded and the resulting byte array's length confirmed to be 32. However, there
 are some addresses that can decode to 32 bytes despite a typo such as a single
@@ -503,7 +503,7 @@ confirm their intentions if a non-zero balance is discovered.
 
 #### Valid ed25519 pubkey check
 
-The address of a normal account in Solana is a Base58-encoded string of a
+The address of a normal account in Renec is a Base58-encoded string of a
 256-bit ed25519 public key. Not all bit patterns are valid public keys for the
 ed25519 curve, so it is possible to ensure user-supplied account addresses are
 at least correct ed25519 public keys.
@@ -583,9 +583,9 @@ curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc": "2.0","id":1,"m
 ## Supporting the SPL Token Standard
 
 [SPL Token](https://spl.solana.com/token) is the standard for wrapped/synthetic
-token creation and exchange on the Solana blockchain.
+token creation and exchange on the Renec blockchain.
 
-The SPL Token workflow is similar to that of native SOL tokens, but there are a
+The SPL Token workflow is similar to that of native RENEC tokens, but there are a
 few differences which will be discussed in this section.
 
 ### Token Mints
@@ -633,8 +633,8 @@ accounts do not:
    `spl-token transfer --fund-recipient ...` command.
 1. SPL Token accounts must remain [rent-exempt](developing/programming-model/accounts.md#rent-exemption)
    for the duration of their existence and therefore require a small amount of
-   native SOL tokens be deposited at account creation. For SPL Token v2 accounts,
-   this amount is 0.00203928 SOL (2,039,280 lamports).
+   native RENEC tokens be deposited at account creation. For SPL Token v2 accounts,
+   this amount is 0.00203928 RENEC (2,039,280 lamports).
 
 #### Command Line
 
@@ -675,7 +675,7 @@ spl-token balance <TOKEN_ACCOUNT_ADDRESS>
 #### Example
 
 ```
-$ solana balance 6VzWGL51jLebvnDifvcuEDec17sK6Wupi4gYhm5RzfkV
+$ renec balance 6VzWGL51jLebvnDifvcuEDec17sK6Wupi4gYhm5RzfkV
 0
 ```
 
@@ -708,7 +708,7 @@ Signature: 3R6tsog17QM8KfzbcbdP4aoMfwgo6hBggJDVy7dZPVmH2xbCWjEj31JKD53NzMrf25ChF
 ### Depositing
 
 Since each `(wallet, mint)` pair requires a separate account on chain. It is
-recommended that the addresses for these accounts be derived from SOL deposit
+recommended that the addresses for these accounts be derived from RENEC deposit
 wallets using the
 [Associated Token Account](https://spl.solana.com/associated-token-account) (ATA)
 scheme and that _only_ deposits from ATA addresses be accepted.
@@ -727,22 +727,22 @@ case, the initial balance can be assumed to be zero.
 
 ### Withdrawing
 
-The withdrawal address a user provides must be the that of their SOL wallet.
+The withdrawal address a user provides must be the that of their RENEC wallet.
 
 Before executing a withdrawal [transfer](#token-transfers),
 the exchange should check the address as
 [described above](#validating-user-supplied-account-addresses-for-withdrawals).
 Additionally this address must be owned by the System Program and have no
-account data. If the address has no SOL balance, user confirmation should be
+account data. If the address has no RENEC balance, user confirmation should be
 obtained before proceeding with the withdrawal.  All other withdrawal addresses
 must be rejected.
 
 From the withdrawal address, the [Associated Token Account](https://spl.solana.com/associated-token-account)
 (ATA) for the correct mint is derived and the transfer issued to that account via a
-[TransferChecked](https://github.com/solana-labs/solana-program-library/blob/fc0d6a2db79bd6499f04b9be7ead0c400283845e/token/program/src/instruction.rs#L268)
+[TransferChecked](https://github.com/remitano/renec-program-library/blob/fc0d6a2db79bd6499f04b9be7ead0c400283845e/token/program/src/instruction.rs#L268)
 instruction. Note that it is possible that the ATA address does not yet exist, at which point the
 exchange should fund the account on behalf of the user. For SPL Token v2
-accounts, funding the withdrawal account will require 0.00203928 SOL (2,039,280
+accounts, funding the withdrawal account will require 0.00203928 RENEC (2,039,280
 lamports).
 
 Template `spl-token transfer` command for a withdrawal:
@@ -764,8 +764,8 @@ the SPL Token's mint account.
 
 ## Testing the Integration
 
-Be sure to test your complete workflow on Solana devnet and testnet
+Be sure to test your complete workflow on Renec devnet and testnet
 [clusters](../clusters.md) before moving to production on mainnet-beta. Devnet
 is the most open and flexible, and ideal for initial development, while testnet
 offers more realistic cluster configuration. Both devnet and testnet support a faucet,
-run `solana airdrop 1` to obtain some devnet or testnet SOL for development and testing.
+run `renec airdrop 1` to obtain some devnet or testnet RENEC for developement and testing.

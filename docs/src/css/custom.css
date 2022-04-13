@@ -10,7 +10,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto');
 
 :root {
-  --ifm-color-primary: #25c2a0;
+  --ifm-color-primary: rgb(155, 89, 182);
   --ifm-color-primary-dark: #409088;
   --ifm-color-primary-darker: #387462;
   --ifm-color-primary-darkest: #1b4e3f;
@@ -20,7 +20,8 @@
   --ifm-code-font-size: 95%;
   --ifm-spacing-horizontal: 1em;
   --ifm-font-family-base: "Roboto", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-  --ifm-footer-background-color: #232323;
+  --ifm-footer-background-color: #210c34;
+  --ifm-navbar-background-color: #210c34;
 }
 
 
@@ -51,6 +52,9 @@ main {
   box-shadow: 0 8px 28px 4px rgba(86,91,115,0.15);
 }
 
+.menu__link--active {
+  font-weight: bold;
+}
 
 .card a {
   text-decoration: none;
@@ -61,7 +65,7 @@ main {
 }
 
 .footer--dark {
-  background-color: #232323 !important;
+  background-color: #210c34 !important;
 }
 
 footer .text--center {
@@ -69,5 +73,5 @@ footer .text--center {
 }
 
 .card__header h3 {
-  color: #1DD79B;
+  color: #41225d;
 }

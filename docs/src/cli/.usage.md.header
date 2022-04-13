@@ -2,7 +2,7 @@
 title: CLI Usage Reference
 ---
 
-The [renec-cli crate](https://crates.io/crates/renec-cli) provides a command-line interface tool for Solana
+The [renec-cli crate](https://crates.io/crates/renec-cli) provides a command-line interface tool for Renec
 
 ## Examples
 
@@ -20,7 +20,7 @@ $ renec-keygen pubkey
 
 ```bash
 // Command
-$ solana airdrop 1
+$ renec airdrop 1
 
 // Return
 "1 RENEC"
@@ -30,7 +30,7 @@ $ solana airdrop 1
 
 ```bash
 // Command
-$ solana balance
+$ renec balance
 
 // Return
 "3.00050001 RENEC"
@@ -40,7 +40,7 @@ $ solana balance
 
 ```bash
 // Command
-$ solana confirm <TX_SIGNATURE>
+$ renec confirm <TX_SIGNATURE>
 
 // Return
 "Confirmed" / "Not found" / "Transaction failed with error <ERR>"
@@ -50,7 +50,7 @@ $ solana confirm <TX_SIGNATURE>
 
 ```bash
 // Command
-$ solana program deploy <PATH>
+$ renec program deploy <PATH>
 
 // Return
 <PROGRAM_ID>

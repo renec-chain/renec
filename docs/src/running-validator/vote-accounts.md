@@ -3,7 +3,7 @@ title: Vote Account Management
 ---
 
 This page describes how to set up an on-chain _vote account_. Creating a vote
-account is needed if you plan to run a validator node on Solana.
+account is needed if you plan to run a validator node on Renec.
 
 ## Create a Vote Account
 
@@ -52,7 +52,7 @@ stored as a "hot wallet" in a keypair file on the same system the validator
 process is running.
 
 Because a hot wallet is generally less secure than an offline or "cold" wallet,
-the validator operator may choose to store only enough SOL on the identity
+the validator operator may choose to store only enough RENEC on the identity
 account to cover voting fees for a limited amount of time, such as a few weeks
 or months. The validator identity account could be periodically topped off
 from a more secure wallet.
@@ -76,7 +76,7 @@ validator process.
 The vote authority can be set to the same address as the validator identity.
 If the validator identity is also the vote authority, only one
 signature per vote transaction is needed in order to both sign the vote and pay
-the transaction fee. Because transaction fees on Solana are assessed
+the transaction fee. Because transaction fees on Renec are assessed
 per-signature, having one signer instead of two will result in half the transaction
 fee paid compared to setting the vote authority and validator identity to two
 different accounts.
@@ -167,8 +167,8 @@ change the validator identity. The follow steps assume that
 `~/authorized_withdrawer.json` is that keypair.
 
 1. Create the new validator identity keypair, `renec-keygen new -o ~/new-validator-keypair.json`.
-2. Ensure that the new identity account has been funded, `solana transfer ~/new-validator-keypair.json 500`.
-3. Run `solana vote-update-validator ~/vote-account-keypair.json ~/new-validator-keypair.json ~/authorized_withdrawer.json`
+2. Ensure that the new identity account has been funded, `renec transfer ~/new-validator-keypair.json 500`.
+3. Run `renec vote-update-validator ~/vote-account-keypair.json ~/new-validator-keypair.json ~/authorized_withdrawer.json`
    to modify the validator identity in your vote account
 4. Restart your validator with the new identity keypair for the `--identity` argument
 
@@ -188,7 +188,7 @@ This temporary validator should be run for two full epochs. During this time it 
 * Receive the transaction fees and rent rewards for your old validator identity
 
 It is safe to stop this temporary validator when your old validator identity is
-no longer listed in the `solana leader-schedule` output.
+no longer listed in the `renec leader-schedule` output.
 
 ### Vote Account Authorized Voter
 
@@ -196,14 +196,14 @@ The _vote authority_ keypair may only be changed at epoch boundaries and
 requires some additional arguments to `renec-validator` for a seamless
 migration.
 
-1. Run `solana epoch-info`. If there is not much time remaining time in the
+1. Run `renec epoch-info`. If there is not much time remaining time in the
    current epoch, consider waiting for the next epoch to allow your validator
    plenty of time to restart and catch up.
 2. Create the new vote authority keypair, `renec-keygen new -o ~/new-vote-authority.json`.
-3. Determine the current _vote authority_ keypair by running `solana vote-account ~/vote-account-keypair.json`. It may be validator's
+3. Determine the current _vote authority_ keypair by running `renec vote-account ~/vote-account-keypair.json`. It may be validator's
    identity account (the default) or some other keypair. The following steps
    assume that `~/validator-keypair.json` is that keypair.
-4. Run `solana vote-authorize-voter-checked ~/vote-account-keypair.json ~/validator-keypair.json ~/new-vote-authority.json`.
+4. Run `renec vote-authorize-voter-checked ~/vote-account-keypair.json ~/validator-keypair.json ~/new-vote-authority.json`.
    The new vote authority is scheduled to become active starting at the next epoch.
 5. `renec-validator` now needs to be restarted with the old and new vote
    authority keypairs, so that it can smoothly transition at the next epoch. Add
@@ -214,29 +214,4 @@ migration.
 
 ### Vote Account Authorized Withdrawer
 
-No special handling or timing considerations are required.
-Use the `solana vote-authorize-withdrawer-checked` command as needed.
-
-### Consider Durable Nonces for a Trustless Transfer of the Authorized Voter or Withdrawer
-
-If the Authorized Voter or Withdrawer is to be transferred to another entity
-then a two-stage signing process using a [Durable Nonce](../offline-signing/durable-nonce) is recommended.
-
-1. Entity B creates a durable nonce using `solana create-nonce-account`
-2. Entity B then runs a `solana vote-authorize-voter-checked` or `solana vote-authorize-withdrawer-checked` command, including:
-  - the `--sign-only` argument
-  - the `--nonce`, `--nonce-authority`, and `--blockhash` arguments to specify the nonce particulars
-  - the address of the Entity A's existing authority, and the keypair for Entity B's new authority
-3. When the `solana vote-authorize-...-checked` command successfully executes, it will output transaction signatures that Entity B must share with Entity A
-4. Entity A then runs a similar `solana vote-authorize-voter-checked` or `solana vote-authorize-withdrawer-checked` command with the following changes:
-  - the `--sign-only` argument is removed, and replaced with a `--signer` argument for each of the signatures provided by Entity B
-  - the address of Entity A's existing authority is replaced with the corresponding keypair, and the the keypair for Entity B's new authority is replaced with the correponding address
-
-On success the authority is now changed without Entity A or B having to reveal keypairs to the other even though both entities signed the transaction.
-
-## Close a Vote Account
-
-A vote account can be closed with the
-[close-vote-account](../cli/usage.md#solana-close-vote-account) command.
-Closing a vote account withdraws all remaining SOL funds to a supplied recipient address and renders it invalid as a vote account.
-It is not possible to close a vote account with active stake.
+No special handling is required. Use the `renec vote-authorize-withdrawer` command as needed.

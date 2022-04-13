@@ -8,7 +8,7 @@ Confirm the IP address and **identity pubkey** of your validator is visible in
 the gossip network by running:
 
 ```bash
-solana gossip
+renec gossip
 ```
 
 ## Check Your Balance
@@ -18,16 +18,16 @@ validator submits votes, and increase after serving as the leader. Pass the
 `--lamports` are to observe in finer detail:
 
 ```bash
-solana balance --lamports
+renec balance --lamports
 ```
 
 ## Check Vote Activity
 
-The `solana vote-account` command displays the recent voting activity from
+The `renec vote-account` command displays the recent voting activity from
 your validator:
 
 ```bash
-solana vote-account ~/vote-account-keypair.json
+renec vote-account ~/vote-account-keypair.json
 ```
 
 ## Get Cluster Info

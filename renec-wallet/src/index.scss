@@ -1,3 +1,11 @@
+html {
+  font-size: 16px;
+}
+@import 'css/functions.scss';
+@import 'css/variables.scss';
+@import 'css/input.scss';
+@import 'css/custom.scss';
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -15,6 +23,7 @@ body,
   min-width: 375px;
   min-height: 600px;
   height: 100%;
+  font-size: 1rem;
 }
 
 /* TODO consolidate popup dimensions */
@@ -44,4 +53,18 @@ body,
 #root {
   display: flex;
   flex-direction: column;
+}
+
+.footer {
+  margin: 0 !important;
+  height: 56px;
+  background: #210C34;
+}
+
+.MuiPaper-elevation1 {
+  box-shadow: none !important;
+}
+
+.MuiCardContent-root {
+  padding: 24px !important;
 }

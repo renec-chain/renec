@@ -25,37 +25,93 @@ import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import { makeStyles } from '@material-ui/core/styles';
 import { useCallAsync } from '../utils/notifications';
 import Link from '@material-ui/core/Link';
 import { validateMnemonic } from 'bip39';
 import DialogForm from '../components/DialogForm';
+import RButton from '../components/base/molecules/button';
+import Icon from '../components/base/atoms/icon';
+import { TextInput } from '../components/base/inputs/text-input'
+import Alert from '../components/base/atoms/alert';
+import Message from '../components/base/molecules/message';
+
+const useStyles = makeStyles((theme) => ({
+  walletButtons: {
+    display: 'flex',
+  },
+  button: {
+    marginRight: theme.spacing(2),
+  }
+}));
 
 export default function LoginPage() {
   const [restore, setRestore] = useState(false);
+  const [newWallet, setNewWallet] = useState(false);
   const [hasLockedMnemonicAndSeed, loading] = useHasLockedMnemonicAndSeed();
+  const classes = useStyles();
 
   if (loading) {
     return null;
   }
+  if (hasLockedMnemonicAndSeed) {
+    return (
+      <Container maxWidth="sm">
+        <LoginForm />;
+      </Container>
+    );
+  }
+  if (!restore && !newWallet) {
+    return (
+      <Container maxWidth="sm">
+        <Card>
+          <CardContent>
+            <h1>Remitano Network Wallet</h1>
+            <div>Restore existing wallet or create a new one</div>
+            <br />
+            
+            <div className={classes.walletButtons}>
+              <div className={classes.button}>
+                <RButton 
+                  variant="secondary" 
+                  icon={<Icon icon="wallet" size={24} />}
+                  onClick={() => setNewWallet(true)}
+                >
+                  Create wallet
+                </RButton>
+              </div>
+              <div className={classes.button}>
+                <RButton 
+                  variant="tertiary" 
+                  outline={true} 
+                  icon={<Icon icon="key" size={24} />}
+                  onClick={() => setRestore(true)}
+                >
+                  Restore wallet
+                </RButton>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </Container>
+    );
+  }
 
   return (
     <Container maxWidth="sm">
-      {restore ? (
+      {restore && (
         <RestoreWalletForm goBack={() => setRestore(false)} />
-      ) : (
+      )}
+      {newWallet && (
         <>
-          {hasLockedMnemonicAndSeed ? <LoginForm /> : <CreateWalletForm />}
-          <br />
-          <Link style={{ cursor: 'pointer' }} onClick={() => setRestore(true)}>
-            Restore existing wallet
-          </Link>
+          {hasLockedMnemonicAndSeed ? <LoginForm /> : <CreateWalletForm goBack={() => setNewWallet(false)} />}
         </>
       )}
     </Container>
   );
 }
 
-function CreateWalletForm() {
+function CreateWalletForm({ goBack }) {
   const [mnemonicAndSeed, setMnemonicAndSeed] = useState(null);
   useEffect(() => {
     generateMnemonicAndSeed().then(setMnemonicAndSeed);
@@ -83,6 +139,7 @@ function CreateWalletForm() {
     return (
       <SeedWordsForm
         mnemonicAndSeed={mnemonicAndSeed}
+        goBack={goBack}
         goForward={() => setSavedWords(true)}
       />
     );
@@ -97,11 +154,10 @@ function CreateWalletForm() {
   );
 }
 
-function SeedWordsForm({ mnemonicAndSeed, goForward }) {
+function SeedWordsForm({ mnemonicAndSeed, goBack, goForward }) {
   const [confirmed, setConfirmed] = useState(false);
   const [downloaded, setDownloaded] = useState(false);
-  const [showDialog, setShowDialog] = useState(false);
-  const [seedCheck, setSeedCheck] = useState('');
+  const [showConfirmMnemonic, setshowConfirmMnemonic] = useState(false);
 
   const downloadMnemonic = (mnemonic) => {
     const url = window.URL.createObjectURL(new Blob([mnemonic]));
@@ -112,76 +168,96 @@ function SeedWordsForm({ mnemonicAndSeed, goForward }) {
     link.click();
   }
 
+  if (showConfirmMnemonic) {
+    return (
+      <ConfirmMnemonic
+        mnemonicAndSeed={mnemonicAndSeed}
+        goForward={goForward}
+        goBack={() =>setshowConfirmMnemonic(false)}
+      />
+    );
+  }
+
   return (
     <>
+      <div className="mb-8 flex">
+        <Icon icon="back" onClick={goBack} />
+        <div className="ml-16 pointer" onClick={goBack}>Back</div>
+      </div>
       <Card>
         <CardContent>
-          <Typography variant="h5" gutterBottom>
-            Create New Wallet
-          </Typography>
-          <Typography paragraph>
-            Create a new wallet to hold RENEC and RPL tokens.
-          </Typography>
-          <Typography>
-            Please write down the following twenty four words and keep them in a
-            safe place:
-          </Typography>
+          <div className="bold text-24 mb-16">Your Mnemonic phrase</div>
+          <div className="mb-16">
+            <Alert variant="warning">
+              Please back up the text below on paper and keep them somewhere secret and safe
+            </Alert>
+          </div>
           {mnemonicAndSeed ? (
-            <TextField
-              variant="outlined"
-              fullWidth
-              multiline
-              margin="normal"
-              value={mnemonicAndSeed.mnemonic}
+            <TextInput
               label="Seed Words"
+              value={mnemonicAndSeed.mnemonic}
+              textarea
               onFocus={(e) => e.currentTarget.select()}
             />
           ) : (
             <LoadingIndicator />
           )}
-          <Typography paragraph>
-            Your private keys are only stored on your current computer or device.
-            You will need these words to restore your wallet if your browser's
-            storage is cleared or your device is damaged or lost.
-          </Typography>
-          <Typography paragraph>
-            By default, RENEC wallet will use <code>m/44'/501'/0'/0'</code> as the
-            derivation path for the main wallet. To use an alternative path, try
-            restoring an existing wallet.
-          </Typography>
           <FormControlLabel
             control={
               <Checkbox
                 checked={confirmed}
                 disabled={!mnemonicAndSeed}
+                style ={{color: "#9B59B6"}}
                 onChange={(e) => setConfirmed(e.target.checked)}
               />
             }
             label="I have saved these words in a safe place."
           />
-          <Typography paragraph>
-          <Button variant="contained" color="primary" style={{ marginTop: 20 }} onClick={() => {
-            downloadMnemonic(mnemonicAndSeed?.mnemonic);
-            setDownloaded(true);
-          }}>
-            Download Backup Mnemonic File (Required)
-          </Button>
-          </Typography>
-        </CardContent>
-        <CardActions style={{ justifyContent: 'flex-end' }}>
-          <Button color="primary" disabled={!confirmed || !downloaded} onClick={() => setShowDialog(true)}>
+          <div className="mt-24 mb-16">
+            <RButton variant="secondary" onClick={() => {
+              downloadMnemonic(mnemonicAndSeed?.mnemonic);
+              setDownloaded(true);
+            }}>
+              Download Backup Mnemonic File (Required)
+            </RButton>
+          </div>
+          <RButton fullWidth color="primary" disabled={!confirmed || !downloaded} onClick={() => setshowConfirmMnemonic(true)}>
             Continue
-          </Button>
-        </CardActions>
+          </RButton>
+        </CardContent>
       </Card>
-      <DialogForm
-        open={showDialog}
-        onClose={() => setShowDialog(false)}
-        onSubmit={goForward}
-        fullWidth
-      >
-        <DialogTitle>{'Confirm Mnemonic'}</DialogTitle>
-        <DialogContentText style={{ margin: 20 }}>
+      <br />
+      <Card>
+        <CardContent>
+          <Message type="info" title="Note" />
+          <p className="text-14">
+            Your private keys are only stored on your current computer or device.
+            You will need these words to restore your wallet if your browser's
+            storage is cleared or your device is damaged or lost.
+          </p>
+          <p className="text-14">
+            By default, RENEC wallet will use <code>m/44'/501'/0'/0'</code> as the
+            derivation path for the main wallet. To use an alternative path, try
+            restoring an existing wallet.
+          </p>
+        </CardContent>
+      </Card>
+    </>
+  );
+}
+
+const ConfirmMnemonic = ({ mnemonicAndSeed, goBack, goForward }) => {
+  const [seedCheck, setSeedCheck] = useState('');
+
+  return (
+    <>
+      <div className="mb-8 flex">
+        <Icon icon="back" onClick={goBack} />
+        <div className="ml-16 pointer" onClick={goBack}>Back</div>
+      </div>
+      <Card>
+        <CardContent>
+          <div className="bold text-24 mb-16">Verification</div>
           <div
             style={{
               display: 'flex',
@@ -190,26 +266,24 @@ function SeedWordsForm({ mnemonicAndSeed, goForward }) {
           >
             Please re-enter your seed phrase to confirm that you have saved it.
           </div>
-          <TextField
-            label={`Please type your seed phrase to confirm`}
+          <div className="mt-24 mb-24">
+            <TextInput
+              label=""
+              onChange={(e) => setSeedCheck(e.target.value)}
+              value={seedCheck}
+              textarea
+            />
+          </div>
+          <RButton
+            color="primary"
             fullWidth
-            variant="outlined"
-            margin="normal"
-            value={seedCheck}
-            onChange={(e) => setSeedCheck(e.target.value)}
-          />
-        </DialogContentText>
-        <DialogActions>
-          <Button onClick={() => setShowDialog(false)}>Close</Button>
-          <Button
-            type="submit"
-            color="secondary"
             disabled={normalizeMnemonic(seedCheck) !== mnemonicAndSeed?.mnemonic}
+            onClick={goForward}
           >
-            Continue
-          </Button>
-        </DialogActions>
-      </DialogForm>
+            Verify
+          </RButton>
+        </CardContent>
+      </Card>
     </>
   );
 }
@@ -219,50 +293,50 @@ function ChoosePasswordForm({ goBack, onSubmit }) {
   const [passwordConfirm, setPasswordConfirm] = useState('');
 
   return (
-    <Card>
-      <CardContent>
-        <Typography variant="h5" gutterBottom>
-          Choose a Password (Optional)
-        </Typography>
-        <Typography>
-          Optionally pick a password to protect your wallet.
-        </Typography>
-        <TextField
-          variant="outlined"
-          fullWidth
-          margin="normal"
-          label="New Password"
-          type="password"
-          autoComplete="new-password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <TextField
-          variant="outlined"
-          fullWidth
-          margin="normal"
-          label="Confirm Password"
-          type="password"
-          autoComplete="new-password"
-          value={passwordConfirm}
-          onChange={(e) => setPasswordConfirm(e.target.value)}
-        />
-        <Typography>
-          If you forget your password you will need to restore your wallet using
-          your seed words.
-        </Typography>
-      </CardContent>
-      <CardActions style={{ justifyContent: 'space-between' }}>
-        <Button onClick={goBack}>Back</Button>
-        <Button
-          color="primary"
-          disabled={password !== passwordConfirm}
-          onClick={() => onSubmit(password)}
-        >
-          Create Wallet
-        </Button>
-      </CardActions>
-    </Card>
+    <>
+      <div className="mb-8 flex">
+          <Icon icon="back" onClick={goBack} />
+          <div className="ml-16 pointer" onClick={goBack}>Back</div>
+        </div>
+      <Card>
+        <CardContent>
+          <div className="bold text-24 mb-16">Choose a Password (Optional)</div>
+          <Typography>
+            Optionally pick a password to protect your wallet.
+          </Typography>
+          <br />
+          <TextInput
+            label="New Password"
+            type="password"
+            autoComplete="new-password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <br />
+          <TextInput
+            label="Confirm Password"
+            type="password"
+            autoComplete="new-password"
+            value={passwordConfirm}
+            onChange={(e) => setPasswordConfirm(e.target.value)}
+          />
+          <br />
+          <Message type="info" title="Note" />
+          <p className="mb-24">
+            If you forget your password you will need to restore your wallet using
+            your seed words.
+          </p>
+          <RButton
+            color="primary"
+            fullWidth
+            disabled={password !== passwordConfirm}
+            onClick={() => onSubmit(password)}
+          >
+            Create Wallet
+          </RButton>
+        </CardContent>
+      </Card>
+    </>
   );
 }
 
@@ -290,13 +364,8 @@ function LoginForm() {
   return (
     <Card>
       <CardContent>
-        <Typography variant="h5" gutterBottom>
-          Unlock Wallet
-        </Typography>
-        <TextField
-          variant="outlined"
-          fullWidth
-          margin="normal"
+        <div className="bold text-24 mb-16">Unlock Wallet</div>
+        <TextInput
           label="Password"
           type="password"
           autoComplete="current-password"
@@ -308,17 +377,17 @@ function LoginForm() {
           control={
             <Checkbox
               checked={stayLoggedIn}
+              style ={{color: "#9B59B6"}}
               onChange={toggleStayLoggedIn}
             />
           }
           label="Keep wallet unlocked"
+          className="mb-16"
         />
-      </CardContent>
-      <CardActions style={{ justifyContent: 'flex-end' }}>
-        <Button color="primary" onClick={submit}>
+        <RButton fullWidth color="primary" onClick={submit}>
           Unlock
-        </Button>
-      </CardActions>
+        </RButton>
+      </CardContent>
     </Card>
   );
 }
@@ -344,72 +413,68 @@ function RestoreWalletForm({ goBack }) {
           seed={seed}
         />
       ) : (
-        <Card>
-          <CardContent>
-            <Typography variant="h5" gutterBottom>
-              Restore Existing Wallet
-            </Typography>
-            <Typography>
-              Restore your wallet using your twelve or twenty-four seed words.
-              Note that this will delete any existing wallet on this device.
-            </Typography>
-            <br />
-            <Typography fontWeight="fontWeightBold">
-              <b>Do not enter your hardware wallet seedphrase here.</b> Hardware
-              wallets can be optionally connected after a web wallet is created.
-            </Typography>
-            {displayInvalidMnemonic && (
-               <Typography fontWeight="fontWeightBold" style={{ color: 'red' }}>
-                 Mnemonic validation failed. Please enter a valid BIP 39 seed phrase.
-               </Typography>
-            )}
-            <TextField
-              variant="outlined"
-              fullWidth
-              multiline
-              rows={3}
-              margin="normal"
-              label="Seed Words"
-              value={rawMnemonic}
-              onChange={(e) => setRawMnemonic(e.target.value)}
-            />
-            <TextField
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              label="New Password (Optional)"
-              type="password"
-              autoComplete="new-password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <TextField
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              label="Confirm Password"
-              type="password"
-              autoComplete="new-password"
-              value={passwordConfirm}
-              onChange={(e) => setPasswordConfirm(e.target.value)}
-            />
-          </CardContent>
-          <CardActions style={{ justifyContent: 'space-between' }}>
-            <Button onClick={goBack}>Cancel</Button>
-            <Button
-              color="primary"
-              disabled={!isNextBtnEnabled}
-              onClick={() => {
-                mnemonicToSeed(mnemonic).then((seed) => {
-                  setSeed(seed);
-                  setNext(true);
-                });
-              }}
-            >
-              Next
-            </Button>
-          </CardActions>
-        </Card>
+        <>
+          <div className="mb-8 flex">
+            <Icon icon="back" onClick={goBack} />
+            <div className="ml-16 pointer" onClick={goBack}>Back</div>
+          </div>
+          <Card>
+            <CardContent>
+              <Typography variant="h5" gutterBottom>
+                Restore Existing Wallet
+              </Typography>
+              <Typography>
+                Restore your wallet using your twelve or twenty-four seed words.
+                Note that this will delete any existing wallet on this device.
+              </Typography>
+              <br />
+              {displayInvalidMnemonic && (
+                <>
+                  <Typography fontWeight="fontWeightBold" style={{ color: 'red' }}>
+                    Mnemonic validation failed. Please enter a valid BIP 39 seed phrase.
+                  </Typography>
+                  <br />
+                </>
+              )}
+              <TextInput
+                label="Seed Words"
+                onChange={(e) => setRawMnemonic(e.target.value)}
+                value={rawMnemonic}
+                textarea
+              />
+              <br />
+              <TextInput
+                label="New password (Optional)"
+                type="password"
+                autoComplete="new-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <br />
+              <TextInput
+                label="Confirm password (Optional"
+                type="password"
+                autoComplete="new-password"
+                value={passwordConfirm}
+                onChange={(e) => setPasswordConfirm(e.target.value)}
+              />
+              <br />
+              <RButton 
+                variant="primary" 
+                disabled={!isNextBtnEnabled}
+                onClick={() => {
+                  mnemonicToSeed(mnemonic).then((seed) => {
+                    setSeed(seed);
+                    setNext(true);
+                  });
+                }}
+                fullWidth
+              >
+                Continue
+              </RButton>
+            </CardContent>
+          </Card>
+        </>
       )}
     </>
   );

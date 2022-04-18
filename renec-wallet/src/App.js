@@ -30,17 +30,19 @@ import { PageProvider, usePage } from './utils/page';
 export default function App() {
   // TODO: add toggle for dark mode
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const prefersLightMode = useMediaQuery('(prefers-color-scheme: light)');
   const theme = React.useMemo(
     () =>
       createMuiTheme({
         palette: {
-          type: prefersDarkMode ? 'dark' : 'light',
-          primary: deepPurple,
+          type: 'light', //prefersDarkMode ? 'dark' : 'light',
+          primary: { main: '#210C34' },
+          background: { default: '#FBFBFC' },
         },
         // TODO consolidate popup dimensions
         ext: '450',
       }),
-    [prefersDarkMode],
+    [prefersLightMode],
   );
 
   // Disallow rendering inside an iframe to prevent clickjacking.

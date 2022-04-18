@@ -1,0 +1,10 @@
+@function get-color($name, $type: 'normal') {
+  $color: map-get($colors, $name);
+  @if ($type == 'dark') {
+    @return get-color-darken($color);
+  }
+  @if ($type == 'light') {
+    @return get-color-lighten($color);
+  }
+  @return $color;
+}

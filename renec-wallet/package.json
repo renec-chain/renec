@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@bonfida/spl-name-service": "^0.1.24",
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
     "@ledgerhq/hw-transport-webhid": "^5.51.1",
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
@@ -29,6 +31,7 @@
     "buffer-layout": "^1.2.0",
     "ed25519-hd-key": "^1.2.0",
     "immutable-tuple": "^0.4.10",
+    "lodash-es": "^4.17.21",
     "material-ui-popup-state": "^1.8.3",
     "mdi-material-ui": "^6.21.0",
     "notistack": "^1.0.2",
@@ -95,6 +98,7 @@
     "gh-pages": "^3.1.0",
     "git-format-staged": "^2.1.0",
     "husky": "^4.3.6",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "sass": "^1.50.0"
   }
 }

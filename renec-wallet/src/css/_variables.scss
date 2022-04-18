@@ -1,0 +1,63 @@
+$colors: (
+
+  white:            #FFFFFF,
+  dark:             #27133A,
+  gray:             #656167,
+
+  primary:          #9B59B6,
+  secondary:        #5E5862,
+  success:          #299D82,
+  danger:           #E65656,
+  warning:          #FFAB00,
+  info:             #308CD5,
+
+  dark-01:          #49474A,
+  light-01:         #FBFBFC,
+  light-02:         #F3F3F3,
+  light-03:         #EBECF0,
+  gray-01:          #D8D9DE,
+  gray-02:          #B8B7BE,
+  gray-03:          #A29DA5,
+  gray-04:          #868187,
+  gray-05:          #BEBEBE,
+  gray-06:          #8C8C8C,
+
+  primary-hover:    #9354AC,
+  secondary-hover:  #5F5864,
+  success-hover:    #26957B,
+  danger-hover:     #DA5151,
+  light-03-hover:   #DFDFE3,
+
+  first:            #9B59B6,
+  dark-first:       #8653A2,
+  second:           #231331,
+  dark-second:      #3d2c4d,
+  active:           #7E6789,
+  disabled:         #E5E5E5,
+  background:       #FAFAFA,
+  text:             #4D4D4D,
+  light-text:       #655D6A,
+  buy:              #299D82,
+  sell:             #E65656,
+  hf:               #19171C,
+  logo:             #2f2f2f,
+  border:           #D1D1D1,
+  light-border:     #E8E8E8,
+  mobile-hero:      #2C0E39,
+  quick-tab:        #EFECF1,
+  btn-text:         #F1F1F1,
+  offer-tab-mobile: #7E7C7F,
+  quick:            #F7931A,
+  menu-text:        #49474A
+);
+
+$main-colors: "primary", "secondary", "success", "danger", "info" ;
+
+$white: #FFFFFF;
+
+$points: (
+  sm: 480px,
+  md: 992px,
+  lg: 1200px,
+  xl: 1920px
+);

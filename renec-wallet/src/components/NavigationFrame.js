@@ -26,6 +26,7 @@ import IconButton from '@material-ui/core/IconButton';
 import SolanaIcon from './SolanaIcon';
 import CodeIcon from '@material-ui/icons/Code';
 import Tooltip from '@material-ui/core/Tooltip';
+import Container from '@material-ui/core/Container';
 import ImportExportIcon from '@material-ui/icons/ImportExport';
 import AddAccountDialog from './AddAccountDialog';
 import DeleteMnemonicDialog from './DeleteMnemonicDialog';
@@ -42,6 +43,7 @@ import { useConnectedWallets } from '../utils/connected-wallets';
 import { usePage } from '../utils/page';
 import { MonetizationOn, OpenInNew } from '@material-ui/icons';
 import AddCustomClusterDialog from './AddCustomClusterDialog';
+import logo from '../img/logo.svg';
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -76,12 +78,14 @@ export default function NavigationFrame({ children }) {
   return (
     <>
       <AppBar position="static" color="primary">
+      <Container>
         <Toolbar>
-          <Typography variant="h6" className={classes.title} component="h1">
-            {isExtensionWidth ? 'RENEC' : 'Remitano Network Wallet'}
-          </Typography>
-          <NavigationButtons />
+            <img src={logo} alt="Remitano logo" />
+            <Typography variant="h6" className={classes.title} component="h1">
+            </Typography>
+            <NavigationButtons />
         </Toolbar>
+        </Container>
       </AppBar>
       <main className={classes.content}>{children}</main>
       {!isExtensionWidth && <Footer />}
@@ -429,25 +433,22 @@ const useFooterStyles = makeStyles((theme) => ({
   footer: {
     display: 'flex',
     justifyContent: 'flex-end',
-    margin: theme.spacing(2),
+    height: 56,
+    background: "#210C34",
+    alignItems: "center",
   },
+  text: {
+    color: "white",
+  }
 }));
 
 function Footer() {
   const classes = useFooterStyles();
   return (
     <footer className={classes.footer}>
-      <Button
-        variant="outlined"
-        color="primary"
-        component="a"
-        target="_blank"
-        rel="noopener"
-        href="https://github.com/serum-foundation/spl-token-wallet"
-        startIcon={<CodeIcon />}
-      >
-        View Source
-      </Button>
+      <Container>
+        <div className={classes.text}>© 2022 Remitano. All rights reserved.</div>
+      </Container>
     </footer>
   );
 }

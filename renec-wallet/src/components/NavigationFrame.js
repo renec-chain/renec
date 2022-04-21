@@ -41,11 +41,20 @@ import ConnectionIcon from './ConnectionIcon';
 import { Badge } from '@material-ui/core';
 import { useConnectedWallets } from '../utils/connected-wallets';
 import { usePage } from '../utils/page';
+import { shortenAddress } from '../utils/utils';
 import { MonetizationOn, OpenInNew } from '@material-ui/icons';
+import Link from '@material-ui/core/Link';
 import AddCustomClusterDialog from './AddCustomClusterDialog';
 import logo from '../img/logo.svg';
+import { useSnackbar } from 'notistack';
 
 const useStyles = makeStyles((theme) => ({
+  header: {
+    backgroundColor: "#27133A",
+    height: 200,
+    minHeight: 200,
+    color: "white", 
+  },
   content: {
     flexGrow: 1,
     paddingBottom: theme.spacing(3),
@@ -75,6 +84,19 @@ const useStyles = makeStyles((theme) => ({
 export default function NavigationFrame({ children }) {
   const classes = useStyles();
   const isExtensionWidth = useIsExtensionWidth();
+  const {
+    accounts,
+  } = useWalletSelector();
+  const [isCopied, setIsCopied] = useState(false);
+  const selectedAccount = accounts.find((a) => a.isSelected);
+  const { enqueueSnackbar } = useSnackbar();
+  const onCopyAddress = () => {
+    navigator.clipboard.writeText(selectedAccount.address.toBase58());
+    enqueueSnackbar(`Copied address`, {
+      variant: 'info',
+      autoHideDuration: 2500,
+    });
+  };
   return (
     <>
       <AppBar position="static" color="primary">
@@ -87,6 +109,20 @@ export default function NavigationFrame({ children }) {
         </Toolbar>
         </Container>
       </AppBar>
+      {selectedAccount && (
+        <div className={classes.header}>
+          <Container fixed maxWidth="md">
+            <div className="bold text-32 mt-48">Main account</div>
+            {isExtensionWidth ? shortenAddress(selectedAccount.address.toBase58()) : selectedAccount.address.toBase58()}
+            <span
+              className="pointer color-primary ml-8"
+              onClick={onCopyAddress}
+            >
+              [copy]
+            </span>
+          </Container>
+        </div>
+      )}
       <main className={classes.content}>{children}</main>
       {!isExtensionWidth && <Footer />}
     </>
@@ -434,6 +470,7 @@ const useFooterStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'flex-end',
     height: 56,
+    minHeight: 56,
     background: "#210C34",
     alignItems: "center",
   },
@@ -447,7 +484,17 @@ function Footer() {
   return (
     <footer className={classes.footer}>
       <Container>
-        <div className={classes.text}>© 2022 Remitano. All rights reserved.</div>
+        <div className={classes.text}>
+          <span>© 2022 </span>
+          <Link
+            href="https://remitano.com"
+            target="_blank"
+            rel="noopener"
+          >
+            <span className="color-primary">Remitano</span>
+          </Link>
+          <span>. All rights reserved.</span>
+        </div>
       </Container>
     </footer>
   );

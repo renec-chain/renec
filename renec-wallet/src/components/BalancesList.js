@@ -1,10 +1,7 @@
 import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Paper from '@material-ui/core/Paper';
 import {
-  refreshWalletPublicKeys,
   useBalanceInfo,
   useWallet,
   useWalletPublicKeys,
@@ -21,47 +18,30 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
 import { abbreviateAddress, useIsExtensionWidth } from '../utils/utils';
-import Button from '@material-ui/core/Button';
-import SendIcon from '@material-ui/icons/Send';
-import ReceiveIcon from '@material-ui/icons/WorkOutline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import AddIcon from '@material-ui/icons/Add';
-import RefreshIcon from '@material-ui/icons/Refresh';
-import IconButton from '@material-ui/core/IconButton';
-import InfoIcon from '@material-ui/icons/InfoOutlined';
-import Tooltip from '@material-ui/core/Tooltip';
-import EditIcon from '@material-ui/icons/Edit';
-import MergeType from '@material-ui/icons/MergeType';
-import SortIcon from '@material-ui/icons/Sort';
-import DeleteIcon from '@material-ui/icons/Delete';
 import AddTokenDialog from './AddTokenDialog';
 import ExportAccountDialog from './ExportAccountDialog';
-import ftxPayIcon from './FtxPay/icon.png';
 import SendDialog from './SendDialog';
 import DepositDialog from './DepositDialog';
 import {
   useIsProdNetwork,
-  refreshAccountInfo,
   useSolanaExplorerUrlSuffix,
 } from '../utils/connection';
 import { useRegion } from '../utils/region';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { serumMarkets, priceStore } from '../utils/markets';
 import { swapApiRequest } from '../utils/swap/api';
 import { showSwapAddress } from '../utils/config';
 import { useAsyncData } from '../utils/fetch-loop';
-import { showTokenInfoDialog } from '../utils/config';
 import { useConnection } from '../utils/connection';
-import { shortenAddress } from '../utils/utils';
 import CloseTokenAccountDialog from './CloseTokenAccountButton';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import TokenIcon from './TokenIcon';
 import EditAccountNameDialog from './EditAccountNameDialog';
 import MergeAccountsDialog from './MergeAccountsDialog';
-import SwapButton from './SwapButton';
-import DnsIcon from '@material-ui/icons/Dns';
-import DomainsList from './DomainsList';
+import {
+  RButton,
+  Icon,
+ } from './base';
+import Card from '@material-ui/core/Card';
 
 const balanceFormat = new Intl.NumberFormat(undefined, {
   minimumFractionDigits: 4,
@@ -103,8 +83,44 @@ function fairsIsLoaded(publicKeys) {
   );
 }
 
+const useStyles = makeStyles((theme) => ({
+  mainWallet: {
+    height: 108,
+    backgroundColor: "#3F2D4F",
+    marginTop: -80,
+    borderRadius: 4,
+    color: "white",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingLeft: 24,
+    paddingRight: 24,
+  },
+  address: {
+    textOverflow: 'ellipsis',
+    overflowX: 'hidden',
+  },
+  itemDetails: {
+    paddingLeft: theme.spacing(3),
+    paddingRight: theme.spacing(3),
+    paddingBottom: theme.spacing(2),
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#F3F3F5',
+  },
+  buttonContainer: {
+    display: 'flex',
+    marginTop: theme.spacing(2),
+  },
+  viewDetails: {
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
+}));
+
 export default function BalancesList() {
-  const wallet = useWallet();
   const [publicKeys, loaded] = useWalletPublicKeys();
   const [showAddTokenDialog, setShowAddTokenDialog] = useState(false);
   const [showEditAccountNameDialog, setShowEditAccountNameDialog] = useState(
@@ -113,13 +129,12 @@ export default function BalancesList() {
   const [showMergeAccounts, setShowMergeAccounts] = useState(false);
   const [showFtxPayDialog, setShowFtxPayDialog] = useState(false);
   const [sortAccounts, setSortAccounts] = useState(SortAccounts.None);
-  const [showDomains, setShowDomains] = useState(false);
   const { accounts, setAccountName } = useWalletSelector();
-  const [isCopied, setIsCopied] = useState(false);
+  const [sendDialogOpen, setSendDialogOpen] = useState(false);
+  const [depositDialogOpen, setDepositDialogOpen] = useState(false);
   const isExtensionWidth = useIsExtensionWidth();
   // Dummy var to force rerenders on demand.
   const [, setForceUpdate] = useState(false);
-  const region = useRegion();
   const selectedAccount = accounts.find((a) => a.isSelected);
   const allTokensLoaded = loaded && fairsIsLoaded(publicKeys);
   let sortedPublicKeys = publicKeys;
@@ -194,124 +209,65 @@ export default function BalancesList() {
     });
   }, [sortedPublicKeys, setUsdValuesCallback]);
 
-  const iconSize = isExtensionWidth ? 'small' : 'medium';
+  const classes = useStyles();
+  const mainPubkey = publicKeys[0];
+  const balanceInfo = useBalanceInfo(mainPubkey);
+  if (!balanceInfo) {
+    return <LoadingIndicator delay={0} />;
+  }
 
   return (
-    <Paper>
-      <AppBar position="static" color="default" elevation={1}>
-        <Toolbar>
-          <CopyToClipboard
-            text={selectedAccount && selectedAccount.address.toBase58()}
-            onCopy={() => {
-              setIsCopied(true);
-              setTimeout(() => {
-                setIsCopied(false);
-              }, 1000);
-            }}
-          >
-            <Tooltip
-              title={
-                <Typography>
-                  {isCopied ? 'Copied' : 'Copy to clipboard'}
-                </Typography>
-              }
-              style={{ fontSize: '10rem' }}
-            >
-              <Typography
-                variant="h6"
-                style={{
-                  flexGrow: 1,
-                  fontSize: isExtensionWidth && '1rem',
-                  cursor: 'pointer',
-                }}
-                hover={true}
-                component="h2"
-              >
-                {selectedAccount && selectedAccount.name}
-                {isExtensionWidth
-                  ? ''
-                  : ` (${
-                      selectedAccount &&
-                      shortenAddress(selectedAccount.address.toBase58())
-                    })`}{' '}
-                {allTokensLoaded && (
-                  <>({numberFormat.format(totalUsdValue.toFixed(2))})</>
-                )}
-              </Typography>
-            </Tooltip>
-          </CopyToClipboard>
-          {selectedAccount &&
-            selectedAccount.name !== 'Main account' &&
-            selectedAccount.name !== 'Hardware wallet' && (
-              <Tooltip title="Edit Account Name" arrow>
-                <IconButton
-                  size={iconSize}
-                  onClick={() => setShowEditAccountNameDialog(true)}
-                >
-                  <EditIcon />
-                </IconButton>
-              </Tooltip>
+    <div>
+      <div className={classes.mainWallet}>
+        <div>
+          <div className="mb-8">
+            {allTokensLoaded && (
+              <>
+                <span className="bold text-20">{totalUsdValue.toFixed(2)}</span>
+                <span>{" USD"}</span>
+              </>
             )}
-          <Tooltip title="See your domains" arrow>
-            <IconButton size={iconSize} onClick={() => setShowDomains(true)}>
-              <DnsIcon />
-            </IconButton>
-          </Tooltip>
-          <DomainsList open={showDomains} setOpen={setShowDomains} />
-          {/* <Tooltip title="Migrate Tokens" arrow>
-            <IconButton
-              size={iconSize}
-              onClick={() => setShowMergeAccounts(true)}
+          </div>
+          <div className="text-14">
+            TOTAL BALANCE
+          </div>
+        </div>
+        <div className="flex">
+          <div className="mr-16">
+            <RButton
+              variant="primary"
+              icon={<Icon icon="send" />}
+              onClick={() => setSendDialogOpen(true)}
             >
-              <MergeType />
-            </IconButton>
-          </Tooltip> */}
-          <Tooltip title="Add Token" arrow>
-            <IconButton
-              size={iconSize}
-              onClick={() => setShowAddTokenDialog(true)}
+              Send
+            </RButton>
+          </div>
+          <div>
+            <RButton
+              variant="transparent"
+              color="white"
+              icon={<Icon icon="receive" />}
+              onClick={() => setDepositDialogOpen(true)}
             >
-              <AddIcon />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Sort Tokens" arrow>
-            <IconButton
-              size={iconSize}
-              onClick={() => {
-                switch (sortAccounts) {
-                  case SortAccounts.None:
-                    setSortAccounts(SortAccounts.Ascending);
-                    return;
-                  case SortAccounts.Ascending:
-                    setSortAccounts(SortAccounts.Descending);
-                    return;
-                  case SortAccounts.Descending:
-                    setSortAccounts(SortAccounts.None);
-                    return;
-                  default:
-                    console.error('invalid sort type', sortAccounts);
-                }
-              }}
-            >
-              <SortIcon />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Refresh" arrow>
-            <IconButton
-              size={iconSize}
-              onClick={() => {
-                refreshWalletPublicKeys(wallet);
-                publicKeys.map((publicKey) =>
-                  refreshAccountInfo(wallet.connection, publicKey, true),
-                );
-              }}
-              style={{ marginRight: -12 }}
-            >
-              <RefreshIcon />
-            </IconButton>
-          </Tooltip>
-        </Toolbar>
-      </AppBar>
+              Receive
+            </RButton>
+          </div>
+          <DepositDialog
+            open={depositDialogOpen}
+            onClose={() => setDepositDialogOpen(false)}
+            balanceInfo={balanceInfo}
+            publicKey={mainPubkey}
+            isAssociatedToken={false}
+          />
+          <SendDialog
+            open={sendDialogOpen}
+            onClose={() => setSendDialogOpen(false)}
+            balanceInfo={balanceInfo}
+            publicKey={mainPubkey}
+          />
+        </div>
+      </div>
+      <div className="bold text-20 mt-30 mb-16">Assets</div>
       <List disablePadding>
         {balanceListItemsMemo.map((Memoized) => (
           <Memoized />
@@ -340,32 +296,9 @@ export default function BalancesList() {
         open={showMergeAccounts}
         onClose={() => setShowMergeAccounts(false)}
       />
-    </Paper>
+    </div>
   );
 }
-
-const useStyles = makeStyles((theme) => ({
-  address: {
-    textOverflow: 'ellipsis',
-    overflowX: 'hidden',
-  },
-  itemDetails: {
-    marginLeft: theme.spacing(3),
-    marginRight: theme.spacing(3),
-    marginBottom: theme.spacing(2),
-  },
-  buttonContainer: {
-    display: 'flex',
-    justifyContent: 'space-evenly',
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
-  },
-  viewDetails: {
-    '&:hover': {
-      cursor: 'pointer',
-    },
-  },
-}));
 
 export function BalanceListItem({ publicKey, expandable, setUsdValue }) {
   const wallet = useWallet();
@@ -502,8 +435,8 @@ export function BalanceListItem({ publicKey, expandable, setUsdValue }) {
   }
 
   return (
-    <>
-      <ListItem button onClick={() => expandable && setOpen((open) => !open)}>
+    <Card className="mb-8">
+      <ListItem style={{padding: 16}} button onClick={() => expandable && setOpen((open) => !open)}>
         <ListItemIcon>
           <TokenIcon
             mint={mint}
@@ -512,29 +445,17 @@ export function BalanceListItem({ publicKey, expandable, setUsdValue }) {
             size={28}
           />
         </ListItemIcon>
-        <div style={{ display: 'flex', flex: 1 }}>
-          <ListItemText
-            primary={
-              <>
-                {balanceFormat.format(amount / Math.pow(10, decimals))}{' '}
-                {displayName}
-              </>
-            }
-            secondary={subtitle}
-            secondaryTypographyProps={{ className: classes.address }}
-          />
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              flexDirection: 'column',
-            }}
-          >
-            {price && (
-              <Typography color="textSecondary">
-                {numberFormat.format(usdValue)}
-              </Typography>
-            )}
+        <div className="flex space-between full-width">
+          <div>
+            <div>{tokenName ?? tokenSymbol}</div>
+            <div>{tokenSymbol}</div>
+          </div>
+          <div className="mr-24">
+            <div>
+              <span className="bold">{balanceFormat.format(amount / Math.pow(10, decimals))}</span>
+              <span>{tokenSymbol && ` ${tokenSymbol}`}</span>
+            </div>
+            <div>{numberFormat.format(usdValue)}</div>
           </div>
         </div>
         {expandable ? open ? <ExpandLess /> : <ExpandMore /> : <></>}
@@ -549,7 +470,7 @@ export function BalanceListItem({ publicKey, expandable, setUsdValue }) {
           />
         </Collapse>
       )}
-    </>
+    </Card>
   );
 }
 
@@ -610,93 +531,7 @@ function BalanceListItemDetails({
       : undefined
     : undefined;
   const isSolAddress = publicKey.equals(owner);
-  const additionalInfo = isExtensionWidth ? undefined : (
-    <>
-      <Typography variant="body2">
-        Token Name: {tokenName ?? 'Unknown'}
-      </Typography>
-      <Typography variant="body2">
-        Token Symbol: {tokenSymbol ?? 'Unknown'}
-      </Typography>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <div>
-          {!isSolAddress && isAssociatedToken === false && (
-            <div style={{ display: 'flex' }}>
-              This is an auxiliary token account.
-            </div>
-          )}
-          <Typography variant="body2">
-            <Link
-              href={
-                `https://explorer.renec.foundation/address/${publicKey.toBase58()}` + urlSuffix
-              }
-              target="_blank"
-              rel="noopener"
-            >
-              View on explorer
-            </Link>
-          </Typography>
-          {market && (
-            <Typography variant="body2">
-              <Link
-                href={`https://dex.projectserum.com/#/market/${market}`}
-                target="_blank"
-                rel="noopener"
-              >
-                View on Serum
-              </Link>
-            </Typography>
-          )}
-          {swapInfo && swapInfo.coin.erc20Contract && (
-            <Typography variant="body2">
-              <Link
-                href={
-                  `https://etherscan.io/token/${swapInfo.coin.erc20Contract}` +
-                  urlSuffix
-                }
-                target="_blank"
-                rel="noopener"
-              >
-                View on Ethereum
-              </Link>
-            </Typography>
-          )}
-          {!isSolAddress && (
-            <Typography variant="body2">
-              <Link
-                className={classes.viewDetails}
-                onClick={() => setShowDetails(!showDetails)}
-              >
-                View Details
-              </Link>
-            </Typography>
-          )}
-          {showDetails &&
-            (mint ? (
-              <Typography variant="body2" className={classes.address}>
-                Mint Address: {mint.toBase58()}
-              </Typography>
-            ) : null)}
-          {!isSolAddress && showDetails && (
-            <Typography variant="body2" className={classes.address}>
-              {isAssociatedToken ? 'Associated' : ''} Token Metadata:{' '}
-              {publicKey.toBase58()}
-            </Typography>
-          )}
-        </div>
-        {exportNeedsDisplay && wallet.allowsExport && (
-          <div>
-            <Typography variant="body2">
-              <Link href={'#'} onClick={(e) => setExportAccDialogOpen(true)}>
-                Export
-              </Link>
-            </Typography>
-          </div>
-        )}
-      </div>
-    </>
-  );
-
+  
   return (
     <>
       {wallet.allowsExport && (
@@ -707,47 +542,40 @@ function BalanceListItemDetails({
       )}
       <div className={classes.itemDetails}>
         <div className={classes.buttonContainer}>
-          {!publicKey.equals(owner) && showTokenInfoDialog ? (
-            <Button
-              variant="outlined"
-              color="default"
-              startIcon={<InfoIcon />}
-              onClick={() => setTokenInfoDialogOpen(true)}
+          <div className="mr-16">
+            <RButton
+              variant="primary"
+              icon={<Icon icon="send" />}
+              onClick={() => setSendDialogOpen(true)}
             >
-              Token Info
-            </Button>
-          ) : null}
-          <Button
-            variant="outlined"
-            color="primary"
-            startIcon={<ReceiveIcon />}
-            onClick={() => setDepositDialogOpen(true)}
-          >
-            Receive
-          </Button>
-          <Button
-            variant="outlined"
-            color="primary"
-            startIcon={<SendIcon />}
-            onClick={() => setSendDialogOpen(true)}
-          >
-            Send
-          </Button>
-          {localStorage.getItem('warning-close-account') &&
-          mint &&
-          amount === 0 ? (
-            <Button
-              variant="outlined"
-              color="secondary"
-              size="small"
-              startIcon={<DeleteIcon />}
-              onClick={() => setCloseTokenAccountDialogOpen(true)}
+              Send
+            </RButton>
+          </div>
+          <div>
+            <RButton
+              variant="transparent"
+              color="gray-darkest"
+              icon={<Icon icon="receive-black" />}
+              onClick={() => setDepositDialogOpen(true)}
             >
-              Delete
-            </Button>
-          ) : null}
+              Receive
+            </RButton>
+          </div>
         </div>
-        {additionalInfo}
+        <Typography variant="body2">
+          <Link
+            href={
+              `https://explorer.renec.foundation/address/${publicKey.toBase58()}` + urlSuffix
+            }
+            target="_blank"
+            rel="noopener"
+          >
+            <div className="flex">
+              <Icon icon="external-link" />
+              <span className="ml-8 color-primary">View on explorer</span>
+            </div>
+          </Link>
+        </Typography>
       </div>
       <SendDialog
         open={sendDialogOpen}

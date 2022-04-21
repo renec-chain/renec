@@ -2,6 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 
+const styles = {
+  textZone: {
+    position: 'relative',
+  },
+  endAdornment: {
+    position: 'absolute',
+    right: 12,
+    top: 25,
+  }
+}
+
 const TextInput = ({
   id,
   label,
@@ -14,6 +25,7 @@ const TextInput = ({
   onChange,
   textarea,
   value,
+  endAdornment,
 }) => {
   const showMessage = hasError || hasWarning;
   return (
@@ -29,7 +41,7 @@ const TextInput = ({
       })}
     >
       <label className="mb-8" htmlFor={id}>{label}</label>
-      <div className="zoned">
+      <div className="zoned" style={styles.textZone}>
         {textarea && (
           <textarea 
             type="text" 
@@ -50,6 +62,7 @@ const TextInput = ({
             onChange={onChange} 
           />
         )}
+        <div style={styles.endAdornment}>{endAdornment}</div>
         {hasError && <i className="icon icon-attention-alt" />}
         {hasWarning && <i className="icon icon-warning-empty" />}
         {showMessage && <div className="code-00 message">{message}</div>}

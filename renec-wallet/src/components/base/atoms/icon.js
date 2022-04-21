@@ -81,4 +81,4 @@ Icon.defaultProps = {
 
 export default Icon;
 
-export { BG_SHAPES, SIZES, ROTATIONS };
+export { Icon, BG_SHAPES, SIZES, ROTATIONS };

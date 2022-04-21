@@ -3,26 +3,29 @@ import PropTypes from "prop-types";
 import { COLORS_PALETTE } from "../variables";
 import { ArmFlex } from "mdi-material-ui";
 
-const calculateTextColorName = (variant, outline, disabled) => {
+const calculateTextColorName = (variant, outline, disabled, color) => {
   if (disabled) return "muted-darker";
   if (outline) return "base";
   if (variant === "tertiary" || variant === "secondary") return "base";
   if (variant === "violet-light") return "muted";
+  if (color) return color;
 
   return "white";
 };
 
-const calculateBgColorName = (variant, outline, disabled) => {
+const calculateBgColorName = (variant, outline, disabled, color) => {
   if (disabled) {
     return outline ? "muted-lighter" : "muted";
   }
   if (outline) return "white";
   if (variant === "tertiary") return "gray-lighter";
+  if (variant === "transparent") return "transparent";
+  if (color) return color;
 
   return variant;
 };
 
-const calculateBorderColorName = (variant, outline, disabled) => {
+const calculateBorderColorName = (variant, outline, disabled, color) => {
   if (disabled) {
     return outline ? "muted-darker" : "muted";
   }
@@ -30,6 +33,8 @@ const calculateBorderColorName = (variant, outline, disabled) => {
   if (variant === "tertiary") {
     return outline ? "gray-light" : "gray-lighter";
   }
+
+  if (color) return color;
 
   return variant;
 };
@@ -81,6 +86,7 @@ const calculateButtonStyle = ({
   alignItems,
   isTextInputSupport,
   fullWidth,
+  color,
 }) => {
   const paddings = calculatePaddings({
     size,
@@ -88,8 +94,8 @@ const calculateButtonStyle = ({
     outline,
     isTextInputSupport,
   });
-  const bgColorName = calculateBgColorName(variant, outline, disabled);
-  const borderColorName = calculateBorderColorName(variant, outline, disabled);
+  const bgColorName = calculateBgColorName(variant, outline, disabled, color);
+  const borderColorName = calculateBorderColorName(variant, outline, disabled, color);
 
   let alignSelf;
 
@@ -112,6 +118,8 @@ const calculateButtonStyle = ({
     width: fullWidth ? "100%" : null,
     cursor: "pointer",
     display: "flex",
+    paddingLeft: 12,
+    paddingRight: 12,
   };
 };
 
@@ -121,12 +129,13 @@ const calculateTextStyle = ({
   outline,
   disabled,
   bold,
+  color,
 }) => {
   const fontSize = {
     xs: 14,
     xl: 18,
   }[buttonSize] || 16;
-  const textColorName = calculateTextColorName(variant, outline, disabled);
+  const textColorName = calculateTextColorName(variant, outline, disabled, color);
 
   return {
     fontWeight: bold ? "bold" : "normal",
@@ -152,6 +161,8 @@ const RButton = (props) => {
     icon,
     iconRight,
     fullWidth,
+    color,
+    className,
   } = props;
 
   const buttonStyle = calculateButtonStyle({
@@ -164,6 +175,7 @@ const RButton = (props) => {
     align,
     alignItems,
     fullWidth,
+    color,
   });
   const textStyle = calculateTextStyle({
     buttonSize: size,
@@ -171,6 +183,7 @@ const RButton = (props) => {
     outline,
     disabled,
     bold,
+    color,
   });
 
   let childrenView = Boolean(children) && children;
@@ -192,8 +205,13 @@ const RButton = (props) => {
   }
 
   return (
-    <button style={{...buttonStyle, ...textStyle}} disabled={disabled} onClick={onClick}>
-        {childrenView}
+    <button
+      style={{...buttonStyle, ...textStyle}} 
+      disabled={disabled} 
+      onClick={onClick}
+      className={className}
+    >
+      {childrenView}
     </button>
   );
 };
@@ -230,6 +248,8 @@ RButton.propTypes = {
   onClick: PropTypes.func,
   icon: PropTypes.node,
   iconRight: PropTypes.bool,
+  color: PropTypes.string,
+  className: PropTypes.string,
 };
 
 RButton.defaultProps = {
@@ -244,6 +264,7 @@ RButton.defaultProps = {
 export default RButton;
 
 export {
+  RButton,
   BUTTON_SIZES,
   BUTTON_VARIANTS,
   BUTTON_ALIGNMENTS,

@@ -105,6 +105,11 @@ module.exports = {
       "running-validator/validator-failover",
       "running-validator/validator-troubleshoot",
     ],
+    "Renec Wallet": [
+      "renec-wallet",
+      "renec-wallet/create-wallet",
+      "renec-wallet/usage",
+    ],
     // Clusters: [
     //   "clusters",
     //   "cluster/rpc-endpoints",

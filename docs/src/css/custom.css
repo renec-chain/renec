@@ -75,3 +75,11 @@ footer .text--center {
 .card__header h3 {
   color: #41225d;
 }
+
+.navbar__link {
+  color: white;
+}
+
+.navbar__link.navbar__link--active {
+  color: rgb(155, 89, 182);
+}

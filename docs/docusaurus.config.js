@@ -67,6 +67,11 @@ module.exports = {
           label: "Validate",
           position: "left",
         },
+        {
+          to: "renec-wallet",
+          label: "Renec wallet",
+          position: "left",
+        },
         // {
         //   to: "integrations/exchange",
         //   label: "Integrate",

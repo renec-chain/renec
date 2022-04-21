@@ -23,6 +23,13 @@ const features = [
       <>Validate transactions, secure the network, and earn rewards.</>
     ),
   },
+  {
+    title: <>Renec Wallet</>,
+    imageUrl: "renec-wallet",
+    description: (
+      <>Create wallet and interact with Remitano network.</>
+    ),
+  },
   // {
   //   title: <>🏛 Create an SPL Token</>,
   //   imageUrl: "https://spl.solana.com/token",

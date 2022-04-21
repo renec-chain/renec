@@ -1,9 +1,33 @@
+.mt-8 {
+  margin-top: 8px !important;
+}
+
+.mt-16 {
+  margin-top: 16px !important;
+}
+
 .mt-24 {
   margin-top: 24px !important;
 }
 
+.mt-30 {
+  margin-top: 30px !important;
+}
+
+.mt-48 {
+  margin-top: 48px !important;
+}
+
 .mr-8 {
   margin-right: 8px !important;
+}
+
+.mr-16 {
+  margin-right: 16px !important;
+}
+
+.mr-24 {
+  margin-right: 24px !important;
 }
 
 .mb-8 {
@@ -26,6 +50,10 @@
   margin-left: 16px !important;
 }
 
+.pl-16 {
+  padding-left: 16px !important;
+}
+
 .pointer {
   cursor: pointer;
 }
@@ -34,14 +62,51 @@
   display: flex;
 }
 
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.full-width {
+  width: 100%;
+}
+
 .text-14 {
   font-size: 14px;
+}
+
+.text-16 {
+  font-size: 16px;
+}
+
+.text-20 {
+  font-size: 20px;
 }
 
 .text-24 {
   font-size: 24px;
 }
 
+.text-32 {
+  font-size: 32px;
+}
+
 .bold {
   font-weight: bold;
+}
+
+.color-primary {
+  color: get-color("primary");
+}
+
+.color-secondary {
+  color: get-color("secondary");
 }

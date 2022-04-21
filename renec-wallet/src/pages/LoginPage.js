@@ -16,8 +16,7 @@ import LoadingIndicator from '../components/LoadingIndicator';
 import { BalanceListItem } from '../components/BalancesList.js';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import { DialogActions, DialogContentText, DialogTitle, Typography } from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
+import { Typography } from '@material-ui/core';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -27,14 +26,14 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import { makeStyles } from '@material-ui/core/styles';
 import { useCallAsync } from '../utils/notifications';
-import Link from '@material-ui/core/Link';
 import { validateMnemonic } from 'bip39';
-import DialogForm from '../components/DialogForm';
-import RButton from '../components/base/molecules/button';
-import Icon from '../components/base/atoms/icon';
-import { TextInput } from '../components/base/inputs/text-input'
-import Alert from '../components/base/atoms/alert';
-import Message from '../components/base/molecules/message';
+import {
+  RButton,
+  Icon,
+  TextInput,
+  Alert,
+  Message,
+ } from '../components/base';
 
 const useStyles = makeStyles((theme) => ({
   walletButtons: {
@@ -74,6 +73,7 @@ export default function LoginPage() {
               <div className={classes.button}>
                 <RButton 
                   variant="secondary" 
+                  size="lg"
                   icon={<Icon icon="wallet" size={24} />}
                   onClick={() => setNewWallet(true)}
                 >
@@ -84,6 +84,7 @@ export default function LoginPage() {
                 <RButton 
                   variant="tertiary" 
                   outline={true} 
+                  size="lg"
                   icon={<Icon icon="key" size={24} />}
                   onClick={() => setRestore(true)}
                 >
@@ -182,7 +183,7 @@ function SeedWordsForm({ mnemonicAndSeed, goBack, goForward }) {
     <>
       <div className="mb-8 flex">
         <Icon icon="back" onClick={goBack} />
-        <div className="ml-16 pointer" onClick={goBack}>Back</div>
+        <div className="pl-16 pointer" onClick={goBack}>Back</div>
       </div>
       <Card>
         <CardContent>
@@ -221,7 +222,7 @@ function SeedWordsForm({ mnemonicAndSeed, goBack, goForward }) {
               Download Backup Mnemonic File (Required)
             </RButton>
           </div>
-          <RButton fullWidth color="primary" disabled={!confirmed || !downloaded} onClick={() => setshowConfirmMnemonic(true)}>
+          <RButton fullWidth variant="primary" disabled={!confirmed || !downloaded} onClick={() => setshowConfirmMnemonic(true)}>
             Continue
           </RButton>
         </CardContent>
@@ -253,7 +254,7 @@ const ConfirmMnemonic = ({ mnemonicAndSeed, goBack, goForward }) => {
     <>
       <div className="mb-8 flex">
         <Icon icon="back" onClick={goBack} />
-        <div className="ml-16 pointer" onClick={goBack}>Back</div>
+        <div className="pl-16 pointer" onClick={goBack}>Back</div>
       </div>
       <Card>
         <CardContent>
@@ -275,7 +276,7 @@ const ConfirmMnemonic = ({ mnemonicAndSeed, goBack, goForward }) => {
             />
           </div>
           <RButton
-            color="primary"
+            variant="primary"
             fullWidth
             disabled={normalizeMnemonic(seedCheck) !== mnemonicAndSeed?.mnemonic}
             onClick={goForward}
@@ -296,7 +297,7 @@ function ChoosePasswordForm({ goBack, onSubmit }) {
     <>
       <div className="mb-8 flex">
           <Icon icon="back" onClick={goBack} />
-          <div className="ml-16 pointer" onClick={goBack}>Back</div>
+          <div className="pl-16 pointer" onClick={goBack}>Back</div>
         </div>
       <Card>
         <CardContent>
@@ -327,7 +328,7 @@ function ChoosePasswordForm({ goBack, onSubmit }) {
             your seed words.
           </p>
           <RButton
-            color="primary"
+            variant="primary"
             fullWidth
             disabled={password !== passwordConfirm}
             onClick={() => onSubmit(password)}
@@ -416,7 +417,7 @@ function RestoreWalletForm({ goBack }) {
         <>
           <div className="mb-8 flex">
             <Icon icon="back" onClick={goBack} />
-            <div className="ml-16 pointer" onClick={goBack}>Back</div>
+            <div className="pl-16 pointer" onClick={goBack}>Back</div>
           </div>
           <Card>
             <CardContent>

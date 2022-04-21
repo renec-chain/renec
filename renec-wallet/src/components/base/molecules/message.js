@@ -89,5 +89,6 @@ Message.defaultProps = {
 export default Message;
 
 export {
+  Message,
   TYPES,
 };

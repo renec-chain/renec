@@ -102,5 +102,6 @@ Alert.defaultProps = {
 export default Alert;
 
 export {
+  Alert,
   ALERT_VARIANTS,
 };

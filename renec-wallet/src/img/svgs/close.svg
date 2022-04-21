@@ -1,0 +1,10 @@
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="icon/navigation/close/24 copy 5">
+<path id="icon color" fill-rule="evenodd" clip-rule="evenodd" d="M9.414 8L16 1.414L14.586 0L8 6.586L1.414 0L0 1.414L6.586 8L0 14.586L1.414 16L8 9.414L14.586 16L16 14.586L9.414 8Z" fill="#5E5862"/>
+<mask id="mask0_9_263" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
+<path id="icon color_2" fill-rule="evenodd" clip-rule="evenodd" d="M9.414 8L16 1.414L14.586 0L8 6.586L1.414 0L0 1.414L6.586 8L0 14.586L1.414 16L8 9.414L14.586 16L16 14.586L9.414 8Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_9_263)">
+</g>
+</g>
+</svg>

@@ -6,7 +6,6 @@ import {
   ThemeProvider,
   unstable_createMuiStrictModeTheme as createMuiTheme,
 } from '@material-ui/core/styles';
-import { deepPurple } from '@material-ui/core/colors';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -29,13 +28,12 @@ import { PageProvider, usePage } from './utils/page';
 
 export default function App() {
   // TODO: add toggle for dark mode
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
   const prefersLightMode = useMediaQuery('(prefers-color-scheme: light)');
   const theme = React.useMemo(
     () =>
       createMuiTheme({
         palette: {
-          type: 'light', //prefersDarkMode ? 'dark' : 'light',
+          type: 'light',
           primary: { main: '#210C34' },
           background: { default: '#FBFBFC' },
         },

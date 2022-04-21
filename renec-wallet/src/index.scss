@@ -40,7 +40,7 @@ body,
   html,
   body,
   #root {
-    max-width: 375px;
+    max-width: 450px;
   }
   html::-webkit-scrollbar,
   body::-webkit-scrollbar,
@@ -67,4 +67,8 @@ body,
 
 .MuiCardContent-root {
   padding: 24px !important;
+}
+
+.MuiDialogContent-dividers {
+  padding: 16px 24px 24px !important;
 }

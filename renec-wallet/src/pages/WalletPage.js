@@ -27,7 +27,8 @@ export default function WalletPage() {
   return (
     <Container fixed maxWidth="md" className={classes.container}>
       <Grid container spacing={isExtensionWidth ? 0 : 3}>
-        <Grid item xs={12} className={classes.balancesContainer}>
+        <Grid md={2} />
+        <Grid item xs={12} md={8} className={classes.balancesContainer}>
           <BalancesList />
         </Grid>
       </Grid>

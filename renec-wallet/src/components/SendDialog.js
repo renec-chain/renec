@@ -27,6 +27,8 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
 import { useAsyncData } from '../utils/fetch-loop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {
@@ -41,6 +43,11 @@ import {
   resolveTwitterHandle,
   getNameKey,
 } from '../utils/name-service';
+import { 
+  TextInput, 
+  RButton,
+  Icon,
+} from '../components/base';
 
 const WUSDC_MINT = new PublicKey(
   'BXXkv6z8ykpG1yuvUDPgh732wzVHB69RnB9YgSYh3itW',
@@ -133,15 +140,18 @@ export default function SendDialog({ open, onClose, publicKey, balanceInfo }) {
         fullWidth
       >
         <DialogTitle>
-          Send {tokenName ?? abbreviateAddress(mint)}
-          {tokenSymbol ? ` (${tokenSymbol})` : null}
-          {ethAccount && (
-            <div>
-              <Typography color="textSecondary" style={{ fontSize: '14px' }}>
-                Metamask connected: {ethAccount}
-              </Typography>
+          <div className="flex space-between">
+            Send {tokenName ?? abbreviateAddress(mint)}
+            {tokenSymbol ? ` (${tokenSymbol})` : null}
+            {ethAccount && (
+              <div>
+                <Typography color="textSecondary" style={{ fontSize: '14px' }}>
+                  Metamask connected: {ethAccount}
+                </Typography>
+              </div>
+            )}
+            <Icon icon="close" onClick={onClose} />
             </div>
-          )}
         </DialogTitle>
         {swapCoinInfo ? (
           <Tabs
@@ -353,29 +363,47 @@ function SendSplDialog({ onClose, publicKey, balanceInfo, onSubmitRef }) {
   onSubmitRef.current = onSubmit;
   return (
     <>
-      <DialogContent>{fields}</DialogContent>
-      <DialogActions>
+      <DialogContent dividers>
+        {fields}
         {shouldShowOverride && (
           <div
             style={{
-              'align-items': 'center',
+              alignItems: 'center',
               display: 'flex',
-              'text-align': 'left',
+              textAlign: 'left',
+              marginTop: 8,
             }}
           >
-            <b>This address has no funds. Are you sure it's correct?</b>
-            <Switch
-              checked={overrideDestinationCheck}
-              onChange={(e) => setOverrideDestinationCheck(e.target.checked)}
-              color="primary"
+            <FormControlLabel
+              control={
+                <Checkbox
+                checked={overrideDestinationCheck}
+                style ={{color: "#9B59B6"}}
+                onChange={(e) => {console.log("changing", overrideDestinationCheck);setOverrideDestinationCheck(!overrideDestinationCheck)}}
+              />
+              }
+              label="I'm aware that this address has no funds"
             />
           </div>
         )}
-        <Button onClick={onClose}>Cancel</Button>
-        <Button type="submit" color="primary" disabled={disabled}>
-          Send
-        </Button>
-      </DialogActions>
+        <div className="flex space-between mt-24">
+          <RButton
+            className="mr-16 full-width"
+            variant="secondary"
+            onClick={onClose}
+          >
+            Cancel
+          </RButton>
+          <RButton
+            className="full-width"
+            type="submit"
+            variant="primary"
+            disabled={disabled}
+          >
+            Send
+          </RButton>
+        </div>
+      </DialogContent>
     </>
   );
 }
@@ -680,60 +708,50 @@ function useForm(
 
   const fields = (
     <>
-      <TextField
-        label="Recipient Address"
-        fullWidth
-        variant="outlined"
-        margin="normal"
-        value={destinationAddress}
-        onChange={(e) => setDestinationAddress(e.target.value.trim())}
-        helperText={addressHelperText}
+      <TextInput
         id={
           !passAddressValidation && passAddressValidation !== undefined
             ? 'outlined-error-helper-text'
             : undefined
         }
-        error={!passAddressValidation && passAddressValidation !== undefined}
+        label="Recipient Address"
+        value={destinationAddress}
+        onChange={(e) => setDestinationAddress(e.target.value.trim())}
+        hasError={!passAddressValidation && passAddressValidation !== undefined}
       />
-      <TextField
+      <TextInput
         label="Amount"
-        fullWidth
-        variant="outlined"
-        margin="normal"
-        type="number"
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <Button
-                onClick={() =>
-                  setTransferAmountString(
-                    balanceAmountToUserAmount(balanceAmount, decimals),
-                  )
-                }
-              >
-                MAX
-              </Button>
-              {tokenSymbol ? tokenSymbol : null}
-            </InputAdornment>
-          ),
-          inputProps: {
-            step: Math.pow(10, -decimals),
-          },
-        }}
         value={transferAmountString}
         onChange={(e) => setTransferAmountString(e.target.value.trim())}
-        helperText={
-          <span
-            onClick={() =>
-              setTransferAmountString(
-                balanceAmountToUserAmount(balanceAmount, decimals),
-              )
-            }
-          >
-            Max: {balanceAmountToUserAmount(balanceAmount, decimals)}
-          </span>
-        }
+        endAdornment={(
+          <InputAdornment position="end">
+            <Button
+              onClick={() =>
+                setTransferAmountString(
+                  balanceAmountToUserAmount(balanceAmount, decimals),
+                )
+              }
+            >
+              MAX
+            </Button>
+            {tokenSymbol ? tokenSymbol : null}
+          </InputAdornment>
+        )}
       />
+      <div className="mt-8">
+        <span>Available: </span>
+        <span
+          className="bold"
+          onClick={() =>
+            setTransferAmountString(
+              balanceAmountToUserAmount(balanceAmount, decimals),
+            )
+          }
+        >
+          {balanceAmountToUserAmount(balanceAmount, decimals)}
+        </span>
+        <span> {tokenSymbol ? tokenSymbol : null}</span>
+      </div>
     </>
   );
 

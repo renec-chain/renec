@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogForm from './DialogForm';
-import { abbreviateAddress } from '../utils/utils';
 import CopyableDisplay from './CopyableDisplay';
 import { useSolanaExplorerUrlSuffix } from '../utils/connection';
 import Typography from '@material-ui/core/Typography';
-import DialogActions from '@material-ui/core/DialogActions';
 import Button from '@material-ui/core/Button';
 import { useAsyncData } from '../utils/fetch-loop';
 import tuple from 'immutable-tuple';
@@ -29,6 +27,11 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { DialogContentText, Tooltip } from '@material-ui/core';
 import { EthFeeEstimate } from './EthFeeEstimate';
+import QRCode from 'qrcode.react';
+import {
+  Alert,
+  Icon
+ } from './base';
 
 const DISABLED_MINTS = new Set([
   'ABE7D8RU1eHfCJWzHYZZeymeE8k9nPPXfqge2NQYyKoL',
@@ -43,7 +46,6 @@ export default function DepositDialog({
   isAssociatedToken,
 }) {
   const ethAccount = useEthAccount();
-  const urlSuffix = useSolanaExplorerUrlSuffix();
   const { mint, tokenName, tokenSymbol, owner } = balanceInfo;
   const [tab, setTab] = useState(0);
 
@@ -93,55 +95,49 @@ export default function DepositDialog({
   return (
     <DialogForm open={open} onClose={onClose} maxWidth="sm" fullWidth>
       <DialogTitle>
-        Deposit {tokenName ?? mint.toBase58()}
-        {tokenSymbol ? ` (${tokenSymbol})` : null}
-        {ethAccount && (
-          <div>
-            <Typography color="textSecondary" style={{ fontSize: '14px' }}>
-              Metamask connected: {ethAccount}
-            </Typography>
-          </div>
-        )}
+        <div className="flex space-between">
+          Receive {tokenSymbol ?? tokenName ?? mint.toBase58()}
+          {ethAccount && (
+            <div>
+              <Typography color="textSecondary" style={{ fontSize: '14px' }}>
+                Metamask connected: {ethAccount}
+              </Typography>
+            </div>
+          )}
+          <Icon icon="close" onClick={onClose} />
+        </div>
       </DialogTitle>
       {tabs}
-      <DialogContent style={{ paddingTop: 16 }}>
+      <DialogContent style={{ paddingTop: 16 }} dividers>
         {tab === 0 ? (
-          <>
+          <div className="flex-column align-center">
             {!displaySolAddress && isAssociatedToken === false ? (
-              <DialogContentText>
-                This address can only be used to receive{' '}
-                {tokenSymbol ?? abbreviateAddress(mint)}. Do not send RENEC to
-                this address.
+              <div>
+                Your deposit address:
                 <br />
                 <b style={{ color: 'red' }}>WARNING</b>: You are using a
                 deprecated account type. Please migrate your tokens. Ideally,
                 create a new wallet. If you send to this address from a poorly
                 implemented wallet, you may burn tokens.
-              </DialogContentText>
+              </div>
             ) : (
-              <DialogContentText>
-                This address can be used to receive{' '}
-                {tokenSymbol ?? abbreviateAddress(mint)}.
-              </DialogContentText>
+              <div className="text-16">
+                Your deposit address:
+              </div>
             )}
+            <QRCode value={depositAddressStr} size={256} includeMargin />
             <CopyableDisplay
               value={depositAddressStr}
               label={'Deposit Address'}
               autoFocus
-              qrCode
             />
-            <DialogContentText variant="body2">
-              <Link
-                href={
-                  `https://explorer.renec.foundation/address/${depositAddressStr}` + urlSuffix
-                }
-                target="_blank"
-                rel="noopener"
-              >
-                View on explorer
-              </Link>
-            </DialogContentText>
-          </>
+            <div className="mt-16">
+              <Alert variant="warning">
+                <span className="bold">Note: </span>
+                <span>This address can only be used to receive RENEC and tokens on Remitano Network</span>
+              </Alert>
+            </div>
+          </div>
         ) : (
           <SolletSwapDepositAddress
             balanceInfo={balanceInfo}
@@ -150,9 +146,6 @@ export default function DepositDialog({
           />
         )}
       </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose}>Close</Button>
-      </DialogActions>
     </DialogForm>
   );
 }

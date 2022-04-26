@@ -453,7 +453,7 @@ function RestoreWalletForm({ goBack }) {
               />
               <br />
               <TextInput
-                label="Confirm password (Optional"
+                label="Confirm password (Optional)"
                 type="password"
                 autoComplete="new-password"
                 value={passwordConfirm}

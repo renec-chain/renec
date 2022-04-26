@@ -25,7 +25,9 @@ import DepositDialog from './DepositDialog';
 import {
   useIsProdNetwork,
   useSolanaExplorerUrlSuffix,
+  useConnectionConfig,
 } from '../utils/connection';
+import { clusterForEndpoint } from '../utils/clusters';
 import { useRegion } from '../utils/region';
 import { serumMarkets, priceStore } from '../utils/markets';
 import { swapApiRequest } from '../utils/swap/api';
@@ -40,6 +42,7 @@ import MergeAccountsDialog from './MergeAccountsDialog';
 import {
   RButton,
   Icon,
+  Alert,
  } from './base';
 import Card from '@material-ui/core/Card';
 
@@ -137,6 +140,9 @@ export default function BalancesList() {
   const [, setForceUpdate] = useState(false);
   const selectedAccount = accounts.find((a) => a.isSelected);
   const allTokensLoaded = loaded && fairsIsLoaded(publicKeys);
+  const { endpoint, setEndpoint } = useConnectionConfig();
+  const cluster = useMemo(() => clusterForEndpoint(endpoint), [endpoint]);
+
   let sortedPublicKeys = publicKeys;
   if (allTokensLoaded && sortAccounts !== SortAccounts.None) {
     sortedPublicKeys = [...publicKeys];
@@ -267,6 +273,13 @@ export default function BalancesList() {
           />
         </div>
       </div>
+      {cluster?.name === "testnet" && (
+        <div className="mt-16">
+          <Alert variant="warning">
+            You are currently on Testnet, the tokens on Testnet is worthless.
+          </Alert>
+        </div>
+      )}
       <div className="bold text-20 mt-30 mb-16">Assets</div>
       <List disablePadding>
         {balanceListItemsMemo.map((Memoized) => (

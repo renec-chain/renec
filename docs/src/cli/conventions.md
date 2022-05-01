@@ -63,10 +63,10 @@ With a file system wallet, the keypair is stored in a file on your computer.
 Replace `<KEYPAIR>` with the complete file path to the keypair file.
 
 For example, if the file system keypair file location is
-`/home/solana/my_wallet.json`, to display the address, do:
+`/home/renec/my_wallet.json`, to display the address, do:
 
 ```bash
-renec-keygen pubkey /home/solana/my_wallet.json
+renec-keygen pubkey /home/renec/my_wallet.json
 ```
 
 #### Hardware Wallet

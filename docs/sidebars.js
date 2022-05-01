@@ -110,6 +110,11 @@ module.exports = {
       "renec-wallet/create-wallet",
       "renec-wallet/usage",
     ],
+    "Renec Program Library": [
+      "rpl-token",
+      "rpl-token/token-program",
+      "rpl-token/associated-token-account",
+    ],
     // Clusters: [
     //   "clusters",
     //   "cluster/rpc-endpoints",

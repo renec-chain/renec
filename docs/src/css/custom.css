@@ -76,8 +76,12 @@ footer .text--center {
   color: #41225d;
 }
 
-.navbar__link {
+.navbar__item.navbar__link {
   color: white;
+}
+
+.navbar__item.navbar__link:hover {
+  color: rgb(155, 89, 182);
 }
 
 .navbar__link.navbar__link--active {

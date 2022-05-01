@@ -30,11 +30,11 @@ const features = [
       <>Create wallet and interact with Remitano network.</>
     ),
   },
-  // {
-  //   title: <>🏛 Create an SPL Token</>,
-  //   imageUrl: "https://spl.solana.com/token",
-  //   description: <>Launch your own SPL Token, Renec's equivalent of ERC-20.</>,
-  // },
+  {
+    title: <>Create an RPL Token</>,
+    imageUrl: "rpl-token",
+    description: <>Launch your own RPL Token, Renec's equivalent of ERC-20.</>,
+  },
   // {
   //   title: <>🏦 Integrate an Exchange</>,
   //   imageUrl: "integrations/exchange",

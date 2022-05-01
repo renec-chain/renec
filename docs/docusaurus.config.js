@@ -52,11 +52,11 @@ module.exports = {
         "srcDark": "img/logo-horizontal.png"
       },
       items: [
-        // {
-        //   href: "https://spl.solana.com",
-        //   label: "Program Library »",
-        //   position: "left",
-        // },
+        {
+          to: "rpl-token",
+          label: "Renec Program Library",
+          position: "left",
+        },
         // {
         //   to: "developing/programming-model/overview",
         //   label: "Develop",

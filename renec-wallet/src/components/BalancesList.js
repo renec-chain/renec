@@ -280,6 +280,11 @@ export default function BalancesList() {
           </Alert>
         </div>
       )}
+      <div className="mt-8">
+        <Alert variant="warning">
+          We have just switched our Testnet to new cluster for better security and stability. If you don't have any RENEC, you can re-request RENEC from our form.
+        </Alert>
+      </div>
       <div className="bold text-20 mt-30 mb-16">Assets</div>
       <List disablePadding>
         {balanceListItemsMemo.map((Memoized) => (

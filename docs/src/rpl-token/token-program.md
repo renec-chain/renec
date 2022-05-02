@@ -775,7 +775,7 @@ There are two programs that are used by the wallet:
   address to the associated token accounts they hold.
 
 ### How to fetch and display token holdings
-The [getTokenAccountsByOwner](../apps/jsonrpc-api#gettokenaccountsbyowner)
+The [getTokenAccountsByOwner](../developing/clients/jsonrpc-api#gettokenaccountsbyowner)
 JSON RPC method can be used to fetch all token accounts for a wallet address.
 
 For each token mint, the wallet could have multiple token accounts: the
@@ -902,7 +902,7 @@ Unlocking works by pushing a permissionless crank on the contract that moves the
 - Audit: The audit was conducted by Kudelski, the report can be found [here](https://github.com/Bonfida/token-vesting/blob/master/audit/Bonfida_SecurityAssessment_Vesting_Final050521.pdf)
 
 ## Register token info
-By default, your created token will display on [Renec Explorer](https://explorer.renec.foundation) and [Renec Wallet](https://wallet.renec.foundation) without detailed info, so you have to create a Pull Request to our repository https://github.com/remitano/rpl-token-registry, for example, add to file `src/tokens/solana.tokenlist.json`
+By default, your created token will display on [Renec Explorer](https://explorer.renec.foundation) and [Renec Wallet](https://wallet.renec.foundation) without detailed info, so you have to create a Pull Request to our repository https://github.com/remitano/rpl-token-registry, for example, add to file `src/tokens/renec.tokenlist.json`
 
 ```
 {

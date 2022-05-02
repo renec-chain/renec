@@ -1,0 +1,57 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@4.7.0
+
+jobs:
+  run-build:
+    docker:
+      - image: cimg/rust:1.58.1
+    steps:
+      - checkout
+      - run:
+          name: Version information
+          command: rustc --version; cargo --version; rustup --version
+      - run:
+          name: Install dependencies
+          command: |
+            rustup component add rustfmt
+            sudo apt-get update
+            sudo apt-get -y install libssl-dev libudev-dev pkg-config zlib1g-dev llvm clang make
+      - run:
+          name: Calculate dependencies
+          command: cargo generate-lockfile
+      - restore_cache:
+          keys:
+            - v1-cargo-cache-{{ arch }}-{{ checksum "Cargo.lock" }}
+      - run:
+          name: Build all targets
+          command: cargo build --release --verbose
+      - save_cache:
+          paths:
+            - /usr/local/cargo/registry
+            - target/debug/.fingerprint
+            - target/debug/build
+            - target/debug/deps
+          key: v4-cargo-cache-{{ arch }}-{{ checksum "Cargo.lock" }}
+  build-docs:
+    docker:
+      - image: cimg/node:14.17.1
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+          app-dir: ~/project/docs
+      - run:
+          command: cd docs && npm run build
+          name: Build docs app
+      - persist_to_workspace:
+          root: ~/project
+          paths: .
+
+workflows:
+  version: 2
+  main:
+    jobs:
+      - run-build
+      - build-docs

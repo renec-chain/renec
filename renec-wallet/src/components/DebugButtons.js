@@ -15,6 +15,7 @@ import {
 import { createAndInitializeMint } from '../utils/tokens';
 import { Tooltip, Button } from '@material-ui/core';
 import React from 'react';
+import { RButton } from './base';
 
 export default function DebugButtons() {
   const wallet = useWallet();
@@ -28,7 +29,7 @@ export default function DebugButtons() {
 
   function requestAirdrop() {
     callAsync(
-      wallet.connection.requestAirdrop(wallet.publicKey, LAMPORTS_PER_SOL),
+      wallet.connection.requestAirdrop(wallet.publicKey, 2 * LAMPORTS_PER_SOL),
       {
         onSuccess: async () => {
           await sleep(5000);
@@ -68,40 +69,41 @@ export default function DebugButtons() {
       <Tooltip
         title={
           requestAirdropDisabled
-            ? 'Receive some devnet RENEC for free. Only enabled on the devnet'
-            : 'Receive some devnet RENEC for free'
+            ? 'Receive some testnet RENEC for free. Only enabled on the testnet'
+            : 'Receive some testnet RENEC for free'
         }
       >
         <span>
-          <Button
-            variant="contained"
-            color="primary"
+          <RButton
+            variant="success"
             onClick={requestAirdrop}
             disabled={requestAirdropDisabled}
           >
             Request Airdrop
-          </Button>
+          </RButton>
         </span>
       </Tooltip>
-      <Tooltip
-        title={
-          noSol
-            ? 'Generate and receive balances in a new test token. Requires RENEC balance'
-            : 'Generate and receive balances in a new test token'
-        }
-      >
-        <span>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={mintTestToken}
-            disabled={sending || noSol}
-            style={{ marginLeft: spacing }}
-          >
-            Mint Test Token
-          </Button>
-        </span>
-      </Tooltip>
+      { false && (
+        <Tooltip
+          title={
+            noSol
+              ? 'Generate and receive balances in a new test token. Requires RENEC balance'
+              : 'Generate and receive balances in a new test token'
+          }
+        >
+          <span>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={mintTestToken}
+              disabled={sending || noSol}
+              style={{ marginLeft: spacing }}
+            >
+              Mint Test Token
+            </Button>
+          </span>
+        </Tooltip>
+      )}
     </div>
   );
 }

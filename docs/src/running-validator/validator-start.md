@@ -2,6 +2,9 @@
 title: Starting a Validator
 ---
 
+## Install Renec CLI
+- [Install the Renec Tools](cli/install-renec-cli-tools.md)
+
 ## Configure Renec CLI
 
 The renec cli includes `get` and `set` configuration commands to automatically

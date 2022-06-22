@@ -153,7 +153,7 @@ JSON RPC URL: http://127.0.0.1:8899
 
 By default, the test validator runs with all [runtime features](programming-model/runtime#features) activated.
 
-You can verify this using the [Solana command-line tools](cli/install-solana-cli-tools.md):
+You can verify this using the [Solana command-line tools](/cli/install-renec-cli-tools):
 
 ```bash
 solana feature status -ul

@@ -8,7 +8,7 @@ import {
   MetadataJsonFile,
 } from "@metaplex/js";
 import ContentLoader from "react-content-loader";
-import ErrorLogo from "img/logos-solana/dark-solana-logo.svg";
+import ErrorLogo from "img/logos/dark-solana-logo.svg";
 import { getLast } from "utils";
 
 const MAX_TIME_LOADING_IMAGE = 5000; /* 5 seconds */

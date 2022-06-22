@@ -5,7 +5,7 @@ import {
   TokenInfo,
   TokenListContainer,
   Strategy,
-} from "@ngocbv/spl-token-registry";
+} from "@ngocbv/rpl-token-registry";
 import { Cluster, clusterSlug, useCluster } from "providers/cluster";
 
 const TokenRegistryContext = React.createContext<TokenInfoMap>(new Map());

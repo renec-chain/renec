@@ -49,6 +49,7 @@ fn load_accounts(path: &Path) -> Result<Input> {
 
 fn main() {
     solana_logger::setup();
+    let max_u64 = std::i64::MAX.to_string();
     let matches = App::new("Solana BPF CLI")
         .version(crate_version!())
         .author("Solana Maintainers <maintainers@solana.foundation>")
@@ -83,8 +84,8 @@ and the following fields are required
 "##,
         )
         .arg(
-            Arg::new("PROGRAM")
-                .about(
+            Arg::with_name("PROGRAM")
+                .help(
                     "Program file to use. This is either an ELF shared-object file to be executed, \
                      or an assembly file to be assembled and executed.",
                 )
@@ -92,35 +93,32 @@ and the following fields are required
                 .index(1)
         )
         .arg(
-            Arg::new("input")
-                .about(
+            Arg::with_name("input")
+                .help(
                     "Input for the program to run on, where FILE is a name of a JSON file \
 with input data, or BYTES is the number of 0-valued bytes to allocate for program parameters",
                 )
-                .short('i')
                 .long("input")
                 .value_name("FILE / BYTES")
                 .takes_value(true)
                 .default_value("0"),
         )
         .arg(
-            Arg::new("memory")
-                .about("Heap memory for the program to run on")
-                .short('m')
+            Arg::with_name("memory")
+                .help("Heap memory for the program to run on")
                 .long("memory")
                 .value_name("BYTES")
                 .takes_value(true)
                 .default_value("0"),
         )
         .arg(
-            Arg::new("use")
-                .about(
+            Arg::with_name("use")
+                .help(
                     "Method of execution to use, where 'cfg' generates Control Flow Graph \
 of the program, 'disassembler' dumps disassembled code of the program, 'interpreter' runs \
 the program in the virtual machine's interpreter, and 'jit' precompiles the program to \
 native machine code before execting it in the virtual machine.",
                 )
-                .short('u')
                 .long("use")
                 .takes_value(true)
                 .value_name("VALUE")
@@ -128,30 +126,26 @@ native machine code before execting it in the virtual machine.",
                 .default_value("jit"),
         )
         .arg(
-            Arg::new("instruction limit")
-                .about("Limit the number of instructions to execute")
-                .short('l')
+            Arg::with_name("instruction limit")
+                .help("Limit the number of instructions to execute")
                 .long("limit")
                 .takes_value(true)
                 .value_name("COUNT")
-                .default_value(&std::i64::MAX.to_string()),
+                .default_value(&max_u64),
         )
         .arg(
-            Arg::new("trace")
-                .about("Output trace to 'trace.out' file using tracing instrumentation")
-                .short('t')
+            Arg::with_name("trace")
+                .help("Output trace to 'trace.out' file using tracing instrumentation")
                 .long("trace"),
         )
         .arg(
-            Arg::new("profile")
-                .about("Output profile to 'profile.dot' file using tracing instrumentation")
-                .short('p')
+            Arg::with_name("profile")
+                .help("Output profile to 'profile.dot' file using tracing instrumentation")
                 .long("profile"),
         )
         .arg(
-            Arg::new("verify")
-                .about("Run the verifier before execution or disassembly")
-                .short('v')
+            Arg::with_name("verify")
+                .help("Run the verifier before execution or disassembly")
                 .long("verify"),
         )
         .get_matches();

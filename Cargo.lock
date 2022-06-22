@@ -3909,38 +3909,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "renec-genesis"
-version = "1.8.14"
-dependencies = [
- "base64 0.12.3",
- "chrono",
- "clap",
- "serde",
- "serde_json",
- "serde_yaml",
- "solana-clap-utils",
- "renec-cli-config",
- "solana-exchange-program",
- "solana-ledger",
- "solana-logger 1.8.14",
- "solana-runtime",
- "solana-sdk",
- "solana-stake-program",
- "solana-version",
- "solana-vote-program",
- "tempfile",
-]
-
-[[package]]
-name = "renec-genesis-utils"
-version = "1.8.14"
-dependencies = [
- "solana-download-utils",
- "solana-runtime",
- "solana-sdk",
-]
-
-[[package]]
 name = "reqwest"
 version = "0.11.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4753,36 +4721,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-bench-exchange"
-version = "1.8.14"
-dependencies = [
- "clap",
- "itertools 0.9.0",
- "log 0.4.14",
- "num-derive",
- "num-traits",
- "rand 0.7.3",
- "rayon",
- "renec-genesis",
- "serde_json",
- "serde_yaml",
- "solana-clap-utils",
- "solana-client",
- "solana-core",
- "solana-exchange-program",
- "solana-faucet",
- "solana-gossip",
- "solana-local-cluster",
- "solana-logger 1.8.14",
- "solana-metrics",
- "solana-net-utils",
- "solana-runtime",
- "solana-sdk",
- "solana-streamer",
- "solana-version",
-]
-
-[[package]]
 name = "solana-bench-streamer"
 version = "1.13.6"
 dependencies = [
@@ -4801,12 +4739,12 @@ dependencies = [
  "crossbeam-channel",
  "log",
  "rayon",
+ "renec-cli-config",
  "renec-genesis",
  "serde_json",
  "serde_yaml",
  "serial_test",
  "solana-clap-utils",
- "renec-cli-config",
  "solana-client",
  "solana-core",
  "solana-faucet",
@@ -5247,6 +5185,7 @@ dependencies = [
  "clap 2.33.3",
  "crossbeam-channel",
  "log",
+ "renec-cli-config",
  "serde",
  "serde_derive",
  "solana-clap-utils",
@@ -5757,6 +5696,7 @@ dependencies = [
  "log",
  "matches",
  "rand 0.7.3",
+ "renec-sys-tuner",
  "solana-entry",
  "solana-ledger",
  "solana-logger 1.13.6",
@@ -5967,12 +5907,13 @@ dependencies = [
  "crossbeam-channel",
  "log",
  "rand 0.7.3",
+ "renec-genesis-utils",
+ "renec-validator",
  "serial_test",
  "solana-clap-utils",
  "solana-client",
  "solana-core",
  "solana-download-utils",
- "renec-genesis-utils",
  "solana-gossip",
  "solana-ledger",
  "solana-local-cluster",
@@ -5984,7 +5925,6 @@ dependencies = [
  "solana-sdk 1.13.6",
  "solana-send-transaction-service",
  "solana-streamer",
- "renec-validator",
  "solana-version",
  "tempfile",
  "tonic-build 0.7.0",
@@ -6276,8 +6216,8 @@ name = "solana-stake-accounts"
 version = "1.13.6"
 dependencies = [
  "clap 2.33.3",
- "solana-clap-utils",
  "renec-cli-config",
+ "solana-clap-utils",
  "solana-client",
  "solana-remote-wallet",
  "solana-runtime",
@@ -6415,9 +6355,9 @@ version = "1.13.6"
 dependencies = [
  "base64 0.13.0",
  "log",
+ "renec-cli-output",
  "serde_derive",
  "serde_json",
- "renec-cli-output",
  "solana-client",
  "solana-core",
  "solana-gossip",
@@ -6472,8 +6412,8 @@ dependencies = [
  "log",
  "rand 0.7.3",
  "rayon",
- "solana-clap-utils",
  "renec-cli",
+ "solana-clap-utils",
  "solana-client",
  "solana-core",
  "solana-faucet",
@@ -6615,6 +6555,8 @@ dependencies = [
  "clap 2.33.3",
  "humantime",
  "log",
+ "renec-cli-config",
+ "renec-cli-output",
  "solana-clap-utils",
  "solana-client",
  "solana-logger 1.13.6",

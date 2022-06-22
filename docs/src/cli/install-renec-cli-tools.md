@@ -15,25 +15,20 @@ depending on your preferred workflow:
 
 - Open your favorite Terminal application
 
-- Install the Renec release
-  [LATEST_RENEC_RELEASE_VERSION](https://github.com/remitano/renec/releases/tag/LATEST_RENEC_RELEASE_VERSION) on your
-  machine by running:
+- Install the latest Renec release machine by running:
 
 ```bash
-sh -c "$(curl -sSfL https://s3.amazonaws.com/release.renec.foundation/LATEST_RENEC_RELEASE_VERSION/install)"
+sh -c "$(curl -sSfL https://s3.amazonaws.com/release.renec.foundation/latest/install)"
 ```
-
-- You can replace `LATEST_RENEC_RELEASE_VERSION` with the release tag matching
-  the software version of your desired release.
 
 - The following output indicates a successful update:
 
 ```text
-downloading LATEST_RENEC_RELEASE_VERSION installer
+downloading v1.9.29 installer
 Configuration: /home/renec/.config/renec/install/config.yml
 Active release directory: /home/renec/.local/share/renec/install/active_release
-* Release version: LATEST_RENEC_RELEASE_VERSION
-* Release URL: https://github.com/remitano/renec/releases/download/LATEST_RENEC_RELEASE_VERSION/renec-release-x86_64-unknown-linux-gnu.tar.bz2
+* Release version: v1.9.29
+* Release URL: https://github.com/remitano/renec/releases/download/v1.9.29/renec-release-x86_64-unknown-linux-gnu.tar.bz2
 Update successful
 ```
 

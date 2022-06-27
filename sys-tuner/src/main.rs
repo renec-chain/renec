@@ -119,13 +119,13 @@ fn main() {
     info!("Tune will service requests only from user {}", user);
 
     unsafe { libc::umask(0o077) };
-    if let Err(e) = std::fs::remove_file(renec_sys_tuner::renec_sys_tuner_PATH) {
+    if let Err(e) = std::fs::remove_file(renec_sys_tuner::RENEC_SYS_TUNER_PATH) {
         if e.kind() != std::io::ErrorKind::NotFound {
             panic!("Failed to remove stale socket file: {:?}", e)
         }
     }
 
-    let listener = unix_socket::UnixListener::bind(renec_sys_tuner::renec_sys_tuner_PATH)
+    let listener = unix_socket::UnixListener::bind(renec_sys_tuner::RENEC_SYS_TUNER_PATH)
         .expect("Failed to bind to the socket file");
 
     let peer_uid;
@@ -135,7 +135,7 @@ fn main() {
         peer_uid = user.uid();
         info!("UID for solana is {}", peer_uid);
         nix::unistd::chown(
-            renec_sys_tuner::renec_sys_tuner_PATH,
+            renec_sys_tuner::RENEC_SYS_TUNER_PATH,
             Some(nix::unistd::Uid::from_raw(peer_uid)),
             None,
         )

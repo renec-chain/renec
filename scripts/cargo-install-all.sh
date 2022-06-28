@@ -92,7 +92,7 @@ else
     renec-validator
     rbpf-cli
     # solana-bench-tps
-    # solana-faucet
+    solana-faucet
     # solana-gossip
     # solana-ledger-tool
     # solana-log-analyzer

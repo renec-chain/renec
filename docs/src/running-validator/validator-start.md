@@ -29,33 +29,6 @@ renec transaction-count
 <!-- View the [metrics dashboard](https://metrics.renec.com:3000/d/monitor/cluster-telemetry) for more
 detail on cluster activity. -->
 
-## Enabling CUDA
-
-If your machine has a GPU with CUDA installed \(Linux-only currently\), include
-the `--cuda` argument to `renec-validator`.
-
-When your validator is started look for the following log message to indicate
-that CUDA is enabled: `"[<timestamp> renec::validator] CUDA is enabled"`
-
-## System Tuning
-
-### Linux
-
-#### Automatic
-
-The renec repo includes a daemon to adjust system settings to optimize performance
-(namely by increasing the OS UDP buffer and file mapping limits).
-
-The daemon (`renec-sys-tuner`) is included in the renec binary release. Restart
-it, _before_ restarting your validator, after each software upgrade to ensure that
-the latest recommended settings are applied.
-
-To run it:
-
-```bash
-sudo $(command -v renec-sys-tuner) --user $(whoami) > sys-tuner.log 2>&1 &
-```
-
 ## Generate identity
 
 Create an identity keypair for your validator by running:
@@ -72,47 +45,7 @@ renec-keygen pubkey ~/validator-keypair.json
 
 > Note: The "validator-keypair.json” file is also your \(ed25519\) private key.
 
-### Paper Wallet identity
-
-You can create a paper wallet for your identity file instead of writing the
-keypair file to disk with:
-
-```bash
-renec-keygen new --no-outfile
-```
-
-The corresponding identity public key can now be viewed by running:
-
-```bash
-renec-keygen pubkey ASK
-```
-
-and then entering your seed phrase.
-
 See [Paper Wallet Usage](../wallet-guide/paper-wallet.md) for more info.
-
----
-
-### Vanity Keypair
-
-You can generate a custom vanity keypair using renec-keygen. For instance:
-
-```bash
-renec-keygen grind --starts-with e1v1s:1
-```
-
-You may request that the generated vanity keypair be expressed as a seed phrase
-which allows recovery of the keypair from the seed phrase and an optionally
-supplied passphrase (note that this is significantly slower than grinding without
-a mnemonic):
-
-```bash
-renec-keygen grind --use-mnemonic --starts-with e1v1s:1
-```
-
-Depending on the string requested, it may take days to find a match...
-
----
 
 Your validator identity keypair uniquely identifies your validator within the
 network. **It is crucial to back-up this information.**
@@ -137,8 +70,8 @@ You should see the following output:
 
 ```text
 Config File: /home/renec/.config/renec/cli/config.yml
-RPC URL: http://api.devnet.renec.com
-WebSocket URL: ws://api.devnet.renec.com/ (computed)
+RPC URL: http://api-testnet.renec.foundation:8899
+WebSocket URL: ws://api-testnet.renec.foundation:8899/ (computed)
 Keypair Path: /home/renec/validator-keypair.json
 Commitment: confirmed
 ```
@@ -206,32 +139,23 @@ Remember to move your authorized withdrawer keypair into a very secure location 
 
 Read more about [creating and managing a vote account](vote-accounts.md).
 
-## Known validators
-
-If you know and respect other validator operators, you can specify this on the command line with the `--known-validator <PUBKEY>`
-argument to `renec-validator`. You can specify multiple ones by repeating the argument `--known-validator <PUBKEY1> --known-validator <PUBKEY2>`.
-This has two effects, one is when the validator is booting with `--only-known-rpc`, it will only ask that set of
-known nodes for downloading genesis and snapshot data. Another is that in combination with the `--halt-on-known-validators-accounts-hash-mismatch` option,
-it will monitor the merkle root hash of the entire accounts state of other known nodes on gossip and if the hashes produce any mismatch,
-the validator will halt the node to prevent the validator from voting or processing potentially incorrect state values. At the moment, the slot that
-the validator publishes the hash on is tied to the snapshot interval. For the feature to be effective, all validators in the known
-set should be set to the same snapshot interval value or multiples of the same.
-
-It is highly recommended you use these options to prevent malicious snapshot state download or
-account state divergence.
-
 ## Connect Your Validator
 
-Connect to the cluster by running:
+Connect to the cluster by running (this configuration is for testnet):
 
 ```bash
-renec-validator \
-  --identity ~/validator-keypair.json \
-  --vote-account ~/vote-account-keypair.json \
-  --rpc-port 8899 \
+~/.local/share/renec/install/active_release/bin/renec-validator \
+  --identity ~/validator-identity.json \
+  --vote-account ~/validator-vote-account.json \
+  --rpc-faucet-address 54.208.172.26:9900 \
+  --enable-rpc-transaction-history \
+  --enable-cpi-and-log-storage \
+  --require-tower \
+  --dynamic-port-range 8000-8020 \
   --entrypoint 54.208.172.26:8001 \
-  --limit-ledger-size \
-  --log ~/renec-validator.log
+  --expected-genesis-hash 2ipyhz9E19koN6Ejh1ERRgQS3wqD6ZV1FFk4pnXBbCrx \
+  --full-rpc-api \
+  --log -
 ```
 
 To force validator logging to the console add a `--log -` argument, otherwise
@@ -282,45 +206,83 @@ here](https://github.com/renec-labs/renec/blob/583cec922b6107e0f85c7e14cb5e642bc
 Running the validator as a systemd unit is one easy way to manage running in the
 background.
 
-Assuming you have a user called `renec` on your machine, create the file `/etc/systemd/system/renec.service` with
+Assuming you have a user called `renec` on your machine (remember replace all `/home/renec` to `/home/{your_os_user}`), create the file `/etc/systemd/system/renec.service` with
 the following:
 
 ```
 [Unit]
-Description=Renec Validator
+Description=RENEC Daemon
 After=network.target
-Wants=renec-sys-tuner.service
-StartLimitIntervalSec=0
 
 [Service]
-Type=simple
-Restart=always
-RestartSec=1
 User=renec
-LimitNOFILE=1000000
-LogRateLimitIntervalSec=0
-Environment="PATH=/bin:/usr/bin:/home/renec/.local/share/renec/install/active_release/bin"
-ExecStart=/home/renec/bin/validator.sh
+Group=renec
+Environment=SOLANA_METRICS_CONFIG=host=http://metrics.renec.foundation:8086,db=testnet,u=write,p=39018931781680558
+Environment=RUST_LOG=info
+ExecStart=/home/renec/.local/share/renec/install/active_release/bin/renec-validator   --identity /home/renec/validator-identity.json   --vote-account /home/renec/validator-vote-account.json   --known-validator FwhcMdpwaeKPaHEn42q2UkeiFrSuMBWHWbimD4aFRF54 --only-known-rpc   --rpc-faucet-address 54.208.172.26:9900 --enable-rpc-transaction-history   --enable-cpi-and-log-storage   --require-tower   --dynamic-port-range 8000-8020   --entrypoint 54.208.172.26:8001   --expected-genesis-hash 2ipyhz9E19koN6Ejh1ERRgQS3wqD6ZV1FFk4pnXBbCrx --full-rpc-api
+StandardOutput=append:/home/renec/renec-validator.log
+StandardError=append:/home/renec/renec-validator-error.log
+Restart=on-failure
+
+# Specifies which signal to use when killing a service. Defaults to SIGTERM.
+KillMode=process
+KillSignal=SIGINT
+TimeoutStopSec=300
+RestartSec=10s
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target
 ```
-
-Now create `/home/renec/bin/validator.sh` to include the desired
-`renec-validator` command-line. Ensure that the 'exec' command is used to
-start the validator process (i.e. "exec renec-validator ...").  This is
-important because without it, logrotate will end up killing the validator
-every time the logs are rotated.
-
-Ensure that running `/home/renec/bin/validator.sh` manually starts
-the validator as expected. Don't forget to mark it executable with `chmod +x /home/renec/bin/validator.sh`
 
 Start the service with:
 
 ```bash
-$ sudo systemctl enable --now renec
+$ sudo systemctl enable renec.service
+$ sudo systemctl start renec.service
 ```
 
+# Advance configurations
+
+## Enabling CUDA
+
+If your machine has a GPU with CUDA installed \(Linux-only currently\), include
+the `--cuda` argument to `renec-validator`.
+
+When your validator is started look for the following log message to indicate
+that CUDA is enabled: `"[<timestamp> renec::validator] CUDA is enabled"`
+
+## System Tuning
+
+### Linux
+
+#### Automatic
+
+The renec repo includes a daemon to adjust system settings to optimize performance
+(namely by increasing the OS UDP buffer and file mapping limits).
+
+The daemon (`renec-sys-tuner`) is included in the renec binary release. Restart
+it, _before_ restarting your validator, after each software upgrade to ensure that
+the latest recommended settings are applied.
+
+To run it:
+
+```bash
+sudo $(command -v renec-sys-tuner) --user $(whoami) > sys-tuner.log 2>&1 &
+```
+
+## Known validators
+
+If you know and respect other validator operators, you can specify this on the command line with the `--known-validator <PUBKEY>`
+argument to `renec-validator`. You can specify multiple ones by repeating the argument `--known-validator <PUBKEY1> --known-validator <PUBKEY2>`.
+This has two effects, one is when the validator is booting with `--only-known-rpc`, it will only ask that set of
+known nodes for downloading genesis and snapshot data. Another is that in combination with the `--halt-on-known-validators-accounts-hash-mismatch` option,
+it will monitor the merkle root hash of the entire accounts state of other known nodes on gossip and if the hashes produce any mismatch,
+the validator will halt the node to prevent the validator from voting or processing potentially incorrect state values. At the moment, the slot that
+the validator publishes the hash on is tied to the snapshot interval. For the feature to be effective, all validators in the known
+set should be set to the same snapshot interval value or multiples of the same.
+
+It is highly recommended you use these options to prevent malicious snapshot state download or
+account state divergence.
 ### Logging
 
 #### Log output tuning
@@ -335,7 +297,7 @@ to be reverted and the issue reproduced before help can be provided.
 
 #### Log rotation
 
-The validator log file, as specified by `--log ~/renec-validator.log`, can get
+The validator log file, as specified by `--log /home/renec/renec-validator.log`, can get
 very large over time and it's recommended that log rotation be configured.
 
 The validator will re-open its when it receives the `USR1` signal, which is the

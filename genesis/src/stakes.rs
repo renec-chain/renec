@@ -111,6 +111,9 @@ pub fn create_and_add_stakes(
 
     for unlock in unlocks {
         let lamports = unlock.amount(stakes_lamports);
+        if lamports <= 0 {
+            break;
+        }
 
         let (granularity, remainder) = if granularity < lamports {
             (granularity, lamports % granularity)

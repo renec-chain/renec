@@ -49,7 +49,6 @@ export default function LoginPage() {
   const [newWallet, setNewWallet] = useState(false);
   const [hasLockedMnemonicAndSeed, loading] = useHasLockedMnemonicAndSeed();
   const classes = useStyles();
-
   if (loading) {
     return null;
   }

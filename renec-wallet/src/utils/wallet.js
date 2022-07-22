@@ -14,6 +14,8 @@ import {
   getOwnedTokenAccounts,
   nativeTransfer,
   transferTokens,
+  delegateStake,
+  undelegateStake,
 } from './tokens';
 import { TOKEN_PROGRAM_ID } from './tokens/instructions';
 import {
@@ -78,6 +80,53 @@ export class Wallet {
       newAccount: new Account(),
     });
   };
+
+  delegateStake = async (votePubkey, stakeAmount) => {
+    let stakeAccount = new Account();
+    return await delegateStake({
+      connection: this.connection,
+      payer: this,
+      stakeAccount,
+      stakeAmount,
+      votePubkey,
+    });
+  }
+
+  undelegateStake = async (pubkey) => {
+    let stakePubkey = new PublicKey(pubkey);
+    return await undelegateStake({
+      connection: this.connection,
+      stakePubkey: stakePubkey,
+      withdrawer: this,
+    });
+  }
+
+  listStakes = async () => {
+    return await this.connection.getProgramAccounts(
+      new PublicKey("Stake11111111111111111111111111111111111111"),
+      {
+        commitment: "confirmed",
+        filters: [
+          {
+            memcmp: {
+              offset: 12,
+              bytes: this.publicKey.toBase58(),
+            }
+          }
+        ]
+      }
+    )
+  }
+
+  getVoteAccounts = async () => {
+    let voteAccounts = await this.connection.getVoteAccounts();
+    return voteAccounts.current;
+  }
+
+  getStakeActivation = async (stakePubkeys) => {
+    let stakeInfo = await this.connection.getStakeActivation(stakePubkeys);
+    return stakeInfo;
+  }
 
   createAssociatedTokenAccount = async (splTokenMintAddress) => {
     return await createAssociatedTokenAccount({
@@ -387,6 +436,23 @@ export function useWalletPublicKeys() {
       oldKeys.every((key, i) => key.equals(newKeys[i])),
   );
   return [publicKeys, loaded];
+}
+
+export function useWalletStakePublicKeys() {
+  let wallet = useWallet();
+  let [stakeAccountInfo, loaded] = useAsyncData(wallet.listStakes, wallet.listStakes);
+  let publicKeys = stakeAccountInfo ? stakeAccountInfo.map(({ pubkey }) => pubkey) : [];
+  return [publicKeys, loaded]
+}
+
+export function useWalletVoteAccounts() {
+  let wallet = useWallet();
+  return useAsyncData(wallet.getVoteAccounts, wallet.getVoteAccounts);
+}
+
+export function useWalletStakeActivation(stakePubkeys) {
+  let wallet = useWallet();
+  return useAsyncData(() => wallet.getStakeActivation(stakePubkeys), () => wallet.getStakeActivation(stakePubkeys));
 }
 
 export function useWalletTokenAccounts() {

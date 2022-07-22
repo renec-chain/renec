@@ -4,6 +4,9 @@ import {
   Transaction,
   TransactionInstruction,
   SYSVAR_RENT_PUBKEY,
+  StakeProgram,
+  Lockup,
+  Authorized,
 } from '@solana/web3.js';
 import { TokenInstructions } from '@project-serum/serum';
 import {
@@ -166,6 +169,61 @@ export async function createAndInitializeTokenAccount({
 
   let signers = [newAccount];
   return await signAndSendTransaction(connection, transaction, payer, signers);
+}
+
+export async function delegateStake({
+  connection,
+  payer,
+  stakeAccount,
+  stakeAmount,
+  votePubkey,
+}) {
+  let votePublicKey = new PublicKey(votePubkey);
+  let lamports = (await connection.getMinimumBalanceForRentExemption(StakeProgram.space)) + stakeAmount;
+  let transaction = new Transaction();
+  transaction.add(
+    StakeProgram.createAccount({
+      fromPubkey: payer.publicKey,
+      authorized: new Authorized(payer.publicKey, payer.publicKey),
+      lamports: lamports,
+      lockup: new Lockup(0, 0, payer.publicKey),
+      stakePubkey: stakeAccount.publicKey
+    }),
+    StakeProgram.delegate({
+      connection,
+      stakePubkey: stakeAccount.publicKey,
+      authorizedPubkey: payer.publicKey,
+      votePubkey: votePublicKey,
+    }),
+  );
+
+  let signers = [stakeAccount];
+  return await signAndSendTransaction(connection, transaction, payer, signers);
+}
+
+export async function undelegateStake({
+  connection,
+  stakePubkey,
+  withdrawer,
+}) {
+  let stakeBalance = await connection.getBalance(stakePubkey);
+  let transaction = new Transaction();
+  
+  transaction.add(
+    StakeProgram.deactivate({
+      stakePubkey: stakePubkey,
+      authorizedPubkey: withdrawer.publicKey,
+    }),
+    StakeProgram.withdraw({
+      stakePubkey: stakePubkey,
+      authorizedPubkey: withdrawer.publicKey,
+      toPubkey: withdrawer.publicKey,
+      lamports: stakeBalance,
+    }),
+  );
+
+  let signers = [];
+  return await signAndSendTransaction(connection, transaction, withdrawer, signers);
 }
 
 export async function createAssociatedTokenAccount({

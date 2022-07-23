@@ -25,6 +25,7 @@ import LoginPage from './pages/LoginPage';
 import ConnectionsPage from './pages/ConnectionsPage';
 import { isExtension } from './utils/utils';
 import { PageProvider, usePage } from './utils/page';
+import StakingPage from './pages/StakingPage';
 
 export default function App() {
   // TODO: add toggle for dark mode
@@ -70,11 +71,13 @@ export default function App() {
         <CssBaseline />
 
         <ConnectionProvider>
-          <TokenRegistryProvider>
-            <SnackbarProvider maxSnack={5} autoHideDuration={8000}>
-              <WalletProvider>{appElement}</WalletProvider>
-            </SnackbarProvider>
-          </TokenRegistryProvider>
+          <PageProvider>
+            <TokenRegistryProvider>
+              <SnackbarProvider maxSnack={5} autoHideDuration={8000}>
+                <WalletProvider>{appElement}</WalletProvider>
+              </SnackbarProvider>
+            </TokenRegistryProvider>
+          </PageProvider>
         </ConnectionProvider>
       </ThemeProvider>
     </Suspense>
@@ -97,7 +100,12 @@ function PageContents() {
   if (window.opener) {
     return <PopupPage opener={window.opener} />;
   }
+  console.log(page)
   if (page === 'wallet') {
+    return <WalletPage />;
+  } else if (page === 'staking') {
+    return <StakingPage />;
+  } if (page === 'wallet') {
     return <WalletPage />;
   } else if (page === 'connections') {
     return <ConnectionsPage />;

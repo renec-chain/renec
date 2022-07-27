@@ -100,7 +100,6 @@ function PageContents() {
   if (window.opener) {
     return <PopupPage opener={window.opener} />;
   }
-  console.log(page)
   if (page === 'wallet') {
     return <WalletPage />;
   } else if (page === 'staking') {

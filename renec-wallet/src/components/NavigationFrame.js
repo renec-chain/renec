@@ -51,10 +51,10 @@ import { COLORS_PALETTE } from './base/variables';
 
 const useStyles = makeStyles((theme) => ({
   header: {
-    backgroundColor: "#27133A",
+    backgroundColor: '#27133A',
     height: 200,
     minHeight: 200,
-    color: "white",
+    color: 'white',
   },
   content: {
     flexGrow: 1,
@@ -86,9 +86,7 @@ export default function NavigationFrame({ children }) {
   const classes = useStyles();
   const isExtensionWidth = useIsExtensionWidth();
   const [page, setPage] = usePage();
-  const {
-    accounts,
-  } = useWalletSelector();
+  const { accounts } = useWalletSelector();
   const [isCopied, setIsCopied] = useState(false);
   const selectedAccount = accounts.find((a) => a.isSelected);
   const { enqueueSnackbar } = useSnackbar();
@@ -100,20 +98,22 @@ export default function NavigationFrame({ children }) {
     });
   };
   const handleChange = (event, newValue) => {
-    console.log(page, setPage)
     setPage(newValue);
   };
   return (
     <>
       <AppBar position="static" color="primary">
         <Container>
-          <Toolbar style={{ display: "flex", justifyContent: "space-between" }}  >
+          <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
             <img src={logo} alt="Remitano logo" />
-            <Tabs value={page} onChange={handleChange} textColor={COLORS_PALETTE.white}
-              indicatorColor="transparent" >
+            <Tabs
+              value={page}
+              onChange={handleChange}
+              textColor={COLORS_PALETTE.white}
+              indicatorColor="transparent"
+            >
               <Tab label="Wallet" value="wallet" />
               <Tab label="Staking" value="staking" />
-              <Tab label="About" value="about" />
             </Tabs>
 
             <NavigationButtons />
@@ -125,7 +125,9 @@ export default function NavigationFrame({ children }) {
         <div className={classes.header}>
           <Container fixed maxWidth="md">
             <div className="bold text-32 mt-48">Main account</div>
-            {isExtensionWidth ? shortenAddress(selectedAccount.address.toBase58()) : selectedAccount.address.toBase58()}
+            {isExtensionWidth
+              ? shortenAddress(selectedAccount.address.toBase58())
+              : selectedAccount.address.toBase58()}
             <span
               className="pointer color-primary ml-8"
               onClick={onCopyAddress}
@@ -160,7 +162,6 @@ function NavigationButtons() {
   } else if (page === 'staking') {
     elements = [<NetworkSelector />];
   }
-
 
   if (isExtension && isExtensionWidth) {
     elements.push(<ExpandButton />);
@@ -485,12 +486,12 @@ const useFooterStyles = makeStyles((theme) => ({
     justifyContent: 'flex-end',
     height: 56,
     minHeight: 56,
-    background: "#210C34",
-    alignItems: "center",
+    background: '#210C34',
+    alignItems: 'center',
   },
   text: {
-    color: "white",
-  }
+    color: 'white',
+  },
 }));
 
 function Footer() {
@@ -500,11 +501,7 @@ function Footer() {
       <Container>
         <div className={classes.text}>
           <span>© 2022 </span>
-          <Link
-            href="https://remitano.com"
-            target="_blank"
-            rel="noopener"
-          >
+          <Link href="https://remitano.com" target="_blank" rel="noopener">
             <span className="color-primary">Remitano</span>
           </Link>
           <span>. All rights reserved.</span>

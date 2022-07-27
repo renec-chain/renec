@@ -1,37 +1,37 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import {
   useBalanceInfo,
   useWalletPublicKeys,
+  useWalletVoteAccounts,
 } from '../utils/wallet';
 import LoadingIndicator from './LoadingIndicator';
 import { Button } from '@material-ui/core';
-import { abbreviateAddress } from '../utils/utils';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import TokenIcon from './TokenIcon';
 import Card from '@material-ui/core/Card';
+import CreateStakingDialog from './CreateStakingDialog';
 
 
 export default function StakingList() {
-  const [publicKeys, loaded] = useWalletPublicKeys();
+  const [voteAccounts, loaded] = useWalletVoteAccounts();
   const StakingListItemsMemo = useMemo(() => {
-    return publicKeys.map((pk) => {
+    return (voteAccounts || []).map((vote, index) => {
       return React.memo((props) => {
         return (
           <StakingListItem
-            key={pk.toString()}
-            publicKey={pk}
+            key={vote.votePubkey.toString() || index.toString()}
+            voteAccount={vote}
           />
         );
       });
     });
-  }, [publicKeys]);
+  }, [voteAccounts]);
 
   return (
     <div>
 
-      <div className="bold text-20 mt-30 mb-16">Validators stakting list</div>
+      <div className="bold text-20 mt-30 mb-16">Validators staking list</div>
       <List disablePadding>
         {StakingListItemsMemo.map((Memoized) => (
           <Memoized />
@@ -43,48 +43,42 @@ export default function StakingList() {
   );
 }
 
-export function StakingListItem({ publicKey }) {
-  const balanceInfo = useBalanceInfo(publicKey);
-
+export function StakingListItem({ voteAccount }) {
+  const { votePubkey, nodePubkey } = voteAccount
+  const [publicKeys] = useWalletPublicKeys();
+  const mainPubkey = publicKeys[0];
+  const balanceInfo = useBalanceInfo(mainPubkey);
   const colappsedAddress = useMemo(() => {
-    const mockAddress = "5t1wercpG3jqFWbo9PnP33UwgQJpSTkcbbfgCb1995tW"
-    return `${mockAddress.substring(0, 4)}....${mockAddress.substring(mockAddress.length - 8, mockAddress.length - 1)}`
+    return `${votePubkey.substring(0, 4)}....${votePubkey.substring(votePubkey.length - 8, votePubkey.length - 1)}`
   }, [])
-
+  const [openStaking, setOpenStaking] = useState(false)
+  if (!voteAccount) {
+    return <LoadingIndicator delay={0} />;
+  }
   if (!balanceInfo) {
     return <LoadingIndicator delay={0} />;
   }
-
-  let {
-    mint,
-    tokenName,
-    tokenSymbol,
-    tokenLogoUri,
-  } = balanceInfo;
-  tokenName = tokenName ?? abbreviateAddress(mint);
-
-
   return (
     <Card className="mb-8">
       <ListItem style={{ padding: 16 }}>
         <ListItemIcon>
-          <TokenIcon
-            mint={mint}
-            tokenName={tokenName}
-            url={tokenLogoUri}
-            size={28}
-          />
         </ListItemIcon>
         <div className="flex space-between full-width">
           <div>
-            <div>{tokenName ?? tokenSymbol}</div>
+            <div>{`NodePubKey:  ${nodePubkey.substring(0, 6)}... ${nodePubkey.substring(nodePubkey.length - 6, nodePubkey.length - 1)}` || ''}</div>
             <div>{colappsedAddress}</div>
           </div>
           <div className="mr-24">
-            <Button variant="outlined">Stake</Button>
+            <Button onClick={() => setOpenStaking(true)} variant="outlined">Stake</Button>
           </div>
         </div>
       </ListItem>
+      <CreateStakingDialog
+        open={openStaking}
+        onClose={() => setOpenStaking(false)}
+        votePubkey={votePubkey}
+        balanceInfo={balanceInfo}
+      />
     </Card>
   );
 }

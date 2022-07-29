@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useContext } from 'react';
 import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
@@ -38,7 +38,7 @@ import {
   useIsExtensionWidth,
 } from '../utils/utils';
 import ConnectionIcon from './ConnectionIcon';
-import { Badge } from '@material-ui/core';
+import { Badge, Tab, Tabs } from '@material-ui/core';
 import { useConnectedWallets } from '../utils/connected-wallets';
 import { usePage } from '../utils/page';
 import { shortenAddress } from '../utils/utils';
@@ -47,13 +47,14 @@ import Link from '@material-ui/core/Link';
 import AddCustomClusterDialog from './AddCustomClusterDialog';
 import logo from '../img/logo.svg';
 import { useSnackbar } from 'notistack';
+import { COLORS_PALETTE } from './base/variables';
 
 const useStyles = makeStyles((theme) => ({
   header: {
-    backgroundColor: "#27133A",
+    backgroundColor: '#27133A',
     height: 200,
     minHeight: 200,
-    color: "white", 
+    color: 'white',
   },
   content: {
     flexGrow: 1,
@@ -84,9 +85,8 @@ const useStyles = makeStyles((theme) => ({
 export default function NavigationFrame({ children }) {
   const classes = useStyles();
   const isExtensionWidth = useIsExtensionWidth();
-  const {
-    accounts,
-  } = useWalletSelector();
+  const [page, setPage] = usePage();
+  const { accounts } = useWalletSelector();
   const [isCopied, setIsCopied] = useState(false);
   const selectedAccount = accounts.find((a) => a.isSelected);
   const { enqueueSnackbar } = useSnackbar();
@@ -97,23 +97,37 @@ export default function NavigationFrame({ children }) {
       autoHideDuration: 2500,
     });
   };
+  const handleChange = (event, newValue) => {
+    setPage(newValue);
+  };
   return (
     <>
       <AppBar position="static" color="primary">
-      <Container>
-        <Toolbar>
+        <Container>
+          <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
             <img src={logo} alt="Remitano logo" />
-            <Typography variant="h6" className={classes.title} component="h1">
-            </Typography>
+            <Tabs
+              value={page}
+              onChange={handleChange}
+              textColor={COLORS_PALETTE.white}
+              indicatorColor="transparent"
+            >
+              <Tab label="Wallet" value="wallet" />
+              <Tab label="Staking" value="staking" />
+            </Tabs>
+
             <NavigationButtons />
-        </Toolbar>
+          </Toolbar>
         </Container>
       </AppBar>
+
       {selectedAccount && (
         <div className={classes.header}>
           <Container fixed maxWidth="md">
             <div className="bold text-32 mt-48">Main account</div>
-            {isExtensionWidth ? shortenAddress(selectedAccount.address.toBase58()) : selectedAccount.address.toBase58()}
+            {isExtensionWidth
+              ? shortenAddress(selectedAccount.address.toBase58())
+              : selectedAccount.address.toBase58()}
             <span
               className="pointer color-primary ml-8"
               onClick={onCopyAddress}
@@ -132,7 +146,6 @@ export default function NavigationFrame({ children }) {
 function NavigationButtons() {
   const isExtensionWidth = useIsExtensionWidth();
   const [page] = usePage();
-
   if (isExtensionPopup) {
     return null;
   }
@@ -146,13 +159,15 @@ function NavigationButtons() {
     ];
   } else if (page === 'connections') {
     elements = [<WalletButton />];
+  } else if (page === 'staking') {
+    elements = [<NetworkSelector />];
   }
 
   if (isExtension && isExtensionWidth) {
     elements.push(<ExpandButton />);
   }
 
-  return elements;
+  return <div>{elements}</div>;
 }
 
 function ExpandButton() {
@@ -471,12 +486,12 @@ const useFooterStyles = makeStyles((theme) => ({
     justifyContent: 'flex-end',
     height: 56,
     minHeight: 56,
-    background: "#210C34",
-    alignItems: "center",
+    background: '#210C34',
+    alignItems: 'center',
   },
   text: {
-    color: "white",
-  }
+    color: 'white',
+  },
 }));
 
 function Footer() {
@@ -486,11 +501,7 @@ function Footer() {
       <Container>
         <div className={classes.text}>
           <span>© 2022 </span>
-          <Link
-            href="https://remitano.com"
-            target="_blank"
-            rel="noopener"
-          >
+          <Link href="https://remitano.com" target="_blank" rel="noopener">
             <span className="color-primary">Remitano</span>
           </Link>
           <span>. All rights reserved.</span>

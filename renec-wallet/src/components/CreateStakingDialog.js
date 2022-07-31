@@ -3,10 +3,9 @@ import Button from '@material-ui/core/Button';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogForm from './DialogForm';
-import { IconButton, InputAdornment, Typography } from '@material-ui/core';
+import { InputAdornment, Typography } from '@material-ui/core';
 import { useWallet } from '../utils/wallet';
 import { Icon, TextInput } from '../components/base';
-import { useSnackbar } from 'notistack';
 import { useSendTransaction } from '../utils/notifications';
 
 export default function CreateStakingDialog({
@@ -111,7 +110,8 @@ export default function CreateStakingDialog({
           variant="contained"
           disabled={
             Number(amount) <= 0 ||
-            Number(amount) > Number(balanceAmountToUserAmount(balanceAmount, decimals)) ||
+            Number(amount) >
+              Number(balanceAmountToUserAmount(balanceAmount, decimals)) ||
             loading
           }
         >

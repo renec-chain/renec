@@ -124,7 +124,7 @@ export class Wallet {
   }
 
   getStakeActivation = async (stakePubkeys) => {
-    let stakeInfo = await this.connection.getStakeActivation(stakePubkeys);
+    const stakeInfo = await this.connection.getStakeActivation(stakePubkeys);
     return stakeInfo;
   }
 

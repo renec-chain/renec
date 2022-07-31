@@ -58,12 +58,6 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
-    paddingBottom: theme.spacing(3),
-    [theme.breakpoints.up(theme.ext)]: {
-      paddingTop: theme.spacing(3),
-      paddingLeft: theme.spacing(1),
-      paddingRight: theme.spacing(1),
-    },
   },
   title: {
     flexGrow: 1,
@@ -121,7 +115,7 @@ export default function NavigationFrame({ children }) {
         </Container>
       </AppBar>
 
-      {selectedAccount && (
+      {(selectedAccount && page === 'wallet') && (
         <div className={classes.header}>
           <Container fixed maxWidth="md">
             <div className="bold text-32 mt-48">Main account</div>

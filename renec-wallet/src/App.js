@@ -26,6 +26,7 @@ import ConnectionsPage from './pages/ConnectionsPage';
 import { isExtension } from './utils/utils';
 import { PageProvider, usePage } from './utils/page';
 import StakingPage from './pages/StakingPage';
+import MyStaking from './pages/MyStaking';
 
 export default function App() {
   // TODO: add toggle for dark mode
@@ -104,7 +105,10 @@ function PageContents() {
     return <WalletPage />;
   } else if (page === 'staking') {
     return <StakingPage />;
-  } if (page === 'wallet') {
+  } else if (page === 'mystaking') {
+    return <MyStaking />;
+  }
+  if (page === 'wallet') {
     return <WalletPage />;
   } else if (page === 'connections') {
     return <ConnectionsPage />;

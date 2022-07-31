@@ -113,6 +113,14 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     backgroundColor: '#F3F3F5',
   },
+  container: {
+    paddingBottom: theme.spacing(3),
+    [theme.breakpoints.up(theme.ext)]: {
+      paddingTop: theme.spacing(3),
+      paddingLeft: theme.spacing(1),
+      paddingRight: theme.spacing(1),
+    },
+  },
   buttonContainer: {
     display: 'flex',
     marginTop: theme.spacing(2),
@@ -224,7 +232,7 @@ export default function BalancesList() {
   }
 
   return (
-    <div>
+    <div className={classes.container} >
       <div className={classes.mainWallet}>
         <div>
           <div className="mb-8">

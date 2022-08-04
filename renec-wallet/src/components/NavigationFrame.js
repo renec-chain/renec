@@ -2,7 +2,7 @@ import React, { useState, useMemo, useContext } from 'react';
 import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useConnectionConfig } from '../utils/connection';
 import {
   clusterForEndpoint,
@@ -24,7 +24,8 @@ import Divider from '@material-ui/core/Divider';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
 import SolanaIcon from './SolanaIcon';
-import CodeIcon from '@material-ui/icons/Code';
+import LightIcon from '@material-ui/icons/WbSunny';
+import DarkIcon from '@material-ui/icons/NightsStayOutlined';
 import Tooltip from '@material-ui/core/Tooltip';
 import Container from '@material-ui/core/Container';
 import ImportExportIcon from '@material-ui/icons/ImportExport';
@@ -38,7 +39,7 @@ import {
   useIsExtensionWidth,
 } from '../utils/utils';
 import ConnectionIcon from './ConnectionIcon';
-import { Badge, Tab, Tabs } from '@material-ui/core';
+import { Badge, Switch, Tab, Tabs } from '@material-ui/core';
 import { useConnectedWallets } from '../utils/connected-wallets';
 import { usePage } from '../utils/page';
 import { shortenAddress } from '../utils/utils';
@@ -48,10 +49,11 @@ import AddCustomClusterDialog from './AddCustomClusterDialog';
 import logo from '../img/logo.svg';
 import { useSnackbar } from 'notistack';
 import { COLORS_PALETTE } from './base/variables';
+import { ColorModeContext } from '../App';
 
 const useStyles = makeStyles((theme) => ({
   header: {
-    backgroundColor: '#27133A',
+    backgroundColor: theme.palette.banner.default,
     height: 200,
     minHeight: 200,
     color: 'white',
@@ -73,6 +75,29 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.main,
     height: 16,
     width: 16,
+  },
+  switch_track: {
+    backgroundColor: theme.palette.primary,
+  },
+  switch_base: {
+    color: theme.palette.primary,
+    '&.Mui-disabled': {
+      color: '#e886a9',
+    },
+    '&.Mui-checked': {
+      color: '#fff',
+    },
+    '&.Mui-checked + .MuiSwitch-track': {
+      backgroundColor: theme.palette.banner_info.main,
+    },
+  },
+  switch_primary: {
+    '&.Mui-checked': {
+      color: theme.palette.primary,
+    },
+    '&.Mui-checked + .MuiSwitch-track': {
+      backgroundColor: theme.palette.primary,
+    },
   },
 }));
 
@@ -115,7 +140,7 @@ export default function NavigationFrame({ children }) {
         </Container>
       </AppBar>
 
-      {(selectedAccount && page === 'wallet') && (
+      {selectedAccount && page === 'wallet' && (
         <div className={classes.header}>
           <Container fixed maxWidth="md">
             <div className="bold text-32 mt-48">Main account</div>
@@ -138,23 +163,37 @@ export default function NavigationFrame({ children }) {
 }
 
 function NavigationButtons() {
+  const classes = useStyles();
+  const theme = useTheme();
+  const colorMode = React.useContext(ColorModeContext);
   const isExtensionWidth = useIsExtensionWidth();
   const [page] = usePage();
   if (isExtensionPopup) {
     return null;
   }
-
-  let elements = [];
+  let elements = [
+    <Switch
+      onClick={colorMode.toggleColorMode}
+      classes={{
+        track: classes.switch_track,
+        switchBase: classes.switch_base,
+        colorPrimary: classes.switch_primary,
+      }}
+      icon={<LightIcon />}
+      checkedIcon={<DarkIcon />}
+      checked={theme.palette.mode === 'dark'}
+    />,
+  ];
   if (page === 'wallet') {
-    elements = [
+    elements = elements.concat([
       isExtension && <ConnectionsButton />,
       <WalletSelector />,
       <NetworkSelector />,
-    ];
+    ]);
   } else if (page === 'connections') {
-    elements = [<WalletButton />];
-  } else if (page === 'staking') {
-    elements = [<NetworkSelector />];
+    elements.push(<WalletButton />);
+  } else if (page === 'staking' || page === 'mystaking') {
+    elements.push(<NetworkSelector />);
   }
 
   if (isExtension && isExtensionWidth) {
@@ -480,11 +519,11 @@ const useFooterStyles = makeStyles((theme) => ({
     justifyContent: 'flex-end',
     height: 56,
     minHeight: 56,
-    background: '#210C34',
+    background: theme.palette.primary,
     alignItems: 'center',
   },
   text: {
-    color: 'white',
+    color: theme.palette.text.main,
   },
 }));
 

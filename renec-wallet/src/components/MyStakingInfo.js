@@ -19,10 +19,10 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   header: {
-    backgroundColor: '#27133A',
+    backgroundColor: theme.palette.banner.default,
     color: 'white',
     paddingTop: 24,
-    paddingBottom: 34
+    paddingBottom: 34,
   },
   box: {
     display: 'flex',
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     padding: '8px 16px',
     borderRadius: '4px',
     marginTop: 24,
-    backgroundColor: '#3F2D4F',
+    backgroundColor: theme.palette.banner.box,
     marginRight: 24,
   },
 }));

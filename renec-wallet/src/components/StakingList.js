@@ -13,8 +13,10 @@ import Card from '@material-ui/core/Card';
 import CreateStakingDialog from './CreateStakingDialog';
 import { usePage } from '../utils/page';
 import { useSendTransaction } from '../utils/notifications';
+import { useStyles } from './BalancesList';
 
 export default function StakingList() {
+  const classes = useStyles();
   const [voteAccounts, loaded] = useWalletVoteAccounts();
   const [page, setPage] = usePage();
 
@@ -34,7 +36,7 @@ export default function StakingList() {
   return (
     <div>
       <div className="flex space-between align-center mt-30 mb-16">
-        <div className="bold text-20">Validators staking list</div>
+        <div className={classes.stakingHeader}>Validators staking list</div>
         <Button
           style={{
             padding: '12px 24px',
@@ -59,6 +61,7 @@ export default function StakingList() {
 }
 
 export function StakingListItem({ voteAccount }) {
+  const classes = useStyles();
   const { votePubkey, nodePubkey } = voteAccount;
   const [publicKeys] = useWalletPublicKeys();
   const mainPubkey = publicKeys[0];
@@ -77,12 +80,12 @@ export function StakingListItem({ voteAccount }) {
     return <LoadingIndicator delay={0} />;
   }
   return (
-    <Card className="mb-8">
+    <Card className={classes.item}>
       <ListItem style={{ padding: 16 }}>
         <ListItemIcon></ListItemIcon>
         <div className="flex space-between full-width">
           <div>
-            <div>
+            <div className={classes.text}>
               {`NodePubKey:  ${nodePubkey.substring(
                 0,
                 6,
@@ -91,10 +94,14 @@ export function StakingListItem({ voteAccount }) {
                 nodePubkey.length - 1,
               )}` || ''}
             </div>
-            <div>{colappsedAddress}</div>
+            <div className={classes.normalText}>{colappsedAddress}</div>
           </div>
           <div className="mr-24">
-            <Button onClick={() => setOpenStaking(true)} variant="outlined">
+            <Button
+              onClick={() => setOpenStaking(true)}
+              variant="outlined"
+              className={classes.text}
+            >
               Stake
             </Button>
           </div>

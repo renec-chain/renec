@@ -28,22 +28,58 @@ import { PageProvider, usePage } from './utils/page';
 import StakingPage from './pages/StakingPage';
 import MyStaking from './pages/MyStaking';
 
-export default function App() {
-  // TODO: add toggle for dark mode
-  const prefersLightMode = useMediaQuery('(prefers-color-scheme: light)');
-  const theme = React.useMemo(
-    () =>
-      createMuiTheme({
-        palette: {
-          type: 'light',
+const getDesignTokens = (mode) => ({
+  palette: {
+    mode,
+    ...(mode === 'light'
+      ? {
+          // palette values for light mode
           primary: { main: '#210C34' },
-          background: { default: '#FBFBFC' },
-        },
-        // TODO consolidate popup dimensions
-        ext: '450',
-      }),
-    [prefersLightMode],
+          background: { default: '#FBFBFC', secondary: '#F3F3F5' },
+          banner: { default: '#27133A', box: '#3F2D4F' },
+          text: { main: '#000' },
+          banner_info: { main: '#3F2D4F' },
+          my_staking_text: { main: '#000' },
+          item_list: '#FFF',
+        }
+      : {
+          // palette values for dark mode
+          primary: { main: '#1A1B23' },
+          background: { default: '#1A1B23', secondary: '#F3F3F5' },
+          banner: { default: '#12131A', box: '#323240' },
+          text: { main: '#fff' },
+          banner_info: { main: '#39394F' },
+          item_list: '#2A2A36',
+          my_staking_text: { main: '#DDD9E9' },
+        }),
+  },
+});
+export const ColorModeContext = React.createContext({
+  toggleColorMode: () => {},
+});
+
+export default function App() {
+  const [mode, setMode] = React.useState(() => {
+    const currentMode = localStorage.getItem('mode');
+    return currentMode || 'light';
+  });
+  const colorMode = React.useMemo(
+    () => ({
+      toggleColorMode: () => {
+        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+        const currentMode = localStorage.getItem('mode');
+        localStorage.setItem(
+          'mode',
+          currentMode ? (currentMode === 'light' ? 'dark' : 'light') : 'light',
+        );
+      },
+    }),
+    [],
   );
+
+  const theme = React.useMemo(() => createMuiTheme(getDesignTokens(mode)), [
+    mode,
+  ]);
 
   // Disallow rendering inside an iframe to prevent clickjacking.
   if (window.self !== window.top) {
@@ -68,19 +104,20 @@ export default function App() {
 
   return (
     <Suspense fallback={<LoadingIndicator />}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-
-        <ConnectionProvider>
-          <PageProvider>
-            <TokenRegistryProvider>
-              <SnackbarProvider maxSnack={5} autoHideDuration={8000}>
-                <WalletProvider>{appElement}</WalletProvider>
-              </SnackbarProvider>
-            </TokenRegistryProvider>
-          </PageProvider>
-        </ConnectionProvider>
-      </ThemeProvider>
+      <ColorModeContext.Provider value={colorMode}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <ConnectionProvider>
+            <PageProvider>
+              <TokenRegistryProvider>
+                <SnackbarProvider maxSnack={5} autoHideDuration={8000}>
+                  <WalletProvider>{appElement}</WalletProvider>
+                </SnackbarProvider>
+              </TokenRegistryProvider>
+            </PageProvider>
+          </ConnectionProvider>
+        </ThemeProvider>
+      </ColorModeContext.Provider>
     </Suspense>
   );
 }

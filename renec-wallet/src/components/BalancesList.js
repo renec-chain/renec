@@ -40,11 +40,7 @@ import TokenIcon from './TokenIcon';
 import EditAccountNameDialog from './EditAccountNameDialog';
 import MergeAccountsDialog from './MergeAccountsDialog';
 import DebugButtons from './DebugButtons';
-import {
-  RButton,
-  Icon,
-  Alert,
- } from './base';
+import { RButton, Icon, Alert } from './base';
 import Card from '@material-ui/core/Card';
 
 const balanceFormat = new Intl.NumberFormat(undefined, {
@@ -87,16 +83,16 @@ function fairsIsLoaded(publicKeys) {
   );
 }
 
-const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles((theme) => ({
   mainWallet: {
     height: 108,
-    backgroundColor: "#3F2D4F",
+    backgroundColor: theme.palette.banner_info.main,
     marginTop: -80,
     borderRadius: 4,
-    color: "white",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
+    color: 'white',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     paddingLeft: 24,
     paddingRight: 24,
   },
@@ -111,9 +107,10 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#F3F3F5',
+    backgroundColor: theme.palette.primary,
   },
   container: {
+    marginTop: 24,
     paddingBottom: theme.spacing(3),
     [theme.breakpoints.up(theme.ext)]: {
       paddingTop: theme.spacing(3),
@@ -130,6 +127,30 @@ const useStyles = makeStyles((theme) => ({
       cursor: 'pointer',
     },
   },
+  textHeader: {
+    color: theme.palette.text.main,
+    fontSize: 20,
+    marginTop: 30,
+    marginBottom: 16,
+    fontWeight: 'bold',
+  },
+  text: {
+    color: theme.palette.text.main,
+    fontWeight: 'bold',
+  },
+  normalText: {
+    color: theme.palette.text.main,
+  },
+  item: {
+    marginBottom: 8,
+    backgroundColor: theme.palette.item_list,
+  },
+  stakingHeader: {
+    color: theme.palette.text.main,
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+
 }));
 
 export default function BalancesList() {
@@ -239,13 +260,11 @@ export default function BalancesList() {
             {allTokensLoaded && (
               <>
                 <span className="bold text-20">{totalUsdValue.toFixed(2)}</span>
-                <span>{" USD"}</span>
+                <span>{' USD'}</span>
               </>
             )}
           </div>
-          <div className="text-14">
-            TOTAL BALANCE
-          </div>
+          <div className="text-14">TOTAL BALANCE</div>
         </div>
         <div className="flex">
           <div className="mr-16">
@@ -282,14 +301,14 @@ export default function BalancesList() {
           />
         </div>
       </div>
-      {cluster?.name === "testnet" && (
+      {cluster?.name === 'testnet' && (
         <div className="mt-16">
           <Alert variant="warning">
             You are currently on Testnet, the tokens on Testnet is worthless.
           </Alert>
         </div>
       )}
-      <div className="bold text-20 mt-30 mb-16">Assets</div>
+      <div className={classes.textHeader}>Assets</div>
       <List disablePadding>
         {balanceListItemsMemo.map((Memoized) => (
           <Memoized />
@@ -457,8 +476,12 @@ export function BalanceListItem({ publicKey, expandable, setUsdValue }) {
   }
 
   return (
-    <Card className="mb-8">
-      <ListItem style={{padding: 16}} button onClick={() => expandable && setOpen((open) => !open)}>
+    <Card className={classes.item}>
+      <ListItem
+        style={{ padding: 16 }}
+        button
+        onClick={() => expandable && setOpen((open) => !open)}
+      >
         <ListItemIcon>
           <TokenIcon
             mint={mint}
@@ -469,15 +492,17 @@ export function BalanceListItem({ publicKey, expandable, setUsdValue }) {
         </ListItemIcon>
         <div className="flex space-between full-width">
           <div>
-            <div>{tokenName ?? tokenSymbol}</div>
-            <div>{tokenSymbol}</div>
+            <div className={classes.text}>{tokenName ?? tokenSymbol}</div>
+            <div className={classes.normalText}>{tokenSymbol}</div>
           </div>
           <div className="mr-24">
             <div>
-              <span className="bold">{balanceFormat.format(amount / Math.pow(10, decimals))}</span>
-              <span>{tokenSymbol && ` ${tokenSymbol}`}</span>
+              <span className={classes.text} >
+                {balanceFormat.format(amount / Math.pow(10, decimals))}
+              </span>
+              <span className={classes.text}>{tokenSymbol && ` ${tokenSymbol}`}</span>
             </div>
-            <div>{numberFormat.format(usdValue)}</div>
+            <div className={classes.normalText}>{numberFormat.format(usdValue)}</div>
           </div>
         </div>
         {expandable ? open ? <ExpandLess /> : <ExpandMore /> : <></>}
@@ -553,7 +578,7 @@ function BalanceListItemDetails({
       : undefined
     : undefined;
   const isSolAddress = publicKey.equals(owner);
-  
+
   return (
     <>
       {wallet.allowsExport && (
@@ -580,15 +605,16 @@ function BalanceListItemDetails({
               icon={<Icon icon="receive-black" />}
               onClick={() => setDepositDialogOpen(true)}
             >
-              Receive
+                <div className={classes.normalText}>Receive</div>
             </RButton>
           </div>
-          { tokenSymbol === 'RENEC' && <DebugButtons /> }
+          {tokenSymbol === 'RENEC' && <DebugButtons />}
         </div>
         <Typography variant="body2">
           <Link
             href={
-              `https://explorer.renec.foundation/address/${publicKey.toBase58()}` + urlSuffix
+              `https://explorer.renec.foundation/address/${publicKey.toBase58()}` +
+              urlSuffix
             }
             target="_blank"
             rel="noopener"

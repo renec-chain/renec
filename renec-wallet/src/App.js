@@ -70,7 +70,7 @@ export default function App() {
         const currentMode = localStorage.getItem('mode');
         localStorage.setItem(
           'mode',
-          currentMode ? (currentMode === 'light' ? 'dark' : 'light') : 'light',
+          currentMode ? (currentMode === 'light' ? 'dark' : 'light') : 'dark',
         );
       },
     }),

@@ -16,6 +16,7 @@ import {
   transferTokens,
   delegateStake,
   undelegateStake,
+  withdrawStake,
 } from './tokens';
 import { TOKEN_PROGRAM_ID } from './tokens/instructions';
 import {
@@ -90,7 +91,7 @@ export class Wallet {
       stakeAmount,
       votePubkey,
     });
-  }
+  };
 
   undelegateStake = async (pubkey) => {
     let stakePubkey = new PublicKey(pubkey);
@@ -99,34 +100,43 @@ export class Wallet {
       stakePubkey: stakePubkey,
       withdrawer: this,
     });
-  }
+  };
+
+  withdrawStake = async (pubkey) => {
+    let stakePubkey = new PublicKey(pubkey);
+    return await withdrawStake({
+      connection: this.connection,
+      stakePubkey: stakePubkey,
+      withdrawer: this,
+    });
+  };
 
   listStakes = async () => {
     return await this.connection.getProgramAccounts(
-      new PublicKey("Stake11111111111111111111111111111111111111"),
+      new PublicKey('Stake11111111111111111111111111111111111111'),
       {
-        commitment: "confirmed",
+        commitment: 'confirmed',
         filters: [
           {
             memcmp: {
               offset: 12,
               bytes: this.publicKey.toBase58(),
-            }
-          }
-        ]
-      }
-    )
-  }
+            },
+          },
+        ],
+      },
+    );
+  };
 
   getVoteAccounts = async () => {
     let voteAccounts = await this.connection.getVoteAccounts();
     return voteAccounts.current;
-  }
+  };
 
   getStakeActivation = async (stakePubkeys) => {
     const stakeInfo = await this.connection.getStakeActivation(stakePubkeys);
     return stakeInfo;
-  }
+  };
 
   createAssociatedTokenAccount = async (splTokenMintAddress) => {
     return await createAssociatedTokenAccount({

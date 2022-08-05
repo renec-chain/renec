@@ -54,6 +54,15 @@
   padding-left: 16px !important;
 }
 
+.px-16 {
+  padding: 16px !important;
+}
+
+.py-16 {
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+}
+
 .pointer {
   cursor: pointer;
 }
@@ -67,8 +76,18 @@
   flex-direction: column;
 }
 
+.flex-1-column {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
 .align-center {
   align-items: center;
+}
+
+.align-end {
+  align-items: flex-end;
 }
 
 .space-between {

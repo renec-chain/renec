@@ -2,7 +2,9 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core';
 import { useIsExtensionWidth } from '../utils/utils';
-import StakingList from '../components/StakingList';
+import MyStakingList from '../components/MyStakingList';
+import { StakingProvider } from '../utils/staking';
+import MyStakingInfo from '../components/MyStakingInfo';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -20,10 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
   header: {
     backgroundColor: '#27133A',
-    height: 200,
-    minHeight: 200,
-    color: 'white',
-    paddingTop: 24,
+    paddingTop: 22,
   },
   box: {
     display: 'flex',
@@ -32,33 +31,24 @@ const useStyles = makeStyles((theme) => ({
     padding: '8px 16px',
     borderRadius: '4px',
     marginTop: 24,
-    backgroundColor: '#210C34',
+    backgroundColor: '#3F2D4F',
+    marginRight: 24,
   },
 }));
-
-export default function StakingPage() {
+export default function MyStaking() {
   const classes = useStyles();
   const isExtensionWidth = useIsExtensionWidth();
   return (
-    <>
-      <div className={classes.header}>
-        <Container fixed maxWidth="md">
-          <Grid container spacing={isExtensionWidth ? 0 : 3}>
-            <Grid md={2} />
-            <Grid item xs={12} md={8} className={classes.balancesContainer}>
-              <div className="bold text-32">Staking</div>
-            </Grid>
-          </Grid>
-        </Container>
-      </div>
+    <StakingProvider>
+      <MyStakingInfo />
       <Container fixed maxWidth="md" className={classes.container}>
         <Grid container spacing={isExtensionWidth ? 0 : 3}>
           <Grid md={2} />
           <Grid item xs={12} md={8} className={classes.balancesContainer}>
-            <StakingList />
+            <MyStakingList />
           </Grid>
         </Grid>
       </Container>
-    </>
+    </StakingProvider>
   );
 }

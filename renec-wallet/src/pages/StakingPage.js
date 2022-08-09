@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   header: {
-    backgroundColor: '#27133A',
+    backgroundColor: theme.palette.banner.default,
     height: 200,
     minHeight: 200,
     color: 'white',

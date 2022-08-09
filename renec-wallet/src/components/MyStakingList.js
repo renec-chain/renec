@@ -10,10 +10,13 @@ import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 import { useSendTransaction } from '../utils/notifications';
 import { useStaking } from '../utils/staking';
 import { stakingFormat } from '../utils/utils';
+import { useStyles } from './BalancesList';
+import { makeStyles } from '@material-ui/styles';
 
 const capitalize = (s) => s && s[0].toUpperCase() + s.slice(1);
 
 export default function MyStakingList() {
+  const classes = useStyles();
   const wallet = useWallet();
   const {
     state: { publicKeys },
@@ -46,7 +49,7 @@ export default function MyStakingList() {
 
   return (
     <div>
-      <div className="bold text-20 mt-30 mb-16">Staking list</div>
+      <div className={classes.textHeader}>My staking list</div>
       <List disablePadding>
         {StakingListItemsMemo.map((Memoized) => (
           <Memoized />
@@ -56,7 +59,24 @@ export default function MyStakingList() {
   );
 }
 
+const myStakingUseStyles = makeStyles((theme) => ({
+  itemTitle: {
+    fontSize: 16,
+    color: theme.palette.my_staking_text.main,
+  },
+  itemSubTitle: {
+    fontSize: 14,
+    color: theme.palette.my_staking_text.main,
+  },
+  iconText: {
+    fontSize: 12,
+    color: theme.palette.my_staking_text.main,
+  },
+}));
+
 export function StakingListItem({ publicKey }) {
+  const classes = useStyles();
+  const myStakingClasses = myStakingUseStyles();
   const [open, setOpen] = useState(false);
   const wallet = useWallet();
   const { addItem } = useStaking();
@@ -86,21 +106,35 @@ export function StakingListItem({ publicKey }) {
   }
 
   return (
-    <Card className="mb-8" onClick={() => setOpen(!open)}>
+    <Card className={classes.item} onClick={() => setOpen(!open)}>
       <ListItem style={{ padding: 16 }}>
         <div className="flex space-between full-width">
-          <div className='flex-1-column'>
-            <div>{colappsedAddress}</div>
+          <div className="flex-1-column">
+            <div
+              className={`${classes.normalText} ${myStakingClasses.itemTitle}`}
+            >
+              {colappsedAddress}
+            </div>
             <div className="flex">
-              <Typography style={{ fontSize: 12 }}>Click to expand</Typography>
+              <Typography
+                className={`${classes.normalText} ${myStakingClasses.iconText}`}
+              >
+                Click to expand
+              </Typography>
               <Icon icon="down" />
             </div>
           </div>
-          <div className='flex-1-column'>
-            <Typography style={{ fontSize: 14 }}>Unknown validator</Typography>
+          <div className="flex-1-column">
+            <Typography
+              className={`${classes.normalText} ${myStakingClasses.itemTitle}`}
+            >
+              Unknown validator
+            </Typography>
           </div>
-          <div className='flex-1-column'>
-            <Typography style={{ fontSize: 14 }}>
+          <div className="flex-1-column">
+            <Typography
+              className={`${classes.normalText} ${myStakingClasses.itemSubTitle}`}
+            >
               {stakingFormat.format(
                 (stakeActivation?.active + stakeActivation?.inactive) /
                   LAMPORTS_PER_SOL,
@@ -113,9 +147,7 @@ export function StakingListItem({ publicKey }) {
               label={capitalize(stakeActivation?.state)}
               style={{
                 backgroundColor:
-                  stakeActivation?.state === 'active'
-                    ? '#417562'
-                    : '#977155',
+                  stakeActivation?.state === 'active' ? '#417562' : '#977155',
                 color: '#FFF',
                 borderRadius: 4,
               }}
@@ -136,6 +168,8 @@ export function StakingListItem({ publicKey }) {
 
 const MyStakingListItemDetails = React.memo(
   ({ stakeActivation, publicKey }) => {
+    const classes = useStyles();
+    const myStakingClasses = myStakingUseStyles();
     const wallet = useWallet();
     const { listStakes, setItem } = useStaking();
     const [sendTransaction] = useSendTransaction();
@@ -167,38 +201,54 @@ const MyStakingListItemDetails = React.memo(
     return (
       <div className="px-16 py-16">
         <div className="flex space-between">
-          <div className='flex-1-column'>
-            <Typography style={{ fontSize: 16 }}>
+          <div className="flex-1-column">
+            <Typography
+              className={`${classes.normalText} ${myStakingClasses.itemTitle}`}
+            >
               {stakingFormat.format(stakeActivation?.active / LAMPORTS_PER_SOL)}
             </Typography>
-            <Typography style={{ fontSize: 12 }}>Active stake</Typography>
+            <Typography
+              className={`${classes.normalText} ${myStakingClasses.iconText}`}
+            >
+              Active stake
+            </Typography>
           </div>
-          <div className='flex-1-column'>
-            <Typography style={{ fontSize: 16 }}>
+          <div className="flex-1-column">
+            <Typography
+              className={`${classes.normalText} ${myStakingClasses.itemTitle}`}
+            >
               {stakingFormat.format(
                 stakeActivation?.inactive / LAMPORTS_PER_SOL,
               )}
             </Typography>
-            <Typography style={{ fontSize: 12 }}>Inactive stake</Typography>
+            <Typography
+              className={`${classes.normalText} ${myStakingClasses.iconText}`}
+            >
+              Inactive stake
+            </Typography>
           </div>
-          <div className='flex-1-column'>
-            <Typography style={{ fontSize: 16 }}>
+          <div className="flex-1-column">
+            <Typography
+              className={`${classes.normalText} ${myStakingClasses.itemTitle}`}
+            >
               {stakingFormat.format(
                 (stakeActivation?.active + stakeActivation?.inactive) /
                   LAMPORTS_PER_SOL,
               )}{' '}
               RENEC
             </Typography>
-            <Typography style={{ fontSize: 12 }}>Stake Balance</Typography>
+            <Typography
+              className={`${classes.normalText} ${myStakingClasses.iconText}`}
+            >
+              Stake Balance
+            </Typography>
           </div>
           <div>
             <Chip
               label={capitalize(stakeActivation?.state)}
               style={{
                 backgroundColor:
-                  stakeActivation?.state === 'active'
-                    ? '#417562'
-                    : '#977155',
+                  stakeActivation?.state === 'active' ? '#417562' : '#977155',
                 color: '#FFF',
                 borderRadius: 4,
               }}

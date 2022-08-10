@@ -6,6 +6,7 @@ import {
   mnemonicToSeed,
   storeMnemonicAndSeed,
   normalizeMnemonic,
+  forgetWallet,
 } from '../utils/wallet-seed';
 import {
   getAccountFromSeed,
@@ -55,7 +56,7 @@ export default function LoginPage() {
   if (hasLockedMnemonicAndSeed) {
     return (
       <Container maxWidth="sm">
-        <LoginForm />;
+        <LoginForm />
       </Container>
     );
   }
@@ -384,12 +385,14 @@ function LoginForm() {
           label="Keep wallet unlocked"
           className="mb-16"
         />
-        <RButton fullWidth color="primary" onClick={submit}>
+        <RButton fullWidth color="primary"  onClick={submit}>
           Unlock
         </RButton>
+        <Typography onClick={forgetWallet} className="mt-16">Forget password? Click to remove mnemonic</Typography>
+
       </CardContent>
     </Card>
-  );
+  )
 }
 
 function RestoreWalletForm({ goBack }) {

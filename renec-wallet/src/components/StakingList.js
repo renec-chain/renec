@@ -12,9 +12,9 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Card from '@material-ui/core/Card';
 import CreateStakingDialog from './CreateStakingDialog';
 import { usePage } from '../utils/page';
-import { useSendTransaction } from '../utils/notifications';
 import { useStyles } from './BalancesList';
-
+import { computeHash } from '../utils/utils';
+const DEFAULT_ICONS_COUNT = 17;
 export default function StakingList() {
   const classes = useStyles();
   const [voteAccounts, loaded] = useWalletVoteAccounts();
@@ -51,8 +51,8 @@ export default function StakingList() {
         </Button>
       </div>
       <List disablePadding>
-        {StakingListItemsMemo.map((Memoized) => (
-          <Memoized />
+        {StakingListItemsMemo.map((Memoized, index) => (
+          <Memoized key={index.toString()} />
         ))}
         {loaded ? null : <LoadingIndicator />}
       </List>
@@ -66,6 +66,7 @@ export function StakingListItem({ voteAccount }) {
   const [publicKeys] = useWalletPublicKeys();
   const mainPubkey = publicKeys[0];
   const balanceInfo = useBalanceInfo(mainPubkey);
+  const computeImageIndex = (computeHash(votePubkey) % DEFAULT_ICONS_COUNT) + 1;
   const colappsedAddress = useMemo(() => {
     return `${votePubkey.substring(0, 4)}....${votePubkey.substring(
       votePubkey.length - 8,
@@ -82,7 +83,13 @@ export function StakingListItem({ voteAccount }) {
   return (
     <Card className={classes.item}>
       <ListItem style={{ padding: 16 }}>
-        <ListItemIcon></ListItemIcon>
+        <ListItemIcon>
+          <img
+            alt=""
+            style={{ height: '32px' }}
+            src={require(`../img/svgs/${computeImageIndex}.svg`)?.default}
+          />
+        </ListItemIcon>
         <div className="flex space-between full-width">
           <div>
             <div className={classes.text}>

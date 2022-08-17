@@ -142,7 +142,7 @@ export function StakingListItem({ publicKey }) {
               RENEC
             </Typography>
           </div>
-          <div>
+          <div className="flex-05-column">
             <Chip
               label={capitalize(stakeActivation?.state)}
               style={{
@@ -181,15 +181,63 @@ const MyStakingListItemDetails = React.memo(
       setItem();
       listStakes(publicKeys);
     };
-    const onClick = async () => {
+    const onClickUndelegate = React.useCallback(async () => {
       return sendTransaction(unDelegateStake(), {
         onSuccess: fetchListStakes,
       });
-    };
+    }, []);
+
+    const onClickWithdraw = React.useCallback(async () => {
+      return sendTransaction(withdrawStake(), {
+        onSuccess: fetchListStakes,
+      });
+    }, []);
 
     const unDelegateStake = async () => {
       return await wallet.undelegateStake(publicKey);
     };
+
+    const withdrawStake = async () => {
+      return await wallet.withdrawStake(publicKey);
+    };
+
+    const renderButton = React.useMemo(() => {
+      switch (stakeActivation?.state) {
+        case 'active':
+        case 'activating':
+          return (
+            <Button
+              className="mt-24"
+              style={{
+                padding: '8px 15px',
+                backgroundColor: '#765EBC',
+                color: '#FFF',
+                borderRadius: '4px',
+              }}
+              onClick={onClickUndelegate}
+            >
+              Undelegate
+            </Button>
+          );
+        case 'inactive':
+          return (
+            <Button
+              className="mt-24"
+              style={{
+                padding: '8px 15px',
+                backgroundColor: '#765EBC',
+                color: '#FFF',
+                borderRadius: '4px',
+              }}
+              onClick={onClickWithdraw}
+            >
+              Withdraw
+            </Button>
+          );
+        default:
+          break;
+      }
+    }, [stakeActivation?.state, onClickWithdraw, onClickUndelegate]);
 
     if (!stakeActivation) {
       return <LoadingIndicator delay={0} />;
@@ -198,6 +246,7 @@ const MyStakingListItemDetails = React.memo(
     if (!publicKey) {
       return <LoadingIndicator delay={0} />;
     }
+
     return (
       <div className="px-16 py-16">
         <div className="flex space-between">
@@ -243,31 +292,9 @@ const MyStakingListItemDetails = React.memo(
               Stake Balance
             </Typography>
           </div>
-          <div>
-            <Chip
-              label={capitalize(stakeActivation?.state)}
-              style={{
-                backgroundColor:
-                  stakeActivation?.state === 'active' ? '#417562' : '#977155',
-                color: '#FFF',
-                borderRadius: 4,
-              }}
-              size="small"
-            />
-          </div>
+          <div className="flex-05-column"></div>
         </div>
-        <Button
-          className="mt-24"
-          style={{
-            padding: '8px 15px',
-            backgroundColor: '#765EBC',
-            color: '#FFF',
-            borderRadius: '4px',
-          }}
-          onClick={onClick}
-        >
-          Undelegate
-        </Button>
+        {renderButton}
       </div>
     );
   },

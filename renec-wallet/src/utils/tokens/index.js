@@ -201,19 +201,29 @@ export async function delegateStake({
   return await signAndSendTransaction(connection, transaction, payer, signers);
 }
 
-export async function undelegateStake({
-  connection,
-  stakePubkey,
-  withdrawer,
-}) {
-  let stakeBalance = await connection.getBalance(stakePubkey);
+export async function undelegateStake({ connection, stakePubkey, withdrawer }) {
   let transaction = new Transaction();
-  
   transaction.add(
     StakeProgram.deactivate({
       stakePubkey: stakePubkey,
       authorizedPubkey: withdrawer.publicKey,
     }),
+  );
+
+  let signers = [];
+  return await signAndSendTransaction(
+    connection,
+    transaction,
+    withdrawer,
+    signers,
+  );
+}
+
+export async function withdrawStake({ connection, stakePubkey, withdrawer }) {
+  let stakeBalance = await connection.getBalance(stakePubkey);
+  let transaction = new Transaction();
+
+  transaction.add(
     StakeProgram.withdraw({
       stakePubkey: stakePubkey,
       authorizedPubkey: withdrawer.publicKey,
@@ -223,7 +233,12 @@ export async function undelegateStake({
   );
 
   let signers = [];
-  return await signAndSendTransaction(connection, transaction, withdrawer, signers);
+  return await signAndSendTransaction(
+    connection,
+    transaction,
+    withdrawer,
+    signers,
+  );
 }
 
 export async function createAssociatedTokenAccount({

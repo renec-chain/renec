@@ -42,7 +42,7 @@ export default function StakingPage() {
   return (
     <>
       <div className={classes.header}>
-        <Container fixed maxWidth="md">
+        <Container fixed maxWidth="lg">
           <Grid container spacing={isExtensionWidth ? 0 : 3}>
             <Grid md={2} />
             <Grid item xs={12} md={8} className={classes.balancesContainer}>
@@ -51,7 +51,7 @@ export default function StakingPage() {
           </Grid>
         </Container>
       </div>
-      <Container fixed maxWidth="md" className={classes.container}>
+      <Container fixed maxWidth="lg" className={classes.container}>
         <Grid container spacing={isExtensionWidth ? 0 : 3}>
           <Grid md={2} />
           <Grid item xs={12} md={8} className={classes.balancesContainer}>

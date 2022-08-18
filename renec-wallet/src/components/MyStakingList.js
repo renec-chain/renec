@@ -1,9 +1,9 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import { useWallet } from '../utils/wallet';
 import LoadingIndicator from './LoadingIndicator';
-import { Button, Chip, Collapse, Typography } from '@material-ui/core';
+import { Button, Chip, Collapse, Link, Typography } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import { Icon } from './base';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
@@ -12,6 +12,7 @@ import { useStaking } from '../utils/staking';
 import { stakingFormat } from '../utils/utils';
 import { useStyles } from './BalancesList';
 import { makeStyles } from '@material-ui/styles';
+import { useSolanaExplorerUrlSuffix } from '../utils/connection';
 
 const capitalize = (s) => s && s[0].toUpperCase() + s.slice(1);
 
@@ -72,9 +73,15 @@ const myStakingUseStyles = makeStyles((theme) => ({
     fontSize: 12,
     color: theme.palette.my_staking_text.main,
   },
+  linkText: {
+    fontSize: 16,
+    color: theme.palette.link.main,
+  },
 }));
 
 export function StakingListItem({ publicKey }) {
+  const urlSuffix = useSolanaExplorerUrlSuffix();
+
   const classes = useStyles();
   const myStakingClasses = myStakingUseStyles();
   const [open, setOpen] = useState(false);
@@ -110,11 +117,20 @@ export function StakingListItem({ publicKey }) {
       <ListItem style={{ padding: 16 }}>
         <div className="flex space-between full-width">
           <div className="flex-1-column">
-            <div
-              className={`${classes.normalText} ${myStakingClasses.itemTitle}`}
+            <Link
+              href={
+                `https://explorer.renec.foundation/address/${publicKey}` +
+                urlSuffix
+              }
+              target="_blank"
+              rel="noopener"
             >
-              {colappsedAddress}
-            </div>
+              <div
+                className={`${classes.normalText} ${myStakingClasses.linkText}`}
+              >
+                {colappsedAddress}
+              </div>
+            </Link>
             <div className="flex">
               <Typography
                 className={`${classes.normalText} ${myStakingClasses.iconText}`}

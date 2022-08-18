@@ -41,6 +41,7 @@ const getDesignTokens = (mode) => ({
           banner_info: { main: '#3F2D4F' },
           my_staking_text: { main: '#000' },
           item_list: '#FFF',
+          link: { main: '#9B59B6' },
         }
       : {
           // palette values for dark mode
@@ -51,6 +52,7 @@ const getDesignTokens = (mode) => ({
           banner_info: { main: '#39394F' },
           item_list: '#2A2A36',
           my_staking_text: { main: '#DDD9E9' },
+          link: { main: '#9B59B6' },
         }),
   },
 });

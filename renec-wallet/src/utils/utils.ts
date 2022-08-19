@@ -120,3 +120,14 @@ export const stakingFormat = new Intl.NumberFormat(undefined, {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
 });
+
+export const computeHash = (inputString) => {
+  var hash = 0, i, chr;
+  if (inputString.length === 0) return hash;
+  for (i = 0; i < inputString.length; i++) {
+    chr   = inputString.charCodeAt(i);
+    hash  = ((hash << 5) - hash) + chr;
+    hash |= 0;
+  }
+  return Math.abs(hash);
+}

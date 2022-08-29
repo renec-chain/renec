@@ -28,7 +28,6 @@ import {
   useConnectionConfig,
 } from '../utils/connection';
 import { clusterForEndpoint } from '../utils/clusters';
-import { useRegion } from '../utils/region';
 import { serumMarkets, priceStore } from '../utils/markets';
 import { swapApiRequest } from '../utils/swap/api';
 import { showSwapAddress } from '../utils/config';
@@ -118,6 +117,23 @@ export const useStyles = makeStyles((theme) => ({
       paddingRight: theme.spacing(1),
     },
   },
+  stakingItemContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    [theme.breakpoints.up('md')]: {
+      width: '100%',
+      alignItems: 'center',
+    },
+    [theme.breakpoints.down('md')]: {
+      flexDirection: 'column',
+      alignItems: 'flex-start',
+    },
+  },
+  stakingItem: {
+    [theme.breakpoints.down('md')]: {
+      marginBottom: 12,
+    },
+  },
   buttonContainer: {
     display: 'flex',
     marginTop: theme.spacing(2),
@@ -141,6 +157,11 @@ export const useStyles = makeStyles((theme) => ({
   normalText: {
     color: theme.palette.text.main,
   },
+  subtitle: {
+    color: theme.palette.text.main,
+    fontSize: 12,
+    fontWeight: 'normal',
+  },
   item: {
     marginBottom: 8,
     backgroundColor: theme.palette.item_list,
@@ -150,7 +171,6 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: 20,
     fontWeight: 'bold',
   },
-
 }));
 
 export default function BalancesList() {
@@ -253,7 +273,7 @@ export default function BalancesList() {
   }
 
   return (
-    <div className={classes.container} >
+    <div className={classes.container}>
       <div className={classes.mainWallet}>
         <div>
           <div className="mb-8">
@@ -497,12 +517,16 @@ export function BalanceListItem({ publicKey, expandable, setUsdValue }) {
           </div>
           <div className="mr-24">
             <div>
-              <span className={classes.text} >
+              <span className={classes.text}>
                 {balanceFormat.format(amount / Math.pow(10, decimals))}
               </span>
-              <span className={classes.text}>{tokenSymbol && ` ${tokenSymbol}`}</span>
+              <span className={classes.text}>
+                {tokenSymbol && ` ${tokenSymbol}`}
+              </span>
             </div>
-            <div className={classes.normalText}>{numberFormat.format(usdValue)}</div>
+            <div className={classes.normalText}>
+              {numberFormat.format(usdValue)}
+            </div>
           </div>
         </div>
         {expandable ? open ? <ExpandLess /> : <ExpandMore /> : <></>}
@@ -605,7 +629,7 @@ function BalanceListItemDetails({
               icon={<Icon icon="receive-black" />}
               onClick={() => setDepositDialogOpen(true)}
             >
-                <div className={classes.normalText}>Receive</div>
+              <div className={classes.normalText}>Receive</div>
             </RButton>
           </div>
           {tokenSymbol === 'RENEC' && <DebugButtons />}

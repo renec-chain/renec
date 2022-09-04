@@ -1,8 +1,40 @@
-import React, { useState, useMemo, useContext } from 'react';
-import Toolbar from '@material-ui/core/Toolbar';
-import AppBar from '@material-ui/core/AppBar';
-import Typography from '@material-ui/core/Typography';
+import React, { useState, useMemo } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  Menu,
+  MenuItem,
+  ListItemIcon,
+  Divider,
+  Hidden,
+  IconButton,
+  Tooltip,
+  Container,
+  Box,
+  Badge,
+  Switch,
+  Tab,
+  Tabs,
+  Link,
+  SvgIcon,
+} from '@material-ui/core';
+import {
+  Check as CheckIcon,
+  Add as AddIcon,
+  ExitToApp,
+  AccountCircle as AccountIcon,
+  Usb as UsbIcon,
+  WbSunny as LightIcon,
+  NightsStayOutlined as DarkIcon,
+  ImportExport as ImportExportIcon,
+  Menu as MenuIcon,
+  MonetizationOn,
+  OpenInNew,
+} from '@material-ui/icons';
+
 import { useConnectionConfig } from '../utils/connection';
 import {
   clusterForEndpoint,
@@ -10,25 +42,7 @@ import {
   addCustomCluster,
   customClusterExists,
 } from '../utils/clusters';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 import { useWalletSelector } from '../utils/wallet';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import CheckIcon from '@material-ui/icons/Check';
-import AddIcon from '@material-ui/icons/Add';
-import ExitToApp from '@material-ui/icons/ExitToApp';
-import AccountIcon from '@material-ui/icons/AccountCircle';
-import UsbIcon from '@material-ui/icons/Usb';
-import Divider from '@material-ui/core/Divider';
-import Hidden from '@material-ui/core/Hidden';
-import IconButton from '@material-ui/core/IconButton';
-import SolanaIcon from './SolanaIcon';
-import LightIcon from '@material-ui/icons/WbSunny';
-import DarkIcon from '@material-ui/icons/NightsStayOutlined';
-import Tooltip from '@material-ui/core/Tooltip';
-import Container from '@material-ui/core/Container';
-import ImportExportIcon from '@material-ui/icons/ImportExport';
 import AddAccountDialog from './AddAccountDialog';
 import DeleteMnemonicDialog from './DeleteMnemonicDialog';
 import AddHardwareWalletDialog from './AddHarwareWalletDialog';
@@ -39,24 +53,47 @@ import {
   useIsExtensionWidth,
 } from '../utils/utils';
 import ConnectionIcon from './ConnectionIcon';
-import { Badge, Switch, Tab, Tabs } from '@material-ui/core';
 import { useConnectedWallets } from '../utils/connected-wallets';
 import { usePage } from '../utils/page';
 import { shortenAddress } from '../utils/utils';
-import { MonetizationOn, OpenInNew } from '@material-ui/icons';
-import Link from '@material-ui/core/Link';
 import AddCustomClusterDialog from './AddCustomClusterDialog';
 import logo from '../img/logo.svg';
 import { useSnackbar } from 'notistack';
 import { COLORS_PALETTE } from './base/variables';
 import { ColorModeContext } from '../App';
 
+import { ReactComponent as RenecFavicon } from '../img/svgs/logo.svg';
+
 const useStyles = makeStyles((theme) => ({
+  appBar: {
+    marginBottom: 24,
+  },
   header: {
     backgroundColor: theme.palette.banner.default,
     height: 200,
     minHeight: 200,
     color: 'white',
+  },
+  lgPagesMenu: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
+  },
+  mdPagesMenu: {
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
+    },
+  },
+  lgLogo: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    }
+  },
+  mdLogo: {
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
+    },
+    width: '180px',
   },
   content: {
     flexGrow: 1,
@@ -101,14 +138,109 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const pages = [
+  {
+    label: 'Wallet',
+    value: 'wallet',
+  },
+  {
+    label: 'Staking',
+    value: 'staking',
+  },
+];
+
+const HeaderBar = () => {
+  const classes = useStyles();
+  const [page, setPage] = usePage();
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+
+  const handleChange = (event, newValue) => {
+    setPage(newValue);
+  };
+
+  const handleMenuPageClick = (pageValue) => {
+    setAnchorElNav(null);
+    setPage(pageValue);
+  };
+
+  return (
+    <AppBar className={classes.appBar} position="static" color="primary">
+      <Container>
+        <Toolbar
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            padding: 0,
+          }}
+        >
+          <img
+            className={classes.lgLogo}
+            src={logo}
+            alt="Remitano logo"
+          />
+          <Tabs
+            className={classes.lgPagesMenu}
+            value={page}
+            onChange={handleChange}
+            textColor={COLORS_PALETTE.white}
+            indicatorColor="transparent"
+          >
+            {pages.map((page) => (
+              <Tab value={page.value} label={page.label} />
+            ))}
+          </Tabs>
+          <Box className={classes.mdPagesMenu}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={() => setAnchorElNav(null)}
+            >
+              {pages.map((page) => (
+                <MenuItem
+                  key={page.value}
+                  onClick={() => handleMenuPageClick(page.value)}
+                >
+                  <Typography textAlign="center">{page.label}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+          <img className={classes.mdLogo} src={logo} alt="Remitano logo" />
+          <NavigationButtons />
+        </Toolbar>
+      </Container>
+    </AppBar>
+  );
+};
+
 export default function NavigationFrame({ children }) {
   const classes = useStyles();
   const isExtensionWidth = useIsExtensionWidth();
-  const [page, setPage] = usePage();
+  const [page] = usePage();
   const { accounts } = useWalletSelector();
-  const [isCopied, setIsCopied] = useState(false);
   const selectedAccount = accounts.find((a) => a.isSelected);
   const { enqueueSnackbar } = useSnackbar();
+
   const onCopyAddress = () => {
     navigator.clipboard.writeText(selectedAccount.address.toBase58());
     enqueueSnackbar(`Copied address`, {
@@ -116,30 +248,10 @@ export default function NavigationFrame({ children }) {
       autoHideDuration: 2500,
     });
   };
-  const handleChange = (event, newValue) => {
-    setPage(newValue);
-  };
+
   return (
     <>
-      <AppBar position="static" color="primary">
-        <Container>
-          <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <img src={logo} alt="Remitano logo" />
-            <Tabs
-              value={page}
-              onChange={handleChange}
-              textColor={COLORS_PALETTE.white}
-              indicatorColor="transparent"
-            >
-              <Tab label="Wallet" value="wallet" />
-              <Tab label="Staking" value="staking" />
-            </Tabs>
-
-            <NavigationButtons />
-          </Toolbar>
-        </Container>
-      </AppBar>
-
+      <HeaderBar />
       {selectedAccount && page === 'wallet' && (
         <div className={classes.header}>
           <Container fixed maxWidth="md">
@@ -305,7 +417,9 @@ function NetworkSelector() {
       <Hidden smUp>
         <Tooltip title="Select Network" arrow>
           <IconButton color="inherit" onClick={(e) => setAnchorEl(e.target)}>
-            <SolanaIcon />
+            <SvgIcon>
+              <RenecFavicon />
+            </SvgIcon>
           </IconButton>
         </Tooltip>
       </Hidden>

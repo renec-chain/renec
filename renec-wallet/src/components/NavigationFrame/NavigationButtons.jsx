@@ -105,8 +105,8 @@ function ExpandButton() {
   };
 
   return (
-    <Tooltip title='Expand View'>
-      <IconButton color='inherit' onClick={onClick}>
+    <Tooltip title="Expand View">
+      <IconButton color="inherit" onClick={onClick}>
         <OpenInNew />
       </IconButton>
     </Tooltip>
@@ -121,14 +121,14 @@ function WalletButton() {
   return (
     <>
       <Hidden smUp>
-        <Tooltip title='Wallet Balances'>
-          <IconButton color='inherit' onClick={onClick}>
+        <Tooltip title="Wallet Balances">
+          <IconButton color="inherit" onClick={onClick}>
             <MonetizationOn />
           </IconButton>
         </Tooltip>
       </Hidden>
       <Hidden xsDown>
-        <Button color='inherit' onClick={onClick} className={classes.button}>
+        <Button color="inherit" onClick={onClick} className={classes.button}>
           Wallet
         </Button>
       </Hidden>
@@ -147,8 +147,8 @@ function ConnectionsButton() {
   return (
     <>
       <Hidden smUp>
-        <Tooltip title='Manage Connections'>
-          <IconButton color='inherit' onClick={onClick}>
+        <Tooltip title="Manage Connections">
+          <IconButton color="inherit" onClick={onClick}>
             <Badge
               badgeContent={connectionAmount}
               classes={{ badge: classes.badge }}
@@ -163,7 +163,7 @@ function ConnectionsButton() {
           badgeContent={connectionAmount}
           classes={{ badge: classes.badge }}
         >
-          <Button color='inherit' onClick={onClick} className={classes.button}>
+          <Button color="inherit" onClick={onClick} className={classes.button}>
             Connections
           </Button>
         </Badge>
@@ -191,7 +191,7 @@ function NetworkSelector() {
       />
       <Hidden smDown>
         <Button
-          color='inherit'
+          color="inherit"
           onClick={(e) => setAnchorEl(e.target)}
           className={classes.button}
         >
@@ -199,8 +199,8 @@ function NetworkSelector() {
         </Button>
       </Hidden>
       <Hidden mdUp>
-        <Tooltip title='Select Network' arrow>
-          <IconButton color='inherit' onClick={(e) => setAnchorEl(e.target)}>
+        <Tooltip title="Select Network" arrow>
+          <IconButton color="inherit" onClick={(e) => setAnchorEl(e.target)}>
             <SvgIcon>
               <RenecFavicon />
             </SvgIcon>
@@ -228,7 +228,7 @@ function NetworkSelector() {
           >
             <ListItemIcon className={classes.menuItemIcon}>
               {cluster.apiUrl === endpoint ? (
-                <CheckIcon fontSize='small' />
+                <CheckIcon fontSize="small" />
               ) : null}
             </ListItemIcon>
             {cluster.name === 'mainnet-beta-backup'
@@ -323,7 +323,7 @@ function WalletSelector() {
       />
       <Hidden xsDown>
         <Button
-          color='inherit'
+          color="inherit"
           onClick={(e) => setAnchorEl(e.target)}
           className={classes.button}
         >
@@ -331,8 +331,8 @@ function WalletSelector() {
         </Button>
       </Hidden>
       <Hidden smUp>
-        <Tooltip title='Select Account' arrow>
-          <IconButton color='inherit' onClick={(e) => setAnchorEl(e.target)}>
+        <Tooltip title="Select Account" arrow>
+          <IconButton color="inherit" onClick={(e) => setAnchorEl(e.target)}>
             <AccountIcon />
           </IconButton>
         </Tooltip>
@@ -369,7 +369,7 @@ function WalletSelector() {
         <Divider />
         <MenuItem onClick={() => setAddHardwareWalletDialogOpen(true)}>
           <ListItemIcon className={classes.menuItemIcon}>
-            <UsbIcon fontSize='small' />
+            <UsbIcon fontSize="small" />
           </ListItemIcon>
           Import Hardware Wallet
         </MenuItem>
@@ -380,7 +380,7 @@ function WalletSelector() {
           }}
         >
           <ListItemIcon className={classes.menuItemIcon}>
-            <AddIcon fontSize='small' />
+            <AddIcon fontSize="small" />
           </ListItemIcon>
           Add Account
         </MenuItem>
@@ -391,7 +391,7 @@ function WalletSelector() {
           }}
         >
           <ListItemIcon className={classes.menuItemIcon}>
-            <ImportExportIcon fontSize='small' />
+            <ImportExportIcon fontSize="small" />
           </ListItemIcon>
           Export Mnemonic
         </MenuItem>
@@ -402,7 +402,7 @@ function WalletSelector() {
           }}
         >
           <ListItemIcon className={classes.menuItemIcon}>
-            <ExitToApp fontSize='small' />
+            <ExitToApp fontSize="small" />
           </ListItemIcon>
           {'Delete Mnemonic & Log Out'}
         </MenuItem>
@@ -420,14 +420,14 @@ function AccountListItem({ account, classes, setAnchorEl, setWalletSelector }) {
         setWalletSelector(account.selector);
       }}
       selected={account.isSelected}
-      component='div'
+      component="div"
     >
       <ListItemIcon className={classes.menuItemIcon}>
-        {account.isSelected ? <CheckIcon fontSize='small' /> : null}
+        {account.isSelected ? <CheckIcon fontSize="small" /> : null}
       </ListItemIcon>
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         <Typography>{account.name}</Typography>
-        <Typography color='textSecondary'>
+        <Typography color="textSecondary">
           {account.address.toBase58()}
         </Typography>
       </div>

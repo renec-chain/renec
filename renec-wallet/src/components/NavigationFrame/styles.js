@@ -1,9 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
-  appBar: {
-    marginBottom: 24,
-  },
   header: {
     backgroundColor: theme.palette.banner.default,
     height: 200,

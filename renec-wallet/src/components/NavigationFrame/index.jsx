@@ -13,53 +13,51 @@ import {
   Menu as MenuIcon,
   Close as CloseIcon,
   HowToVote,
-  AccountBalanceWalletOutlined
+  AccountBalanceWalletOutlined,
 } from '@material-ui/icons';
 import { useWalletSelector } from '../../utils/wallet';
-import {
-  useIsExtensionWidth,
-} from '../../utils/utils';
+import { useIsExtensionWidth } from '../../utils/utils';
 import { usePage } from '../../utils/page';
 import { shortenAddress } from '../../utils/utils';
 import logo from '../../img/logo.svg';
 import { useSnackbar } from 'notistack';
 import { COLORS_PALETTE } from '../base/variables';
 import MobileNavMenu from '../MobileNavMenu';
-import { useStyles, useFooterStyles } from './styles'
+import { useStyles, useFooterStyles } from './styles';
 import NavigationButtons, { ThemeSwitcher } from './NavigationButtons';
 
 export const pages = [
   {
     label: 'Wallet',
     value: 'wallet',
-    icon: AccountBalanceWalletOutlined
+    icon: AccountBalanceWalletOutlined,
   },
   {
     label: 'Staking',
     value: 'staking',
-    icon: HowToVote
+    icon: HowToVote,
   },
 ];
 
 const HeaderBar = () => {
   const classes = useStyles();
   const [page, setPage] = usePage();
-  const [menuOpen, setMenuOpen] = React.useState()
+  const [menuOpen, setMenuOpen] = React.useState();
 
   const handleCloseNavMenu = () => {
-    setMenuOpen(false)
-  }
+    setMenuOpen(false);
+  };
 
   const handleToggleNavMenu = () => {
-    setMenuOpen(prev => !prev)
-  }
+    setMenuOpen((prev) => !prev);
+  };
 
   const handleChange = (event, newValue) => {
     setPage(newValue);
   };
 
   return (
-    <AppBar className={classes.appBar} position="static" color="primary">
+    <AppBar position="static" color="primary">
       <Container>
         <Toolbar
           style={{
@@ -69,10 +67,7 @@ const HeaderBar = () => {
           }}
         >
           <Hidden smDown>
-            <img
-              src={logo}
-              alt="Remitano logo"
-            />
+            <img src={logo} alt="Remitano logo" />
             <Tabs
               value={page}
               onChange={handleChange}
@@ -165,4 +160,3 @@ function Footer() {
     </footer>
   );
 }
-

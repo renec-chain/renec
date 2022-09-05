@@ -6,7 +6,7 @@ orbs:
 jobs:
   run-build:
     docker:
-      - image: cimg/rust:1.58.1
+      - image: cimg/rust:1.59.0
     steps:
       - checkout
       - run:

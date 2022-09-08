@@ -1,289 +1,61 @@
-import React, { useState, useMemo } from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  Menu,
-  MenuItem,
-  ListItemIcon,
-  Divider,
-  Hidden,
-  IconButton,
-  Tooltip,
-  Container,
-  Box,
-  Badge,
-  Switch,
-  Tab,
-  Tabs,
-  Link,
-  SvgIcon,
-} from '@material-ui/core';
-import {
-  Check as CheckIcon,
-  Add as AddIcon,
-  ExitToApp,
-  AccountCircle as AccountIcon,
-  Usb as UsbIcon,
-  WbSunny as LightIcon,
-  NightsStayOutlined as DarkIcon,
-  ImportExport as ImportExportIcon,
-  Menu as MenuIcon,
-  MonetizationOn,
-  OpenInNew,
-} from '@material-ui/icons';
-
-import { useConnectionConfig } from '../utils/connection';
-import {
-  clusterForEndpoint,
-  getClusters,
-  addCustomCluster,
-  customClusterExists,
-} from '../utils/clusters';
-import { useWalletSelector } from '../utils/wallet';
-import AddAccountDialog from './AddAccountDialog';
-import DeleteMnemonicDialog from './DeleteMnemonicDialog';
-import AddHardwareWalletDialog from './AddHarwareWalletDialog';
-import { ExportMnemonicDialog } from './ExportAccountDialog.js';
+import React, { useMemo, useState } from 'react';
+import { useTheme } from '@material-ui/core/styles';
+import { ColorModeContext } from '../../App';
 import {
   isExtension,
   isExtensionPopup,
   useIsExtensionWidth,
-} from '../utils/utils';
-import ConnectionIcon from './ConnectionIcon';
-import { useConnectedWallets } from '../utils/connected-wallets';
-import { usePage } from '../utils/page';
-import { shortenAddress } from '../utils/utils';
-import AddCustomClusterDialog from './AddCustomClusterDialog';
-import logo from '../img/logo.svg';
-import { useSnackbar } from 'notistack';
-import { COLORS_PALETTE } from './base/variables';
-import { ColorModeContext } from '../App';
+} from '../../utils/utils';
+import { usePage } from '../../utils/page';
+import {
+  Badge,
+  Button,
+  Divider,
+  Hidden,
+  IconButton,
+  ListItemIcon,
+  Menu,
+  MenuItem,
+  SvgIcon,
+  Switch,
+  Tooltip,
+  Typography,
+} from '@material-ui/core';
+import {
+  AccountCircle as AccountIcon,
+  Add as AddIcon,
+  Check as CheckIcon,
+  ExitToApp,
+  ImportExport as ImportExportIcon,
+  MonetizationOn,
+  NightsStayOutlined as DarkIcon,
+  OpenInNew,
+  Usb as UsbIcon,
+  WbSunny as LightIcon,
+} from '@material-ui/icons';
+import { useConnectedWallets } from '../../utils/connected-wallets';
+import ConnectionIcon from '../ConnectionIcon';
+import { useConnectionConfig } from '../../utils/connection';
+import {
+  addCustomCluster,
+  clusterForEndpoint,
+  customClusterExists,
+  getClusters,
+} from '../../utils/clusters';
+import AddCustomClusterDialog from '../AddCustomClusterDialog';
+import { ReactComponent as RenecFavicon } from '../../img/svgs/logo.svg';
+import { useWalletSelector } from '../../utils/wallet';
+import AddHardwareWalletDialog from '../AddHarwareWalletDialog';
+import AddAccountDialog from '../AddAccountDialog';
+import { ExportMnemonicDialog } from '../ExportAccountDialog';
+import DeleteMnemonicDialog from '../DeleteMnemonicDialog';
+import { useStyles } from './styles';
 
-import { ReactComponent as RenecFavicon } from '../img/svgs/logo.svg';
-
-const useStyles = makeStyles((theme) => ({
-  appBar: {
-    marginBottom: 24,
-  },
-  header: {
-    backgroundColor: theme.palette.banner.default,
-    height: 200,
-    minHeight: 200,
-    color: 'white',
-  },
-  lgPagesMenu: {
-    [theme.breakpoints.down('sm')]: {
-      display: 'none',
-    },
-  },
-  mdPagesMenu: {
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
-  },
-  lgLogo: {
-    [theme.breakpoints.down('sm')]: {
-      display: 'none',
-    }
-  },
-  mdLogo: {
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
-    width: '180px',
-  },
-  content: {
-    flexGrow: 1,
-  },
-  title: {
-    flexGrow: 1,
-  },
-  button: {
-    marginLeft: theme.spacing(1),
-  },
-  menuItemIcon: {
-    minWidth: 32,
-  },
-  badge: {
-    backgroundColor: theme.palette.success.main,
-    color: theme.palette.text.main,
-    height: 16,
-    width: 16,
-  },
-  switch_track: {
-    backgroundColor: theme.palette.primary,
-  },
-  switch_base: {
-    color: theme.palette.primary,
-    '&.Mui-disabled': {
-      color: '#e886a9',
-    },
-    '&.Mui-checked': {
-      color: '#fff',
-    },
-    '&.Mui-checked + .MuiSwitch-track': {
-      backgroundColor: theme.palette.banner_info.main,
-    },
-  },
-  switch_primary: {
-    '&.Mui-checked': {
-      color: theme.palette.primary,
-    },
-    '&.Mui-checked + .MuiSwitch-track': {
-      backgroundColor: theme.palette.primary,
-    },
-  },
-}));
-
-const pages = [
-  {
-    label: 'Wallet',
-    value: 'wallet',
-  },
-  {
-    label: 'Staking',
-    value: 'staking',
-  },
-];
-
-const HeaderBar = () => {
-  const classes = useStyles();
-  const [page, setPage] = usePage();
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-
-  const handleChange = (event, newValue) => {
-    setPage(newValue);
-  };
-
-  const handleMenuPageClick = (pageValue) => {
-    setAnchorElNav(null);
-    setPage(pageValue);
-  };
-
-  return (
-    <AppBar className={classes.appBar} position="static" color="primary">
-      <Container>
-        <Toolbar
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            padding: 0,
-          }}
-        >
-          <img
-            className={classes.lgLogo}
-            src={logo}
-            alt="Remitano logo"
-          />
-          <Tabs
-            className={classes.lgPagesMenu}
-            value={page}
-            onChange={handleChange}
-            textColor={COLORS_PALETTE.white}
-            indicatorColor="transparent"
-          >
-            {pages.map((page) => (
-              <Tab value={page.value} label={page.label} />
-            ))}
-          </Tabs>
-          <Box className={classes.mdPagesMenu}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={() => setAnchorElNav(null)}
-            >
-              {pages.map((page) => (
-                <MenuItem
-                  key={page.value}
-                  onClick={() => handleMenuPageClick(page.value)}
-                >
-                  <Typography textAlign="center">{page.label}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-          <img className={classes.mdLogo} src={logo} alt="Remitano logo" />
-          <NavigationButtons />
-        </Toolbar>
-      </Container>
-    </AppBar>
-  );
-};
-
-export default function NavigationFrame({ children }) {
-  const classes = useStyles();
-  const isExtensionWidth = useIsExtensionWidth();
-  const [page] = usePage();
-  const { accounts } = useWalletSelector();
-  const selectedAccount = accounts.find((a) => a.isSelected);
-  const { enqueueSnackbar } = useSnackbar();
-
-  const onCopyAddress = () => {
-    navigator.clipboard.writeText(selectedAccount.address.toBase58());
-    enqueueSnackbar(`Copied address`, {
-      variant: 'info',
-      autoHideDuration: 2500,
-    });
-  };
-
-  return (
-    <>
-      <HeaderBar />
-      {selectedAccount && page === 'wallet' && (
-        <div className={classes.header}>
-          <Container fixed maxWidth="md">
-            <div className="bold text-32 mt-48">Main account</div>
-            {isExtensionWidth
-              ? shortenAddress(selectedAccount.address.toBase58())
-              : selectedAccount.address.toBase58()}
-            <span
-              className="pointer color-primary ml-8"
-              onClick={onCopyAddress}
-            >
-              [copy]
-            </span>
-          </Container>
-        </div>
-      )}
-      <main className={classes.content}>{children}</main>
-      {!isExtensionWidth && <Footer />}
-    </>
-  );
-}
-
-function NavigationButtons() {
+export const ThemeSwitcher = () => {
   const classes = useStyles();
   const theme = useTheme();
   const colorMode = React.useContext(ColorModeContext);
-  const isExtensionWidth = useIsExtensionWidth();
-  const [page] = usePage();
-  if (isExtensionPopup) {
-    return null;
-  }
-  let elements = [
+  return (
     <Switch
       onClick={colorMode.toggleColorMode}
       classes={{
@@ -294,8 +66,20 @@ function NavigationButtons() {
       icon={<LightIcon />}
       checkedIcon={<DarkIcon />}
       checked={theme.palette.mode === 'dark'}
-    />,
-  ];
+    />
+  );
+};
+
+function NavigationButtons({ withoutThemeSwitch = false }) {
+  const isExtensionWidth = useIsExtensionWidth();
+  const [page] = usePage();
+
+  if (isExtensionPopup) {
+    return null;
+  }
+
+  let elements = withoutThemeSwitch ? [] : [<ThemeSwitcher />];
+
   if (page === 'wallet') {
     elements = elements.concat([
       isExtension && <ConnectionsButton />,
@@ -405,7 +189,7 @@ function NetworkSelector() {
           setCustomNetworkOpen(false);
         }}
       />
-      <Hidden xsDown>
+      <Hidden smDown>
         <Button
           color="inherit"
           onClick={(e) => setAnchorEl(e.target)}
@@ -414,7 +198,7 @@ function NetworkSelector() {
           {cluster?.label ?? 'Network'}
         </Button>
       </Hidden>
-      <Hidden smUp>
+      <Hidden mdUp>
         <Tooltip title="Select Network" arrow>
           <IconButton color="inherit" onClick={(e) => setAnchorEl(e.target)}>
             <SvgIcon>
@@ -627,37 +411,6 @@ function WalletSelector() {
   );
 }
 
-const useFooterStyles = makeStyles((theme) => ({
-  footer: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    height: 56,
-    minHeight: 56,
-    background: theme.palette.primary,
-    alignItems: 'center',
-  },
-  text: {
-    color: theme.palette.text.main,
-  },
-}));
-
-function Footer() {
-  const classes = useFooterStyles();
-  return (
-    <footer className={classes.footer}>
-      <Container>
-        <div className={classes.text}>
-          <span>© 2022 </span>
-          <Link href="https://remitano.com" target="_blank" rel="noopener">
-            <span className="color-primary">Remitano</span>
-          </Link>
-          <span>. All rights reserved.</span>
-        </div>
-      </Container>
-    </footer>
-  );
-}
-
 function AccountListItem({ account, classes, setAnchorEl, setWalletSelector }) {
   return (
     <MenuItem
@@ -681,3 +434,5 @@ function AccountListItem({ account, classes, setAnchorEl, setWalletSelector }) {
     </MenuItem>
   );
 }
+
+export default NavigationButtons;

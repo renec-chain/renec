@@ -13,28 +13,45 @@ import { PerformanceInfo } from "providers/stats/solanaPerformanceInfo";
 import { StatsNotReady } from "pages/ClusterStatsPage";
 
 export function TpsCard() {
-  return (
-    <div className="card">
-      <div className="card-header">
-        <h4 className="card-header-title">Live Transaction Stats</h4>
-      </div>
-      <TpsCardBody />
-    </div>
-  );
-}
-
-function TpsCardBody() {
   const performanceInfo = usePerformanceInfo();
+  const isStatusNotReady = performanceInfo.status !== ClusterStatsStatus.Ready;
+  const { avgTps } = performanceInfo;
+  const averageTps = Math.round(avgTps).toLocaleString("en-US");
+  const transactionCount = <AnimatedTransactionCount info={performanceInfo} />;
 
-  if (performanceInfo.status !== ClusterStatsStatus.Ready) {
-    return (
-      <StatsNotReady
-        error={performanceInfo.status === ClusterStatsStatus.Error}
-      />
-    );
-  }
-
-  return <TpsBarChart performanceInfo={performanceInfo} />;
+  return (
+    <>
+      <div className="card">
+        <div className="card-header">
+          <h4 className="card-header-title">Live Transaction Stats</h4>
+        </div>
+        {isStatusNotReady && (
+          <StatsNotReady
+            error={performanceInfo.status === ClusterStatsStatus.Error}
+          />
+        )}
+        {!isStatusNotReady && (
+          <TableCardBody>
+            <tr>
+              <td className="w-100">Transaction count</td>
+              <td className="text-lg-end font-monospace">
+                {transactionCount}{" "}
+              </td>
+            </tr>
+            <tr>
+              <td className="w-100">Transactions per second (TPS)</td>
+              <td className="text-lg-end font-monospace">{averageTps} </td>
+            </tr>
+          </TableCardBody>
+        )}
+      </div>
+      {!isStatusNotReady && (
+        <div className="card">
+          <TpsBarChart performanceInfo={performanceInfo} />
+        </div>
+      )}
+    </>
+  );
 }
 
 type Series = "short" | "medium" | "long";
@@ -142,10 +159,9 @@ const CHART_OPTIONS = (historyMaxTps: number): ChartOptions => {
 
 type TpsBarChartProps = { performanceInfo: PerformanceInfo };
 function TpsBarChart({ performanceInfo }: TpsBarChartProps) {
-  const { perfHistory, avgTps, historyMaxTps } = performanceInfo;
+  const { perfHistory, historyMaxTps } = performanceInfo;
   const [series, setSeries] = React.useState<Series>("short");
-  const averageTps = Math.round(avgTps).toLocaleString("en-US");
-  const transactionCount = <AnimatedTransactionCount info={performanceInfo} />;
+
   const seriesData = perfHistory[series];
   const chartOptions = React.useMemo(
     () => CHART_OPTIONS(historyMaxTps),
@@ -159,8 +175,8 @@ function TpsBarChart({ performanceInfo }: TpsBarChartProps) {
     }),
     datasets: [
       {
-        backgroundColor: "#00D192",
-        hoverBackgroundColor: "#00D192",
+        backgroundColor: "#765EBC",
+        hoverBackgroundColor: "#FFFFFF",
         borderWidth: 0,
         data: seriesData.map((val) => val || 0),
       },
@@ -168,51 +184,35 @@ function TpsBarChart({ performanceInfo }: TpsBarChartProps) {
   };
 
   return (
-    <>
-      <TableCardBody>
-        <tr>
-          <td className="w-100">Transaction count</td>
-          <td className="text-lg-end font-monospace">{transactionCount} </td>
-        </tr>
-        <tr>
-          <td className="w-100">Transactions per second (TPS)</td>
-          <td className="text-lg-end font-monospace">{averageTps} </td>
-        </tr>
-      </TableCardBody>
-
-      <hr className="my-0" />
-
-      <div className="card-body py-3">
-        <div className="align-box-row align-items-start justify-content-between">
-          <div className="d-flex justify-content-between w-100">
-            <span className="mb-0 font-size-sm">TPS history</span>
-
-            <div className="font-size-sm">
-              {SERIES.map((key) => (
-                <button
-                  key={key}
-                  onClick={() => setSeries(key)}
-                  className={classNames("btn btn-sm btn-white ms-2", {
-                    active: series === key,
-                  })}
-                >
-                  {SERIES_INFO[key].interval}
-                </button>
-              ))}
-            </div>
+    <div className="card-body py-4">
+      <div className="align-box-row align-items-start justify-content-between">
+        <div className="d-flex justify-content-between w-100">
+          <h3 className="mb-0 card-header-title">TPS history</h3>
+          <div className="font-size-sm">
+            {SERIES.map((key) => (
+              <button
+                key={key}
+                onClick={() => setSeries(key)}
+                className={classNames("btn btn-sm border-base ms-2", {
+                  active: series === key,
+                })}
+              >
+                {SERIES_INFO[key].interval}
+              </button>
+            ))}
           </div>
+        </div>
 
-          <div
-            id="perf-history"
-            className="mt-3 d-flex justify-content-end flex-row w-100"
-          >
-            <div className="w-100">
-              <Bar data={chartData} options={chartOptions} height={80} />
-            </div>
+        <div
+          id="perf-history"
+          className="mt-3 d-flex justify-content-end flex-row w-100"
+        >
+          <div className="w-100">
+            <Bar data={chartData} options={chartOptions} height={80} />
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

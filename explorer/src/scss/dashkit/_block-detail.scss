@@ -1,0 +1,13 @@
+.block-detail {
+  &__back-btn {
+    color: $white;
+
+    &:hover {
+      color: $white;
+    }
+
+    i {
+      font-size: 18px;
+    }
+  }
+}

@@ -1,11 +1,11 @@
-// 
+//
 // variables.scss
 // Extended from Bootstrap
 //
 
 @use 'sass:math';
 
-// 
+//
 // Bootstrap Overrides ===================================
 //
 
@@ -29,6 +29,7 @@ $gray-700: #6E84A3 !default;
 $gray-800: #3B506C !default;
 $gray-900: #283E59 !default;
 $black: #12263F !default;
+$footer-bg: #262636 !default;
 
 /* beautify ignore:start */
 $grays: (
@@ -85,7 +86,7 @@ $theme-colors: map-merge(
     "light": $light,
     "dark": $dark,
     "white": $white
-  ), 
+  ),
 $theme-colors);
 /* beautify ignore:end */
 
@@ -252,7 +253,7 @@ $display-font-sizes: (
   2: 3.25rem,
   3: 2.625rem,
   4: 2rem,
-) !default; 
+) !default;
 /* beautify ignore:end */
 
 $display-font-weight: 600 !default;
@@ -624,7 +625,7 @@ $code-font-size: 87.5% !default;
 $code-color: $blue !default;
 
 
-// 
+//
 // Theme =====================================
 //
 
@@ -712,7 +713,6 @@ $navbar-vibrant-color: fade-out($white, .3) !default;
 $navbar-vibrant-hover-color: $white !default;
 $navbar-vibrant-active-color: $white !default;
 $navbar-vibrant-brand-filter: brightness(0) invert(1) !default;
-$navbar-vibrant-toggler-icon-bg: str-replace(url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='#{$navbar-vibrant-color}' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"), "#", "%23") !default;
 
 $navbar-dark-bg: $gray-800-dark !default;
 $navbar-dark-border-color: $gray-800-dark !default;
@@ -940,7 +940,7 @@ $path-to-fonts: '../fonts' !default;
 $path-to-img: '../img' !default;
 
 
-// 
+//
 // Utilities =====================================
 //
 

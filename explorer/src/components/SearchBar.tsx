@@ -1,7 +1,13 @@
 import React from "react";
 import bs58 from "bs58";
 import { useHistory, useLocation } from "react-router-dom";
-import Select, { InputActionMeta, ActionMeta, ValueType } from "react-select";
+import Select, {
+  InputActionMeta,
+  ActionMeta,
+  ValueType,
+  components,
+  ValueContainerProps,
+} from "react-select";
 import StateManager from "react-select";
 import {
   LOADER_IDS,
@@ -13,6 +19,7 @@ import {
 import { Cluster, useCluster } from "providers/cluster";
 import { useTokenRegistry } from "providers/mints/token-registry";
 import { TokenInfoMap } from "@ngocbv/rpl-token-registry";
+import { ReactComponent as SearchIcon } from "img/icons/search.svg";
 
 export function SearchBar() {
   const [search, setSearch] = React.useState("");
@@ -62,7 +69,11 @@ export function SearchBar() {
               input: (style) => ({ ...style, width: "100%" }),
             }}
             onInputChange={onInputChange}
-            components={{ DropdownIndicator }}
+            components={{
+              DropdownIndicator,
+              IndicatorSeparator,
+              ValueContainer,
+            }}
             classNamePrefix="search-bar"
           />
         </div>
@@ -289,10 +300,22 @@ function buildOptions(
   return options;
 }
 
-function DropdownIndicator() {
+const DropdownIndicator = () => null;
+
+const IndicatorSeparator = () => null;
+
+const ValueContainer = ({
+  children,
+  ...props
+}: ValueContainerProps<any, any>) => {
   return (
-    <div className="search-indicator">
-      <span className="fe fe-search"></span>
-    </div>
+    components.ValueContainer && (
+      <components.ValueContainer {...props}>
+        <div className="d-flex flex-grow-1 align-items-center">
+          <SearchIcon />
+          {children}
+        </div>
+      </components.ValueContainer>
+    )
   );
-}
+};

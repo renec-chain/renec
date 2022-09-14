@@ -171,11 +171,6 @@
   }
 }
 
-.navbar-dark.navbar-vibrant .navbar-toggler-icon {
-  background-image: $navbar-vibrant-toggler-icon-bg;
-}
-
-
 // Navbar light
 
 .navbar-light {
@@ -211,6 +206,10 @@
   border-top-color: $navbar-light-divider-color;
 }
 
+.navbar-light .navbar-toggler {
+  color: $white;
+  font-size: 28px;
+}
 
 // Navbar brand
 
@@ -248,26 +247,15 @@
 
 // Navbar navigaton
 
-.navbar-nav {
-  margin-left: -$navbar-padding-x;
-  margin-right: -$navbar-padding-x;
-}
-
 .navbar-nav .nav-link {
   padding-left: $navbar-padding-x;
   padding-right: $navbar-padding-x;
+  color: $gray-600-dark !important;
 
   &.active {
-    position: relative;
-
-    &:before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: $nav-link-padding-y;
-      bottom: $nav-link-padding-y;
-      border-left: 2px solid $primary;
-    }
+    color: $white !important;
+    border-radius: 4px;
+    background: $gray-500-dark;
   }
 }
 
@@ -311,7 +299,7 @@
 
 
 // Expanded
-// 
+//
 // Expanded navbar specific styles
 
 .navbar-expand {
@@ -348,7 +336,7 @@
 
           // Increase $nav-link-padding-y value to align the underline
           // with the bottom of the navbar
-          padding: .625rem $navbar-nav-link-padding-x;
+          padding: 0.4rem $navbar-nav-link-padding-x;
 
           &.active {
             position: relative;
@@ -516,7 +504,7 @@
 
 
   // Expanded
-  // 
+  //
   // Expanded navbar specific styles
 
   &.navbar-expand {
@@ -588,14 +576,6 @@
 
             &.active {
 
-              &:before {
-                top: $nav-link-padding-y;
-                bottom: $nav-link-padding-y;
-                left: 0;
-                right: auto;
-                border-left: 2px solid $primary;
-                border-bottom: 0;
-              }
             }
           }
 
@@ -651,7 +631,7 @@
 .navbar-vertical-sm {
 
   // Expanded
-  // 
+  //
   // Expanded navbar specific styles
 
   &.navbar-expand {
@@ -717,4 +697,14 @@
       }
     }
   }
+}
+
+.nav-tabs .nav-link {
+  color: $white;
+  font-weight: bold;
+}
+
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+  border-bottom-color: $primary;
+  color: $primary;
 }

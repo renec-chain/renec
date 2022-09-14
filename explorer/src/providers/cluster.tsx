@@ -23,10 +23,7 @@ export enum Cluster {
   Custom,
 }
 
-export const CLUSTERS = [
-  Cluster.Testnet,
-  Cluster.Custom,
-];
+export const CLUSTERS = [Cluster.Testnet, Cluster.Custom];
 
 export function clusterSlug(cluster: Cluster): string {
   switch (cluster) {

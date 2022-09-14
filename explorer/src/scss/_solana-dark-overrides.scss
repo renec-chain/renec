@@ -27,16 +27,22 @@ ul.log-messages {
 
 .search-bar__placeholder {
   color: $input-placeholder-color !important;
+  margin-left: 34px !important;
+
+  @include media-breakpoint-down(sm) {
+    font-size: 0.825rem;
+  }
 }
 
 .search-bar__control {
   background-color: $gray-800-dark !important;
-  border-color: $card-outline-color !important;
+  border-color: $border-color !important;
   box-shadow: $card-box-shadow !important;
   min-height: 52px !important;
 
   .search-bar__input {
     color: $white !important;
+    margin-left: 10px !important;
   }
 }
 

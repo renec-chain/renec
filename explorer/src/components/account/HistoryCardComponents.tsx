@@ -24,7 +24,7 @@ export function HistoryCardHeader({
     <div className="card-header align-items-center">
       <h3 className="card-header-title">{title}</h3>
       <button
-        className="btn btn-white btn-sm"
+        className="btn border-base btn-sm"
         disabled={fetching}
         onClick={() => refresh()}
       >

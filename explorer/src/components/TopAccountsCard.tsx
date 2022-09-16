@@ -193,11 +193,7 @@ const FilterDropdown = ({ filter, toggle, show }: DropdownProps) => {
   const FILTERS: Filter[] = ["all", null, "nonCirculating"];
   return (
     <div className="dropdown">
-      <button
-        className="btn btn-white btn-sm dropdown-toggle"
-        type="button"
-        onClick={toggle}
-      >
+      <button className="btn border-base dropdown-toggle" onClick={toggle}>
         {filterTitle(filter)}
       </button>
       <div className={`dropdown-menu-end dropdown-menu${show ? " show" : ""}`}>

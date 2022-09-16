@@ -1,9 +1,9 @@
-// 
+//
 // buttons.scss
 // Extended from Bootstrap
 //
 
-// 
+//
 // Bootstrap Overrides =====================================
 //
 
@@ -37,7 +37,7 @@
 .btn-group-toggle .btn-white:not(:disabled):not(.disabled).active,
 .btn-group-toggle .btn-check:checked + .btn-white {
   background-color: $input-bg;
-  border-color: $input-focus-border-color;
+  //border-color: $input-focus-border-color;
   box-shadow: none;
   color: $primary;
 }

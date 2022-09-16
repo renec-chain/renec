@@ -473,3 +473,7 @@ p.updated-time {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.btn-white, .btn-white.disabled, .btn-light.disabled, btn-light:disabled {
+  border-color: $border-color;
+}

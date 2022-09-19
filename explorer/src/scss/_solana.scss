@@ -12,7 +12,7 @@ pre {
 }
 
 .badge.bg-primary, .btn-primary {
-  color: $gray-900;
+  color: $white;
 }
 
 .table > :not(:first-child) {
@@ -373,19 +373,47 @@ pre.json-wrap {
   max-width: 36rem;
 }
 
+.cluster-stats-page {
+  flex: 1;
+  background-color: $gray-800-dark;
+
+  &__gradient-bg {
+    height: 74px;
+    background-color: $body-bg;
+  }
+}
+
 .staking-card {
   h1 {
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
+    line-height: 36px;
+
     small {
       font-size: 1rem;
     }
   }
+
   h5 {
     margin-bottom: 0;
   }
+
+  h4 {
+    color: #6E6E7C;
+    margin-bottom: 0.5rem;
+  }
+
+  h4, h5 {
+    line-height: 24px;
+  }
+
   em {
     font-style: normal;
     color: $primary;
+  }
+
+  .card {
+    min-height: 148px;
+    background-color: $gray-800-dark;
   }
 }
 
@@ -444,4 +472,8 @@ p.updated-time {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.btn-white, .btn-white.disabled, .btn-light.disabled, btn-light:disabled {
+  border-color: $border-color;
 }

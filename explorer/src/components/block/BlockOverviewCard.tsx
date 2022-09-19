@@ -183,23 +183,21 @@ function MoreSection({
 }) {
   return (
     <>
-      <div className="container">
-        <div className="header">
-          <div className="header-body pt-0">
-            <ul className="nav nav-tabs nav-overflow header-tabs">
-              {TABS.map(({ title, slug, path }) => (
-                <li key={slug} className="nav-item">
-                  <NavLink
-                    className="nav-link"
-                    to={clusterPath(`/block/${slot}${path}`)}
-                    exact
-                  >
-                    {title}
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
-          </div>
+      <div className="header">
+        <div className="header-body pt-0">
+          <ul className="nav nav-tabs nav-overflow header-tabs">
+            {TABS.map(({ title, slug, path }) => (
+              <li key={slug} className="nav-item">
+                <NavLink
+                  className="nav-link"
+                  to={clusterPath(`/block/${slot}${path}`)}
+                  exact
+                >
+                  {title}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
       {tab === undefined && <BlockHistoryCard block={block} />}

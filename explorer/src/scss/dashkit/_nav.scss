@@ -1,38 +1,25 @@
-// 
+//
 // nav.scss
 // Extended from Bootstrap
 //
 
 @use 'sass:math';
 
-// 
+//
 // Bootstrap Overrides =====================================
 //
 
 // Changing nav tabs to be bottom highlight style
 
-.nav-tabs {
+.navbar-collapse {
 
   .nav-item {
     margin-left: $nav-tabs-link-margin-x;
     margin-right: $nav-tabs-link-margin-x;
-  }
 
-  .nav-link {
-    padding: $nav-tabs-link-padding-y 0;
-    border-bottom: $nav-tabs-link-active-border-width solid transparent;
-    border-left-width: 0;
-    border-right-width: 0;
-    border-top-width: 0;
-    
-    &:not(.active) {
-      color: $gray-600;
-
-      &:hover {
-        color: $gray-700;
-      }
+    @include media-breakpoint-down(sm) {
+      margin: 0;
     }
-
   }
 
   .nav-item:first-child {
@@ -51,7 +38,7 @@
 }
 
 
-// 
+//
 // Theme =====================================
 //
 
@@ -82,7 +69,7 @@
     margin-left: $nav-tabs-sm-link-margin-x;
     margin-right: $nav-tabs-sm-link-margin-x;
   }
-  
+
   .nav-link {
     // Calculates the exact padding necessary to vertically fill the .card-header
     padding-top: (math.div($font-size-base, $nav-tabs-sm-font-size) * $nav-tabs-link-padding-y);

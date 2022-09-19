@@ -18,7 +18,6 @@ ul, ol {
   padding-left: 2.5rem;
 }
 
-
 //
 // Remove the cancel buttons in Chrome and Safari on macOS.
 //
@@ -26,3 +25,66 @@ ul, ol {
 [type="search"]::-webkit-search-cancel-button {
   -webkit-appearance: none;
 }
+
+.navbar {
+  padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
+}
+
+.main-content {
+
+  &__title {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 40px;
+
+    @include media-breakpoint-down(sm) {
+      font-size: 26px;
+      line-height: 32px;
+      margin: 0;
+    }
+  }
+}
+
+a, .fe.fe-copy {
+  color: $primary;
+}
+
+a {
+  &:hover {
+    color: $primary;
+  }
+}
+
+.text-primary {
+  color: $primary;
+}
+
+.text-muted {
+  color: $gray-600-dark !important;
+}
+
+.border-base {
+  border: 1px solid $border-color;
+}
+
+.card-header {
+  border-bottom: none;
+}
+
+.table {
+  border-collapse: collapse;
+}
+
+.card-body .btn {
+  background-color: $gray-500-dark;
+
+  &.active {
+    background-color: transparent;
+  }
+}
+
+.btn-white {
+  border-color: $border-color;
+}
+

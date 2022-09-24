@@ -94,7 +94,7 @@ else
     # solana-bench-tps
     solana-faucet
     # solana-gossip
-    # solana-ledger-tool
+    solana-ledger-tool # TODO: change to renec-ledger-tool
     # solana-log-analyzer
     # solana-net-shaper
   )

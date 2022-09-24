@@ -343,7 +343,7 @@ impl ProgramSubCommands for App<'_, '_> {
                 )
                 .subcommand(
                     SubCommand::with_name("close")
-                        .about("Close a program or buffer account and withdraw all lamports")
+                        .about("Close a program or buffer account and withdraw all lamports. This command will destroy the program completely and CAN'T BE RECOVERED")
                         .arg(
                             Arg::with_name("account")
                                 .index(1)

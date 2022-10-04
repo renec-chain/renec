@@ -250,7 +250,7 @@ function DelegationCard({
 }
 
 function AuthoritiesCard({ meta }: { meta: StakeMeta }) {
-  const hasLockup = meta.lockup.unixTimestamp > 0;
+  const hasLockup = meta.lockup.unixTimestamp > 0 || meta.lockup.epoch > 0;
   return (
     <div className="card">
       <div className="card-header">
@@ -274,12 +274,26 @@ function AuthoritiesCard({ meta }: { meta: StakeMeta }) {
         </tr>
 
         {hasLockup && (
-          <tr>
-            <td>Lockup Authority Address</td>
-            <td className="text-lg-end">
-              <Address pubkey={meta.lockup.custodian} alignRight link />
-            </td>
-          </tr>
+          <>
+            <tr>
+              <td>Lockup Authority Address</td>
+              <td className="text-lg-end">
+                <Address pubkey={meta.lockup.custodian} alignRight link />
+              </td>
+            </tr>
+            <tr>
+              <td>Activation Epoch</td>
+              <td className="text-lg-end">
+                {meta.lockup.epoch}
+              </td>
+            </tr>
+            <tr>
+              <td>Activation Time</td>
+              <td className="text-lg-end">
+                {meta.lockup.unixTimestamp}
+              </td>
+            </tr>
+          </>
         )}
       </TableCardBody>
     </div>

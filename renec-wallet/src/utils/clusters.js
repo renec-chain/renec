@@ -2,6 +2,12 @@ import { clusterApiUrl } from '@solana/web3.js';
 
 export const CLUSTERS = [
   {
+    name: 'mainnet-beta',
+    apiUrl: "https://api-mainnet-beta.renec.foundation:8899",
+    label: 'Mainnet Beta',
+    clusterSlug: 'mainnet-beta',
+  },
+  {
     name: 'testnet',
     apiUrl: "https://api-testnet.renec.foundation:8899",
     label: 'Testnet',

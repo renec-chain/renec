@@ -16,7 +16,7 @@ const ConnectionContext = React.createContext<{
   connection: Connection;
 } | null>(null);
 
-export const MAINNET_URL = 'https://solana-api.projectserum.com';
+export const MAINNET_URL = 'https://api-mainnet-beta.renec.foundation:8899';
 export const TESTNET_URL = 'https://api-testnet.renec.foundation:8899';
 // No backup url for now. Leave the variable to not break wallets that
 // have saved the url in their local storage, previously.

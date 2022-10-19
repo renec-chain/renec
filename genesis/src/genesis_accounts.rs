@@ -6,50 +6,127 @@ use {
     solana_sdk::{genesis_config::GenesisConfig, native_token::LAMPORTS_PER_SOL},
 };
 
-// 20% for first year, then monthly for 5 years
-const UNLOCKS_20_AT_BEGINNING: UnlockInfo = UnlockInfo {
-    cliff_fraction: 0.2,
+// monthly for 5 years
+const UNLOCKS_MONTHLY_FOR_5_YEARS: UnlockInfo = UnlockInfo {
+    cliff_fraction: 0.01666666667,
     cliff_years: 0.0,
-    unlocks: 60,
-    unlock_years: 5.0,
-    custodian: "ELEGzPKyDtwBTJXkxSFAC3qQcmaYgvWRBAz6tsvxznCT",
+    unlocks: 59,
+    unlock_years: 0.08333333333,
+    custodian: "8iQ7WaWL2Ez2PUd4rHcY1L8KPmz22YeMUUC45YBVrdab",
+};
+// monthly for 2 years
+const UNLOCKS_MONTHLY_FOR_2_YEARS: UnlockInfo = UnlockInfo {
+    cliff_fraction: 0.04166666667,
+    cliff_years: 0.0,
+    unlocks: 23,
+    unlock_years: 0.08333333333,
+    custodian: "8iQ7WaWL2Ez2PUd4rHcY1L8KPmz22YeMUUC45YBVrdab",
+};
+// monthly for 6 months
+const UNLOCKS_MONTHLY_FOR_6_MONTHS: UnlockInfo = UnlockInfo {
+    cliff_fraction: 0.1666666667,
+    cliff_years: 0.0,
+    unlocks: 5,
+    unlock_years: 0.08333333333,
+    custodian: "8iQ7WaWL2Ez2PUd4rHcY1L8KPmz22YeMUUC45YBVrdab",
+};
+// unlock immediately
+const UNLOCKS_IMMEDIATELY: UnlockInfo = UnlockInfo {
+    cliff_fraction: 1.0,
+    cliff_years: 0.0,
+    unlocks: 0,
+    unlock_years: 0.0,
+    custodian: "8iQ7WaWL2Ez2PUd4rHcY1L8KPmz22YeMUUC45YBVrdab",
+};
+// unlock immediately after 3 years
+const UNLOCKS_AFTER_3_YEARS: UnlockInfo = UnlockInfo {
+    cliff_fraction: 1.0,
+    cliff_years: 3.0,
+    unlocks: 0,
+    unlock_years: 0.0,
+    custodian: "8iQ7WaWL2Ez2PUd4rHcY1L8KPmz22YeMUUC45YBVrdab",
 };
 // Yearly for 10 years
 const UNLOCKS_IN_10_YEARS: UnlockInfo = UnlockInfo {
     cliff_fraction: 0.1,
-    cliff_years: 1.0,
+    cliff_years: 0.0,
     unlocks: 9,
-    unlock_years: 9.0,
-    custodian: "ELEGzPKyDtwBTJXkxSFAC3qQcmaYgvWRBAz6tsvxznCT",
+    unlock_years: 1.0,
+    custodian: "8iQ7WaWL2Ez2PUd4rHcY1L8KPmz22YeMUUC45YBVrdab",
 };
 
-// TODO: 40_000_000 is temporary, when mainnet is launched, edit this number
-const MINERS_RENEC_AMOUNT: u64 = 40_000_000;
-const REMITANO_RENEC_AMOUNT: u64 = (MINERS_RENEC_AMOUNT as f64 * 0.25) as u64;
-const DAPP_SUPPORT_RENEC_AMOUNT: u64 = ((MINERS_RENEC_AMOUNT + REMITANO_RENEC_AMOUNT) as f64 * 0.1046221254) as u64;
+const VERIFIED_MINERS_AMOUNT: f64 = 35_008_728.0;
+const UNVERIFIED_MINERS_AMOUNT: f64 = 10_079_131.0;
+const REMITANO_GIVEAWAY_AMOUNT: f64 = 566_718.0;
+const TOTAL_MINERS_AMOUNT: f64 = VERIFIED_MINERS_AMOUNT + REMITANO_GIVEAWAY_AMOUNT;
+const MINERS_AMOUNT: f64 = VERIFIED_MINERS_AMOUNT + UNVERIFIED_MINERS_AMOUNT;
+const REMITANO_RENEC_AMOUNT: f64 = MINERS_AMOUNT * 0.25 - REMITANO_GIVEAWAY_AMOUNT;
+const LIQUIDITY_AMOUNT: f64 = MINERS_AMOUNT * 0.05;
+const BURST_MARKETING_AMOUNT: f64 = MINERS_AMOUNT * 0.05;
+const LONGTERM_MARKETING_AMOUNT: f64 = MINERS_AMOUNT * 0.1;
+const TREASURY_AMOUNT: f64 = MINERS_AMOUNT * 0.2;
+const DAPP_SUPPORT_RENEC_AMOUNT: f64 = (TOTAL_MINERS_AMOUNT + REMITANO_RENEC_AMOUNT + LIQUIDITY_AMOUNT + LIQUIDITY_AMOUNT + BURST_MARKETING_AMOUNT + LONGTERM_MARKETING_AMOUNT + TREASURY_AMOUNT) * 0.1;
 
-pub const REMITANO_STAKER_INFOS: &[StakerInfo] = &[
-    StakerInfo {
-        name: "remitano",
-        staker: "HyEVmBC7gYXaMzDCibu6Ahxp9A78XChoBGfpGJMk3Yq2",
-        lamports: REMITANO_RENEC_AMOUNT * LAMPORTS_PER_SOL,
-        withdrawer: Some("8XBnv8o7oqV1Cx5ZCm67pSgWjo4CSSaazJCnB8yg6Q6T"),
-    },
-];
-pub const MINERS_STAKER_INFOS: &[StakerInfo] = &[
+pub const MINERS_AND_REMITANO_INFOS: &[StakerInfo] = &[
     StakerInfo {
         name: "miners",
-        staker: "2NbSRu4EFyQWwQrtAyC66Qqm5eaeUxjUD8TWyUnRpUfC",
-        lamports: MINERS_RENEC_AMOUNT * LAMPORTS_PER_SOL,
-        withdrawer: Some("7GYXsHnr4CL2X6k5f1R6z694vPMyNgFu53vAQ69NsqxT"),
+        staker: "FKtEiKsTVjXiccHTxzHDyUkkzE9aTqoJxzWh5oY3kuno",
+        lamports: TOTAL_MINERS_AMOUNT as u64 * LAMPORTS_PER_SOL,
+        withdrawer: Some("BDU8UZArkiUVzu9ReyXUaefqYNEZwJE7q2Ju95vWo6ZC"),
+    },
+    StakerInfo {
+        name: "remitano",
+        staker: "HsVaAaqQtweccoH8WGnGhSWpUgjk1Gmy5oRxbqq9eaow",
+        lamports: REMITANO_RENEC_AMOUNT as u64 * LAMPORTS_PER_SOL,
+        withdrawer: Some("4GD5xCfSJn97d1BCHVj47jsngdd3fJo7RWap8WxRKaBZ"),
+    },
+];
+pub const LIQUIDITY_INFOS: &[StakerInfo] = &[
+    StakerInfo {
+        name: "liquidity",
+        staker: "EufLViubSkHoFVrKjBrbpAkdJg7sGZYmYuCMEahWrGJ4",
+        lamports: LIQUIDITY_AMOUNT as u64 * LAMPORTS_PER_SOL,
+        withdrawer: Some("8t8WduDHEwcHFVyL9t5GQnWTEPc12L352xG6CAJuKgoU"),
+    },
+];
+pub const REMITANO_BOUGHT_LIQUIDITY_INFOS: &[StakerInfo] = &[
+    StakerInfo {
+        name: "remitano bought liquidity",
+        staker: "Bujir72W7XjkSuMB2N5MVeskHvfKAnBwETAseXJUV6Xs",
+        lamports: (LIQUIDITY_AMOUNT as u64 - 1_000_000) * LAMPORTS_PER_SOL,
+        withdrawer: Some("3aJPDrQqDWDHXkzf9Zxic9GFrxbxdFAsCQAHVm4RXtDy"),
+    },
+];
+pub const BURST_MARKETING_INFOS: &[StakerInfo] = &[
+    StakerInfo {
+        name: "burst marketing",
+        staker: "FQYPWNSNTzqcMDKJ2Rqi8vgHWaRACvvUNkb3ogra9Rje",
+        lamports: BURST_MARKETING_AMOUNT as u64 * LAMPORTS_PER_SOL,
+        withdrawer: Some("6cdNkCWqazSAaHbUPGg4m7JKZouYdvMGRTjNWHmf8V5z"),
+    },
+];
+pub const LONGTERM_MARKETING_INFOS: &[StakerInfo] = &[
+    StakerInfo {
+        name: "longterm marketing",
+        staker: "25Cv2HQQdafjdkngAV1qBtuqkc2m9qXMmw37KGEtncQL",
+        lamports: LONGTERM_MARKETING_AMOUNT as u64 * LAMPORTS_PER_SOL,
+        withdrawer: Some("GgKdSn6ih1iE9VmyeLEicniAYwgnRj7tbJwRAF5qyvNT"),
+    },
+];
+pub const TREASURY_INFOS: &[StakerInfo] = &[
+    StakerInfo {
+        name: "treasury",
+        staker: "676ys3xDJgTLe5MtVAQJ8FnrWJA7kSsfkcFGQDAPZnSa",
+        lamports: TREASURY_AMOUNT as u64 * LAMPORTS_PER_SOL,
+        withdrawer: Some("39fT5Xbn2CXqPB2SqU9aMis1UA1fdwFZhqKgKntVjifz"),
     },
 ];
 pub const DAPPS_STAKER_INFOS: &[StakerInfo] = &[
     StakerInfo {
         name: "dapps support",
-        staker: "96b1mmsrYYtDk2D1nWU5sA4pWu3yMhx4btFa8nrgf4qB",
-        lamports: DAPP_SUPPORT_RENEC_AMOUNT * LAMPORTS_PER_SOL,
-        withdrawer: Some("Gx8MBH5axvswttbHdx7ZckmeE6R8Vohn1V9tCLQG3TQ9"),
+        staker: "G1rkVu5JfWudnAaDCeDvr95eLQ4LdRWq4cSjyNjDVNwj",
+        lamports: DAPP_SUPPORT_RENEC_AMOUNT as u64 * LAMPORTS_PER_SOL,
+        withdrawer: Some("4PMtuSiZ8qzQT65NSmCwn1dXuHF55pjGyGtaMFWr8LfX"),
     },
 ];
 
@@ -64,16 +141,36 @@ fn add_stakes(
         .sum::<u64>()
 }
 
-pub fn add_genesis_accounts(genesis_config: &mut GenesisConfig, mut issued_lamports: u64) {
+pub fn add_genesis_accounts(genesis_config: &mut GenesisConfig, mut _issued_lamports: u64) {
     add_stakes(
         genesis_config,
-        REMITANO_STAKER_INFOS,
-        &UNLOCKS_20_AT_BEGINNING,
+        MINERS_AND_REMITANO_INFOS,
+        &UNLOCKS_MONTHLY_FOR_5_YEARS,
     );
     add_stakes(
         genesis_config,
-        MINERS_STAKER_INFOS,
-        &UNLOCKS_20_AT_BEGINNING,
+        LIQUIDITY_INFOS,
+        &UNLOCKS_IMMEDIATELY,
+    );
+    add_stakes(
+        genesis_config,
+        REMITANO_BOUGHT_LIQUIDITY_INFOS,
+        &UNLOCKS_MONTHLY_FOR_6_MONTHS,
+    );
+    add_stakes(
+        genesis_config,
+        BURST_MARKETING_INFOS,
+        &UNLOCKS_MONTHLY_FOR_2_YEARS,
+    );
+    add_stakes(
+        genesis_config,
+        LONGTERM_MARKETING_INFOS,
+        &UNLOCKS_MONTHLY_FOR_5_YEARS,
+    );
+    add_stakes(
+        genesis_config,
+        TREASURY_INFOS,
+        &UNLOCKS_AFTER_3_YEARS,
     );
     add_stakes(
         genesis_config,
@@ -92,12 +189,22 @@ mod tests {
 
         add_genesis_accounts(&mut genesis_config, 0);
 
+        assert_eq!(MINERS_AND_REMITANO_INFOS[0].lamports, 35_575_446 * LAMPORTS_PER_SOL);
+        assert_eq!(MINERS_AND_REMITANO_INFOS[1].lamports, 10_705_246 * LAMPORTS_PER_SOL);
+        assert_eq!(LIQUIDITY_INFOS[0].lamports, 2_254_392 * LAMPORTS_PER_SOL);
+        assert_eq!(REMITANO_BOUGHT_LIQUIDITY_INFOS[0].lamports, 1_254_392 * LAMPORTS_PER_SOL);
+        assert_eq!(BURST_MARKETING_INFOS[0].lamports, 2_254_392 * LAMPORTS_PER_SOL);
+        assert_eq!(LONGTERM_MARKETING_INFOS[0].lamports, 4_508_785 * LAMPORTS_PER_SOL);
+        assert_eq!(TREASURY_INFOS[0].lamports, 9_017_571 * LAMPORTS_PER_SOL);
+        assert_eq!(DAPPS_STAKER_INFOS[0].lamports, 6_657_022 * LAMPORTS_PER_SOL);
+        assert_eq!(genesis_config.accounts.len(), 230);
+
         let lamports = genesis_config
             .accounts
             .iter()
             .map(|(_, account)| account.lamports)
             .sum::<u64>();
 
-        assert_eq!(55_231_106 * LAMPORTS_PER_SOL, lamports);
+        assert_eq!(lamports, 72_227_246 * LAMPORTS_PER_SOL);
     }
 }

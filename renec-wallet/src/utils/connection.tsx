@@ -24,7 +24,7 @@ export const MAINNET_BACKUP_URL = 'https://solana-api.projectserum.com/';
 export function ConnectionProvider({ children }) {
   const [endpoint, setEndpoint] = useLocalStorageState(
     'connectionEndpoint',
-    TESTNET_URL,
+    MAINNET_URL,
   );
 
   const connection = useMemo(() => new Connection(endpoint, 'recent'), [

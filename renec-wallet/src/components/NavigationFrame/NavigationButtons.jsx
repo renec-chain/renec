@@ -231,9 +231,7 @@ function NetworkSelector() {
                 <CheckIcon fontSize="small" />
               ) : null}
             </ListItemIcon>
-            {cluster.name === 'mainnet-beta-backup'
-              ? 'Mainnet Beta Backup'
-              : cluster.apiUrl}
+            {cluster.label || cluster.apiUrl}
           </MenuItem>
         ))}
         <MenuItem

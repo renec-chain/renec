@@ -7,6 +7,7 @@ import { InputAdornment, Typography } from '@material-ui/core';
 import { useWallet } from '../utils/wallet';
 import { Icon, TextInput } from '../components/base';
 import { useSendTransaction } from '../utils/notifications';
+import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 
 export default function CreateStakingDialog({
   open,
@@ -19,6 +20,8 @@ export default function CreateStakingDialog({
   const [loading, setLoading] = useState(false);
   const { amount: balanceAmount, decimals, tokenSymbol } = balanceInfo;
   const [sendTransaction, sending] = useSendTransaction();
+  const STAKING_FEE_IN_LAMPORTS = 3000000;
+  const userMaxStakeAmount = balanceAmount - STAKING_FEE_IN_LAMPORTS > 0 ? balanceAmount - STAKING_FEE_IN_LAMPORTS : 0;
 
   const onSubmit = async () => {
     setLoading(true);
@@ -31,7 +34,7 @@ export default function CreateStakingDialog({
   };
 
   const balanceAmountToUserAmount = (balanceAmount, decimals) => {
-    return (balanceAmount / Math.pow(10, decimals)).toFixed(decimals);
+    return (balanceAmount / LAMPORTS_PER_SOL).toFixed(decimals);
   };
 
   return (
@@ -78,7 +81,7 @@ export default function CreateStakingDialog({
                 <Button
                   onClick={() =>
                     setAmount(
-                      balanceAmountToUserAmount(balanceAmount, decimals),
+                      balanceAmountToUserAmount(userMaxStakeAmount, decimals),
                     )
                   }
                 >
@@ -94,10 +97,10 @@ export default function CreateStakingDialog({
           <span
             className="bold"
             onClick={() => {
-              setAmount(balanceAmountToUserAmount(balanceAmount, decimals));
+              setAmount(balanceAmountToUserAmount(userMaxStakeAmount, decimals));
             }}
           >
-            {balanceAmountToUserAmount(balanceAmount, decimals)}
+            {balanceAmountToUserAmount(userMaxStakeAmount, decimals)}
           </span>
           <span> {tokenSymbol || 'RENEC'}</span>
         </div>
@@ -111,7 +114,7 @@ export default function CreateStakingDialog({
           disabled={
             Number(amount) <= 0 ||
             Number(amount) >
-              Number(balanceAmountToUserAmount(balanceAmount, decimals)) ||
+              Number(balanceAmountToUserAmount(userMaxStakeAmount, decimals)) ||
             loading
           }
         >

@@ -41,6 +41,7 @@ import MergeAccountsDialog from './MergeAccountsDialog';
 import DebugButtons from './DebugButtons';
 import { RButton, Icon, Alert } from './base';
 import Card from '@material-ui/core/Card';
+import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 
 const balanceFormat = new Intl.NumberFormat(undefined, {
   minimumFractionDigits: 4,
@@ -277,10 +278,10 @@ export default function BalancesList() {
       <div className={classes.mainWallet}>
         <div>
           <div className="mb-8">
-            {allTokensLoaded && (
+            {(
               <>
-                <span className="bold text-20">{totalUsdValue.toFixed(2)}</span>
-                <span>{' USD'}</span>
+                <span className="bold text-20">{(balanceInfo.amount / LAMPORTS_PER_SOL).toFixed(4)}</span>
+                <span>{' RENEC'}</span>
               </>
             )}
           </div>

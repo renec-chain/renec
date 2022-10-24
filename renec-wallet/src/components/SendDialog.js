@@ -382,7 +382,7 @@ function SendSplDialog({ onClose, publicKey, balanceInfo, onSubmitRef }) {
                 onChange={(e) => {console.log("changing", overrideDestinationCheck);setOverrideDestinationCheck(!overrideDestinationCheck)}}
               />
               }
-              label="I'm aware that this address has no funds"
+              label="I'm aware that this address has no funds or this might be an exchange wallet"
             />
           </div>
         )}

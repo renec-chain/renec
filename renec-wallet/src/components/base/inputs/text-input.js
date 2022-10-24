@@ -26,6 +26,7 @@ const TextInput = ({
   textarea,
   value,
   endAdornment,
+  type = "text"
 }) => {
   const showMessage = hasError || hasWarning;
   return (
@@ -43,23 +44,23 @@ const TextInput = ({
       <label className="mb-8" htmlFor={id}>{label}</label>
       <div className="zoned" style={styles.textZone}>
         {textarea && (
-          <textarea 
-            type="text" 
+          <textarea
+            type="text"
             id={id}
             value={value}
-            placeholder={placeholder} 
-            disabled={isDisabled} 
-            onChange={onChange} 
+            placeholder={placeholder}
+            disabled={isDisabled}
+            onChange={onChange}
           />
         )}
         {!textarea && (
-          <input 
-            type="text" 
-            id={id} 
+          <input
+            type={type}
+            id={id}
             value={value}
-            placeholder={placeholder} 
-            disabled={isDisabled} 
-            onChange={onChange} 
+            placeholder={placeholder}
+            disabled={isDisabled}
+            onChange={onChange}
           />
         )}
         <div style={styles.endAdornment}>{endAdornment}</div>
@@ -82,6 +83,7 @@ TextInput.propTypes = {
   grayTheme: PropTypes.bool,
   textarea: PropTypes.bool,
   value: PropTypes.string,
+  type: PropTypes.string,
 };
 
 export { TextInput };

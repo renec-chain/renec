@@ -12,6 +12,24 @@ A Proof of Stake \(PoS\), \(i.e. using in-protocol asset, RENEC, to provide secu
 
 While many of the details of the specific implementation are currently under consideration and are expected to come into focus through specific modeling studies and parameter exploration on the Renec testnet, we outline here our current thinking on the main components of the PoS system. Much of this thinking is based on the current status of Casper FFG, with optimizations and specific attributes to be modified as is allowed by Renec's Proof of History \(PoH\) blockchain data structure.
 
+### Staking Yield [%]
+
+Inflation rate is the Renec protocol will automatically create new tokens on a predetermined inflation schedule (discussed below). The _Inflation Rate [%]_ is the annualized growth rate of the _Total Current Supply_ at any point in time. **In RENEC blockchain inflation rate is fixed at 4.5% a year.**
+
+The rate of return (aka _interest_) earned on RENEC staked on the network. It is often quoted as an annualized rate (e.g. "the network _staking yield_ is currently $10\%$ per year").
+
+- _Staking yield_ is of great interest to validators and token holders who wish to delegate their tokens to avoid token dilution due to inflation (the extent of which is discussed below).
+- $100\%$ of inflationary issuances are to be distributed to staked token-holders in proportion to their staked RENEC and to validators who charge a commission on the rewards earned by their delegated RENEC.
+- _Staking yield_ can be calculated from the _Inflation Schedule_ along with the fraction of the _Total Current Supply_ that is staked at any given time. The explicit relationship is given by:
+
+$$
+\begin{aligned}
+\text{Staking Yield} =~&\text{Inflation Rate(4.5\%)}\times\text{Validator Uptime}~\times \\
+&\left( 1 - \text{Validator Fee} \right) \times \left( \frac{1}{\%~\text{RENEC Staked}} \right) \\
+\text{where:}\\
+\%~\text{RENEC Staked} &= \frac{\text{Total RENEC Staked}}{\text{Total Current Supply}}
+\end{aligned}
+$$
 ## General Overview
 
 Renec's ledger validation design is based on a rotating, stake-weighted selected leader broadcasting transactions in a PoH data structure to validating nodes. These nodes, upon receiving the leader's broadcast, have the opportunity to vote on the current state and PoH height by signing a transaction into the PoH stream.

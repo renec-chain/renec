@@ -11,7 +11,7 @@ tokens on Remitano network.
 
 Choose a token you want to send and click on `Send` button.
 
-All you need to do is inputing recipient address and amount you want to send. If this address doesn't have funds, you need to check on `I'm aware that this address has no funds`,
+All you need to do is inputing recipient address and amount you want to send. If this address doesn't have funds, you need to check on `I'm aware that this address has no funds or this might be an exchange wallet`,
 then click on `Send`.
 
 ![](https://img-portal-prod.s3.amazonaws.com/uploads/image/attachment/36811/Screen_Shot_2022-04-21_at_15.52.11.png)

@@ -49,15 +49,23 @@ secure, robust and performant.
 ## How do I stake my RENEC tokens?
 
 You can stake RENEC by moving your tokens
-into a wallet that supports staking.   The wallet provides steps to create a stake account
-and do the delegation.
+into RENEC wallet web https://wallet.renec.foundation or RENEC wallet extension on Chrome or stake by using Renec command line tool.
 
-#### Supported Wallets
+### Stake RENEC on RENEC wallet
+#### Select the Staking menu
 
-Many web and mobile wallets support Solana staking operations. Please check with
-your favorite wallet's maintainers regarding status
+![](https://img-portal-prod.s3.amazonaws.com/uploads/image/attachment/54379/3.png)
 
-- Renec command line tools can perform all stake operations in conjunction
+#### Select your validator that you trust the most
+
+![](https://img-portal-prod.s3.amazonaws.com/uploads/image/attachment/73327/Screen_Shot_2022-10-23_at_13.10.55.png)
+
+#### Select the amount of RENEC you want to stake and press the "Stake" button.
+
+![](https://img-portal-prod.s3.amazonaws.com/uploads/image/attachment/54381/5.png)
+
+### Stake RENEC using command line tool
+Renec command line tools can perform all stake operations in conjunction
   with a CLI-generated keypair file wallet, a paper wallet, or with a connected
   Ledger Nano.
   [Staking commands using the Renec Command Line Tools](cli/delegate-stake.md).
@@ -72,18 +80,6 @@ will be of a different type than one used to simply send and receive tokens.
 Follow the wallet's instructions for selecting a validator.  You can get
 information about potentially performant validators from the links below.
 The Renec Foundation does not recommend any particular validator.
-
-The Mainnet Beta validators introduce themselves and their services on this
-Renec Forum thread:
-
-- https://forums.solana.com/t/validator-information-thread
-
-The site solanabeach.io is built and maintained by one of our validators,
-Staking Facilities. It provides a some high-level graphical information about
-the network as a whole, as well as a list of each validator and some recent
-performance statistics about each one.
-
-- https://solanabeach.io
 
 To view block production statistics, use the Renec command-line tools:
 

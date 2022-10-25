@@ -33,7 +33,7 @@ module.exports = {
     //   },
     //   "wallet-guide/support",
     // ],
-    // Staking: ["staking", "staking/stake-accounts"],
+    Staking: ["staking", "implemented-proposals/staking-rewards", "staking/stake-accounts"],
     // "Command Line": [
     //   "cli",
     //   // "cli/install-renec-cli-tools",
@@ -97,6 +97,7 @@ module.exports = {
     Validating: [
       "running-validator",
       "running-validator/validator-reqs",
+      "cli/install-renec-cli-tools",
       "running-validator/validator-start",
       "running-validator/vote-accounts",
       "running-validator/validator-stake",

@@ -79,6 +79,26 @@ function Home() {
                   </div>
                 </Link>
               </div>
+              <div className={clsx("col col--4", styles.feature)}>
+                <Link className="navbar__link" to="staking">
+                  <div className="card">
+                    <div className="card__header">
+                      <h3>
+                        <Translate description="run-validator">
+                          Staking
+                        </Translate>
+                      </h3>
+                    </div>
+                    <div className="card__body">
+                      <p>
+                        <Translate description="validate-transactions">
+                          Delegate RENEC to validators and get rewards
+                        </Translate>
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              </div>
             </div>
           </div>
         </section>

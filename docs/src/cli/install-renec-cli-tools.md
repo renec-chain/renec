@@ -50,7 +50,7 @@ renec --version
 - After a successful install, `renec-install update` may be used to easily
   update the Renec software to a newer version at any time.
 
----
+## Download Prebuilt Binaries
 ### Linux
 
 Download the binaries by navigating to

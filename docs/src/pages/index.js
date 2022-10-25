@@ -39,7 +39,7 @@ function Home() {
                 </Link>
               </div>
               <div className={clsx("col col--4", styles.feature)}>
-              <Link className="navbar__link" to="rpl-token">
+                <Link className="navbar__link" to="rpl-token">
                   <div className="card">
                     <div className="card__header">
                       <h3>
@@ -73,6 +73,26 @@ function Home() {
                       <p>
                         <Translate description="wallet-options">
                           Create wallet and interact with Remitano network.
+                        </Translate>
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+              <div className={clsx("col col--4", styles.feature)}>
+                <Link className="navbar__link" to="staking">
+                  <div className="card">
+                    <div className="card__header">
+                      <h3>
+                        <Translate description="run-validator">
+                          Staking
+                        </Translate>
+                      </h3>
+                    </div>
+                    <div className="card__body">
+                      <p>
+                        <Translate description="validate-transactions">
+                          Delegate RENEC to validators and get rewards
                         </Translate>
                       </p>
                     </div>

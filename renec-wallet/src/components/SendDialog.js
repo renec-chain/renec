@@ -63,6 +63,7 @@ const DISABLED_ERC20_MINTS = new Set([
   'kinXdEcpDQeHPEuQnqmUgtYykqKGVFq6CeVX5iAHJq6',
   'ABE7D8RU1eHfCJWzHYZZeymeE8k9nPPXfqge2NQYyKoL',
 ]);
+const TRANSFER_FEE_IN_LAMPORTS = 5000;
 
 export default function SendDialog({ open, onClose, publicKey, balanceInfo }) {
   const isProdNetwork = useIsProdNetwork();
@@ -705,6 +706,7 @@ function useForm(
 
   const parsedAmount = parseFloat(transferAmountString) * 10 ** decimals;
   const validAmount = parsedAmount > 0 && parsedAmount <= balanceAmount;
+  const userTransferableAmount = balanceAmount - TRANSFER_FEE_IN_LAMPORTS > 0 ? balanceAmount - TRANSFER_FEE_IN_LAMPORTS : 0;
 
   const fields = (
     <>
@@ -728,7 +730,7 @@ function useForm(
             <Button
               onClick={() =>
                 setTransferAmountString(
-                  balanceAmountToUserAmount(balanceAmount, decimals),
+                  balanceAmountToUserAmount(userTransferableAmount, decimals),
                 )
               }
             >
@@ -744,11 +746,11 @@ function useForm(
           className="bold"
           onClick={() =>
             setTransferAmountString(
-              balanceAmountToUserAmount(balanceAmount, decimals),
+              balanceAmountToUserAmount(userTransferableAmount, decimals),
             )
           }
         >
-          {balanceAmountToUserAmount(balanceAmount, decimals)}
+          {balanceAmountToUserAmount(userTransferableAmount, decimals)}
         </span>
         <span> {tokenSymbol ? tokenSymbol : null}</span>
       </div>

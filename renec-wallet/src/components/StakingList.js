@@ -117,7 +117,7 @@ export function StakingListItem({ voteAccount }) {
           </div>
           <div className={classes.stakingItem}>
             <div className={`${classes.text} flex align-center`}>
-              Commission
+              Fee
               <Tooltip
                 title="The percentage fee paid to validators"
                 placement="top-start"

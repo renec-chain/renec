@@ -158,7 +158,7 @@ balance of 105,290,880 lamports (=~ 0.105 RENEC) to be rent-exempt:
 105,290,880 = 19.055441478439427 (fee rate) * (128 + 15_000)(account size including metadata) * ((365.25/2) * 2)(epochs in 2 years)
 ```
 
-Rent can also be estimated via the [`renec rent` CLI subcommand](cli/usage.md#solana-rent)
+Rent can also be estimated via the [`renec rent` CLI subcommand](cli/usage.md#renec-rent)
 
 ```text
 $ renec rent 15000

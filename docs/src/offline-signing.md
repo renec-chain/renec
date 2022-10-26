@@ -6,8 +6,6 @@ Some security models require keeping signing keys, and thus the signing
 process, separated from transaction creation and network broadcast. Examples
 include:
 
-- Collecting signatures from geographically disparate signers in a
-  [multi-signature scheme](https://spl.solana.com/token#multisig-usage)
 - Signing transactions using an [airgapped](<https://en.wikipedia.org/wiki/Air_gap_(networking)>)
   signing device
 
@@ -18,26 +16,26 @@ transaction.
 
 At present, the following commands support offline signing:
 
-- [`create-stake-account`](cli/usage.md#solana-create-stake-account)
-- [`create-stake-account-checked`](cli/usage.md#solana-create-stake-account-checked)
-- [`deactivate-stake`](cli/usage.md#solana-deactivate-stake)
-- [`delegate-stake`](cli/usage.md#solana-delegate-stake)
-- [`split-stake`](cli/usage.md#solana-split-stake)
-- [`stake-authorize`](cli/usage.md#solana-stake-authorize)
-- [`stake-authorize-checked`](cli/usage.md#solana-stake-authorize-checked)
-- [`stake-set-lockup`](cli/usage.md#solana-stake-set-lockup)
-- [`stake-set-lockup-checked`](cli/usage.md#solana-stake-set-lockup-checked)
-- [`transfer`](cli/usage.md#solana-transfer)
-- [`withdraw-stake`](cli/usage.md#solana-withdraw-stake)
+- [`create-stake-account`](cli/usage.md#renec-create-stake-account)
+- [`create-stake-account-checked`](cli/usage.md#renec-create-stake-account-checked)
+- [`deactivate-stake`](cli/usage.md#renec-deactivate-stake)
+- [`delegate-stake`](cli/usage.md#renec-delegate-stake)
+- [`split-stake`](cli/usage.md#renec-split-stake)
+- [`stake-authorize`](cli/usage.md#renec-stake-authorize)
+- [`stake-authorize-checked`](cli/usage.md#renec-stake-authorize-checked)
+- [`stake-set-lockup`](cli/usage.md#renec-stake-set-lockup)
+- [`stake-set-lockup-checked`](cli/usage.md#renec-stake-set-lockup-checked)
+- [`transfer`](cli/usage.md#renec-transfer)
+- [`withdraw-stake`](cli/usage.md#renec-withdraw-stake)
 
-- [`create-vote-account`](cli/usage.md#solana-create-vote-account)
-- [`vote-authorize-voter`](cli/usage.md#solana-vote-authorize-voter)
-- [`vote-authorize-voter-checked`](cli/usage.md#solana-vote-authorize-voter-checked)
-- [`vote-authorize-withdrawer`](cli/usage.md#solana-vote-authorize-withdrawer)
-- [`vote-authorize-withdrawer-checked`](cli/usage.md#solana-vote-authorize-withdrawer-checked)
-- [`vote-update-commission`](cli/usage.md#solana-vote-update-commission)
-- [`vote-update-validator`](cli/usage.md#solana-vote-update-validator)
-- [`withdraw-from-vote-account`](cli/usage.md#solana-withdraw-from-vote-account)
+- [`create-vote-account`](cli/usage.md#renec-create-vote-account)
+- [`vote-authorize-voter`](cli/usage.md#renec-vote-authorize-voter)
+- [`vote-authorize-voter-checked`](cli/usage.md#renec-vote-authorize-voter-checked)
+- [`vote-authorize-withdrawer`](cli/usage.md#renec-vote-authorize-withdrawer)
+- [`vote-authorize-withdrawer-checked`](cli/usage.md#renec-vote-authorize-withdrawer-checked)
+- [`vote-update-commission`](cli/usage.md#renec-vote-update-commission)
+- [`vote-update-validator`](cli/usage.md#renec-vote-update-validator)
+- [`withdraw-from-vote-account`](cli/usage.md#renec-withdraw-from-vote-account)
 
 ## Signing Transactions Offline
 

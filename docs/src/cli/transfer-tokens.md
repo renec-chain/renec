@@ -27,7 +27,7 @@ on devnet have **no** value, so don't worry if you lose them.
 First, _airdrop_ yourself some play tokens on the devnet.
 
 ```bash
-renec airdrop 1 <RECIPIENT_ACCOUNT_ADDRESS> --url https://api.devnet.solana.com
+renec airdrop 1 <RECIPIENT_ACCOUNT_ADDRESS> --url https://api-testnet.renec.foundation:8899
 ```
 
 where you replace the text `<RECIPIENT_ACCOUNT_ADDRESS>` with your base58-encoded
@@ -47,7 +47,7 @@ Confirm the airdrop was successful by checking the account's balance.
 It should output `1 RENEC`:
 
 ```bash
-renec balance <ACCOUNT_ADDRESS> --url https://api.devnet.solana.com
+renec balance <ACCOUNT_ADDRESS> --url https://api-testnet.renec.foundation:8899
 ```
 
 #### Create a second wallet address
@@ -79,7 +79,7 @@ with the private keypair corresponding to the sender's public key in the
 transaction.
 
 ```bash
-renec transfer --from <KEYPAIR> <RECIPIENT_ACCOUNT_ADDRESS> 0.5 --allow-unfunded-recipient --url https://api.devnet.solana.com --fee-payer <KEYPAIR>
+renec transfer --from <KEYPAIR> <RECIPIENT_ACCOUNT_ADDRESS> 0.5 --allow-unfunded-recipient --url https://api-testnet.renec.foundation:8899 --fee-payer <KEYPAIR>
 ```
 
 where you replace `<KEYPAIR>` with the path to a keypair in your first wallet,
@@ -89,7 +89,7 @@ wallet.
 Confirm the updated balances with `renec balance`:
 
 ```bash
-renec balance <ACCOUNT_ADDRESS> --url http://api.devnet.solana.com
+renec balance <ACCOUNT_ADDRESS> --url https://api-testnet.renec.foundation:8899
 ```
 
 where `<ACCOUNT_ADDRESS>` is either the public key from your keypair or the
@@ -98,10 +98,10 @@ recipient's public key.
 #### Full example of test transfer
 
 ```bash
-$ renec-keygen new --outfile my_solana_wallet.json   # Creating my first wallet, a file system wallet
+$ renec-keygen new --outfile my_renec_wallet.json   # Creating my first wallet, a file system wallet
 Generating a new keypair
 For added security, enter a passphrase (empty for no passphrase):
-Wrote new keypair to my_solana_wallet.json
+Wrote new keypair to my_renec_wallet.json
 ==========================================================================
 pubkey: DYw8jCTfwHNRJhhmFcbXvVDTqWMEVFBX6ZKUmG5CNSKK                          # Here is the address of the first wallet
 ==========================================================================
@@ -109,11 +109,11 @@ Save this seed phrase to recover your new keypair:
 width enhance concert vacant ketchup eternal spy craft spy guard tag punch    # If this was a real wallet, never share these words on the internet like this!
 ==========================================================================
 
-$ renec airdrop 1 DYw8jCTfwHNRJhhmFcbXvVDTqWMEVFBX6ZKUmG5CNSKK --url https://api.devnet.solana.com  # Airdropping 1 RENEC to my wallet's address/pubkey
+$ renec airdrop 1 DYw8jCTfwHNRJhhmFcbXvVDTqWMEVFBX6ZKUmG5CNSKK --url https://api-testnet.renec.foundation:8899  # Airdropping 1 RENEC to my wallet's address/pubkey
 Requesting airdrop of 1 RENEC from 35.233.193.70:9900
 1 RENEC
 
-$ renec balance DYw8jCTfwHNRJhhmFcbXvVDTqWMEVFBX6ZKUmG5CNSKK --url https://api.devnet.solana.com # Check the address's balance
+$ renec balance DYw8jCTfwHNRJhhmFcbXvVDTqWMEVFBX6ZKUmG5CNSKK --url https://api-testnet.renec.foundation:8899 # Check the address's balance
 1 RENEC
 
 $ renec-keygen new --no-outfile  # Creating a second wallet, a paper wallet
@@ -126,13 +126,13 @@ Save this seed phrase to recover your new keypair:
 clump panic cousin hurt coast charge engage fall eager urge win love   # If this was a real wallet, never share these words on the internet like this!
 ====================================================================
 
-$ renec transfer --from my_solana_wallet.json 7S3P4HxJpyyigGzodYwHtCxZyUQe9JiBMHyRWXArAaKv 0.5 --allow-unfunded-recipient --url https://api.devnet.solana.com --fee-payer my_solana_wallet.json  # Transferring tokens to the public address of the paper wallet
+$ renec transfer --from my_renec_wallet.json 7S3P4HxJpyyigGzodYwHtCxZyUQe9JiBMHyRWXArAaKv 0.5 --allow-unfunded-recipient --url https://api-testnet.renec.foundation:8899 --fee-payer my_renec_wallet.json  # Transferring tokens to the public address of the paper wallet
 3gmXvykAd1nCQQ7MjosaHLf69Xyaqyq1qw2eu1mgPyYXd5G4v1rihhg1CiRw35b9fHzcftGKKEu4mbUeXY2pEX2z  # This is the transaction signature
 
-$ renec balance DYw8jCTfwHNRJhhmFcbXvVDTqWMEVFBX6ZKUmG5CNSKK --url https://api.devnet.solana.com
+$ renec balance DYw8jCTfwHNRJhhmFcbXvVDTqWMEVFBX6ZKUmG5CNSKK --url https://api-testnet.renec.foundation:8899
 0.499995 RENEC  # The sending account has slightly less than 0.5 RENEC remaining due to the 0.000005 RENEC transaction fee payment
 
-$ renec balance 7S3P4HxJpyyigGzodYwHtCxZyUQe9JiBMHyRWXArAaKv --url https://api.devnet.solana.com
+$ renec balance 7S3P4HxJpyyigGzodYwHtCxZyUQe9JiBMHyRWXArAaKv --url https://api-testnet.renec.foundation:8899
 0.5 RENEC  # The second wallet has now received the 0.5 RENEC transfer from the first wallet
 
 ```

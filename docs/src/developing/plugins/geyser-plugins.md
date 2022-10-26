@@ -329,16 +329,16 @@ Start the server:
 sudo systemctl start postgresql@14-main
 ```
 
-Create the database. For example, the following creates a database named 'solana':
+Create the database. For example, the following creates a database named 'renec':
 
 ```
 sudo -u postgres createdb renec -p 5433
 ```
 
-Create the database user. For example, the following creates a regular user named 'solana':
+Create the database user. For example, the following creates a regular user named 'renec':
 
 ```
-sudo -u postgres createuser -p 5433 solana
+sudo -u postgres createuser -p 5433 renec
 ```
 
 Verify the database is working using psql. For example, assuming the node running
@@ -346,7 +346,7 @@ PostgreSQL has the ip 10.138.0.9, the following command will land in a shell whe
 SQL commands can be entered:
 
 ```
-psql -U renec -p 5433 -h 10.138.0.9 -w -d solana
+psql -U renec -p 5433 -h 10.138.0.9 -w -d renec
 ```
 
 #### Create the Schema Objects

@@ -2,8 +2,6 @@
 title: Inflation Schedule
 ---
 
-**Subject to change. Follow most recent economic discussions in the Renec forums: https://forums.solana.com**
-
 Validator-clients have two functional roles in the Renec network:
 
 - Validate \(vote\) the current global state of their observed PoH.
@@ -14,7 +12,6 @@ Validator-client rewards for these services are to be distributed at the end of 
 The effective protocol-based annual staking yield \(%\) per epoch received by validation-clients is to be a function of:
 
 - the current global inflation rate, derived from the pre-determined dis-inflationary issuance schedule \(see [Validation-client Economics](ed_vce_overview.md)\)
-- the fraction of staked SOLs out of the current total circulating supply,
 - the commission charged by the validation service,
 - the up-time/participation \[% of available slots that validator had opportunity to vote on\] of a given validator over the previous epoch.
 
@@ -37,21 +34,21 @@ From these simulated _Inflation Schedules_, we can also project ranges for token
 
 ![](/img/p_total_supply_ranges.png)
 
-Finally we can estimate the _Staked Yield_ on staked RENEC, if we introduce an additional parameter, previously discussed, _% of Staked SOL_:
+Finally we can estimate the _Staked Yield_ on staked RENEC, if we introduce an additional parameter, previously discussed, _% of Staked RENEC_:
 
 %~\text{RENEC Staked} = \frac{\text{Total RENEC Staked}}{\text{Total Current Supply}}
 
-In this case, because _% of Staked SOL_ is a parameter that must be estimated (unlike the _Inflation Schedule_ parameters), it is easier to use specific _Inflation Schedule_ parameters and explore a range of _% of Staked SOL_. For the below example, we’ve chosen the middle of the parameter ranges explored above:
+In this case, because _% of Staked RENEC_ is a parameter that must be estimated (unlike the _Inflation Schedule_ parameters), it is easier to use specific _Inflation Schedule_ parameters and explore a range of _% of Staked RENEC_. For the below example, we’ve chosen the middle of the parameter ranges explored above:
 
 - _Initial Inflation Rate_: 8%
 - _Dis-inflation Rate_: -15%
 - _Long-term Inflation Rate_: 1.5%
 
-The values of _% of Staked SOL_ range from 60% - 90%, which we feel covers the likely range we expect to observe, based on feedback from the investor and validator communities as well as what is observed on comparable Proof-of-Stake protocols.
+The values of _% of Staked RENEC_ range from 60% - 90%, which we feel covers the likely range we expect to observe, based on feedback from the investor and validator communities as well as what is observed on comparable Proof-of-Stake protocols.
 
 ![](/img/p_ex_staked_yields.png)
 
-Again, the above shows an example _Staked Yield_ that a staker might expect over time on the Renec network with the _Inflation Schedule_ as specified. This is an idealized _Staked Yield_ as it neglects validator uptime impact on rewards, validator commissions, potential yield throttling and potential slashing incidents. It additionally ignores that _% of Staked SOL_ is dynamic by design - the economic incentives set up by this _Inflation Schedule_.
+Again, the above shows an example _Staked Yield_ that a staker might expect over time on the Renec network with the _Inflation Schedule_ as specified. This is an idealized _Staked Yield_ as it neglects validator uptime impact on rewards, validator commissions, potential yield throttling and potential slashing incidents. It additionally ignores that _% of Staked RENEC_ is dynamic by design - the economic incentives set up by this _Inflation Schedule_.
 
 ### Adjusted Staking Yield
 

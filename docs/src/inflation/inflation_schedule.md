@@ -27,14 +27,14 @@ In the above graph we see the annual inflation rate [$\%$] over time, given the 
 
 Similarly, here we see the _Total Current Supply_ of RENEC [MM] over time, assuming an initial _Total Current Supply_ of `488,587,349 RENEC` (i.e. for this example, taking the _Total Current Supply_ as of `2020-01-25` and simulating inflation starting from that day).
 
-Setting aside validator uptime and commissions, the expected Staking Yield and Adjusted Staking Yield metrics are then primarily a function of the % of total RENEC staked on the network. Therefore we can we can model _Staking Yield_, if we introduce an additional parameter _% of Staked SOL_:
+Setting aside validator uptime and commissions, the expected Staking Yield and Adjusted Staking Yield metrics are then primarily a function of the % of total RENEC staked on the network. Therefore we can we can model _Staking Yield_, if we introduce an additional parameter _% of Staked RENEC_:
 
 $$
 \%~\text{RENEC Staked} = \frac{\text{Total RENEC Staked}}{\text{Total Current Supply}}
 $$
 
-This parameter must be estimated because it is a dynamic property of the token holders and staking incentives. The values of _% of Staked SOL_ presented here range from $60\% - 90\%$, which we feel covers the likely range we expect to observe, based on feedback from the investor and validator communities as well as what is observed on comparable Proof-of-Stake protocols.
+This parameter must be estimated because it is a dynamic property of the token holders and staking incentives. The values of _% of Staked RENEC_ presented here range from $60\% - 90\%$, which we feel covers the likely range we expect to observe, based on feedback from the investor and validator communities as well as what is observed on comparable Proof-of-Stake protocols.
 
 ![](/img/p_ex_staked_yields.png)
 
-Again, the above shows an example _Staked Yield_ that a staker might expect over time on the Renec network with the _Inflation Schedule_ as specified. This is an idealized _Staked Yield_ as it neglects validator uptime impact on rewards, validator commissions, potential yield throttling and potential slashing incidents. It additionally ignores that _% of Staked SOL_ is dynamic by design - the economic incentives set up by this _Inflation Schedule_ are more clearly seen when _Token Dilution_ is taken into account (see the **Adjusted Staking Yield** section below).
+Again, the above shows an example _Staked Yield_ that a staker might expect over time on the Renec network with the _Inflation Schedule_ as specified. This is an idealized _Staked Yield_ as it neglects validator uptime impact on rewards, validator commissions, potential yield throttling and potential slashing incidents. It additionally ignores that _% of Staked RENEC_ is dynamic by design - the economic incentives set up by this _Inflation Schedule_ are more clearly seen when _Token Dilution_ is taken into account (see the **Adjusted Staking Yield** section below).

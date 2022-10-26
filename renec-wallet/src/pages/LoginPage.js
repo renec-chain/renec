@@ -28,11 +28,11 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { makeStyles } from '@material-ui/core/styles';
 import { useCallAsync } from '../utils/notifications';
 import { validateMnemonic } from 'bip39';
+import { Alert } from '@material-ui/lab'
 import {
   RButton,
   Icon,
   TextInput,
-  Alert,
   Message,
  } from '../components/base';
 
@@ -68,11 +68,10 @@ export default function LoginPage() {
             <h1>Remitano Network Wallet</h1>
             <div>Restore existing wallet or create a new one</div>
             <br />
-            
             <div className={classes.walletButtons}>
               <div className={classes.button}>
-                <RButton 
-                  variant="secondary" 
+                <RButton
+                  variant="secondary"
                   size="lg"
                   icon={<Icon icon="wallet" size={24} />}
                   onClick={() => setNewWallet(true)}
@@ -81,9 +80,9 @@ export default function LoginPage() {
                 </RButton>
               </div>
               <div className={classes.button}>
-                <RButton 
-                  variant="tertiary" 
-                  outline={true} 
+                <RButton
+                  variant="tertiary"
+                  outline={true}
                   size="lg"
                   icon={<Icon icon="key" size={24} />}
                   onClick={() => setRestore(true)}
@@ -181,21 +180,30 @@ function SeedWordsForm({ mnemonicAndSeed, goBack, goForward }) {
 
   return (
     <>
-      <div className="mb-8 flex">
+      <div className="mb-16 flex mt-16">
         <Icon icon="back" onClick={goBack} />
         <div className="pl-16 pointer" onClick={goBack}>Back</div>
       </div>
       <Card>
         <CardContent>
-          <div className="bold text-24 mb-16">Your Mnemonic phrase</div>
+          <div className="bold text-24 mb-16">Your Secret Key</div>
           <div className="mb-16">
-            <Alert variant="warning">
-              Please back up the text below on paper and keep them somewhere secret and safe
+            <Alert severity="error">
+              Please write down your secret key and keep it in a safe place.
+            </Alert>
+            <div className="mt-8" />
+            <Alert severity="error">
+              Your secret key are required to restore your wallet in case your devices are damaged or lose access to it.
+              Never share this secret key to any one or it might results in an irreversible loss of your funds.
+            </Alert>
+            <div className="mt-8" />
+            <Alert severity="error">
+              Losing a secret key will cause your wallet inaccessible hence losing access to your funds; make sure you store the key safely.
             </Alert>
           </div>
           {mnemonicAndSeed ? (
             <TextInput
-              label="Seed Words"
+              label="Secret key"
               value={mnemonicAndSeed.mnemonic}
               textarea
               onFocus={(e) => e.currentTarget.select()}
@@ -212,35 +220,19 @@ function SeedWordsForm({ mnemonicAndSeed, goBack, goForward }) {
                 onChange={(e) => setConfirmed(e.target.checked)}
               />
             }
-            label="I have saved these words in a safe place."
+            label="I have written down my secret key and stored it in a safe place."
           />
           <div className="mt-24 mb-16">
             <RButton variant="secondary" onClick={() => {
               downloadMnemonic(mnemonicAndSeed?.mnemonic);
               setDownloaded(true);
             }}>
-              Download Backup Mnemonic File (Required)
+              Download your secret key as a file (Required)
             </RButton>
           </div>
           <RButton fullWidth variant="primary" disabled={!confirmed || !downloaded} onClick={() => setshowConfirmMnemonic(true)}>
             Continue
           </RButton>
-        </CardContent>
-      </Card>
-      <br />
-      <Card>
-        <CardContent>
-          <Message type="info" title="Note" />
-          <p className="text-14">
-            Your private keys are only stored on your current computer or device.
-            You will need these words to restore your wallet if your browser's
-            storage is cleared or your device is damaged or lost.
-          </p>
-          <p className="text-14">
-            By default, RENEC wallet will use <code>m/44'/501'/0'/0'</code> as the
-            derivation path for the main wallet. To use an alternative path, try
-            restoring an existing wallet.
-          </p>
         </CardContent>
       </Card>
     </>
@@ -252,7 +244,7 @@ const ConfirmMnemonic = ({ mnemonicAndSeed, goBack, goForward }) => {
 
   return (
     <>
-      <div className="mb-8 flex">
+      <div className="mb-16 mt-16 flex">
         <Icon icon="back" onClick={goBack} />
         <div className="pl-16 pointer" onClick={goBack}>Back</div>
       </div>
@@ -265,7 +257,7 @@ const ConfirmMnemonic = ({ mnemonicAndSeed, goBack, goForward }) => {
               flexDirection: 'column',
             }}
           >
-            Please re-enter your seed phrase to confirm that you have saved it.
+            Please re-enter your secret key to confirm that you have saved it.
           </div>
           <div className="mt-24 mb-24">
             <TextInput
@@ -295,10 +287,10 @@ function ChoosePasswordForm({ goBack, onSubmit }) {
 
   return (
     <>
-      <div className="mb-8 flex">
-          <Icon icon="back" onClick={goBack} />
-          <div className="pl-16 pointer" onClick={goBack}>Back</div>
-        </div>
+      <div className="mt-16 mb-16 flex">
+        <Icon icon="back" onClick={goBack} />
+        <div className="pl-16 pointer" onClick={goBack}>Back</div>
+      </div>
       <Card>
         <CardContent>
           <div className="bold text-24 mb-16">Choose a Password (Optional)</div>
@@ -462,8 +454,8 @@ function RestoreWalletForm({ goBack }) {
                 onChange={(e) => setPasswordConfirm(e.target.value)}
               />
               <br />
-              <RButton 
-                variant="primary" 
+              <RButton
+                variant="primary"
                 disabled={!isNextBtnEnabled}
                 onClick={() => {
                   mnemonicToSeed(mnemonic).then((seed) => {

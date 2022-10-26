@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   generateMnemonicAndSeed,
   useHasLockedMnemonicAndSeed,
@@ -26,15 +26,11 @@ import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import { makeStyles } from '@material-ui/core/styles';
+import { LockOutlined, LockOpenOutlined } from '@material-ui/icons';
 import { useCallAsync } from '../utils/notifications';
 import { validateMnemonic } from 'bip39';
-import { Alert } from '@material-ui/lab'
-import {
-  RButton,
-  Icon,
-  TextInput,
-  Message,
- } from '../components/base';
+import { Alert } from '@material-ui/lab';
+import { RButton, Icon, TextInput, Message } from '../components/base';
 
 const useStyles = makeStyles((theme) => ({
   walletButtons: {
@@ -42,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     marginRight: theme.spacing(2),
-  }
+  },
 }));
 
 export default function LoginPage() {
@@ -99,12 +95,14 @@ export default function LoginPage() {
 
   return (
     <Container maxWidth="sm">
-      {restore && (
-        <RestoreWalletForm goBack={() => setRestore(false)} />
-      )}
+      {restore && <RestoreWalletForm goBack={() => setRestore(false)} />}
       {newWallet && (
         <>
-          {hasLockedMnemonicAndSeed ? <LoginForm /> : <CreateWalletForm goBack={() => setNewWallet(false)} />}
+          {hasLockedMnemonicAndSeed ? (
+            <LoginForm />
+          ) : (
+            <CreateWalletForm goBack={() => setNewWallet(false)} />
+          )}
         </>
       )}
     </Container>
@@ -166,14 +164,14 @@ function SeedWordsForm({ mnemonicAndSeed, goBack, goForward }) {
     link.setAttribute('download', 'renec.bak');
     document.body.appendChild(link);
     link.click();
-  }
+  };
 
   if (showConfirmMnemonic) {
     return (
       <ConfirmMnemonic
         mnemonicAndSeed={mnemonicAndSeed}
         goForward={goForward}
-        goBack={() =>setshowConfirmMnemonic(false)}
+        goBack={() => setshowConfirmMnemonic(false)}
       />
     );
   }
@@ -182,7 +180,9 @@ function SeedWordsForm({ mnemonicAndSeed, goBack, goForward }) {
     <>
       <div className="mb-16 flex mt-16">
         <Icon icon="back" onClick={goBack} />
-        <div className="pl-16 pointer" onClick={goBack}>Back</div>
+        <div className="pl-16 pointer" onClick={goBack}>
+          Back
+        </div>
       </div>
       <Card>
         <CardContent>
@@ -193,15 +193,20 @@ function SeedWordsForm({ mnemonicAndSeed, goBack, goForward }) {
             </Alert>
             <div className="mt-8" />
             <Alert severity="error">
-              Your secret key are required to restore your wallet in case your devices are damaged or lose access to it.
-              Never share this secret key to any one or it might results in an irreversible loss of your funds.
+              Your secret key are required to restore your wallet in case your
+              devices are damaged or lose access to it. Never share this secret
+              key to any one or it might results in an irreversible loss of your
+              funds.
             </Alert>
             <div className="mt-8" />
             <Alert severity="error">
-              Losing a secret key will cause your wallet inaccessible hence losing access to your funds; make sure you store the key safely.
+              Losing a secret key will cause your wallet inaccessible hence
+              losing access to your funds; make sure you store the key safely.
             </Alert>
           </div>
-          {mnemonicAndSeed ? (
+          <div className='mb-8'>Secret key</div>
+          <PassPhrase mnemonicAndSeed={mnemonicAndSeed} />
+          {/* {mnemonicAndSeed ? (
             <TextInput
               label="Secret key"
               value={mnemonicAndSeed.mnemonic}
@@ -210,27 +215,35 @@ function SeedWordsForm({ mnemonicAndSeed, goBack, goForward }) {
             />
           ) : (
             <LoadingIndicator />
-          )}
+          )} */}
           <FormControlLabel
             control={
               <Checkbox
                 checked={confirmed}
                 disabled={!mnemonicAndSeed}
-                style ={{color: "#9B59B6"}}
+                style={{ color: '#9B59B6' }}
                 onChange={(e) => setConfirmed(e.target.checked)}
               />
             }
             label="I have written down my secret key and stored it in a safe place."
           />
           <div className="mt-24 mb-16">
-            <RButton variant="secondary" onClick={() => {
-              downloadMnemonic(mnemonicAndSeed?.mnemonic);
-              setDownloaded(true);
-            }}>
+            <RButton
+              variant="secondary"
+              onClick={() => {
+                downloadMnemonic(mnemonicAndSeed?.mnemonic);
+                setDownloaded(true);
+              }}
+            >
               Download your secret key as a file (Required)
             </RButton>
           </div>
-          <RButton fullWidth variant="primary" disabled={!confirmed || !downloaded} onClick={() => setshowConfirmMnemonic(true)}>
+          <RButton
+            fullWidth
+            variant="primary"
+            disabled={!confirmed || !downloaded}
+            onClick={() => setshowConfirmMnemonic(true)}
+          >
             Continue
           </RButton>
         </CardContent>
@@ -246,7 +259,9 @@ const ConfirmMnemonic = ({ mnemonicAndSeed, goBack, goForward }) => {
     <>
       <div className="mb-16 mt-16 flex">
         <Icon icon="back" onClick={goBack} />
-        <div className="pl-16 pointer" onClick={goBack}>Back</div>
+        <div className="pl-16 pointer" onClick={goBack}>
+          Back
+        </div>
       </div>
       <Card>
         <CardContent>
@@ -270,7 +285,9 @@ const ConfirmMnemonic = ({ mnemonicAndSeed, goBack, goForward }) => {
           <RButton
             variant="primary"
             fullWidth
-            disabled={normalizeMnemonic(seedCheck) !== mnemonicAndSeed?.mnemonic}
+            disabled={
+              normalizeMnemonic(seedCheck) !== mnemonicAndSeed?.mnemonic
+            }
             onClick={goForward}
           >
             Verify
@@ -279,7 +296,7 @@ const ConfirmMnemonic = ({ mnemonicAndSeed, goBack, goForward }) => {
       </Card>
     </>
   );
-}
+};
 
 function ChoosePasswordForm({ goBack, onSubmit }) {
   const [password, setPassword] = useState('');
@@ -289,7 +306,9 @@ function ChoosePasswordForm({ goBack, onSubmit }) {
     <>
       <div className="mt-16 mb-16 flex">
         <Icon icon="back" onClick={goBack} />
-        <div className="pl-16 pointer" onClick={goBack}>Back</div>
+        <div className="pl-16 pointer" onClick={goBack}>
+          Back
+        </div>
       </div>
       <Card>
         <CardContent>
@@ -316,8 +335,8 @@ function ChoosePasswordForm({ goBack, onSubmit }) {
           <br />
           <Message type="info" title="Note" />
           <p className="mb-24">
-            If you forget your password you will need to restore your wallet using
-            your seed words.
+            If you forget your password you will need to restore your wallet
+            using your seed words.
           </p>
           <RButton
             variant="primary"
@@ -343,14 +362,14 @@ function LoginForm() {
       progressMessage: 'Unlocking wallet...',
       successMessage: 'Wallet unlocked',
     });
-  }
+  };
   const submitOnEnter = (e) => {
-    if (e.code === "Enter" || e.code === "NumpadEnter") {
+    if (e.code === 'Enter' || e.code === 'NumpadEnter') {
       e.preventDefault();
       e.stopPropagation();
       submit();
     }
-  }
+  };
   const setPasswordOnChange = (e) => setPassword(e.target.value);
   const toggleStayLoggedIn = (e) => setStayLoggedIn(e.target.checked);
 
@@ -370,21 +389,22 @@ function LoginForm() {
           control={
             <Checkbox
               checked={stayLoggedIn}
-              style ={{color: "#9B59B6"}}
+              style={{ color: '#9B59B6' }}
               onChange={toggleStayLoggedIn}
             />
           }
           label="Keep wallet unlocked"
           className="mb-16"
         />
-        <RButton fullWidth color="primary"  onClick={submit}>
+        <RButton fullWidth color="primary" onClick={submit}>
           Unlock
         </RButton>
-        <Typography onClick={forgetWallet} className="mt-16">Forget password? Click to remove mnemonic</Typography>
-
+        <Typography onClick={forgetWallet} className="mt-16">
+          Forget password? Click to remove mnemonic
+        </Typography>
       </CardContent>
     </Card>
-  )
+  );
 }
 
 function RestoreWalletForm({ goBack }) {
@@ -397,7 +417,8 @@ function RestoreWalletForm({ goBack }) {
   const mnemonic = normalizeMnemonic(rawMnemonic);
   const isNextBtnEnabled =
     password === passwordConfirm && validateMnemonic(mnemonic);
-  const displayInvalidMnemonic = validateMnemonic(mnemonic) === false && mnemonic.length > 0;
+  const displayInvalidMnemonic =
+    validateMnemonic(mnemonic) === false && mnemonic.length > 0;
   return (
     <>
       {next ? (
@@ -411,7 +432,9 @@ function RestoreWalletForm({ goBack }) {
         <>
           <div className="mb-8 flex">
             <Icon icon="back" onClick={goBack} />
-            <div className="pl-16 pointer" onClick={goBack}>Back</div>
+            <div className="pl-16 pointer" onClick={goBack}>
+              Back
+            </div>
           </div>
           <Card>
             <CardContent>
@@ -425,8 +448,12 @@ function RestoreWalletForm({ goBack }) {
               <br />
               {displayInvalidMnemonic && (
                 <>
-                  <Typography fontWeight="fontWeightBold" style={{ color: 'red' }}>
-                    Mnemonic validation failed. Please enter a valid BIP 39 seed phrase.
+                  <Typography
+                    fontWeight="fontWeightBold"
+                    style={{ color: 'red' }}
+                  >
+                    Mnemonic validation failed. Please enter a valid BIP 39 seed
+                    phrase.
                   </Typography>
                   <br />
                 </>
@@ -604,3 +631,46 @@ export function toDerivationPath(dPathMenuItem) {
       throw new Error(`invalid derivation path: ${dPathMenuItem}`);
   }
 }
+
+const PassPhrase = ({ mnemonicAndSeed }) => {
+  const [visible, setVisible] = useState(false);
+  const timer = useRef(null)
+
+  if (!mnemonicAndSeed) {
+    return <LoadingIndicator />;
+  }
+
+  const handleOpen = () => {
+    setVisible(true)
+    clearTimeout(timer.current)
+    timer.current = setTimeout(() => {
+      setVisible(false)
+    }, 8000)
+  }
+
+  const handleHide = () => {
+    clearTimeout(timer.current)
+    setVisible(false)
+  }
+
+  return (
+    <div className="passphrase mb-8">
+      {!visible && (
+        <div className="passphrase__overlay">
+          <span onClick={handleOpen}>
+            <LockOpenOutlined titleAccess='Show your secret key' color="disabled" />
+            Click to view you secret key
+          </span>
+        </div>
+      )}
+      {visible && (
+        <span onClick={handleHide} className='passphrase__quick-hide'>
+          <LockOutlined titleAccess='Hide your secret key' color="disabled" />
+        </span>
+      )}
+      <div className='passphrase__value'>
+        {mnemonicAndSeed.mnemonic}
+      </div>
+    </div>
+  );
+};

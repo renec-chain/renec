@@ -78,12 +78,12 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 SUBCOMMANDS:
     account                              Show the contents of an account
@@ -100,7 +100,7 @@ SUBCOMMANDS:
                                          time
     cluster-version                      Get the version of the cluster entrypoint
     completion                           Generate completion scripts for various shells
-    config                               Solana command-line tool configuration settings
+    config                               RENEC command-line tool configuration settings
     confirm                              Confirm transaction by signature
     create-address-with-seed             Generate a derived account address with a seed
     create-nonce-account                 Create a nonce account
@@ -148,7 +148,7 @@ SUBCOMMANDS:
     transaction-history                  Show historical transactions affecting the given address from newest to
                                          oldest
     transfer                             Transfer funds between system accounts
-    validator-info                       Publish/get Validator info on Solana
+    validator-info                       Publish/get Validator info on RENEC
     validators                           Show summary information about the current validators
     vote-account                         Show the contents of a vote account
     vote-authorize-voter                 Authorize a new vote signing keypair for the given vote account
@@ -187,13 +187,13 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
     -o, --output-file <FILEPATH>           Write the account data to this file
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 ARGS:
     <ACCOUNT_ADDRESS>    Account key URI. , one of:
@@ -226,12 +226,12 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 ```
 
 #### renec-airdrop
@@ -255,12 +255,12 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 ARGS:
     <AMOUNT>               The airdrop amount to request, in RENEC
@@ -293,14 +293,14 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --with-memo <MEMO>                 Specify a memo string to include in the transaction.
         --nonce-authority <KEYPAIR>        Provide the nonce authority keypair to use when signing a nonced transaction
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 ARGS:
     <NONCE_ACCOUNT_ADDRESS>    Address of the nonce account. , one of:
@@ -339,12 +339,12 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 ARGS:
     <ACCOUNT_ADDRESS>    The account address of the balance to check. , one of:
@@ -376,12 +376,12 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 ARGS:
     <SLOT>    
@@ -408,12 +408,12 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 ```
 
 #### renec-block-production
@@ -438,14 +438,14 @@ OPTIONS:
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
         --epoch <epoch>                    Epoch to show block production for [default: current epoch]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
         --slot-limit <slot_limit>          Limit results to this many slots from the end of the epoch [default: full
                                            epoch]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 ```
 
 #### renec-block-time
@@ -469,12 +469,12 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 ARGS:
     <SLOT>    Slot number of the block to query
@@ -503,14 +503,14 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --our-localhost <PORT>             Guess Identity pubkey and validator rpc node assuming local (possibly
                                            private) validator [default: 8899]
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 ARGS:
     <OUR_VALIDATOR_PUBKEY>    Identity pubkey of the validator, one of:
@@ -543,12 +543,12 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 ```
 
 #### renec-cluster-version
@@ -572,12 +572,12 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 ```
 
 #### renec-completion
@@ -601,19 +601,19 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
     -s, --shell <shell>                     [default: bash]  [possible values: bash, fish, zsh, powershell, elvish]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 ```
 
 #### renec-config
 ```text
 renec-config 
-Solana command-line tool configuration settings
+RENEC command-line tool configuration settings
 
 USAGE:
     renec config [FLAGS] [OPTIONS] <SUBCOMMAND>
@@ -631,12 +631,12 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 SUBCOMMANDS:
     export-address-labels    Export the current address labels
@@ -667,12 +667,12 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 ARGS:
     <TRANSACTION_SIGNATURE>    The transaction signature to confirm
@@ -714,12 +714,12 @@ OPTIONS:
                                              * a hyphen; signals a JSON-encoded keypair on stdin
                                              * the 'ASK' keyword; to recover a keypair via its seed phrase
                                              * a hardware wallet keypair URL (i.e. usb://ledger)
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 ARGS:
     <SEED_STRING>    The seed.  Must not take more than 32 bytes to encode as utf-8
@@ -748,7 +748,7 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --with-memo <MEMO>                 Specify a memo string to include in the transaction.
@@ -762,7 +762,7 @@ OPTIONS:
                                            compact]
         --seed <STRING>                    Seed for address generation; if specified, the resulting account will be at a
                                            derived address of the NONCE_ACCOUNT pubkey
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 ARGS:
     <ACCOUNT_KEYPAIR>    Keypair of the nonce account to fund
@@ -804,7 +804,7 @@ OPTIONS:
                                             argument 
                                             is also passed. Defaults to the client keypair.
         --from <KEYPAIR>                    Source account of funds [default: cli config keypair]
-    -u, --url <URL_OR_MONIKER>              URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>              URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                             testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                 Filepath or URL to a keypair
         --lockup-date <RFC3339 DATETIME>    The date and time at which this account will be available for withdrawal
@@ -813,7 +813,7 @@ OPTIONS:
         --nonce <PUBKEY>                    Provide the nonce account to use when creating a nonced 
                                             transaction. Nonced transactions are useful when a transaction 
                                             requires a lengthy signing process. Learn more about nonced 
-                                            transactions at https://docs.solana.com/offline-signing/durable-nonce
+                                            transactions at https://docs.RENEC.com/offline-signing/durable-nonce
         --nonce-authority <KEYPAIR>         Provide the nonce authority keypair to use when signing a nonced transaction
         --output <FORMAT>                   Return information in specified output format [possible values: json, json-
                                             compact]
@@ -821,7 +821,7 @@ OPTIONS:
                                             a derived address of the STAKE_ACCOUNT_KEYPAIR pubkey
         --signer <PUBKEY=SIGNATURE>...      Provide a public-key/signature pair for the transaction
         --stake-authority <PUBKEY>          Authorized staker [default: cli config keypair]
-        --ws <URL>                          WebSocket URL for the solana cluster
+        --ws <URL>                          WebSocket URL for the RENEC cluster
         --withdraw-authority <PUBKEY>       Authorized withdrawer [default: cli config keypair]
 
 ARGS:
@@ -857,14 +857,14 @@ OPTIONS:
                                            or the pubkey of an offline signer, provided an appropriate --signer argument 
                                            is also passed. Defaults to the client keypair.
         --from <KEYPAIR>                   Source account of funds [default: cli config keypair]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --with-memo <MEMO>                 Specify a memo string to include in the transaction.
         --nonce <PUBKEY>                   Provide the nonce account to use when creating a nonced 
                                            transaction. Nonced transactions are useful when a transaction 
                                            requires a lengthy signing process. Learn more about nonced 
-                                           transactions at https://docs.solana.com/offline-signing/durable-nonce
+                                           transactions at https://docs.RENEC.com/offline-signing/durable-nonce
         --nonce-authority <KEYPAIR>        Provide the nonce authority keypair to use when signing a nonced transaction
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
@@ -872,7 +872,7 @@ OPTIONS:
                                            derived address of the STAKE_ACCOUNT_KEYPAIR pubkey
         --signer <PUBKEY=SIGNATURE>...     Provide a public-key/signature pair for the transaction
         --stake-authority <PUBKEY>         Authorized staker [default: cli config keypair]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
         --withdraw-authority <KEYPAIR>     Authorized withdrawer [default: cli config keypair]
 
 ARGS:
@@ -919,14 +919,14 @@ OPTIONS:
                                              or the pubkey of an offline signer, provided an appropriate --signer
                                              argument 
                                              is also passed. Defaults to the client keypair.
-    -u, --url <URL_OR_MONIKER>               URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-
+    -u, --url <URL_OR_MONIKER>               URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-
                                              beta, testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                  Filepath or URL to a keypair
         --with-memo <MEMO>                   Specify a memo string to include in the transaction.
         --nonce <PUBKEY>                     Provide the nonce account to use when creating a nonced 
                                              transaction. Nonced transactions are useful when a transaction 
                                              requires a lengthy signing process. Learn more about nonced 
-                                             transactions at https://docs.solana.com/offline-signing/durable-nonce
+                                             transactions at https://docs.RENEC.com/offline-signing/durable-nonce
         --nonce-authority <KEYPAIR>          Provide the nonce authority keypair to use when signing a nonced
                                              transaction
         --output <FORMAT>                    Return information in specified output format [possible values: json, json-
@@ -934,7 +934,7 @@ OPTIONS:
         --seed <STRING>                      Seed for address generation; if specified, the resulting account will be at
                                              a derived address of the VOTE ACCOUNT pubkey
         --signer <PUBKEY=SIGNATURE>...       Provide a public-key/signature pair for the transaction
-        --ws <URL>                           WebSocket URL for the solana cluster
+        --ws <URL>                           WebSocket URL for the RENEC cluster
 
 ARGS:
     <ACCOUNT_KEYPAIR>      Vote account keypair to create
@@ -974,14 +974,14 @@ OPTIONS:
         --fee-payer <KEYPAIR>              Specify the fee-payer account. This may be a keypair file, the ASK keyword 
                                            or the pubkey of an offline signer, provided an appropriate --signer argument 
                                            is also passed. Defaults to the client keypair.
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --with-memo <MEMO>                 Specify a memo string to include in the transaction.
         --nonce <PUBKEY>                   Provide the nonce account to use when creating a nonced 
                                            transaction. Nonced transactions are useful when a transaction 
                                            requires a lengthy signing process. Learn more about nonced 
-                                           transactions at https://docs.solana.com/offline-signing/durable-nonce
+                                           transactions at https://docs.RENEC.com/offline-signing/durable-nonce
         --nonce-authority <KEYPAIR>        Provide the nonce authority keypair to use when signing a nonced transaction
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
@@ -989,7 +989,7 @@ OPTIONS:
                                            derived address of STAKE_ACCOUNT_ADDRESS
         --signer <PUBKEY=SIGNATURE>...     Provide a public-key/signature pair for the transaction
         --stake-authority <KEYPAIR>        Authorized staker [default: cli config keypair]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 ARGS:
     <STAKE_ACCOUNT_ADDRESS>    Stake account to be deactivated (or base of derived address if --seed is used). , one
@@ -1022,12 +1022,12 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 ARGS:
     <TRANSACTION>    transaction to decode
@@ -1061,20 +1061,20 @@ OPTIONS:
         --fee-payer <KEYPAIR>              Specify the fee-payer account. This may be a keypair file, the ASK keyword 
                                            or the pubkey of an offline signer, provided an appropriate --signer argument 
                                            is also passed. Defaults to the client keypair.
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --with-memo <MEMO>                 Specify a memo string to include in the transaction.
         --nonce <PUBKEY>                   Provide the nonce account to use when creating a nonced 
                                            transaction. Nonced transactions are useful when a transaction 
                                            requires a lengthy signing process. Learn more about nonced 
-                                           transactions at https://docs.solana.com/offline-signing/durable-nonce
+                                           transactions at https://docs.RENEC.com/offline-signing/durable-nonce
         --nonce-authority <KEYPAIR>        Provide the nonce authority keypair to use when signing a nonced transaction
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
         --signer <PUBKEY=SIGNATURE>...     Provide a public-key/signature pair for the transaction
         --stake-authority <KEYPAIR>        Authorized staker [default: cli config keypair]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 ARGS:
     <STAKE_ACCOUNT_ADDRESS>    Stake account to delegate, one of:
@@ -1112,12 +1112,12 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 ```
 
 #### renec-epoch-info
@@ -1141,12 +1141,12 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 ```
 
 #### renec-feature
@@ -1170,12 +1170,12 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 SUBCOMMANDS:
     activate    Activate a runtime feature
@@ -1205,12 +1205,12 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 ```
 
 #### renec-first-available-block
@@ -1234,12 +1234,12 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 ```
 
 #### renec-genesis-hash
@@ -1263,12 +1263,12 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 ```
 
 #### renec-gossip
@@ -1292,12 +1292,12 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 ```
 
 #### renec-help
@@ -1333,12 +1333,12 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 SUBCOMMANDS:
     help       Prints this message or the help of the given subcommand(s)
@@ -1368,12 +1368,12 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 ```
 
 #### renec-leader-schedule
@@ -1398,12 +1398,12 @@ OPTIONS:
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
         --epoch <EPOCH>                    Epoch to show leader schedule for. [default: current]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 ```
 
 #### renec-live-slots
@@ -1427,12 +1427,12 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 ```
 
 #### renec-logs
@@ -1457,12 +1457,12 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 ARGS:
     <ADDRESS>    Account address to monitor [default: monitor all transactions except for votes] , one of:
@@ -1500,20 +1500,20 @@ OPTIONS:
         --fee-payer <KEYPAIR>              Specify the fee-payer account. This may be a keypair file, the ASK keyword 
                                            or the pubkey of an offline signer, provided an appropriate --signer argument 
                                            is also passed. Defaults to the client keypair.
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --with-memo <MEMO>                 Specify a memo string to include in the transaction.
         --nonce <PUBKEY>                   Provide the nonce account to use when creating a nonced 
                                            transaction. Nonced transactions are useful when a transaction 
                                            requires a lengthy signing process. Learn more about nonced 
-                                           transactions at https://docs.solana.com/offline-signing/durable-nonce
+                                           transactions at https://docs.RENEC.com/offline-signing/durable-nonce
         --nonce-authority <KEYPAIR>        Provide the nonce authority keypair to use when signing a nonced transaction
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
         --signer <PUBKEY=SIGNATURE>...     Provide a public-key/signature pair for the transaction
         --stake-authority <KEYPAIR>        Authorized staker [default: cli config keypair]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 ARGS:
     <STAKE_ACCOUNT_ADDRESS>           Stake account to merge into, one of:
@@ -1552,14 +1552,14 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --with-memo <MEMO>                 Specify a memo string to include in the transaction.
         --nonce-authority <KEYPAIR>        Provide the nonce authority keypair to use when signing a nonced transaction
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 ARGS:
     <NONCE_ACCOUNT_ADDRESS>    Address of the nonce account. , one of:
@@ -1591,12 +1591,12 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 ARGS:
     <NONCE_ACCOUNT_ADDRESS>    Address of the nonce account to display. , one of:
@@ -1629,12 +1629,12 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 ARGS:
     <NONCE_ACCOUNT_ADDRESS>    Address of the nonce account to display. , one of:
@@ -1670,14 +1670,14 @@ OPTIONS:
                                            ~/.config/renec/cli/config.yml]
     -c, --count <NUMBER>                   Stop after submitting count transactions
     -i, --interval <SECONDS>               Wait interval seconds between submitting the next transaction [default: 2]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --lamports <NUMBER>                Number of lamports to transfer for each transaction [default: 1]
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
     -t, --timeout <SECONDS>                Wait up to timeout seconds for transaction confirmation [default: 15]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 ```
 
 #### renec-program
@@ -1701,12 +1701,12 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 SUBCOMMANDS:
     close                    Close a program or buffer account and withdraw all lamports
@@ -1741,12 +1741,12 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 ARGS:
     <DATA_LENGTH_OR_MONIKER>    Length of data in the account to calculate rent for, or moniker: [nonce, stake,
@@ -1775,12 +1775,12 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 ARGS:
     <SIGNER_KEYPAIR>    The signer path to resolve
@@ -1807,12 +1807,12 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 ```
 
 #### renec-split-stake
@@ -1842,14 +1842,14 @@ OPTIONS:
         --fee-payer <KEYPAIR>              Specify the fee-payer account. This may be a keypair file, the ASK keyword 
                                            or the pubkey of an offline signer, provided an appropriate --signer argument 
                                            is also passed. Defaults to the client keypair.
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --with-memo <MEMO>                 Specify a memo string to include in the transaction.
         --nonce <PUBKEY>                   Provide the nonce account to use when creating a nonced 
                                            transaction. Nonced transactions are useful when a transaction 
                                            requires a lengthy signing process. Learn more about nonced 
-                                           transactions at https://docs.solana.com/offline-signing/durable-nonce
+                                           transactions at https://docs.RENEC.com/offline-signing/durable-nonce
         --nonce-authority <KEYPAIR>        Provide the nonce authority keypair to use when signing a nonced transaction
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
@@ -1857,7 +1857,7 @@ OPTIONS:
                                            derived address of SPLIT_STAKE_ACCOUNT
         --signer <PUBKEY=SIGNATURE>...     Provide a public-key/signature pair for the transaction
         --stake-authority <KEYPAIR>        Authorized staker [default: cli config keypair]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 ARGS:
     <STAKE_ACCOUNT_ADDRESS>    Stake account to split (or base of derived address if --seed is used). , one of:
@@ -1893,13 +1893,13 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --num-rewards-epochs <NUM>         Display rewards for NUM recent epochs, max 10 [default: latest epoch only]
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 ARGS:
     <STAKE_ACCOUNT_ADDRESS>    The stake account to display. , one of:
@@ -1941,7 +1941,7 @@ OPTIONS:
                                              or the pubkey of an offline signer, provided an appropriate --signer
                                              argument 
                                              is also passed. Defaults to the client keypair.
-    -u, --url <URL_OR_MONIKER>               URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-
+    -u, --url <URL_OR_MONIKER>               URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-
                                              beta, testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                  Filepath or URL to a keypair
         --with-memo <MEMO>                   Specify a memo string to include in the transaction.
@@ -1960,14 +1960,14 @@ OPTIONS:
         --nonce <PUBKEY>                     Provide the nonce account to use when creating a nonced 
                                              transaction. Nonced transactions are useful when a transaction 
                                              requires a lengthy signing process. Learn more about nonced 
-                                             transactions at https://docs.solana.com/offline-signing/durable-nonce
+                                             transactions at https://docs.RENEC.com/offline-signing/durable-nonce
         --nonce-authority <KEYPAIR>          Provide the nonce authority keypair to use when signing a nonced
                                              transaction
         --output <FORMAT>                    Return information in specified output format [possible values: json, json-
                                              compact]
         --signer <PUBKEY=SIGNATURE>...       Provide a public-key/signature pair for the transaction
         --stake-authority <KEYPAIR>          Authorized staker [default: cli config keypair]
-        --ws <URL>                           WebSocket URL for the solana cluster
+        --ws <URL>                           WebSocket URL for the RENEC cluster
         --withdraw-authority <KEYPAIR>       Authorized withdrawer [default: cli config keypair]
 
 ARGS:
@@ -2010,7 +2010,7 @@ OPTIONS:
                                               or the pubkey of an offline signer, provided an appropriate --signer
                                               argument 
                                               is also passed. Defaults to the client keypair.
-    -u, --url <URL_OR_MONIKER>                URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-
+    -u, --url <URL_OR_MONIKER>                URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-
                                               beta, testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                   Filepath or URL to a keypair
         --with-memo <MEMO>                    Specify a memo string to include in the transaction.
@@ -2019,14 +2019,14 @@ OPTIONS:
         --nonce <PUBKEY>                      Provide the nonce account to use when creating a nonced 
                                               transaction. Nonced transactions are useful when a transaction 
                                               requires a lengthy signing process. Learn more about nonced 
-                                              transactions at https://docs.solana.com/offline-signing/durable-nonce
+                                              transactions at https://docs.RENEC.com/offline-signing/durable-nonce
         --nonce-authority <KEYPAIR>           Provide the nonce authority keypair to use when signing a nonced
                                               transaction
         --output <FORMAT>                     Return information in specified output format [possible values: json,
                                               json-compact]
         --signer <PUBKEY=SIGNATURE>...        Provide a public-key/signature pair for the transaction
         --stake-authority <KEYPAIR>           Authorized staker [default: cli config keypair]
-        --ws <URL>                            WebSocket URL for the solana cluster
+        --ws <URL>                            WebSocket URL for the RENEC cluster
         --withdraw-authority <KEYPAIR>        Authorized withdrawer [default: cli config keypair]
 
 ARGS:
@@ -2060,14 +2060,14 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --limit <NUM>                      Display NUM recent epochs worth of stake history in text mode. 0 for all
                                            [default: 10]
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 ```
 
 #### renec-stake-set-lockup
@@ -2099,7 +2099,7 @@ OPTIONS:
                                             or the pubkey of an offline signer, provided an appropriate --signer
                                             argument 
                                             is also passed. Defaults to the client keypair.
-    -u, --url <URL_OR_MONIKER>              URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>              URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                             testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                 Filepath or URL to a keypair
         --lockup-date <RFC3339 DATETIME>    The date and time at which this account will be available for withdrawal
@@ -2114,12 +2114,12 @@ OPTIONS:
         --nonce <PUBKEY>                    Provide the nonce account to use when creating a nonced 
                                             transaction. Nonced transactions are useful when a transaction 
                                             requires a lengthy signing process. Learn more about nonced 
-                                            transactions at https://docs.solana.com/offline-signing/durable-nonce
+                                            transactions at https://docs.RENEC.com/offline-signing/durable-nonce
         --nonce-authority <KEYPAIR>         Provide the nonce authority keypair to use when signing a nonced transaction
         --output <FORMAT>                   Return information in specified output format [possible values: json, json-
                                             compact]
         --signer <PUBKEY=SIGNATURE>...      Provide a public-key/signature pair for the transaction
-        --ws <URL>                          WebSocket URL for the solana cluster
+        --ws <URL>                          WebSocket URL for the RENEC cluster
 
 ARGS:
     <STAKE_ACCOUNT_ADDRESS>    Stake account for which to set lockup parameters. , one of:
@@ -2159,7 +2159,7 @@ OPTIONS:
                                             or the pubkey of an offline signer, provided an appropriate --signer
                                             argument 
                                             is also passed. Defaults to the client keypair.
-    -u, --url <URL_OR_MONIKER>              URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>              URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                             testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                 Filepath or URL to a keypair
         --lockup-date <RFC3339 DATETIME>    The date and time at which this account will be available for withdrawal
@@ -2169,12 +2169,12 @@ OPTIONS:
         --nonce <PUBKEY>                    Provide the nonce account to use when creating a nonced 
                                             transaction. Nonced transactions are useful when a transaction 
                                             requires a lengthy signing process. Learn more about nonced 
-                                            transactions at https://docs.solana.com/offline-signing/durable-nonce
+                                            transactions at https://docs.RENEC.com/offline-signing/durable-nonce
         --nonce-authority <KEYPAIR>         Provide the nonce authority keypair to use when signing a nonced transaction
         --output <FORMAT>                   Return information in specified output format [possible values: json, json-
                                             compact]
         --signer <PUBKEY=SIGNATURE>...      Provide a public-key/signature pair for the transaction
-        --ws <URL>                          WebSocket URL for the solana cluster
+        --ws <URL>                          WebSocket URL for the RENEC cluster
 
 ARGS:
     <STAKE_ACCOUNT_ADDRESS>    Stake account for which to set lockup parameters. , one of:
@@ -2207,12 +2207,12 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 ARGS:
     <VOTE_ACCOUNT_PUBKEYS>...    Only show stake accounts delegated to the provided vote accounts. , one of:
@@ -2245,12 +2245,12 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 ```
 
 #### renec-transaction-count
@@ -2274,12 +2274,12 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 ```
 
 #### renec-transaction-history
@@ -2305,13 +2305,13 @@ OPTIONS:
                                             processed, confirmed, finalized]
     -C, --config <FILEPATH>                 Configuration file to use [default:
                                             ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>              URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>              URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                             testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                 Filepath or URL to a keypair
         --limit <LIMIT>                     Maximum number of transaction signatures to return [default: 1000]
         --output <FORMAT>                   Return information in specified output format [possible values: json, json-
                                             compact]
-        --ws <URL>                          WebSocket URL for the solana cluster
+        --ws <URL>                          WebSocket URL for the RENEC cluster
 
 ARGS:
     <ADDRESS>    Account address, one of:
@@ -2358,19 +2358,19 @@ OPTIONS:
                                              * a hyphen; signals a JSON-encoded keypair on stdin
                                              * the 'ASK' keyword; to recover a keypair via its seed phrase
                                              * a hardware wallet keypair URL (i.e. usb://ledger)
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --with-memo <MEMO>                 Specify a memo string to include in the transaction.
         --nonce <PUBKEY>                   Provide the nonce account to use when creating a nonced 
                                            transaction. Nonced transactions are useful when a transaction 
                                            requires a lengthy signing process. Learn more about nonced 
-                                           transactions at https://docs.solana.com/offline-signing/durable-nonce
+                                           transactions at https://docs.RENEC.com/offline-signing/durable-nonce
         --nonce-authority <KEYPAIR>        Provide the nonce authority keypair to use when signing a nonced transaction
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
         --signer <PUBKEY=SIGNATURE>...     Provide a public-key/signature pair for the transaction
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 ARGS:
     <RECIPIENT_ADDRESS>    The account address of recipient. , one of:
@@ -2385,7 +2385,7 @@ ARGS:
 #### renec-validator-info
 ```text
 renec-validator-info 
-Publish/get Validator info on Solana
+Publish/get Validator info on RENEC
 
 USAGE:
     renec validator-info [FLAGS] [OPTIONS] <SUBCOMMAND>
@@ -2403,17 +2403,17 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 SUBCOMMANDS:
-    get        Get and parse Solana Validator info
+    get        Get and parse RENEC Validator info
     help       Prints this message or the help of the given subcommand(s)
-    publish    Publish Validator info on Solana
+    publish    Publish Validator info on RENEC
 ```
 
 #### renec-validators
@@ -2447,7 +2447,7 @@ OPTIONS:
             Minimum slot distance from the tip to consider a validator delinquent. [default: 128]
 
     -u, --url <URL_OR_MONIKER>
-            URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta, testnet, devnet, localhost]
+            URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta, testnet, devnet, localhost]
 
     -k, --keypair <KEYPAIR>                           Filepath or URL to a keypair
         --output <FORMAT>
@@ -2456,7 +2456,7 @@ OPTIONS:
         --sort <sort>
             Sort order (does not affect JSON output) [default: stake]  [possible values: delinquent, commission,
             credits, identity, last-vote, root, skip-rate, stake, vote-account]
-        --ws <URL>                                    WebSocket URL for the solana cluster
+        --ws <URL>                                    WebSocket URL for the RENEC cluster
 ```
 
 #### renec-vote-account
@@ -2482,13 +2482,13 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --num-rewards-epochs <NUM>         Display rewards for NUM recent epochs, max 10 [default: latest epoch only]
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 ARGS:
     <VOTE_ACCOUNT_ADDRESS>    Vote account pubkey. , one of:
@@ -2526,19 +2526,19 @@ OPTIONS:
         --fee-payer <KEYPAIR>              Specify the fee-payer account. This may be a keypair file, the ASK keyword 
                                            or the pubkey of an offline signer, provided an appropriate --signer argument 
                                            is also passed. Defaults to the client keypair.
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --with-memo <MEMO>                 Specify a memo string to include in the transaction.
         --nonce <PUBKEY>                   Provide the nonce account to use when creating a nonced 
                                            transaction. Nonced transactions are useful when a transaction 
                                            requires a lengthy signing process. Learn more about nonced 
-                                           transactions at https://docs.solana.com/offline-signing/durable-nonce
+                                           transactions at https://docs.RENEC.com/offline-signing/durable-nonce
         --nonce-authority <KEYPAIR>        Provide the nonce authority keypair to use when signing a nonced transaction
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
         --signer <PUBKEY=SIGNATURE>...     Provide a public-key/signature pair for the transaction
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 ARGS:
     <VOTE_ACCOUNT_ADDRESS>     Vote account in which to set the authorized voter. , one of:
@@ -2583,19 +2583,19 @@ OPTIONS:
         --fee-payer <KEYPAIR>              Specify the fee-payer account. This may be a keypair file, the ASK keyword 
                                            or the pubkey of an offline signer, provided an appropriate --signer argument 
                                            is also passed. Defaults to the client keypair.
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --with-memo <MEMO>                 Specify a memo string to include in the transaction.
         --nonce <PUBKEY>                   Provide the nonce account to use when creating a nonced 
                                            transaction. Nonced transactions are useful when a transaction 
                                            requires a lengthy signing process. Learn more about nonced 
-                                           transactions at https://docs.solana.com/offline-signing/durable-nonce
+                                           transactions at https://docs.RENEC.com/offline-signing/durable-nonce
         --nonce-authority <KEYPAIR>        Provide the nonce authority keypair to use when signing a nonced transaction
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
         --signer <PUBKEY=SIGNATURE>...     Provide a public-key/signature pair for the transaction
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 ARGS:
     <VOTE_ACCOUNT_ADDRESS>      Vote account in which to set the authorized voter. , one of:
@@ -2635,19 +2635,19 @@ OPTIONS:
         --fee-payer <KEYPAIR>              Specify the fee-payer account. This may be a keypair file, the ASK keyword 
                                            or the pubkey of an offline signer, provided an appropriate --signer argument 
                                            is also passed. Defaults to the client keypair.
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --with-memo <MEMO>                 Specify a memo string to include in the transaction.
         --nonce <PUBKEY>                   Provide the nonce account to use when creating a nonced 
                                            transaction. Nonced transactions are useful when a transaction 
                                            requires a lengthy signing process. Learn more about nonced 
-                                           transactions at https://docs.solana.com/offline-signing/durable-nonce
+                                           transactions at https://docs.RENEC.com/offline-signing/durable-nonce
         --nonce-authority <KEYPAIR>        Provide the nonce authority keypair to use when signing a nonced transaction
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
         --signer <PUBKEY=SIGNATURE>...     Provide a public-key/signature pair for the transaction
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 ARGS:
     <VOTE_ACCOUNT_ADDRESS>    Vote account in which to set the authorized withdrawer. , one of:
@@ -2692,19 +2692,19 @@ OPTIONS:
         --fee-payer <KEYPAIR>              Specify the fee-payer account. This may be a keypair file, the ASK keyword 
                                            or the pubkey of an offline signer, provided an appropriate --signer argument 
                                            is also passed. Defaults to the client keypair.
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --with-memo <MEMO>                 Specify a memo string to include in the transaction.
         --nonce <PUBKEY>                   Provide the nonce account to use when creating a nonced 
                                            transaction. Nonced transactions are useful when a transaction 
                                            requires a lengthy signing process. Learn more about nonced 
-                                           transactions at https://docs.solana.com/offline-signing/durable-nonce
+                                           transactions at https://docs.RENEC.com/offline-signing/durable-nonce
         --nonce-authority <KEYPAIR>        Provide the nonce authority keypair to use when signing a nonced transaction
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
         --signer <PUBKEY=SIGNATURE>...     Provide a public-key/signature pair for the transaction
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 ARGS:
     <VOTE_ACCOUNT_ADDRESS>      Vote account in which to set the authorized withdrawer. , one of:
@@ -2744,19 +2744,19 @@ OPTIONS:
         --fee-payer <KEYPAIR>              Specify the fee-payer account. This may be a keypair file, the ASK keyword 
                                            or the pubkey of an offline signer, provided an appropriate --signer argument 
                                            is also passed. Defaults to the client keypair.
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --with-memo <MEMO>                 Specify a memo string to include in the transaction.
         --nonce <PUBKEY>                   Provide the nonce account to use when creating a nonced 
                                            transaction. Nonced transactions are useful when a transaction 
                                            requires a lengthy signing process. Learn more about nonced 
-                                           transactions at https://docs.solana.com/offline-signing/durable-nonce
+                                           transactions at https://docs.RENEC.com/offline-signing/durable-nonce
         --nonce-authority <KEYPAIR>        Provide the nonce authority keypair to use when signing a nonced transaction
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
         --signer <PUBKEY=SIGNATURE>...     Provide a public-key/signature pair for the transaction
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 ARGS:
     <VOTE_ACCOUNT_ADDRESS>    Vote account to update. , one of:
@@ -2796,19 +2796,19 @@ OPTIONS:
         --fee-payer <KEYPAIR>              Specify the fee-payer account. This may be a keypair file, the ASK keyword 
                                            or the pubkey of an offline signer, provided an appropriate --signer argument 
                                            is also passed. Defaults to the client keypair.
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --with-memo <MEMO>                 Specify a memo string to include in the transaction.
         --nonce <PUBKEY>                   Provide the nonce account to use when creating a nonced 
                                            transaction. Nonced transactions are useful when a transaction 
                                            requires a lengthy signing process. Learn more about nonced 
-                                           transactions at https://docs.solana.com/offline-signing/durable-nonce
+                                           transactions at https://docs.RENEC.com/offline-signing/durable-nonce
         --nonce-authority <KEYPAIR>        Provide the nonce authority keypair to use when signing a nonced transaction
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
         --signer <PUBKEY=SIGNATURE>...     Provide a public-key/signature pair for the transaction
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 ARGS:
     <VOTE_ACCOUNT_ADDRESS>    Vote account to update. , one of:
@@ -2842,12 +2842,12 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 ARGS:
     <PERCENT>    
@@ -2874,14 +2874,14 @@ OPTIONS:
                                            processed, confirmed, finalized]
     -C, --config <FILEPATH>                Configuration file to use [default:
                                            ~/.config/renec/cli/config.yml]
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --with-memo <MEMO>                 Specify a memo string to include in the transaction.
         --nonce-authority <KEYPAIR>        Provide the nonce authority keypair to use when signing a nonced transaction
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
 
 ARGS:
     <NONCE_ACCOUNT_ADDRESS>    Nonce account to withdraw from. , one of:
@@ -2931,7 +2931,7 @@ OPTIONS:
             or the pubkey of an offline signer, provided an appropriate --signer argument 
             is also passed. Defaults to the client keypair.
     -u, --url <URL_OR_MONIKER>
-            URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta, testnet, devnet, localhost]
+            URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta, testnet, devnet, localhost]
 
     -k, --keypair <KEYPAIR>                             Filepath or URL to a keypair
         --with-memo <MEMO>                              Specify a memo string to include in the transaction.
@@ -2939,7 +2939,7 @@ OPTIONS:
             Provide the nonce account to use when creating a nonced 
             transaction. Nonced transactions are useful when a transaction 
             requires a lengthy signing process. Learn more about nonced 
-            transactions at https://docs.solana.com/offline-signing/durable-nonce
+            transactions at https://docs.RENEC.com/offline-signing/durable-nonce
         --nonce-authority <KEYPAIR>
             Provide the nonce authority keypair to use when signing a nonced transaction
 
@@ -2947,7 +2947,7 @@ OPTIONS:
             Return information in specified output format [possible values: json, json-compact]
 
         --signer <PUBKEY=SIGNATURE>...                  Provide a public-key/signature pair for the transaction
-        --ws <URL>                                      WebSocket URL for the solana cluster
+        --ws <URL>                                      WebSocket URL for the RENEC cluster
 
 ARGS:
     <VOTE_ACCOUNT_ADDRESS>    Vote account from which to withdraw. , one of:
@@ -2994,21 +2994,21 @@ OPTIONS:
         --fee-payer <KEYPAIR>              Specify the fee-payer account. This may be a keypair file, the ASK keyword 
                                            or the pubkey of an offline signer, provided an appropriate --signer argument 
                                            is also passed. Defaults to the client keypair.
-    -u, --url <URL_OR_MONIKER>             URL for Solana's JSON RPC or moniker (or their first letter): [mainnet-beta,
+    -u, --url <URL_OR_MONIKER>             URL for RENEC's JSON RPC or moniker (or their first letter): [mainnet-beta,
                                            testnet, devnet, localhost]
     -k, --keypair <KEYPAIR>                Filepath or URL to a keypair
         --with-memo <MEMO>                 Specify a memo string to include in the transaction.
         --nonce <PUBKEY>                   Provide the nonce account to use when creating a nonced 
                                            transaction. Nonced transactions are useful when a transaction 
                                            requires a lengthy signing process. Learn more about nonced 
-                                           transactions at https://docs.solana.com/offline-signing/durable-nonce
+                                           transactions at https://docs.RENEC.com/offline-signing/durable-nonce
         --nonce-authority <KEYPAIR>        Provide the nonce authority keypair to use when signing a nonced transaction
         --output <FORMAT>                  Return information in specified output format [possible values: json, json-
                                            compact]
         --seed <STRING>                    Seed for address generation; if specified, the resulting account will be at a
                                            derived address of STAKE_ACCOUNT_ADDRESS
         --signer <PUBKEY=SIGNATURE>...     Provide a public-key/signature pair for the transaction
-        --ws <URL>                         WebSocket URL for the solana cluster
+        --ws <URL>                         WebSocket URL for the RENEC cluster
         --withdraw-authority <KEYPAIR>     Authorized withdrawer [default: cli config keypair]
 
 ARGS:

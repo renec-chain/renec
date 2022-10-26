@@ -2,7 +2,7 @@
 title: Staking
 ---
 For an overview of staking, read first the
-[Staking and Inflation FAQ](https://solana.com/staking).
+[Staking and Inflation FAQ](https://docs.renec.foundation/staking).
 
 ------
 

@@ -16,7 +16,7 @@ While many of the details of the specific implementation are currently under con
 
 Inflation rate is the Renec protocol will automatically create new tokens on a predetermined inflation schedule (discussed below). The _Inflation Rate [%]_ is the annualized growth rate of the _Total Current Supply_ at any point in time. **In RENEC blockchain inflation rate is fixed at 4.5% a year.**
 
-The rate of return (aka _interest_) earned on RENEC staked on the network. It is often quoted as an annualized rate (e.g. "the network _staking yield_ is currently $10\%$ per year").
+The rate of return (aka _interest_) earned on RENEC staked on the network. It is often quoted as an annualized rate (e.g. "the network _staking yield_ is currently $4.5\%$ per year").
 
 - _Staking yield_ is of great interest to validators and token holders who wish to delegate their tokens to avoid token dilution due to inflation (the extent of which is discussed below).
 - $100\%$ of inflationary issuances are to be distributed to staked token-holders in proportion to their staked RENEC and to validators who charge a commission on the rewards earned by their delegated RENEC.

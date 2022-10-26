@@ -10,7 +10,6 @@ Before you begin make sure you have first
 Explorers:
 
 - [http://explorer.renec.foundation/](https://explorer.renec.foundation/).
-- [http://solanabeach.io/](http://solanabeach.io/).
 
 ## Testnet
 
@@ -23,15 +22,9 @@ Explorers:
 - Testnet typically runs a newer software release than both Devnet and
   Mainnet Beta
 - Gossip entrypoint for Testnet: `54.208.172.26:8001`
-- Metrics environment variable for Testnet:
-
-<!-- ```bash
-export SOLANA_METRICS_CONFIG="host=https://metrics.solana.com:8086,db=tds,u=testnet_write,p=c4fa841aa918bf8274e3e2a44d77568d9861b3ea"
-``` -->
-
 - RPC URL for Testnet: `https://api-testnet.renec.foundation:8899`
 
-##### Example `solana` command-line configuration
+##### Example `renec` command-line configuration
 
 ```bash
 renec config set --url https://api-testnet.renec.foundation:8899

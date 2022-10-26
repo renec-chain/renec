@@ -18,10 +18,10 @@ Use `renec config set` command to target a particular cluster. After setting
 a cluster target, any future subcommands will send/receive information from that
 cluster.
 
-For example to target the Devnet cluster, run:
+For example to target the Testnet cluster, run:
 
 ```bash
-renec config set --url https://api.devnet.solana.com
+renec config set --url https://api-testnet.renec.foundation:8899
 ```
 
 ## Ensure Versions Match

@@ -320,6 +320,7 @@ function ChoosePasswordForm({ goBack, onSubmit }) {
           <TextInput
             label="New Password"
             type="password"
+            name="password"
             autoComplete="new-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -328,6 +329,7 @@ function ChoosePasswordForm({ goBack, onSubmit }) {
           <TextInput
             label="Confirm Password"
             type="password"
+            name="password-confirm"
             autoComplete="new-password"
             value={passwordConfirm}
             onChange={(e) => setPasswordConfirm(e.target.value)}
@@ -380,6 +382,7 @@ function LoginForm() {
         <TextInput
           label="Password"
           type="password"
+          name="password"
           autoComplete="current-password"
           value={password}
           onChange={setPasswordOnChange}
@@ -468,6 +471,7 @@ function RestoreWalletForm({ goBack }) {
               <TextInput
                 label="New password (Optional)"
                 type="password"
+                name="password"
                 autoComplete="new-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -476,6 +480,7 @@ function RestoreWalletForm({ goBack }) {
               <TextInput
                 label="Confirm password (Optional)"
                 type="password"
+                name="password-confirm"
                 autoComplete="new-password"
                 value={passwordConfirm}
                 onChange={(e) => setPasswordConfirm(e.target.value)}
@@ -657,18 +662,18 @@ const PassPhrase = ({ mnemonicAndSeed }) => {
     <div className="passphrase mb-8">
       {!visible && (
         <div className="passphrase__overlay">
-          <span onClick={handleOpen}>
+          <span data-testid="show-secret" onClick={handleOpen}>
             <LockOpenOutlined titleAccess='Show your secret key' color="disabled" />
             Click to view your secret key
           </span>
         </div>
       )}
       {visible && (
-        <span onClick={handleHide} className='passphrase__quick-hide'>
+        <span data-testid="hide-secret" onClick={handleHide} className='passphrase__quick-hide'>
           <LockOutlined titleAccess='Hide your secret key' color="disabled" />
         </span>
       )}
-      <div className='passphrase__value'>
+      <div data-testid="secret-key" className='passphrase__value'>
         {mnemonicAndSeed.mnemonic}
       </div>
     </div>

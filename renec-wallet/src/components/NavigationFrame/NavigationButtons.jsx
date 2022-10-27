@@ -192,6 +192,7 @@ function NetworkSelector() {
       <Hidden smDown>
         <Button
           color="inherit"
+          data-testid="select-network"
           onClick={(e) => setAnchorEl(e.target)}
           className={classes.button}
         >

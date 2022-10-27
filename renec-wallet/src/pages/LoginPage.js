@@ -659,7 +659,7 @@ const PassPhrase = ({ mnemonicAndSeed }) => {
         <div className="passphrase__overlay">
           <span onClick={handleOpen}>
             <LockOpenOutlined titleAccess='Show your secret key' color="disabled" />
-            Click to view you secret key
+            Click to view your secret key
           </span>
         </div>
       )}

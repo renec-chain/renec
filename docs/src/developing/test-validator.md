@@ -153,10 +153,10 @@ JSON RPC URL: http://127.0.0.1:8899
 
 By default, the test validator runs with all [runtime features](programming-model/runtime#features) activated.
 
-You can verify this using the [Solana command-line tools](/cli/install-renec-cli-tools):
+You can verify this using the [RENEC command-line tools](/cli/install-renec-cli-tools):
 
 ```bash
-solana feature status -ul
+renec feature status -ul
 ```
 
 Since this may not always be desired, especially when testing programs meant for deployment to mainnet, the CLI provides an option to deactivate specific features:

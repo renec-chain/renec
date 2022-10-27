@@ -26,7 +26,8 @@ const TextInput = ({
   textarea,
   value,
   endAdornment,
-  type = "text"
+  type = "text",
+  name
 }) => {
   const showMessage = hasError || hasWarning;
   return (
@@ -46,6 +47,7 @@ const TextInput = ({
         {textarea && (
           <textarea
             type="text"
+            name={name}
             id={id}
             value={value}
             placeholder={placeholder}
@@ -57,6 +59,7 @@ const TextInput = ({
           <input
             type={type}
             id={id}
+            name={name}
             value={value}
             placeholder={placeholder}
             disabled={isDisabled}
@@ -84,6 +87,7 @@ TextInput.propTypes = {
   textarea: PropTypes.bool,
   value: PropTypes.string,
   type: PropTypes.string,
+  name: PropTypes.string
 };
 
 export { TextInput };

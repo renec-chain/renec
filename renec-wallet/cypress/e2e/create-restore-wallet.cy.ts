@@ -4,9 +4,11 @@ describe('create-restore wallet', () => {
   let secret = ""
 
   beforeEach(() => {
-    cy.visit('/')
-    cy.findByTestId("select-network").click()
-    cy.findByText("Testnet").click()
+    cy.visit('/', {
+      onBeforeLoad(window) {
+        window.localStorage.setItem("connectionEndpoint", "\"https://api-testnet.renec.foundation:8899\"")
+      }
+    })
   })
 
   it('create wallet', () => {

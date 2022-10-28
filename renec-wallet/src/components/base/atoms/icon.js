@@ -57,7 +57,7 @@ const Icon = React.memo(({
 
   return (
     <div style={containerStyle}>
-      <img src={require(`../../../img/svgs/${icon}.svg`)?.default} {...svgProps} onClick={onClick} />
+      <img data-testid={testID} src={require(`../../../img/svgs/${icon}.svg`)?.default} {...svgProps} onClick={onClick} />
     </div>
   );
 });

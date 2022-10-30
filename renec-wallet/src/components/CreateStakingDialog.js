@@ -47,6 +47,7 @@ export default function CreateStakingDialog({
       onClose={onClose}
       onSubmit={onSubmit}
       fullWidth
+      data-testid="create-staking-dialog"
     >
       <DialogTitle>
         <div className="flex space-between mt-8">
@@ -72,6 +73,7 @@ export default function CreateStakingDialog({
           </Typography>
           <TextInput
             fullWidth
+            name="amount"
             variant="outlined"
             margin="normal"
             value={amount}
@@ -96,6 +98,7 @@ export default function CreateStakingDialog({
           <span>Available: </span>
           <span
             className="bold"
+            data-testid="available-balance"
             onClick={() => {
               setAmount(balanceAmountToUserAmount(userMaxStakeAmount, decimals));
             }}

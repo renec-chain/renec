@@ -85,7 +85,7 @@ export function StakingListItem({ voteAccount }) {
     return <LoadingIndicator delay={0} />;
   }
   return (
-    <Card className={classes.item}>
+    <Card data-testid="staking-item" className={classes.item}>
       <ListItem style={{ padding: 16 }}>
         <ListItemIcon>
           <img

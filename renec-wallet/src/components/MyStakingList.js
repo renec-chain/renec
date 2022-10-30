@@ -97,7 +97,7 @@ export default function MyStakingList() {
   return (
     <div>
       <div className={classes.textHeader}>My staking list</div>
-      <List disablePadding>
+      <List data-testid="staking-list" disablePadding>
         {StakingListItemsMemo.map((Memoized) => (
           <Memoized />
         ))}

@@ -161,7 +161,7 @@ function SeedWordsForm({ mnemonicAndSeed, goBack, goForward }) {
     const url = window.URL.createObjectURL(new Blob([mnemonic]));
     const link = document.createElement('a');
     link.href = url;
-    link.setAttribute('download', 'renec.bak');
+    link.setAttribute('download', 'renec.txt');
     document.body.appendChild(link);
     link.click();
   };

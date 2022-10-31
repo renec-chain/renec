@@ -13,16 +13,60 @@ import { stakingFormat } from '../utils/utils';
 import { useStyles } from './BalancesList';
 import { makeStyles } from '@material-ui/styles';
 import { useSolanaExplorerUrlSuffix } from '../utils/connection';
+import ConfirmDialog from './base/molecules/confirm-dialog';
+import { useModalState } from '../utils/custom-hooks';
 
 const capitalize = (s) => s && s[0].toUpperCase() + s.slice(1);
 
 export default function MyStakingList() {
   const classes = useStyles();
   const wallet = useWallet();
+  const { setItem } = useStaking();
+  const {open, onClose, onOpen} = useModalState();
+  const [pendingUndelegate, setPendingUndelegate] = useState(null)
+  const [sendTransaction] = useSendTransaction();
+
+  const fetchListStakes = async () => {
+    const stakeAccountInfo = await wallet.listStakes();
+    const publicKeys = stakeAccountInfo
+      ? stakeAccountInfo.map(({ pubkey }) => pubkey)
+      : [];
+    setItem();
+    listStakes(publicKeys);
+  };
+
   const {
     state: { publicKeys },
     listStakes,
   } = useStaking();
+
+  const onClickUndelegate = (publicKey) => {
+    onOpen()
+    setPendingUndelegate(publicKey)
+  }
+
+  const onConfirmUndelegate = async () => {
+    setPendingUndelegate(null)
+    onClose()
+    return sendTransaction(unDelegateStake(pendingUndelegate), {
+      onSuccess: fetchListStakes,
+    });
+  }
+
+  const onClickWithdraw = React.useCallback(async (publicKey) => {
+    return sendTransaction(withdrawStake(publicKey), {
+      onSuccess: fetchListStakes,
+    });
+  }, []);
+
+  const unDelegateStake = async (publicKey) => {
+    return await wallet.undelegateStake(publicKey);
+  };
+
+  const withdrawStake = async (publicKey) => {
+    return await wallet.withdrawStake(publicKey);
+  };
+
   const StakingListItemsMemo = useMemo(() => {
     return (publicKeys || []).map((publicKey, index) => {
       return React.memo((props) => {
@@ -30,6 +74,8 @@ export default function MyStakingList() {
           <StakingListItem
             key={publicKey.toString() || index.toString()}
             publicKey={publicKey}
+            onClickUndelegate={onClickUndelegate}
+            onClickWithdraw={onClickWithdraw}
           />
         );
       });
@@ -56,6 +102,16 @@ export default function MyStakingList() {
           <Memoized />
         ))}
       </List>
+      <ConfirmDialog
+        title="Confirm Undelegate"
+        warningMessage="Undelegate could take several days to be successful, you can still receive commission during the waiting period. Do you want to undelegate this stake?"
+        open={open}
+        onClose={() => {
+          setPendingUndelegate(null);
+          onClose();
+        }}
+        onConfirm={onConfirmUndelegate}
+      />
     </div>
   );
 }
@@ -79,9 +135,12 @@ const myStakingUseStyles = makeStyles((theme) => ({
   },
 }));
 
-export function StakingListItem({ publicKey }) {
+export const StakingListItem = ({
+  publicKey,
+  onClickUndelegate,
+  onClickWithdraw,
+}) => {
   const urlSuffix = useSolanaExplorerUrlSuffix();
-
   const classes = useStyles();
   const myStakingClasses = myStakingUseStyles();
   const [open, setOpen] = useState(false);
@@ -176,45 +235,25 @@ export function StakingListItem({ publicKey }) {
         <MyStakingListItemDetails
           stakeActivation={stakeActivation}
           publicKey={publicKey}
+          onClickUndelegate={onClickUndelegate}
+          onClickWithdraw={onClickWithdraw}
         />
       </Collapse>
     </Card>
   );
-}
+};
 
 const MyStakingListItemDetails = React.memo(
-  ({ stakeActivation, publicKey }) => {
+  ({ stakeActivation, publicKey, onClickUndelegate, onClickWithdraw }) => {
     const classes = useStyles();
     const myStakingClasses = myStakingUseStyles();
-    const wallet = useWallet();
-    const { listStakes, setItem } = useStaking();
-    const [sendTransaction] = useSendTransaction();
-    const fetchListStakes = async () => {
-      const stakeAccountInfo = await wallet.listStakes();
-      const publicKeys = stakeAccountInfo
-        ? stakeAccountInfo.map(({ pubkey }) => pubkey)
-        : [];
-      setItem();
-      listStakes(publicKeys);
-    };
-    const onClickUndelegate = React.useCallback(async () => {
-      return sendTransaction(unDelegateStake(), {
-        onSuccess: fetchListStakes,
-      });
-    }, []);
 
-    const onClickWithdraw = React.useCallback(async () => {
-      return sendTransaction(withdrawStake(), {
-        onSuccess: fetchListStakes,
-      });
-    }, []);
-
-    const unDelegateStake = async () => {
-      return await wallet.undelegateStake(publicKey);
+    const handleClickUndelegate = () => {
+      onClickUndelegate(publicKey);
     };
 
-    const withdrawStake = async () => {
-      return await wallet.withdrawStake(publicKey);
+    const handleClickWithdraw = () => {
+      onClickWithdraw(publicKey);
     };
 
     const renderButton = React.useMemo(() => {
@@ -230,7 +269,7 @@ const MyStakingListItemDetails = React.memo(
                 color: '#FFF',
                 borderRadius: '4px',
               }}
-              onClick={onClickUndelegate}
+              onClick={handleClickUndelegate}
             >
               Undelegate
             </Button>
@@ -245,7 +284,7 @@ const MyStakingListItemDetails = React.memo(
                 color: '#FFF',
                 borderRadius: '4px',
               }}
-              onClick={onClickWithdraw}
+              onClick={handleClickWithdraw}
             >
               Withdraw
             </Button>

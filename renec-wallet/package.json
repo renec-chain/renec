@@ -58,7 +58,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "e2e-test": "cypress open",
-    "e2e-test:headless": "cypress run"
+    "e2e-test:headless": "wait-on http://127.0.0.1:3000 && cypress run"
   },
   "eslintConfig": {
     "env": {
@@ -98,6 +98,7 @@
     "git-format-staged": "^2.1.0",
     "husky": "^4.3.6",
     "prettier": "^2.2.1",
-    "sass": "^1.50.0"
+    "sass": "^1.50.0",
+    "wait-on": "^6.0.1"
   }
 }

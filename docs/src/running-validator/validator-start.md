@@ -8,11 +8,8 @@ The renec cli includes `get` and `set` configuration commands to automatically
 set the `--url` argument for cli commands. For example:
 
 ```bash
-renec config set --url https://api-testnet.renec.foundation:8899
+renec config set --url https://api-mainnet-beta.renec.foundation:8899
 ```
-
-While this section demonstrates how to connect to the Testnet cluster, the steps
-are similar for the other [Renec Clusters](../clusters.md).
 
 ## Confirm The Cluster Is Reachable
 
@@ -67,13 +64,13 @@ You should see the following output:
 
 ```text
 Config File: /home/renec/.config/renec/cli/config.yml
-RPC URL: http://api-testnet.renec.foundation:8899
-WebSocket URL: ws://api-testnet.renec.foundation:8899/ (computed)
+RPC URL: http://api-mainnet-beta.renec.foundation:8899
+WebSocket URL: ws://api-mainnet-beta.renec.foundation:8899/ (computed)
 Keypair Path: /home/renec/validator-keypair.json
 Commitment: confirmed
 ```
 
-## Airdrop & Check Validator Balance
+<!-- ## Airdrop & Check Validator Balance
 
 Airdrop yourself some RENEC to get started:
 
@@ -96,7 +93,7 @@ Or to see in finer detail:
 renec balance --lamports
 ```
 
-Read more about the [difference between RENEC and lamports here](../introduction.md#what-are-sols).
+Read more about the [difference between RENEC and lamports here](../introduction.md#what-are-sols). -->
 
 ## Create Authorized Withdrawer Account
 
@@ -144,13 +141,12 @@ Connect to the cluster by running (this configuration is for testnet):
 ~/.local/share/renec/install/active_release/bin/renec-validator \
   --identity ~/validator-identity.json \
   --vote-account ~/validator-vote-account.json \
-  --rpc-faucet-address 54.208.172.26:9900 \
   --enable-rpc-transaction-history \
   --enable-cpi-and-log-storage \
   --require-tower \
   --dynamic-port-range 8000-8020 \
-  --entrypoint 54.208.172.26:8001 \
-  --expected-genesis-hash 2ipyhz9E19koN6Ejh1ERRgQS3wqD6ZV1FFk4pnXBbCrx \
+  --entrypoint 52.21.244.146:8001 \
+  --expected-genesis-hash 7PNFRHLxT9FcAxSUcg3P8BraJnnUBnjuy8LwRbRJvVkX \
   --full-rpc-api \
   --log -
 ```
@@ -160,13 +156,6 @@ the validator will automatically log to a file.
 
 The ledger will be placed in the `ledger/` directory by default, use the
 `--ledger` argument to specify a different location.
-
-> Note: You can use a
-> [paper wallet seed phrase](../wallet-guide/paper-wallet.md)
-> for your `--identity` and/or
-> `--authorized-voter` keypairs. To use these, pass the respective argument as
-> `renec-validator --identity ASK ... --authorized-voter ASK ...`
-> and you will be prompted to enter your seed phrases and optional passphrase.
 
 Confirm your validator is connected to the network by opening a new terminal and
 running:
@@ -214,9 +203,9 @@ After=network.target
 [Service]
 User=renec
 Group=renec
-Environment=SOLANA_METRICS_CONFIG=host=http://metrics.renec.foundation:8086,db=testnet,u=write,p=39018931781680558
+Environment=SOLANA_METRICS_CONFIG=host=http://metrics.renec.foundation:8086,db=mainnet-beta,u=write,p=39018931781680558
 Environment=RUST_LOG=info
-ExecStart=/home/renec/.local/share/renec/install/active_release/bin/renec-validator   --identity /home/renec/validator-identity.json   --vote-account /home/renec/validator-vote-account.json   --known-validator FwhcMdpwaeKPaHEn42q2UkeiFrSuMBWHWbimD4aFRF54 --only-known-rpc   --rpc-faucet-address 54.208.172.26:9900 --enable-rpc-transaction-history   --enable-cpi-and-log-storage   --require-tower   --dynamic-port-range 8000-8020   --entrypoint 54.208.172.26:8001   --expected-genesis-hash 2ipyhz9E19koN6Ejh1ERRgQS3wqD6ZV1FFk4pnXBbCrx --full-rpc-api
+ExecStart=/home/renec/.local/share/renec/install/active_release/bin/renec-validator   --identity /home/renec/validator-identity.json   --vote-account /home/renec/validator-vote-account.json --enable-rpc-transaction-history   --enable-cpi-and-log-storage   --require-tower   --dynamic-port-range 8000-8020   --entrypoint 52.21.244.146:8001   --expected-genesis-hash 7PNFRHLxT9FcAxSUcg3P8BraJnnUBnjuy8LwRbRJvVkX --full-rpc-api
 StandardOutput=append:/home/renec/renec-validator.log
 StandardError=append:/home/renec/renec-validator-error.log
 Restart=on-failure

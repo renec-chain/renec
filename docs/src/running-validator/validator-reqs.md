@@ -11,33 +11,6 @@ has a rent-exempt reserve of 0.02685864 RENEC. Voting also requires sending a vo
 transaction for each block the validator agrees with, which can cost up to
 1.1 RENEC per day.
 
-## Hardware Recommendations for Testnet
-
-- CPU
-  - 12 cores / 24 threads, or more
-  - 2.8GHz, or faster
-  - AVX2 instruction support (to use official release binaries, self-compile
-    otherwise)
-  - Support for AVX512f and/or SHA-NI instructions is helpful
-  - The AMD Zen3 series is popular with the validator community
-- RAM
-  - 32GB, or more
-  - Motherboard with 256GB capacity suggested
-- Disk
-  - PCIe Gen3 x4 NVME SSD, or better
-  - Accounts: 500GB, or larger. High TBW (Total Bytes Written)
-  - Ledger: 1TB or larger. High TBW suggested
-  - OS: (Optional) 500GB, or larger. SATA OK
-  - The OS may be installed on the ledger disk, though testing has shown better
-    performance with the ledger on its own disk
-  - Accounts and ledger _can_ be stored on the same disk, however due to high
-    IOPS, this is not recommended
-  - The Samsung 970 and 980 Pro series SSDs are popular with the validator community
-- GPUs
-  - Not strictly necessary at this time
-  - Motherboard and power supply speced to add one or more high-end GPUs in the
-    future suggested
-
 <!-- ### RPC Node Recommendations
 The [hardware recommendations](#hardware-recommendations) above should be considered
 bare minimums if the validator is intended to be employed as an RPC node. To provide
@@ -53,8 +26,7 @@ made.
   - Accounts and ledger should not be stored on the same disk -->
 
 ## Hardware Recommendations for Mainnet
-In progress...
-<!-- - CPU
+- CPU
   - 12 cores / 24 threads, or more
   - 2.8GHz, or faster
   - AVX2 instruction support (to use official release binaries, self-compile
@@ -77,7 +49,34 @@ In progress...
 - GPUs
   - Not strictly necessary at this time
   - Motherboard and power supply speced to add one or more high-end GPUs in the
-    future suggested -->
+    future suggested
+
+## Hardware Recommendations for Testnet
+
+- CPU
+  - 12 cores / 24 threads, or more
+  - 2.8GHz, or faster
+  - AVX2 instruction support (to use official release binaries, self-compile
+    otherwise)
+  - Support for AVX512f and/or SHA-NI instructions is helpful
+  - The AMD Zen3 series is popular with the validator community
+- RAM
+  - 128GB, or more
+  - Motherboard with 256GB capacity suggested
+- Disk
+  - PCIe Gen3 x4 NVME SSD, or better
+  - Accounts: 500GB, or larger. High TBW (Total Bytes Written)
+  - Ledger: 1TB or larger. High TBW suggested
+  - OS: (Optional) 500GB, or larger. SATA OK
+  - The OS may be installed on the ledger disk, though testing has shown better
+    performance with the ledger on its own disk
+  - Accounts and ledger _can_ be stored on the same disk, however due to high
+    IOPS, this is not recommended
+  - The Samsung 970 and 980 Pro series SSDs are popular with the validator community
+- GPUs
+  - Not strictly necessary at this time
+  - Motherboard and power supply speced to add one or more high-end GPUs in the
+    future suggested
 
 <!-- ## Virtual machines on Cloud Platforms
 

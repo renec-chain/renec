@@ -48,6 +48,25 @@ jobs:
       - persist_to_workspace:
           root: ~/project
           paths: .
+  wallet-e2e-test:
+    docker:
+      - image: cypress/base:14.16.0
+        environment:
+          TERM: xterm
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: cd renec-wallet && yarn install
+      - run:
+          name: Launch server
+          command: cd renec-wallet && yarn start
+          background: true
+      - run:
+          name: Run E2E tests
+          command: cd renec-wallet && yarn e2e-test:headless
+      - store_artifacts:
+          path: renec-wallet/cypress/screenshots
 
 workflows:
   version: 2
@@ -55,3 +74,4 @@ workflows:
     jobs:
       - run-build
       - build-docs
+      - wallet-e2e-test

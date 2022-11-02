@@ -31,6 +31,7 @@ import { useCallAsync } from '../utils/notifications';
 import { validateMnemonic } from 'bip39';
 import { Alert } from '@material-ui/lab';
 import { RButton, Icon, TextInput, Message } from '../components/base';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
   walletButtons: {
@@ -42,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function LoginPage() {
+  const { t } = useTranslation();
   const [restore, setRestore] = useState(false);
   const [newWallet, setNewWallet] = useState(false);
   const [hasLockedMnemonicAndSeed, loading] = useHasLockedMnemonicAndSeed();
@@ -61,8 +63,8 @@ export default function LoginPage() {
       <Container maxWidth="sm">
         <Card>
           <CardContent>
-            <h1>Remitano Network Wallet</h1>
-            <div>Restore existing wallet or create a new one</div>
+            <h1>{t('renec_wallet')}</h1>
+            <div>{t('restore_create_wallet')}</div>
             <br />
             <div className={classes.walletButtons}>
               <div className={classes.button}>
@@ -72,7 +74,7 @@ export default function LoginPage() {
                   icon={<Icon icon="wallet" size={24} />}
                   onClick={() => setNewWallet(true)}
                 >
-                  Create wallet
+                  {t('create_wallet')}
                 </RButton>
               </div>
               <div className={classes.button}>
@@ -83,7 +85,7 @@ export default function LoginPage() {
                   icon={<Icon icon="key" size={24} />}
                   onClick={() => setRestore(true)}
                 >
-                  Restore wallet
+                  {t('restore_wallet')}
                 </RButton>
               </div>
             </div>
@@ -111,11 +113,13 @@ export default function LoginPage() {
 
 function CreateWalletForm({ goBack }) {
   const [mnemonicAndSeed, setMnemonicAndSeed] = useState(null);
+  const [savedWords, setSavedWords] = useState(false);
+  const callAsync = useCallAsync();
+  const { t } = useTranslation();
+
   useEffect(() => {
     generateMnemonicAndSeed().then(setMnemonicAndSeed);
   }, []);
-  const [savedWords, setSavedWords] = useState(false);
-  const callAsync = useCallAsync();
 
   function submit(password) {
     const { mnemonic, seed } = mnemonicAndSeed;
@@ -127,8 +131,8 @@ function CreateWalletForm({ goBack }) {
         DERIVATION_PATH.bip44Change,
       ),
       {
-        progressMessage: 'Creating wallet...',
-        successMessage: 'Wallet created',
+        progressMessage: t('creating_wallet'),
+        successMessage: t('create_wallet_success'),
       },
     );
   }
@@ -153,6 +157,7 @@ function CreateWalletForm({ goBack }) {
 }
 
 function SeedWordsForm({ mnemonicAndSeed, goBack, goForward }) {
+  const { t } = useTranslation();
   const [confirmed, setConfirmed] = useState(false);
   const [downloaded, setDownloaded] = useState(false);
   const [showConfirmMnemonic, setshowConfirmMnemonic] = useState(false);
@@ -181,41 +186,21 @@ function SeedWordsForm({ mnemonicAndSeed, goBack, goForward }) {
       <div className="mb-16 flex mt-16">
         <Icon icon="back" onClick={goBack} />
         <div className="pl-16 pointer" onClick={goBack}>
-          Back
+          {t('back')}
         </div>
       </div>
       <Card>
         <CardContent>
-          <div className="bold text-24 mb-16">Your Secret Key</div>
+          <div className="bold text-24 mb-16">{t('your_secret_key')}</div>
           <div className="mb-16">
-            <Alert severity="error">
-              Please write down your secret key and keep it in a safe place.
-            </Alert>
+            <Alert severity="error">{t('secret_key_warning_0')}</Alert>
             <div className="mt-8" />
-            <Alert severity="error">
-              Your secret key are required to restore your wallet in case your
-              devices are damaged or lose access to it. Never share this secret
-              key to any one or it might results in an irreversible loss of your
-              funds.
-            </Alert>
+            <Alert severity="error">{t('secret_key_warning_1')}</Alert>
             <div className="mt-8" />
-            <Alert severity="error">
-              Losing a secret key will cause your wallet inaccessible hence
-              losing access to your funds; make sure you store the key safely.
-            </Alert>
+            <Alert severity="error">{t('secret_key_warning_2')}</Alert>
           </div>
-          <div className='mb-8'>Secret key</div>
+          <div className="mb-8">{t('secret_key')}</div>
           <PassPhrase mnemonicAndSeed={mnemonicAndSeed} />
-          {/* {mnemonicAndSeed ? (
-            <TextInput
-              label="Secret key"
-              value={mnemonicAndSeed.mnemonic}
-              textarea
-              onFocus={(e) => e.currentTarget.select()}
-            />
-          ) : (
-            <LoadingIndicator />
-          )} */}
           <FormControlLabel
             control={
               <Checkbox
@@ -225,7 +210,7 @@ function SeedWordsForm({ mnemonicAndSeed, goBack, goForward }) {
                 onChange={(e) => setConfirmed(e.target.checked)}
               />
             }
-            label="I have written down my secret key and stored it in a safe place."
+            label={t('confirm_save_secret_key')}
           />
           <div className="mt-24 mb-16">
             <RButton
@@ -235,7 +220,7 @@ function SeedWordsForm({ mnemonicAndSeed, goBack, goForward }) {
                 setDownloaded(true);
               }}
             >
-              Download your secret key as a file (Required)
+              {t('down_load_secret_key')}
             </RButton>
           </div>
           <RButton
@@ -244,7 +229,7 @@ function SeedWordsForm({ mnemonicAndSeed, goBack, goForward }) {
             disabled={!confirmed || !downloaded}
             onClick={() => setshowConfirmMnemonic(true)}
           >
-            Continue
+            {t('continue')}
           </RButton>
         </CardContent>
       </Card>
@@ -254,25 +239,26 @@ function SeedWordsForm({ mnemonicAndSeed, goBack, goForward }) {
 
 const ConfirmMnemonic = ({ mnemonicAndSeed, goBack, goForward }) => {
   const [seedCheck, setSeedCheck] = useState('');
+  const { t } = useTranslation();
 
   return (
     <>
       <div className="mb-16 mt-16 flex">
         <Icon icon="back" onClick={goBack} />
         <div className="pl-16 pointer" onClick={goBack}>
-          Back
+          {t('back')}
         </div>
       </div>
       <Card>
         <CardContent>
-          <div className="bold text-24 mb-16">Verification</div>
+          <div className="bold text-24 mb-16">{t('verification')}</div>
           <div
             style={{
               display: 'flex',
               flexDirection: 'column',
             }}
           >
-            Please re-enter your secret key to confirm that you have saved it.
+            {t('re_enter_secret_key')}
           </div>
           <div className="mt-24 mb-24">
             <TextInput
@@ -290,7 +276,7 @@ const ConfirmMnemonic = ({ mnemonicAndSeed, goBack, goForward }) => {
             }
             onClick={goForward}
           >
-            Verify
+            {t('verify')}
           </RButton>
         </CardContent>
       </Card>
@@ -301,24 +287,23 @@ const ConfirmMnemonic = ({ mnemonicAndSeed, goBack, goForward }) => {
 function ChoosePasswordForm({ goBack, onSubmit }) {
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
+  const { t } = useTranslation();
 
   return (
     <>
       <div className="mt-16 mb-16 flex">
         <Icon icon="back" onClick={goBack} />
         <div className="pl-16 pointer" onClick={goBack}>
-          Back
+          {t('back')}
         </div>
       </div>
       <Card>
         <CardContent>
-          <div className="bold text-24 mb-16">Choose a Password (Optional)</div>
-          <Typography>
-            Optionally pick a password to protect your wallet.
-          </Typography>
+          <div className="bold text-24 mb-16">{t('choose_a_password')}</div>
+          <Typography>{t('choose_a_password_description')}</Typography>
           <br />
           <TextInput
-            label="New Password"
+            label={t('new_password')}
             type="password"
             name="password"
             autoComplete="new-password"
@@ -327,7 +312,7 @@ function ChoosePasswordForm({ goBack, onSubmit }) {
           />
           <br />
           <TextInput
-            label="Confirm Password"
+            label={t('confirm_password')}
             type="password"
             name="password-confirm"
             autoComplete="new-password"
@@ -335,18 +320,15 @@ function ChoosePasswordForm({ goBack, onSubmit }) {
             onChange={(e) => setPasswordConfirm(e.target.value)}
           />
           <br />
-          <Message type="info" title="Note" />
-          <p className="mb-24">
-            If you forget your password you will need to restore your wallet
-            using your seed words.
-          </p>
+          <Message type="info" title={t('note')} />
+          <p className="mb-24">{t('forget_password_note')}</p>
           <RButton
             variant="primary"
             fullWidth
             disabled={password !== passwordConfirm}
             onClick={() => onSubmit(password)}
           >
-            Create Wallet
+            {t('create_wallet')}
           </RButton>
         </CardContent>
       </Card>
@@ -358,11 +340,12 @@ function LoginForm() {
   const [password, setPassword] = useState('');
   const [stayLoggedIn, setStayLoggedIn] = useState(false);
   const callAsync = useCallAsync();
+  const { t } = useTranslation();
 
   const submit = () => {
     callAsync(loadMnemonicAndSeed(password, stayLoggedIn), {
-      progressMessage: 'Unlocking wallet...',
-      successMessage: 'Wallet unlocked',
+      progressMessage: t('unlocking_wallet'),
+      successMessage: t('unlock_wallet_success'),
     });
   };
   const submitOnEnter = (e) => {
@@ -378,9 +361,9 @@ function LoginForm() {
   return (
     <Card>
       <CardContent>
-        <div className="bold text-24 mb-16">Unlock Wallet</div>
+        <div className="bold text-24 mb-16">{t('unlock_wallet')}</div>
         <TextInput
-          label="Password"
+          label={t('password')}
           type="password"
           name="password"
           autoComplete="current-password"
@@ -396,14 +379,14 @@ function LoginForm() {
               onChange={toggleStayLoggedIn}
             />
           }
-          label="Keep wallet unlocked"
+          label={t('keep_wallet_unlock')}
           className="mb-16"
         />
         <RButton fullWidth color="primary" onClick={submit}>
-          Unlock
+          {t('unlock')}
         </RButton>
         <Typography onClick={forgetWallet} className="mt-16">
-          Forget password? Click to remove mnemonic
+          {t('forget_password_unlock')}
         </Typography>
       </CardContent>
     </Card>
@@ -416,12 +399,13 @@ function RestoreWalletForm({ goBack }) {
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [next, setNext] = useState(false);
-
+  const { t } = useTranslation();
   const mnemonic = normalizeMnemonic(rawMnemonic);
   const isNextBtnEnabled =
     password === passwordConfirm && validateMnemonic(mnemonic);
   const displayInvalidMnemonic =
     validateMnemonic(mnemonic) === false && mnemonic.length > 0;
+
   return (
     <>
       {next ? (
@@ -433,20 +417,19 @@ function RestoreWalletForm({ goBack }) {
         />
       ) : (
         <>
-          <div className="mb-8 flex">
+          <div className="mb-16 mt-16 flex">
             <Icon icon="back" onClick={goBack} />
             <div className="pl-16 pointer" onClick={goBack}>
-              Back
+              {t('back')}
             </div>
           </div>
           <Card>
             <CardContent>
               <Typography variant="h5" gutterBottom>
-                Restore Existing Wallet
+                {t('restore_existing_wallet')}
               </Typography>
               <Typography>
-                Restore your wallet using your twelve or twenty-four seed words.
-                Note that this will delete any existing wallet on this device.
+                {t('restore_existing_wallet_description')}
               </Typography>
               <br />
               {displayInvalidMnemonic && (
@@ -455,21 +438,20 @@ function RestoreWalletForm({ goBack }) {
                     fontWeight="fontWeightBold"
                     style={{ color: 'red' }}
                   >
-                    Mnemonic validation failed. Please enter a valid BIP 39 seed
-                    phrase.
+                    {t('invalid_secret_key_format')}
                   </Typography>
                   <br />
                 </>
               )}
               <TextInput
-                label="Seed Words"
+                label={t('secret_key')}
                 onChange={(e) => setRawMnemonic(e.target.value)}
                 value={rawMnemonic}
                 textarea
               />
               <br />
               <TextInput
-                label="New password (Optional)"
+                label={t('new_password_optional')}
                 type="password"
                 name="password"
                 autoComplete="new-password"
@@ -478,7 +460,7 @@ function RestoreWalletForm({ goBack }) {
               />
               <br />
               <TextInput
-                label="Confirm password (Optional)"
+                label={t('confirm_password_optional')}
                 type="password"
                 name="password-confirm"
                 autoComplete="new-password"
@@ -497,7 +479,7 @@ function RestoreWalletForm({ goBack }) {
                 }}
                 fullWidth
               >
-                Continue
+                {t('continue')}
               </RButton>
             </CardContent>
           </Card>
@@ -509,6 +491,7 @@ function RestoreWalletForm({ goBack }) {
 
 function DerivedAccounts({ goBack, mnemonic, seed, password }) {
   const callAsync = useCallAsync();
+  const { t } = useTranslation();
   const [dPathMenuItem, setDPathMenuItem] = useState(
     DerivationPathMenuItem.Bip44Change,
   );
@@ -540,9 +523,9 @@ function DerivedAccounts({ goBack, mnemonic, seed, password }) {
         setDPathMenuItem={setDPathMenuItem}
       />
       <CardActions style={{ justifyContent: 'space-between' }}>
-        <Button onClick={goBack}>Back</Button>
+        <Button onClick={goBack}>{t('back')}</Button>
         <Button color="primary" onClick={submit}>
-          Restore
+          {t('restore')}
         </Button>
       </CardActions>
     </Card>
@@ -557,6 +540,8 @@ export function AccountsSelector({
   setDPathMenuItem,
   onClick,
 }) {
+  const { t } = useTranslation();
+
   return (
     <CardContent>
       <div
@@ -566,7 +551,7 @@ export function AccountsSelector({
         }}
       >
         <Typography variant="h5" gutterBottom>
-          Derivable Accounts
+          {t('derivable_account')}
         </Typography>
         <FormControl variant="outlined">
           <Select
@@ -588,7 +573,7 @@ export function AccountsSelector({
             </MenuItem>
             {showDeprecated && (
               <MenuItem value={DerivationPathMenuItem.Deprecated}>
-                {`m/501'/0'/0/0 (deprecated)`}
+                {`m/501'/0'/0/0 (${t('deprecated')})`}
               </MenuItem>
             )}
           </Select>
@@ -639,32 +624,36 @@ export function toDerivationPath(dPathMenuItem) {
 
 const PassPhrase = ({ mnemonicAndSeed }) => {
   const [visible, setVisible] = useState(false);
-  const timer = useRef(null)
+  const { t } = useTranslation();
+  const timer = useRef(null);
 
   if (!mnemonicAndSeed) {
     return <LoadingIndicator />;
   }
 
   const handleOpen = () => {
-    setVisible(true)
-    clearTimeout(timer.current)
+    setVisible(true);
+    clearTimeout(timer.current);
     timer.current = setTimeout(() => {
-      setVisible(false)
-    }, 8000)
-  }
+      setVisible(false);
+    }, 8000);
+  };
 
   const handleHide = () => {
-    clearTimeout(timer.current)
-    setVisible(false)
-  }
+    clearTimeout(timer.current);
+    setVisible(false);
+  };
 
   return (
     <div className="passphrase mb-8">
       {!visible && (
         <div className="passphrase__overlay">
           <span data-testid="show-secret" onClick={handleOpen}>
-            <LockOpenOutlined titleAccess='Show your secret key' color="disabled" />
-            Click to view your secret key
+            <LockOpenOutlined
+              titleAccess="Show your secret key"
+              color="disabled"
+            />
+            {t('click_view_secret_key')}
           </span>
         </div>
       )}

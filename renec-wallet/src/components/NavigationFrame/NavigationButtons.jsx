@@ -70,7 +70,7 @@ export const ThemeSwitcher = () => {
   );
 };
 
-function NavigationButtons({ withoutThemeSwitch = false }) {
+function NavigationButtons() {
   const isExtensionWidth = useIsExtensionWidth();
   const [page] = usePage();
 
@@ -78,7 +78,7 @@ function NavigationButtons({ withoutThemeSwitch = false }) {
     return null;
   }
 
-  let elements = withoutThemeSwitch ? [] : [<ThemeSwitcher />];
+  let elements = [<ThemeSwitcher />];
 
   if (page === 'wallet') {
     elements = elements.concat([

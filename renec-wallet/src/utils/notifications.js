@@ -3,6 +3,7 @@ import { useSnackbar } from 'notistack';
 import { useConnection, useSolanaExplorerUrlSuffix } from './connection';
 import Button from '@material-ui/core/Button';
 import { confirmTransaction } from './utils';
+import i18n from '../i18n'
 
 export function useSendTransaction() {
   const connection = useConnection();
@@ -71,8 +72,8 @@ export function useCallAsync() {
   return async function callAsync(
     promise,
     {
-      progressMessage = 'Submitting...',
-      successMessage = 'Success',
+      progressMessage = i18n.t('submitting'),
+      successMessage = i18n.t('success'),
       onSuccess,
       onError,
     } = {},

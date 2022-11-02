@@ -25,6 +25,7 @@ import { COLORS_PALETTE } from '../base/variables';
 import MobileNavMenu from '../MobileNavMenu';
 import { useStyles, useFooterStyles } from './styles';
 import NavigationButtons, { ThemeSwitcher } from './NavigationButtons';
+import ToggleLanguage from '../base/molecules/toggle-language';
 
 export const pages = [
   {
@@ -78,6 +79,7 @@ const HeaderBar = () => {
                 <Tab value={page.value} label={page.label} />
               ))}
             </Tabs>
+            <ToggleLanguage />
           </Hidden>
           <Hidden mdUp>
             <IconButton
@@ -92,7 +94,7 @@ const HeaderBar = () => {
             </IconButton>
             <MobileNavMenu onClose={handleCloseNavMenu} open={menuOpen} />
             <img className={classes.mdLogo} src={logo} alt="Remitano logo" />
-            <ThemeSwitcher />
+            <ToggleLanguage />
           </Hidden>
           <Hidden smDown>
             <NavigationButtons />

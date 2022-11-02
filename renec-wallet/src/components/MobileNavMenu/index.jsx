@@ -7,9 +7,10 @@ import {
   ListItemText,
 } from '@material-ui/core';
 import { usePage } from '../../utils/page';
-import NavigationButtons from '../NavigationFrame/NavigationButtons';
+import NavigationButtons, { ThemeSwitcher } from '../NavigationFrame/NavigationButtons';
 import { useStyles } from './styles';
 import { pages } from '../NavigationFrame';
+import ToggleLanguage from '../base/molecules/toggle-language';
 
 const MobileNavMenu = ({ open, onClose }) => {
   const [, setPage] = usePage();
@@ -42,7 +43,7 @@ const MobileNavMenu = ({ open, onClose }) => {
             ))}
           </List>
           <div className={classes.navigateButtons}>
-            <NavigationButtons withoutThemeSwitch />
+            <NavigationButtons />
           </div>
         </div>
       </Container>

@@ -8,6 +8,7 @@ import DialogForm from './DialogForm';
 import { abbreviateAddress } from '../utils/utils';
 import CopyableDisplay from './CopyableDisplay';
 import { makeStyles } from '@material-ui/core/styles';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
   explorerLink: {
@@ -30,6 +31,7 @@ export default function TokenInfoDialog({
   let { mint, tokenName, tokenSymbol } = balanceInfo;
   const urlSuffix = useSolanaExplorerUrlSuffix();
   const classes = useStyles();
+  const { t } = useTranslation()
 
   return (
     <DialogForm open={open} onClose={onClose}>
@@ -50,7 +52,7 @@ export default function TokenInfoDialog({
             target="_blank"
             rel="noopener"
           >
-            View on explorer
+            {t('view_on_explorer')}
           </Link>
         </Typography>
         {!!mint && (

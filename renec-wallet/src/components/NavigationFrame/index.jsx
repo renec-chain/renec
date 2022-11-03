@@ -26,15 +26,17 @@ import MobileNavMenu from '../MobileNavMenu';
 import { useStyles, useFooterStyles } from './styles';
 import NavigationButtons, { ThemeSwitcher } from './NavigationButtons';
 import ToggleLanguage from '../base/molecules/toggle-language';
+import { useTranslation } from 'react-i18next';
+import i18n from '../../i18n'
 
 export const pages = [
   {
-    label: 'Wallet',
+    label: i18n.t('wallet'),
     value: 'wallet',
     icon: AccountBalanceWalletOutlined,
   },
   {
-    label: 'Staking',
+    label: i18n.t('staking'),
     value: 'staking',
     icon: HowToVote,
   },
@@ -107,6 +109,7 @@ const HeaderBar = () => {
 
 export default function Index({ children }) {
   const classes = useStyles();
+  const { t } = useTranslation()
   const isExtensionWidth = useIsExtensionWidth();
   const [page] = usePage();
   const { accounts } = useWalletSelector();
@@ -115,7 +118,7 @@ export default function Index({ children }) {
 
   const onCopyAddress = () => {
     navigator.clipboard.writeText(selectedAccount.address.toBase58());
-    enqueueSnackbar(`Copied address`, {
+    enqueueSnackbar(t('copied_address'), {
       variant: 'info',
       autoHideDuration: 2500,
     });
@@ -127,7 +130,7 @@ export default function Index({ children }) {
       {selectedAccount && page === 'wallet' && (
         <div className={classes.header}>
           <Container fixed maxWidth="md">
-            <div className="bold text-32 mt-48">Main account</div>
+            <div className="bold text-32 mt-48">{t('main_account')}</div>
             {isExtensionWidth
               ? shortenAddress(selectedAccount.address.toBase58())
               : selectedAccount.address.toBase58()}

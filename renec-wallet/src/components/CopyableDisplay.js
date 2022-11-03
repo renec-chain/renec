@@ -3,6 +3,7 @@ import { TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useSnackbar } from 'notistack';
 import RButton from './base/molecules/button';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,6 +26,7 @@ export default function CopyableDisplay({
   helperText,
 }) {
   const { enqueueSnackbar } = useSnackbar();
+  const { t } = useTranslation();
   const textareaRef = useRef();
   const classes = useStyles();
   const copyLink = () => {
@@ -32,7 +34,7 @@ export default function CopyableDisplay({
     if (textArea) {
       textArea.select();
       document.execCommand('copy');
-      enqueueSnackbar(`Copied ${label}`, {
+      enqueueSnackbar(t('copied_label', { label }), {
         variant: 'info',
         autoHideDuration: 2500,
       });
@@ -56,7 +58,7 @@ export default function CopyableDisplay({
       <RButton
         onClick={copyLink}
       >
-        Copy
+        {t('copy')}
       </RButton>
     </div>
   );

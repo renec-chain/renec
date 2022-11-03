@@ -48,6 +48,7 @@ import {
   RButton,
   Icon,
 } from '../components/base';
+import { useTranslation } from 'react-i18next';
 
 const WUSDC_MINT = new PublicKey(
   'BXXkv6z8ykpG1yuvUDPgh732wzVHB69RnB9YgSYh3itW',
@@ -69,6 +70,7 @@ export default function SendDialog({ open, onClose, publicKey, balanceInfo }) {
   const isProdNetwork = useIsProdNetwork();
   const [tab, setTab] = useState('spl');
   const onSubmitRef = useRef();
+  const { t } = useTranslation();
 
   let [swapCoinInfo] = useSwapApiGet(
     showSwapAddress && balanceInfo.mint && isProdNetwork
@@ -142,7 +144,7 @@ export default function SendDialog({ open, onClose, publicKey, balanceInfo }) {
       >
         <DialogTitle>
           <div className="flex space-between">
-            Send {tokenName ?? abbreviateAddress(mint)}
+            {t('send_token', {token: tokenName ?? abbreviateAddress(mint)})}
             {tokenSymbol ? ` (${tokenSymbol})` : null}
             {ethAccount && (
               <div>
@@ -228,6 +230,7 @@ function SendSplDialog({ onClose, publicKey, balanceInfo, onSubmitRef }) {
       ? 'Enter Remitano Network Address'
       : 'Enter RPL token or Remitano Network address';
   const wallet = useWallet();
+  const { t } = useTranslation();
   const [sendTransaction, sending] = useSendTransaction();
   const [addressHelperText, setAddressHelperText] = useState(
     defaultAddressHelperText,
@@ -383,7 +386,7 @@ function SendSplDialog({ onClose, publicKey, balanceInfo, onSubmitRef }) {
                 onChange={(e) => {console.log("changing", overrideDestinationCheck);setOverrideDestinationCheck(!overrideDestinationCheck)}}
               />
               }
-              label="I'm aware that this address has no funds or this might be an exchange wallet"
+              label={t('aware_this_address_has_no_funds')}
             />
           </div>
         )}
@@ -393,7 +396,7 @@ function SendSplDialog({ onClose, publicKey, balanceInfo, onSubmitRef }) {
             variant="secondary"
             onClick={onClose}
           >
-            Cancel
+            {t('cancel')}
           </RButton>
           <RButton
             className="full-width"
@@ -401,7 +404,7 @@ function SendSplDialog({ onClose, publicKey, balanceInfo, onSubmitRef }) {
             variant="primary"
             disabled={disabled}
           >
-            Send
+            {t('send')}
           </RButton>
         </div>
       </DialogContent>
@@ -703,7 +706,7 @@ function useForm(
   const [destinationAddress, setDestinationAddress] = useState('');
   const [transferAmountString, setTransferAmountString] = useState('');
   const { amount: balanceAmount, decimals, tokenSymbol } = balanceInfo;
-
+  const { t } = useTranslation();
   const parsedAmount = parseFloat(transferAmountString) * 10 ** decimals;
   const validAmount = parsedAmount > 0 && parsedAmount <= balanceAmount;
   const userTransferableAmount = balanceAmount - TRANSFER_FEE_IN_LAMPORTS > 0 ? balanceAmount - TRANSFER_FEE_IN_LAMPORTS : 0;
@@ -716,14 +719,14 @@ function useForm(
             ? 'outlined-error-helper-text'
             : undefined
         }
-        label="Recipient Address"
+        label={t('recipient_address')}
         name="recipient-address"
         value={destinationAddress}
         onChange={(e) => setDestinationAddress(e.target.value.trim())}
         hasError={!passAddressValidation && passAddressValidation !== undefined}
       />
       <TextInput
-        label="Amount"
+        label={t('amount')}
         name="amount"
         value={transferAmountString}
         onChange={(e) => setTransferAmountString(e.target.value.trim())}
@@ -736,14 +739,14 @@ function useForm(
                 )
               }
             >
-              MAX
+              {t('max')}
             </Button>
             {tokenSymbol ? tokenSymbol : null}
           </InputAdornment>
         )}
       />
       <div className="mt-8">
-        <span>Available: </span>
+        <span>{t('available')}: </span>
         <span
           className="bold"
           data-testid="available-balance"

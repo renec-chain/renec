@@ -16,6 +16,7 @@ import { createAndInitializeMint } from '../utils/tokens';
 import { Tooltip, Button } from '@material-ui/core';
 import React from 'react';
 import { RButton } from './base';
+import { useTranslation } from 'react-i18next';
 
 export default function DebugButtons() {
   const wallet = useWallet();
@@ -24,6 +25,7 @@ export default function DebugButtons() {
   const balanceInfo = useBalanceInfo(wallet.publicKey);
   const [sendTransaction, sending] = useSendTransaction();
   const callAsync = useCallAsync();
+  const { t } = useTranslation();
 
   let { amount } = balanceInfo || {};
 
@@ -80,7 +82,7 @@ export default function DebugButtons() {
             onClick={requestAirdrop}
             disabled={requestAirdropDisabled}
           >
-            Request Airdrop
+            {t('request_airdrop')}
           </RButton>
         </span>
       </Tooltip>

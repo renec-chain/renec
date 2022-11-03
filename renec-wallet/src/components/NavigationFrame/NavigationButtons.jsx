@@ -50,6 +50,7 @@ import AddAccountDialog from '../AddAccountDialog';
 import { ExportMnemonicDialog } from '../ExportAccountDialog';
 import DeleteMnemonicDialog from '../DeleteMnemonicDialog';
 import { useStyles } from './styles';
+import { useTranslation } from 'react-i18next';
 
 export const ThemeSwitcher = () => {
   const classes = useStyles();
@@ -116,6 +117,7 @@ function ExpandButton() {
 function WalletButton() {
   const classes = useStyles();
   const setPage = usePage()[1];
+  const { t } = useTranslation()
   const onClick = () => setPage('wallet');
 
   return (
@@ -129,7 +131,7 @@ function WalletButton() {
       </Hidden>
       <Hidden xsDown>
         <Button color="inherit" onClick={onClick} className={classes.button}>
-          Wallet
+          {t('wallet')}
         </Button>
       </Hidden>
     </>
@@ -177,6 +179,7 @@ function NetworkSelector() {
   const cluster = useMemo(() => clusterForEndpoint(endpoint), [endpoint]);
   const [anchorEl, setAnchorEl] = useState(null);
   const [addCustomNetworkOpen, setCustomNetworkOpen] = useState(false);
+  const { t } = useTranslation()
   const classes = useStyles();
 
   return (
@@ -242,8 +245,8 @@ function NetworkSelector() {
         >
           <ListItemIcon className={classes.menuItemIcon}></ListItemIcon>
           {customClusterExists()
-            ? 'Edit Custom Endpoint'
-            : 'Add Custom Endpoint'}
+            ? t('edit_custom_endpoint')
+            : t('add_custom_endpoint')}
         </MenuItem>
       </Menu>
     </>
@@ -260,6 +263,7 @@ function WalletSelector() {
     addAccount,
   } = useWalletSelector();
   const [anchorEl, setAnchorEl] = useState(null);
+  const { t } = useTranslation();
   const [addAccountOpen, setAddAccountOpen] = useState(false);
   const [
     addHardwareWalletDialogOpen,
@@ -326,7 +330,7 @@ function WalletSelector() {
           onClick={(e) => setAnchorEl(e.target)}
           className={classes.button}
         >
-          Account
+          {t('account')}
         </Button>
       </Hidden>
       <Hidden smUp>
@@ -370,7 +374,7 @@ function WalletSelector() {
           <ListItemIcon className={classes.menuItemIcon}>
             <UsbIcon fontSize="small" />
           </ListItemIcon>
-          Import Hardware Wallet
+          {t('import_hardware_wallet')}
         </MenuItem>
         <MenuItem
           onClick={() => {
@@ -381,7 +385,7 @@ function WalletSelector() {
           <ListItemIcon className={classes.menuItemIcon}>
             <AddIcon fontSize="small" />
           </ListItemIcon>
-          Add Account
+          {t('add_account')}
         </MenuItem>
         <MenuItem
           onClick={() => {
@@ -392,7 +396,7 @@ function WalletSelector() {
           <ListItemIcon className={classes.menuItemIcon}>
             <ImportExportIcon fontSize="small" />
           </ListItemIcon>
-          Export Mnemonic
+          {t('export_mnemonic')}
         </MenuItem>
         <MenuItem
           onClick={() => {
@@ -403,7 +407,7 @@ function WalletSelector() {
           <ListItemIcon className={classes.menuItemIcon}>
             <ExitToApp fontSize="small" />
           </ListItemIcon>
-          {'Delete Mnemonic & Log Out'}
+          {t('delete_mnemonic_and_log_out')}
         </MenuItem>
       </Menu>
     </>

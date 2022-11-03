@@ -64,9 +64,12 @@ export default function MyStakingInfo() {
                 </Typography>
               </div>
               <div className={classes.box}>
-                <Typography style={{ fontSize: 16 }}>Active stake</Typography>
+                <Typography style={{ fontSize: 16 }}>Active staked</Typography>
                 <Typography style={{ fontSize: 16, fontWeight: 'bold' }}>
-                  {staking?.state.activeStake}
+                  {stakingFormat.format(
+                    staking?.state?.activeStake / LAMPORTS_PER_SOL,
+                  )}{' '}
+                  RENEC
                 </Typography>
               </div>
             </div>

@@ -22,7 +22,7 @@ function stakingReducer(state, action) {
       return {
         ...state,
         totalStaked: state.totalStaked + staking.active + staking.inactive,
-        activeStake: state.activeStake + (staking.state === 'active' ? 1 : 0),
+        activeStake: state.activeStake + staking.active,
       };
     }
     case actions.SET_ITEM: {

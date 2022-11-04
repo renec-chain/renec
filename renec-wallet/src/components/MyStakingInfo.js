@@ -4,6 +4,7 @@ import { usePage } from '../utils/page';
 import { useStaking } from '../utils/staking';
 import { stakingFormat, useIsExtensionWidth } from '../utils/utils';
 import { Icon } from './base';
+import { useTranslation } from 'react-i18next';
 const useStyles = makeStyles((theme) => ({
   container: {
     [theme.breakpoints.down(theme.ext)]: {
@@ -40,6 +41,8 @@ export default function MyStakingInfo() {
   const [page, setPage] = usePage();
   const classes = useStyles();
   const staking = useStaking();
+  const { t } = useTranslation();
+
   return (
     <div className={classes.header}>
       <Container fixed maxWidth="md">
@@ -49,7 +52,7 @@ export default function MyStakingInfo() {
             <div className="mb-16 flex">
               <Icon icon="back" onClick={() => setPage('staking')} />
               <div className="pl-16 pointer" onClick={() => setPage('staking')}>
-                Back
+                {t('back')}
               </div>
             </div>
             <div className="bold text-32">My Staking</div>

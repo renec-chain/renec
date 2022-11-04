@@ -88,5 +88,21 @@ export default {
   delete_mnemonic_warn_1: 'To prevent loss of funds, please ensure you have the seed phrase and the private key for all current accounts. You can view it by selecting "Export Mnemonic" in the user menu.',
   delete: 'Delete',
   please_type_your_secret_key: 'Please type your seed phrase to confirm',
-  aware_this_address_has_no_funds: 'I\'m aware that this address has no funds or this might be an exchange wallet'
+  aware_this_address_has_no_funds: 'I\'m aware that this address has no funds or this might be an exchange wallet',
+  validator_staking_list: 'Validators staking list',
+  my_staking: 'My Staking',
+  stake: 'Stake',
+  my_staking_list: 'My staking list',
+  confirm_undelegate: 'Confirm Undelegate',
+  confirm_undelegate_warning: 'Undelegate could take several days to be successful, you can still receive commission during the waiting period. Do you want to undelegate this stake?',
+  click_to_expand: 'Click to expand',
+  unknown_validator: 'Unknown validator',
+  undelegate: 'Undelegate',
+  withdraw: 'Withdraw',
+  stake_balance: 'Stake Balance',
+  active_stake: 'Active stake',
+  inactive_stake: 'Inactive stake',
+  sending_transaction: 'Sending transaction...',
+  confirming_transaction: 'Confirming transaction',
+  transaction_confirmed: 'Transaction confirmed'
 }

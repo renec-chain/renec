@@ -88,5 +88,21 @@ export default {
   delete_mnemonic_warn_1: 'Để tránh mất tiền, hãy đảm bảo bạn có mã bí mật và khóa riêng tư cho tất cả các tài khoản hiện tại. Bạn có thể xem nó bằng cách chọn “Xuất mã bí mật” trong trang người dùng.',
   delete: 'Xóa',
   please_type_your_secret_key: 'Vui lòng nhập mã bí mật của bạn để xác nhận',
-  aware_this_address_has_no_funds: 'Tôi nhận thức rằng địa chỉ này không có tiền hoặc đây có thể là một ví trao đổi'
+  aware_this_address_has_no_funds: 'Tôi nhận thức rằng địa chỉ này không có tiền hoặc đây có thể là một ví trao đổi',
+  validator_staking_list: 'Danh sách Validators',
+  my_staking: 'Stake của tôi',
+  stake: 'Stake',
+  my_staking_list: 'Danh sách stake của tôi',
+  confirm_undelegate: 'Xác nhận hủy bỏ',
+  confirm_undelegate_warning: 'Hủy bỏ stake có thể cần nhiều ngày để hoàn thành, bạn vẫn có thể nhận được lợi tức trong quá trình đợi. Bạn có thực sự muốn hủy bỏ?',
+  click_to_expand: 'Nhấp để mở rộng',
+  unknown_validator: 'Validator không xác định',
+  undelegate: 'Hủy bỏ stake',
+  withdraw: 'Rút',
+  stake_balance: 'Số dư stake',
+  active_stake: 'Stake đang hoạt động',
+  inactive_stake: 'Stake không hoạt động',
+  sending_transaction: 'Đang gửi giao dịch...',
+  confirming_transaction: 'Đang xác nhận giao dịch',
+  transaction_confirmed: 'Giao dịch đã được xác nhận'
 }

@@ -17,12 +17,14 @@ import { computeHash } from '../utils/utils';
 import { stakingFormat } from '../utils/utils';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 import ErrorOutline from '@material-ui/icons/ErrorOutline';
+import { useTranslation } from 'react-i18next';
 const DEFAULT_ICONS_COUNT = 17;
 
 export default function StakingList() {
   const classes = useStyles();
   const [voteAccounts, loaded] = useWalletVoteAccounts();
   const [page, setPage] = usePage();
+  const { t } = useTranslation();
 
   const StakingListItemsMemo = useMemo(() => {
     return (voteAccounts || []).sort((a, b) => b.activatedStake - a.activatedStake).map((vote, index) => {
@@ -40,7 +42,7 @@ export default function StakingList() {
   return (
     <div>
       <div className="flex space-between align-center mt-30 mb-16">
-        <div className={classes.stakingHeader}>Validators staking list</div>
+        <div className={classes.stakingHeader}>{t('validator_staking_list')}</div>
         <Button
           style={{
             padding: '12px 24px',
@@ -51,7 +53,7 @@ export default function StakingList() {
           }}
           onClick={() => setPage('mystaking')}
         >
-          My Staking
+          {t('my_staking')}
         </Button>
       </div>
       <List disablePadding>
@@ -66,6 +68,7 @@ export default function StakingList() {
 
 export function StakingListItem({ voteAccount }) {
   const classes = useStyles();
+  const { t } = useTranslation();
   const { votePubkey, nodePubkey } = voteAccount;
   const [publicKeys] = useWalletPublicKeys();
   const mainPubkey = publicKeys[0];
@@ -133,7 +136,7 @@ export function StakingListItem({ voteAccount }) {
               variant="outlined"
               className={classes.text}
             >
-              Stake
+              {t('stake')}
             </Button>
           </div>
         </div>

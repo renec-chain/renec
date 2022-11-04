@@ -8,6 +8,7 @@ import { useWallet } from '../utils/wallet';
 import { Icon, TextInput } from '../components/base';
 import { useSendTransaction } from '../utils/notifications';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
+import { useTranslation } from 'react-i18next';
 
 export default function CreateStakingDialog({
   open,
@@ -16,6 +17,7 @@ export default function CreateStakingDialog({
   balanceInfo,
 }) {
   const wallet = useWallet();
+  const { t } = useTranslation();
   const [amount, setAmount] = useState();
   const [loading, setLoading] = useState(false);
   const { amount: balanceAmount, decimals, tokenSymbol } = balanceInfo;
@@ -69,7 +71,7 @@ export default function CreateStakingDialog({
             style={{ flexGrow: 1, fontSize: 16 }}
             component="h2"
           >
-            Amount:
+            {t('amount')}:
           </Typography>
           <TextInput
             fullWidth
@@ -87,7 +89,7 @@ export default function CreateStakingDialog({
                     )
                   }
                 >
-                  MAX
+                  {t('max')}
                 </Button>
                 {tokenSymbol ? tokenSymbol : null}
               </InputAdornment>
@@ -95,7 +97,7 @@ export default function CreateStakingDialog({
           />
         </div>
         <div className="mt-8 mb-24">
-          <span>Available: </span>
+          <span>{t('available')}: </span>
           <span
             className="bold"
             data-testid="available-balance"
@@ -121,7 +123,7 @@ export default function CreateStakingDialog({
             loading
           }
         >
-          Stake
+          {t('stake')}
         </Button>
       </DialogContent>
     </DialogForm>

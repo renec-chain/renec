@@ -2,8 +2,8 @@ import "@testing-library/cypress/add-commands"
 
 const unlocked = {
   derivationPath: "bip44Change",
-  mnemonic:"roast know quality leisure swallow purse where door into race rally injury maze oven multiply border regular glimpse play tourist athlete shrug hand lawn",
-  seed: "9a1cd788b0d68ffcb78f1c1626f7c047f0df1b7d330e937a0905e73fbf215c4bd40a29c584905699ba0f5d44113c33d50d310c580174e3d54288bbeacb62bd15",
+  mnemonic:"use beef own chapter cheese curve kangaroo pride barely uphold sad wine silver quarter valid energy snap rate share pave caution slab fall person",
+  seed: "5b2666547209aedf3ddc727f9f06e2fc8a70de41ee323965d02e0bfaa82a00cdce1a8116b294f02ffca71212c410c049836693c39a7cd7e1b4b4d3baafa63a1a",
 }
 
 describe("send/receive renec", () => {
@@ -29,16 +29,21 @@ describe("send/receive renec", () => {
     cy.findByTestId("deposit-dialog").within(() => {
       cy.findByText("Receive RENEC").should("be.visible")
       cy.findByText("Your deposit address:").should("be.visible")
-      cy.get("textarea").should('have.value', '6KkM9tktbnrkFKNu3staDFUghwVi8KSNU5fLnyJCsLGw')
+      cy.get("textarea").should('have.value', '5wMBXZjyZvy73FbWifznQ8AdH6hSww2JwGSx5vK1iesa')
       cy.findByText("This address can only be used to receive RENEC and tokens on Remitano Network").should("be.visible")
       cy.findByRole("button", {name: "Copy"}).click()
     })
     cy.findByText("Copied Deposit Address").should("be.visible")
     cy.findByTestId("dialog-close").click()
     cy.findByTestId("deposit-dialog").should("not.exist")
-    cy.get("[data-testid~='balance-item']").first().click()
-    cy.findByRole("button", {name: 'Request Airdrop'}).click()
-    cy.findByText("Success! Please wait up to 30 seconds for the RENEC tokens to appear in your wallet.").should("be.visible")
+    cy.findByTestId('wallet-total-balance').then($element => {
+      const balance = $element.text()
+      if (Number(balance) < 0.1) {
+        cy.get("[data-testid~='balance-item']").first().click()
+        cy.findByRole("button", {name: 'Request Airdrop'}).click()
+        cy.findByText("Success! Please wait up to 30 seconds for the RENEC tokens to appear in your wallet.").should("be.visible")
+      }
+    })
   })
 
   it("send renec", () => {
@@ -51,7 +56,7 @@ describe("send/receive renec", () => {
       cy.findByText("Amount").should("be.visible")
       cy.findByRole("button", {name: 'Send'}).should("be.disabled")
       cy.get("input[name='recipient-address']").type(destinationWallet)
-      cy.get("input[name='amount']").type("10")
+      cy.get("input[name='amount']").type("0.0001")
       cy.findByRole("button", {name: 'Send'}).click()
     })
     cy.findByText("Transaction confirmed").should("be.visible")
@@ -82,9 +87,7 @@ describe("send/receive renec", () => {
         cy.findByText("MAX").click()
         cy.get("input[name='recipient-address']").type(destinationWallet)
         cy.get("input[name='amount']").should("have.value", availableBalance)
-        cy.findByRole("button", {name: 'Send'}).click()
       })
     })
-    cy.findByText("Transaction confirmed").should("be.visible")
   })
 })

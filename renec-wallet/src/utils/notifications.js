@@ -4,17 +4,19 @@ import { useConnection, useSolanaExplorerUrlSuffix } from './connection';
 import Button from '@material-ui/core/Button';
 import { confirmTransaction } from './utils';
 import i18n from '../i18n'
+import { useTranslation } from 'react-i18next';
 
 export function useSendTransaction() {
   const connection = useConnection();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [sending, setSending] = useState(false);
+  const { t } = useTranslation();
 
   async function sendTransaction(
     signaturePromise,
     { onSuccess, onError } = {},
   ) {
-    let id = enqueueSnackbar('Sending transaction...', {
+    let id = enqueueSnackbar(t('sending_transaction'), {
       variant: 'info',
       persist: true,
     });
@@ -22,7 +24,7 @@ export function useSendTransaction() {
     try {
       let signature = await signaturePromise;
       closeSnackbar(id);
-      id = enqueueSnackbar('Confirming transaction...', {
+      id = enqueueSnackbar(t('confirming_transaction'), {
         variant: 'info',
         persist: true,
         action: <ViewTransactionOnExplorerButton signature={signature} />,
@@ -30,7 +32,7 @@ export function useSendTransaction() {
       await confirmTransaction(connection, signature);
       closeSnackbar(id);
       setSending(false);
-      enqueueSnackbar('Transaction confirmed', {
+      enqueueSnackbar(t('transaction_confirmed'), {
         variant: 'success',
         autoHideDuration: 15000,
         action: <ViewTransactionOnExplorerButton signature={signature} />,
@@ -54,6 +56,8 @@ export function useSendTransaction() {
 
 function ViewTransactionOnExplorerButton({ signature }) {
   const urlSuffix = useSolanaExplorerUrlSuffix();
+  const { t } = useTranslation();
+
   return (
     <Button
       color="inherit"
@@ -62,7 +66,7 @@ function ViewTransactionOnExplorerButton({ signature }) {
       rel="noopener"
       href={`https://explorer.renec.foundation/tx/${signature}` + urlSuffix}
     >
-      View on explorer
+      {t('view_on_explorer')}
     </Button>
   );
 }

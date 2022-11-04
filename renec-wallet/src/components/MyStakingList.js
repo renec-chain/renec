@@ -15,11 +15,13 @@ import { makeStyles } from '@material-ui/styles';
 import { useSolanaExplorerUrlSuffix } from '../utils/connection';
 import ConfirmDialog from './base/molecules/confirm-dialog';
 import { useModalState } from '../utils/custom-hooks';
+import { useTranslation } from 'react-i18next';
 
 const capitalize = (s) => s && s[0].toUpperCase() + s.slice(1);
 
 export default function MyStakingList() {
   const classes = useStyles();
+  const { t } = useTranslation();
   const wallet = useWallet();
   const { setItem } = useStaking();
   const {open, onClose, onOpen} = useModalState();
@@ -96,15 +98,15 @@ export default function MyStakingList() {
 
   return (
     <div>
-      <div className={classes.textHeader}>My staking list</div>
+      <div className={classes.textHeader}>{t('my_staking_list')}</div>
       <List data-testid="staking-list" disablePadding>
         {StakingListItemsMemo.map((Memoized) => (
           <Memoized />
         ))}
       </List>
       <ConfirmDialog
-        title="Confirm Undelegate"
-        warningMessage="Undelegate could take several days to be successful, you can still receive commission during the waiting period. Do you want to undelegate this stake?"
+        title={t('confirm_undelegate')}
+        warningMessage={t('confirm_undelegate_warning')}
         open={open}
         testID="confirm-undelegate-dialog"
         onClose={() => {
@@ -143,6 +145,7 @@ export const StakingListItem = ({
 }) => {
   const urlSuffix = useSolanaExplorerUrlSuffix();
   const classes = useStyles();
+  const { t } = useTranslation();
   const myStakingClasses = myStakingUseStyles();
   const [open, setOpen] = useState(false);
   const wallet = useWallet();
@@ -195,7 +198,7 @@ export const StakingListItem = ({
               <Typography
                 className={`${classes.normalText} ${myStakingClasses.iconText}`}
               >
-                Click to expand
+                {t('click_to_expand')}
               </Typography>
               <Icon icon="down" />
             </div>
@@ -204,7 +207,7 @@ export const StakingListItem = ({
             <Typography
               className={`${classes.normalText} ${myStakingClasses.itemTitle}`}
             >
-              Unknown validator
+              {t('unknown_validator')}
             </Typography>
           </div>
           <div className="flex-1-column">
@@ -247,6 +250,7 @@ export const StakingListItem = ({
 const MyStakingListItemDetails = React.memo(
   ({ stakeActivation, publicKey, onClickUndelegate, onClickWithdraw }) => {
     const classes = useStyles();
+    const { t } = useTranslation();
     const myStakingClasses = myStakingUseStyles();
 
     const handleClickUndelegate = () => {
@@ -272,7 +276,7 @@ const MyStakingListItemDetails = React.memo(
               }}
               onClick={handleClickUndelegate}
             >
-              Undelegate
+              {t('undelegate')}
             </Button>
           );
         case 'inactive':
@@ -287,7 +291,7 @@ const MyStakingListItemDetails = React.memo(
               }}
               onClick={handleClickWithdraw}
             >
-              Withdraw
+              {t('withdraw')}
             </Button>
           );
         default:
@@ -315,7 +319,7 @@ const MyStakingListItemDetails = React.memo(
             <Typography
               className={`${classes.normalText} ${myStakingClasses.iconText}`}
             >
-              Active stake
+              {t('active_stake')}
             </Typography>
           </div>
           <div className="flex-1-column">
@@ -329,7 +333,7 @@ const MyStakingListItemDetails = React.memo(
             <Typography
               className={`${classes.normalText} ${myStakingClasses.iconText}`}
             >
-              Inactive stake
+              {t('inactive_stake')}
             </Typography>
           </div>
           <div className="flex-1-column">
@@ -345,7 +349,7 @@ const MyStakingListItemDetails = React.memo(
             <Typography
               className={`${classes.normalText} ${myStakingClasses.iconText}`}
             >
-              Stake Balance
+              {t('stake_balance')}
             </Typography>
           </div>
           <div className="flex-05-column"></div>

@@ -3,6 +3,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import {
   useBalanceInfo,
+  useWalletFetchSupply,
   useWalletPublicKeys,
   useWalletVoteAccounts,
 } from '../utils/wallet';
@@ -13,7 +14,7 @@ import Card from '@material-ui/core/Card';
 import CreateStakingDialog from './CreateStakingDialog';
 import { usePage } from '../utils/page';
 import { useStyles } from './BalancesList';
-import { computeHash } from '../utils/utils';
+import {calculateEstimatedApr, computeHash} from '../utils/utils';
 import { stakingFormat } from '../utils/utils';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 import ErrorOutline from '@material-ui/icons/ErrorOutline';
@@ -22,22 +23,25 @@ const DEFAULT_ICONS_COUNT = 17;
 
 export default function StakingList() {
   const classes = useStyles();
-  const [voteAccounts, loaded] = useWalletVoteAccounts();
+  const [voteAccountsData, loaded] = useWalletVoteAccounts();
   const [page, setPage] = usePage();
   const { t } = useTranslation();
 
-  const StakingListItemsMemo = useMemo(() => {
-    return (voteAccounts || []).sort((a, b) => b.activatedStake - a.activatedStake).map((vote, index) => {
-      return React.memo((props) => {
-        return (
-          <StakingListItem
-            key={vote.votePubkey.toString() || index.toString()}
-            voteAccount={vote}
-          />
-        );
-      });
-    });
-  }, [voteAccounts]);
+  const [supplyData] = useWalletFetchSupply()
+  const totalSupply = supplyData?.value?.total
+
+  const voteAccounts = React.useMemo(
+    () => voteAccountsData?.current || [],
+    [voteAccountsData]
+  );
+
+  const totalActiveStake = React.useMemo(() => {
+    const delinquent = voteAccountsData?.delinquent || [];
+    const delinquentStake = delinquent?.reduce((prev, current) => prev + current.activatedStake, 0);
+    const totalActiveInVoteAccounts = voteAccounts?.reduce((prev, current) => prev + current.activatedStake, 0)
+
+    return delinquentStake + totalActiveInVoteAccounts
+  }, [voteAccounts, voteAccountsData?.delinquent]);
 
   return (
     <div>
@@ -57,8 +61,13 @@ export default function StakingList() {
         </Button>
       </div>
       <List disablePadding>
-        {StakingListItemsMemo.map((Memoized, index) => (
-          <Memoized key={index.toString()} />
+        {voteAccounts.map((voteAccount) => (
+          <StakingListItem
+            key={voteAccount.votePubkey.toString()}
+            voteAccount={voteAccount}
+            totalSupply={totalSupply}
+            totalActiveStake={totalActiveStake}
+          />
         ))}
         {loaded ? null : <LoadingIndicator />}
       </List>
@@ -66,20 +75,29 @@ export default function StakingList() {
   );
 }
 
-export function StakingListItem({ voteAccount }) {
+export const StakingListItem = ({ voteAccount, totalSupply, totalActiveStake }) => {
   const classes = useStyles();
   const { t } = useTranslation();
-  const { votePubkey, nodePubkey } = voteAccount;
+  const { votePubkey, nodePubkey, commission } = voteAccount;
   const [publicKeys] = useWalletPublicKeys();
   const mainPubkey = publicKeys[0];
   const balanceInfo = useBalanceInfo(mainPubkey);
   const computeImageIndex = (computeHash(votePubkey) % DEFAULT_ICONS_COUNT) + 1;
+
   const colappsedAddress = useMemo(() => {
     return `${votePubkey.substring(0, 4)}....${votePubkey.substring(
       votePubkey.length - 8,
       votePubkey.length - 1,
     )}`;
-  }, []);
+  }, [votePubkey]);
+
+  const estimatedAPR = useMemo(
+    () => {
+      return calculateEstimatedApr({totalSupply, totalActiveStake, commission})
+    },
+    [totalSupply, totalActiveStake, commission],
+  )
+
   const [openStaking, setOpenStaking] = useState(false);
   if (!voteAccount) {
     return <LoadingIndicator delay={0} />;
@@ -87,6 +105,7 @@ export function StakingListItem({ voteAccount }) {
   if (!balanceInfo) {
     return <LoadingIndicator delay={0} />;
   }
+
   return (
     <Card data-testid="staking-item" className={classes.item}>
       <ListItem style={{ padding: 16 }}>
@@ -130,15 +149,19 @@ export function StakingListItem({ voteAccount }) {
             </div>
             <div className={classes.normalText}>{voteAccount.commission}%</div>
           </div>
-          <div className="mr-24">
-            <Button
-              onClick={() => setOpenStaking(true)}
-              variant="outlined"
-              className={classes.text}
-            >
-              {t('stake')}
-            </Button>
+          <div className={classes.stakingItem}>
+            <div className={`${classes.text} flex align-center`}>
+              {t("apr_estimated")}
+            </div>
+            <div className={classes.normalText}>{estimatedAPR.toFixed(2)}%</div>
           </div>
+          <Button
+            onClick={() => setOpenStaking(true)}
+            variant="outlined"
+            className={classes.text}
+          >
+            {t('stake')}
+          </Button>
         </div>
       </ListItem>
       <CreateStakingDialog

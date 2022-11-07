@@ -130,9 +130,12 @@ export class Wallet {
   };
 
   getVoteAccounts = async () => {
-    let voteAccounts = await this.connection.getVoteAccounts();
-    return voteAccounts.current;
+    return await this.connection.getVoteAccounts();
   };
+
+  getSupply = async () => {
+    return await this.connection.getSupply()
+  }
 
   getStakeActivation = async (stakePubkeys) => {
     const stakeInfo = await this.connection.getStakeActivation(stakePubkeys);
@@ -458,7 +461,12 @@ export function useWalletStakePublicKeys() {
 
 export function useWalletVoteAccounts() {
   let wallet = useWallet();
-  return useAsyncData(wallet.getVoteAccounts, wallet.getVoteAccounts);
+  return useAsyncData(wallet.getVoteAccounts, "getVoteAccounts");
+}
+
+export function useWalletFetchSupply() {
+  const wallet = useWallet()
+  return useAsyncData(wallet.getSupply, "getSupply")
 }
 
 export function useWalletStakeActivation(stakePubkeys) {

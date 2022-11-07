@@ -30,10 +30,10 @@ describe("send/receive renec", () => {
       cy.findByText("Receive RENEC").should("be.visible")
       cy.findByText("Your deposit address:").should("be.visible")
       cy.get("textarea").should('have.value', '5wMBXZjyZvy73FbWifznQ8AdH6hSww2JwGSx5vK1iesa')
-      cy.findByText("This address can only be used to receive RENEC and tokens on Remitano Network").should("be.visible")
+      cy.findByText("This address can only be used to receive RENEC and tokens on RENEC Blockchain").should("be.visible")
       cy.findByRole("button", {name: "Copy"}).click()
     })
-    cy.findByText("Copied Deposit Address").should("be.visible")
+    cy.findByText("Copied Deposit address").should("be.visible")
     cy.findByTestId("dialog-close").click()
     cy.findByTestId("deposit-dialog").should("not.exist")
     cy.findByTestId('wallet-total-balance').then($element => {

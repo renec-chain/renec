@@ -25,7 +25,7 @@ export default function StakingList() {
   const [page, setPage] = usePage();
 
   const StakingListItemsMemo = useMemo(() => {
-    return (voteAccounts || []).map((vote, index) => {
+    return (voteAccounts || []).sort((a, b) => b.activatedStake - a.activatedStake).map((vote, index) => {
       return React.memo((props) => {
         return (
           <StakingListItem

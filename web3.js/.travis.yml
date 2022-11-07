@@ -2,7 +2,7 @@ dist: bionic
 sudo: required
 language: node_js
 node_js:
-  - "lts/*"
+  - 'lts/*'
   # - "node" disabled due to flaky test failures
 
 cache:
@@ -37,7 +37,7 @@ deploy:
     local-dir: doc
     on:
       branch: master
-      node_js: "lts/*"
+      node_js: 'lts/*'
 
   - provider: script
     skip_cleanup: true
@@ -45,7 +45,7 @@ deploy:
       - npx semantic-release
     on:
       branch: master
-      node_js: "lts/*"
+      node_js: 'lts/*'
 
   - provider: releases
     skip-cleanup: true
@@ -55,4 +55,4 @@ deploy:
     api_key: $GITHUB_TOKEN
     on:
       tags: true
-      node_js: "lts/*"
+      node_js: 'lts/*'

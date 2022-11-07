@@ -35,13 +35,14 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 24,
   },
 }));
+
 export default function MyStaking() {
   const classes = useStyles();
   const isExtensionWidth = useIsExtensionWidth();
   return (
     <StakingProvider>
       <MyStakingInfo />
-      <Container fixed maxWidth="md" className={classes.container}>
+      <Container fixed maxWidth="lg" className={classes.container}>
         <Grid container spacing={isExtensionWidth ? 0 : 3}>
           <Grid md={2} />
           <Grid item xs={12} md={8} className={classes.balancesContainer}>

@@ -35,8 +35,8 @@ export default {
   restore_existing_wallet: 'Khôi Phục Lại Ví',
   restore_existing_wallet_description: 'Sử dụng mã bí mật dài 12 hoặc 24 từ để khôi phục ví của bạn. Lưu ý rằng việc này sẽ xóa thông tin của tất cả ví đang tồn tại trên thiết bị này.',
   invalid_secret_key_format: 'Mã bí mật không chính xác. Vui lòng điền mã bí mật ở định dạng BIP 39.',
-  new_password_optional: 'mật khẩu mới (không bắt buộc)',
-  confirm_password_optional: 'xác nhận mật khẩu (không bắt buộc)',
+  new_password_optional: 'Mật khẩu mới (không bắt buộc)',
+  confirm_password_optional: 'Xác nhận mật khẩu (không bắt buộc)',
   submitting: 'Đang gửi yêu cầu...',
   success: 'Thành công',
   derivable_account: 'Danh sách Tài khoản',
@@ -90,7 +90,7 @@ export default {
   please_type_your_secret_key: 'Vui lòng nhập mã bí mật của bạn để xác nhận',
   aware_this_address_has_no_funds: 'Tôi nhận thức rằng địa chỉ này không có tiền hoặc đây có thể là một ví trao đổi',
   validator_staking_list: 'Danh sách Validators',
-  my_staking: 'Stake của tôi',
+  my_staking: 'Stake Của Tôi',
   stake: 'Stake',
   my_staking_list: 'Danh sách stake của tôi',
   confirm_undelegate: 'Xác nhận hủy bỏ',
@@ -104,5 +104,6 @@ export default {
   inactive_stake: 'Stake không hoạt động',
   sending_transaction: 'Đang gửi giao dịch...',
   confirming_transaction: 'Đang xác nhận giao dịch',
-  transaction_confirmed: 'Giao dịch đã được xác nhận'
+  transaction_confirmed: 'Giao dịch đã được xác nhận',
+  apr_estimated: "APR (ước tính)"
 }

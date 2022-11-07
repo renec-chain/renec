@@ -10,13 +10,15 @@ describe('Cluster Util', () => {
   });
 
   it('devnet', () => {
-    expect(clusterApiUrl()).to.eq('https://api.devnet.solana.com');
-    expect(clusterApiUrl('devnet')).to.eq('https://api.devnet.solana.com');
+    expect(clusterApiUrl()).to.eq('https://api-devnet.renec.foundation:8899');
+    expect(clusterApiUrl('devnet')).to.eq(
+      'https://api-devnet.renec.foundation:8899',
+    );
     expect(clusterApiUrl('devnet', true)).to.eq(
-      'https://api.devnet.solana.com',
+      'https://api-devnet.renec.foundation:8899',
     );
     expect(clusterApiUrl('devnet', false)).to.eq(
-      'http://api.devnet.solana.com',
+      'http://api-devnet.renec.foundation:8899',
     );
   });
 });

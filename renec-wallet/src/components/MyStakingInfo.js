@@ -45,7 +45,7 @@ export default function MyStakingInfo() {
 
   return (
     <div className={classes.header}>
-      <Container fixed maxWidth="md">
+      <Container fixed maxWidth="lg">
         <Grid container spacing={isExtensionWidth ? 0 : 3}>
           <Grid md={2} />
           <Grid item xs={12} md={8} className={classes.balancesContainer}>
@@ -55,7 +55,7 @@ export default function MyStakingInfo() {
                 {t('back')}
               </div>
             </div>
-            <div className="bold text-32">My Staking</div>
+            <div className="bold text-32">{t("my_staking")}</div>
             <div className="flex align-end">
               <div className={classes.box}>
                 <Typography style={{ fontSize: 16 }}>Total stake</Typography>

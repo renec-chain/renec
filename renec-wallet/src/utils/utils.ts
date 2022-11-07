@@ -131,3 +131,11 @@ export const computeHash = (inputString) => {
   }
   return Math.abs(hash);
 }
+
+export const calculateEstimatedApr = ({totalSupply, totalActiveStake, commission}) => {
+  const yearlyRate = 0.045 // (4.5%)
+  const totalYearlyBonus = yearlyRate * totalSupply
+  const bonusForEachActiveRenec = totalYearlyBonus / totalActiveStake
+  const result = bonusForEachActiveRenec * (100 - commission);
+  return result
+}

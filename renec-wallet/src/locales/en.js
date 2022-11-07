@@ -35,8 +35,8 @@ export default {
   restore_existing_wallet: 'Restore Existing Wallet',
   restore_existing_wallet_description: 'Restore your wallet using your twelve or twenty-four seed words. Note that this will delete any existing wallet on this device.',
   invalid_secret_key_format: 'Mnemonic validation failed. Please enter a valid BIP 39 seed phrase.',
-  new_password_optional: 'new password (optional)',
-  confirm_password_optional: 'confirm password (optional)',
+  new_password_optional: 'New password (optional)',
+  confirm_password_optional: 'Confirm password (optional)',
   submitting: 'Submitting...',
   success: 'Success',
   derivable_account: 'Derivable Accounts',
@@ -104,5 +104,6 @@ export default {
   inactive_stake: 'Inactive stake',
   sending_transaction: 'Sending transaction...',
   confirming_transaction: 'Confirming transaction',
-  transaction_confirmed: 'Transaction confirmed'
+  transaction_confirmed: 'Transaction confirmed',
+  apr_estimated: "APR (estimated)"
 }

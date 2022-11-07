@@ -1,13 +1,13 @@
 const endpoint = {
   http: {
-    devnet: 'http://api.devnet.solana.com',
-    testnet: 'http://api.testnet.solana.com',
-    'mainnet-beta': 'http://api.mainnet-beta.solana.com/',
+    devnet: 'http://api-devnet.renec.foundation:8899',
+    testnet: 'http://api-testnet.renec.foundation:8899',
+    'mainnet-beta': 'http://api-mainnet-beta.renec.foundation:8899',
   },
   https: {
-    devnet: 'https://api.devnet.solana.com',
-    testnet: 'https://api.testnet.solana.com',
-    'mainnet-beta': 'https://api.mainnet-beta.solana.com/',
+    devnet: 'https://api-devnet.renec.foundation:8899',
+    testnet: 'https://api-testnet.renec.foundation:8899',
+    'mainnet-beta': 'https://api-mainnet-beta.renec.foundation:8899',
   },
 };
 

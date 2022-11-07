@@ -93,7 +93,7 @@ export default function DepositDialog({
     ? owner.toBase58()
     : publicKey.toBase58();
   return (
-    <DialogForm open={open} onClose={onClose} maxWidth="sm" fullWidth>
+    <DialogForm data-testid="deposit-dialog" open={open} onClose={onClose} maxWidth="sm" fullWidth>
       <DialogTitle>
         <div className="flex space-between">
           Receive {tokenSymbol ?? tokenName ?? mint.toBase58()}
@@ -104,7 +104,7 @@ export default function DepositDialog({
               </Typography>
             </div>
           )}
-          <Icon icon="close" onClick={onClose} />
+          <Icon testID="dialog-close" icon="close" onClick={onClose} />
         </div>
       </DialogTitle>
       {tabs}

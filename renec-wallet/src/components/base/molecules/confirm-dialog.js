@@ -8,9 +8,9 @@ import {
 } from '@material-ui/core';
 import Icon from '../atoms/icon';
 
-const ConfirmDialog = ({ title, warningMessage, open, onClose, onConfirm }) => {
+const ConfirmDialog = ({ title, warningMessage, open, onClose, onConfirm, testID }) => {
   return (
-    <Dialog open={open}>
+    <Dialog data-testid={testID} open={open}>
       <DialogTitle>
         <div className="flex space-between">
           <span>{title}</span>

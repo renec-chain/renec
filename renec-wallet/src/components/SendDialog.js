@@ -43,8 +43,8 @@ import {
   resolveTwitterHandle,
   getNameKey,
 } from '../utils/name-service';
-import { 
-  TextInput, 
+import {
+  TextInput,
   RButton,
   Icon,
 } from '../components/base';
@@ -364,7 +364,7 @@ function SendSplDialog({ onClose, publicKey, balanceInfo, onSubmitRef }) {
   onSubmitRef.current = onSubmit;
   return (
     <>
-      <DialogContent dividers>
+      <DialogContent data-testid="send-sql-dialog" dividers>
         {fields}
         {shouldShowOverride && (
           <div
@@ -717,12 +717,14 @@ function useForm(
             : undefined
         }
         label="Recipient Address"
+        name="recipient-address"
         value={destinationAddress}
         onChange={(e) => setDestinationAddress(e.target.value.trim())}
         hasError={!passAddressValidation && passAddressValidation !== undefined}
       />
       <TextInput
         label="Amount"
+        name="amount"
         value={transferAmountString}
         onChange={(e) => setTransferAmountString(e.target.value.trim())}
         endAdornment={(
@@ -744,6 +746,7 @@ function useForm(
         <span>Available: </span>
         <span
           className="bold"
+          data-testid="available-balance"
           onClick={() =>
             setTransferAmountString(
               balanceAmountToUserAmount(userTransferableAmount, decimals),

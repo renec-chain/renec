@@ -97,7 +97,7 @@ export default function MyStakingList() {
   return (
     <div>
       <div className={classes.textHeader}>My staking list</div>
-      <List disablePadding>
+      <List data-testid="staking-list" disablePadding>
         {StakingListItemsMemo.map((Memoized) => (
           <Memoized />
         ))}
@@ -106,6 +106,7 @@ export default function MyStakingList() {
         title="Confirm Undelegate"
         warningMessage="Undelegate could take several days to be successful, you can still receive commission during the waiting period. Do you want to undelegate this stake?"
         open={open}
+        testID="confirm-undelegate-dialog"
         onClose={() => {
           setPendingUndelegate(null);
           onClose();
@@ -172,7 +173,7 @@ export const StakingListItem = ({
   }
 
   return (
-    <Card className={classes.item} onClick={() => setOpen(!open)}>
+    <Card className={`${classes.item} my-staking-item`} onClick={() => setOpen(!open)}>
       <ListItem style={{ padding: 16 }}>
         <div className="flex space-between full-width">
           <div className="flex-1-column">

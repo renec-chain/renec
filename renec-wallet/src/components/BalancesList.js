@@ -280,7 +280,7 @@ export default function BalancesList() {
           <div className="mb-8">
             {(
               <>
-                <span className="bold text-20">{(balanceInfo.amount / LAMPORTS_PER_SOL).toFixed(4)}</span>
+                <span data-testid="wallet-total-balance" className="bold text-20">{(balanceInfo.amount / LAMPORTS_PER_SOL).toFixed(4)}</span>
                 <span>{' RENEC'}</span>
               </>
             )}
@@ -497,7 +497,7 @@ export function BalanceListItem({ publicKey, expandable, setUsdValue }) {
   }
 
   return (
-    <Card className={classes.item}>
+    <Card className={classes.item} data-testid={`balance-item balance-item-${publicKey}`}>
       <ListItem
         style={{ padding: 16 }}
         button

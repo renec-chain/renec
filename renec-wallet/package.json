@@ -29,6 +29,7 @@
     "bn.js": "^5.1.2",
     "bs58": "^4.0.1",
     "buffer-layout": "^1.2.0",
+    "cypress": "^10.11.0",
     "ed25519-hd-key": "^1.2.0",
     "immutable-tuple": "^0.4.10",
     "lodash-es": "^4.17.21",
@@ -55,7 +56,9 @@
     "build:extension": "yarn build && cp -a ./build/. ./extension/build/ && yarn build:extension-scripts",
     "build:extension-scripts": "cp -a ./extension/src/. ./extension/build/.",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "e2e-test": "cypress open",
+    "e2e-test:headless": "wait-on http://127.0.0.1:3000 && cypress run"
   },
   "eslintConfig": {
     "env": {
@@ -88,17 +91,14 @@
     "singleQuote": true,
     "trailingComma": "all"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "git-format-staged -f 'prettier --stdin-filepath \"{}\"' src/*.js"
-    }
-  },
   "devDependencies": {
+    "@testing-library/cypress": "^8.0.3",
     "@types/react-copy-to-clipboard": "^5.0.1",
     "gh-pages": "^3.1.0",
     "git-format-staged": "^2.1.0",
     "husky": "^4.3.6",
     "prettier": "^2.2.1",
-    "sass": "^1.50.0"
+    "sass": "^1.50.0",
+    "wait-on": "^6.0.1"
   }
 }

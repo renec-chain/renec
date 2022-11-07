@@ -55,7 +55,7 @@ export default function MyStakingInfo() {
             <div className="bold text-32">My Staking</div>
             <div className="flex align-end">
               <div className={classes.box}>
-                <Typography style={{ fontSize: 16 }}>Total staked</Typography>
+                <Typography style={{ fontSize: 16 }}>Total stake</Typography>
                 <Typography style={{ fontSize: 16, fontWeight: 'bold' }}>
                   {stakingFormat.format(
                     staking?.state?.totalStaked / LAMPORTS_PER_SOL,
@@ -64,7 +64,7 @@ export default function MyStakingInfo() {
                 </Typography>
               </div>
               <div className={classes.box}>
-                <Typography style={{ fontSize: 16 }}>Active staked</Typography>
+                <Typography style={{ fontSize: 16 }}>Active stake</Typography>
                 <Typography style={{ fontSize: 16, fontWeight: 'bold' }}>
                   {stakingFormat.format(
                     staking?.state?.activeStake / LAMPORTS_PER_SOL,

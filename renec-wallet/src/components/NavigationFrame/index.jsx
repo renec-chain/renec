@@ -27,25 +27,28 @@ import { useStyles, useFooterStyles } from './styles';
 import NavigationButtons, { ThemeSwitcher } from './NavigationButtons';
 import ToggleLanguage from '../base/molecules/toggle-language';
 import { useTranslation } from 'react-i18next';
-import i18n from '../../i18n'
 
-export const pages = [
-  {
-    label: i18n.t('wallet'),
-    value: 'wallet',
-    icon: AccountBalanceWalletOutlined,
-  },
-  {
-    label: i18n.t('staking'),
-    value: 'staking',
-    icon: HowToVote,
-  },
-];
+export const usePagesMenu = () => {
+  const {t} = useTranslation()
+  return [
+    {
+      label: t('wallet'),
+      value: 'wallet',
+      icon: AccountBalanceWalletOutlined,
+    },
+    {
+      label: t('staking'),
+      value: 'staking',
+      icon: HowToVote,
+    },
+  ]
+}
 
 const HeaderBar = () => {
   const classes = useStyles();
   const [page, setPage] = usePage();
   const [menuOpen, setMenuOpen] = React.useState();
+  const pages = usePagesMenu()
 
   const handleCloseNavMenu = () => {
     setMenuOpen(false);

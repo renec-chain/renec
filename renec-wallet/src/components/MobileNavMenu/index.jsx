@@ -7,14 +7,14 @@ import {
   ListItemText,
 } from '@material-ui/core';
 import { usePage } from '../../utils/page';
-import NavigationButtons, { ThemeSwitcher } from '../NavigationFrame/NavigationButtons';
+import NavigationButtons from '../NavigationFrame/NavigationButtons';
 import { useStyles } from './styles';
-import { pages } from '../NavigationFrame';
-import ToggleLanguage from '../base/molecules/toggle-language';
+import {usePagesMenu} from "../NavigationFrame";
 
 const MobileNavMenu = ({ open, onClose }) => {
   const [, setPage] = usePage();
   const classes = useStyles();
+  const pages = usePagesMenu()
 
   const handleMenuPageClick = (pageValue) => {
     onClose();

@@ -30,6 +30,7 @@ import Moment from "react-moment";
 import { extractMintDetails, MintDetails } from "./common";
 import { Cluster, useCluster } from "providers/cluster";
 import { reportError } from "utils/sentry";
+import { useTranslation } from "react-i18next";
 
 type IndexedTransfer = {
   index: number;
@@ -44,6 +45,7 @@ export function TokenTransfersCard({ pubkey }: { pubkey: PublicKey }) {
   const fetchAccountHistory = useFetchAccountHistory();
   const refresh = () => fetchAccountHistory(pubkey, true, true);
   const loadMore = () => fetchAccountHistory(pubkey, true);
+  const { t } = useTranslation();
 
   const { tokenRegistry } = useTokenRegistry();
 
@@ -207,10 +209,12 @@ export function TokenTransfersCard({ pubkey }: { pubkey: PublicKey }) {
 
   if (history?.data === undefined) {
     if (history.status === FetchStatus.Fetching) {
-      return <LoadingCard message="Loading token transfers" />;
+      return <LoadingCard message={t("loading_token_transfers")} />;
     }
 
-    return <ErrorCard retry={refresh} text="Failed to fetch token transfers" />;
+    return (
+      <ErrorCard retry={refresh} text={t("failed_to_fetch_token_transfers")} />
+    );
   }
 
   const fetching = history.status === FetchStatus.Fetching;
@@ -219,18 +223,18 @@ export function TokenTransfersCard({ pubkey }: { pubkey: PublicKey }) {
       <HistoryCardHeader
         fetching={fetching}
         refresh={() => refresh()}
-        title="Token Transfers"
+        title={t("token_transfers")}
       />
       <div className="table-responsive mb-0">
         <table className="table table-sm table-nowrap card-table">
           <thead>
             <tr>
-              <th className="text-muted">Transaction Signature</th>
-              {hasTimestamps && <th className="text-muted">Age</th>}
-              <th className="text-muted">Source</th>
-              <th className="text-muted">Destination</th>
-              <th className="text-muted">Amount</th>
-              <th className="text-muted">Result</th>
+              <th className="text-muted">{t("transaction_signature")}</th>
+              {hasTimestamps && <th className="text-muted">{t("age")}</th>}
+              <th className="text-muted">{t("source")}</th>
+              <th className="text-muted">{t("destination")}</th>
+              <th className="text-muted">{t("amount")}</th>
+              <th className="text-muted">{t("result")}</th>
             </tr>
           </thead>
           <tbody className="list">{detailsList}</tbody>

@@ -1,10 +1,13 @@
 import React, { ReactNode } from "react";
 import { Buffer } from "buffer";
 import { Copyable } from "./Copyable";
+import { useTranslation } from "react-i18next";
 
 export function HexData({ raw }: { raw: Buffer }) {
+  const { t } = useTranslation();
+
   if (!raw || raw.length === 0) {
-    return <span>No data</span>;
+    return <span>{t("no_data")}</span>;
   }
 
   const chunks = [];

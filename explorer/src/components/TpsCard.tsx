@@ -11,6 +11,7 @@ import { TableCardBody } from "components/common/TableCardBody";
 import { ChartOptions, ChartTooltipModel } from "chart.js";
 import { PerformanceInfo } from "providers/stats/solanaPerformanceInfo";
 import { StatsNotReady } from "pages/ClusterStatsPage";
+import { useTranslation } from "react-i18next";
 
 export function TpsCard() {
   const performanceInfo = usePerformanceInfo();
@@ -18,12 +19,13 @@ export function TpsCard() {
   const { avgTps } = performanceInfo;
   const averageTps = Math.round(avgTps).toLocaleString("en-US");
   const transactionCount = <AnimatedTransactionCount info={performanceInfo} />;
+  const { t } = useTranslation();
 
   return (
     <>
       <div className="card">
         <div className="card-header">
-          <h4 className="card-header-title">Live Transaction Stats</h4>
+          <h4 className="card-header-title">{t("live_transaction_stats")}</h4>
         </div>
         {isStatusNotReady && (
           <StatsNotReady
@@ -33,13 +35,13 @@ export function TpsCard() {
         {!isStatusNotReady && (
           <TableCardBody>
             <tr>
-              <td className="w-100">Transaction count</td>
+              <td className="w-100">{t("transaction_count")}</td>
               <td className="text-lg-end font-monospace">
                 {transactionCount}{" "}
               </td>
             </tr>
             <tr>
-              <td className="w-100">Transactions per second (TPS)</td>
+              <td className="w-100">{t("transaction_per_second")}</td>
               <td className="text-lg-end font-monospace">{averageTps} </td>
             </tr>
           </TableCardBody>
@@ -161,6 +163,7 @@ type TpsBarChartProps = { performanceInfo: PerformanceInfo };
 function TpsBarChart({ performanceInfo }: TpsBarChartProps) {
   const { perfHistory, historyMaxTps } = performanceInfo;
   const [series, setSeries] = React.useState<Series>("short");
+  const { t } = useTranslation();
 
   const seriesData = perfHistory[series];
   const chartOptions = React.useMemo(
@@ -187,7 +190,7 @@ function TpsBarChart({ performanceInfo }: TpsBarChartProps) {
     <div className="card-body py-4">
       <div className="align-box-row align-items-start justify-content-between">
         <div className="d-flex justify-content-between w-100">
-          <h3 className="mb-0 card-header-title">TPS history</h3>
+          <h3 className="mb-0 card-header-title">{t("tps_history")}</h3>
           <div className="font-size-sm">
             {SERIES.map((key) => (
               <button

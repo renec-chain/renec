@@ -55,6 +55,7 @@ import {
   isMangoInstruction,
   parseMangoInstructionTitle,
 } from "components/instruction/mango/types";
+import { useTranslation } from "react-i18next";
 
 const TRUNCATE_TOKEN_LENGTH = 10;
 const ALL_TOKENS = "";
@@ -67,6 +68,7 @@ type InstructionType = {
 export function TokenHistoryCard({ pubkey }: { pubkey: PublicKey }) {
   const address = pubkey.toBase58();
   const ownedTokens = useAccountOwnedTokens(address);
+  const { t } = useTranslation();
 
   if (ownedTokens === undefined) {
     return null;
@@ -76,9 +78,7 @@ export function TokenHistoryCard({ pubkey }: { pubkey: PublicKey }) {
   if (tokens === undefined || tokens.length === 0) return null;
 
   if (tokens.length > 25) {
-    return (
-      <ErrorCard text="Token transaction history is not available for accounts with over 25 token accounts" />
-    );
+    return <ErrorCard text={t("token_transaction_history_not_available")} />;
   }
 
   return <TokenHistoryTable tokens={tokens} />;
@@ -103,6 +103,7 @@ function TokenHistoryTable({ tokens }: { tokens: TokenInfoWithPubkey[] }) {
   const transactionDetailsCache = useTransactionDetailsCache();
   const [showDropdown, setDropdown] = React.useState(false);
   const filter = useQueryFilter();
+  const { t } = useTranslation();
 
   const filteredTokens = React.useMemo(
     () =>
@@ -201,20 +202,20 @@ function TokenHistoryTable({ tokens }: { tokens: TokenInfoWithPubkey[] }) {
 
   if (mintAndTxs.length === 0) {
     if (fetching) {
-      return <LoadingCard message="Loading history" />;
+      return <LoadingCard message={t("loading_history")} />;
     } else if (failed) {
       return (
         <ErrorCard
           retry={() => fetchHistories(true)}
-          text="Failed to fetch transaction history"
+          text={t("failed_to_fetch_transaction_history")}
         />
       );
     }
     return (
       <ErrorCard
         retry={() => fetchHistories(true)}
-        retryText="Try again"
-        text="No transaction history found"
+        retryText={t("try_again")}
+        text={t("no_transaction_history_found")}
       />
     );
   }
@@ -228,7 +229,7 @@ function TokenHistoryTable({ tokens }: { tokens: TokenInfoWithPubkey[] }) {
   return (
     <div className="card">
       <div className="card-header align-items-center">
-        <h3 className="card-header-title">Token History</h3>
+        <h3 className="card-header-title">{t("token_history")}</h3>
         <FilterDropdown
           filter={filter}
           toggle={() => setDropdown((show) => !show)}
@@ -243,12 +244,12 @@ function TokenHistoryTable({ tokens }: { tokens: TokenInfoWithPubkey[] }) {
           {fetching ? (
             <>
               <span className="spinner-grow spinner-grow-sm me-2"></span>
-              Loading
+              {t("loading")}
             </>
           ) : (
             <>
               <span className="fe fe-refresh-cw me-2"></span>
-              Refresh
+              {t("refresh")}
             </>
           )}
         </button>
@@ -258,11 +259,11 @@ function TokenHistoryTable({ tokens }: { tokens: TokenInfoWithPubkey[] }) {
         <table className="table table-sm table-nowrap card-table">
           <thead>
             <tr>
-              <th className="text-muted w-1">Slot</th>
-              <th className="text-muted">Result</th>
-              <th className="text-muted">Token</th>
-              <th className="text-muted">Instruction Type</th>
-              <th className="text-muted">Transaction Signature</th>
+              <th className="text-muted w-1">{t("slot")}</th>
+              <th className="text-muted">{t("result")}</th>
+              <th className="text-muted">{t("token")}</th>
+              <th className="text-muted">{t("instruction_type")}</th>
+              <th className="text-muted">{t("transaction_signature")}</th>
             </tr>
           </thead>
           <tbody className="list">
@@ -280,7 +281,9 @@ function TokenHistoryTable({ tokens }: { tokens: TokenInfoWithPubkey[] }) {
 
       <div className="card-footer">
         {allFoundOldest ? (
-          <div className="text-muted text-center">Fetched full history</div>
+          <div className="text-muted text-center">
+            {t("fetched_full_history")}
+          </div>
         ) : (
           <button
             className="btn btn-primary w-100"
@@ -290,10 +293,10 @@ function TokenHistoryTable({ tokens }: { tokens: TokenInfoWithPubkey[] }) {
             {fetching ? (
               <>
                 <span className="spinner-grow spinner-grow-sm me-2"></span>
-                Loading
+                {t("loading")}
               </>
             ) : (
-              "Load More"
+              t("loading_more")
             )}
           </button>
         )}
@@ -305,6 +308,7 @@ function TokenHistoryTable({ tokens }: { tokens: TokenInfoWithPubkey[] }) {
 const FilterDropdown = ({ filter, toggle, show, tokens }: FilterProps) => {
   const { cluster } = useCluster();
   const { tokenRegistry } = useTokenRegistry();
+  const { t } = useTranslation();
 
   const buildLocation = (location: Location, filter: string) => {
     const params = new URLSearchParams(location.search);
@@ -332,13 +336,13 @@ const FilterDropdown = ({ filter, toggle, show, tokens }: FilterProps) => {
 
   return (
     <div className="dropdown me-2">
-      <small className="me-2">Filter:</small>
+      <small className="me-2">{t("filter")}:</small>
       <button
         className="btn btn-white btn-sm dropdown-toggle"
         type="button"
         onClick={toggle}
       >
-        {filter === ALL_TOKENS ? "All Tokens" : nameLookup.get(filter)}
+        {filter === ALL_TOKENS ? t("all_tokens") : nameLookup.get(filter)}
       </button>
       <div
         className={`token-filter dropdown-menu-end dropdown-menu${
@@ -356,7 +360,7 @@ const FilterDropdown = ({ filter, toggle, show, tokens }: FilterProps) => {
               onClick={toggle}
             >
               {filterOption === ALL_TOKENS
-                ? "All Tokens"
+                ? t("all_tokens")
                 : formatTokenName(filterOption, cluster, tokenRegistry)}
             </Link>
           );
@@ -378,6 +382,7 @@ const TokenTransactionRow = React.memo(
   }) => {
     const fetchDetails = useFetchTransactionDetails();
     const { cluster } = useCluster();
+    const { t } = useTranslation();
 
     // Fetch details on load
     React.useEffect(() => {
@@ -388,10 +393,10 @@ const TokenTransactionRow = React.memo(
     let statusClass: string;
     if (tx.err) {
       statusClass = "warning";
-      statusText = "Failed";
+      statusText = t("failed");
     } else {
       statusClass = "success";
-      statusText = "Success";
+      statusText = t("success");
     }
 
     const instructions =
@@ -413,7 +418,7 @@ const TokenTransactionRow = React.memo(
 
           <td>
             <span className="spinner-grow spinner-grow-sm me-2"></span>
-            Loading
+            {t("loading")}
           </td>
 
           <td>

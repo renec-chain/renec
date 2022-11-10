@@ -22,6 +22,8 @@ import { SimulatorCard } from "./SimulatorCard";
 import { MIN_MESSAGE_LENGTH, RawInput } from "./RawInputCard";
 import { InstructionsSection } from "./InstructionsSection";
 import base58 from "bs58";
+import { useTranslation } from "react-i18next";
+import i18n from "../../i18n";
 
 export type TransactionData = {
   rawMessage: Uint8Array;
@@ -47,11 +49,11 @@ function decodeSignatures(signaturesParam: string): (string | null)[] {
   try {
     signatures = JSON.parse(signaturesParam);
   } catch (err) {
-    throw new Error("Signatures param is not valid JSON");
+    throw new Error(i18n.t("signature_param_is_not_valid_json"));
   }
 
   if (!Array.isArray(signatures)) {
-    throw new Error("Signatures param is not a JSON array");
+    throw new Error(i18n.t("signatures_params_is_not_json_array"));
   }
 
   const validSignatures: (string | null)[] = [];
@@ -62,14 +64,14 @@ function decodeSignatures(signaturesParam: string): (string | null)[] {
     }
 
     if (typeof signature !== "string") {
-      throw new Error("Signature is not a string");
+      throw new Error(i18n.t("signature_is_not_a_string"));
     }
 
     try {
       base58.decode(signature);
       validSignatures.push(signature);
     } catch (err) {
-      throw new Error("Signature is not valid base58");
+      throw new Error(i18n.t("signature_is_not_valid_base58"));
     }
   }
 
@@ -114,7 +116,7 @@ function decodeUrlParams(
     const buffer = Uint8Array.from(atob(messageParam), (c) => c.charCodeAt(0));
 
     if (buffer.length < MIN_MESSAGE_LENGTH) {
-      throw new Error("message buffer is too short");
+      throw new Error(i18n.t("message_buffer_too_short"));
     }
 
     const message = Message.from(buffer);
@@ -141,6 +143,7 @@ export function TransactionInspectorPage({
   const history = useHistory();
   const location = useLocation();
   const [paramString, setParamString] = React.useState<string>();
+  const { t } = useTranslation();
 
   // Sync message with url search params
   React.useEffect(() => {
@@ -199,7 +202,7 @@ export function TransactionInspectorPage({
     <div className="container mt-4">
       <div className="header">
         <div className="header-body">
-          <h2 className="header-title">Transaction Inspector</h2>
+          <h2 className="header-title">{t("transaction_inspector")}</h2>
         </div>
       </div>
       {signature ? (
@@ -221,6 +224,7 @@ function PermalinkView({
 }) {
   const details = useRawTransactionDetails(signature);
   const fetchTransaction = useFetchRawTransaction();
+  const { t } = useTranslation();
   const refreshTransaction = () => fetchTransaction(signature);
   const history = useHistory();
   const location = useLocation();
@@ -240,15 +244,15 @@ function PermalinkView({
     return (
       <ErrorCard
         retry={refreshTransaction}
-        text="Failed to fetch transaction"
+        text={t("failed_to_fetch_transaction")}
       />
     );
   } else if (!transaction) {
     return (
       <ErrorCard
-        text="Transaction was not found"
+        text={t("transaction_was_not_found")}
         retry={reset}
-        retryText="Reset"
+        retryText={t("reset")}
       />
     );
   }
@@ -301,6 +305,7 @@ function OverviewCard({
   const fee =
     message.header.numRequiredSignatures * DEFAULT_FEES.lamportsPerSignature;
   const feePayerValidator = createFeePayerValidator(fee);
+  const { t } = useTranslation();
 
   const size = React.useMemo(() => {
     const sigBytes = 1 + 64 * message.header.numRequiredSignatures;
@@ -311,9 +316,9 @@ function OverviewCard({
     <>
       <div className="card">
         <div className="card-header">
-          <h3 className="card-header-title">Transaction Overview</h3>
+          <h3 className="card-header-title">{t("transaction_overview")}</h3>
           <button className="btn btn-sm d-flex btn-white" onClick={onClear}>
-            Clear
+            {t("clear")}
           </button>
         </div>
         <TableCardBody>
@@ -327,7 +332,9 @@ function OverviewCard({
                     size <= PACKET_DATA_SIZE ? "text-muted" : "text-warning"
                   }
                 >
-                  Max transaction size is {PACKET_DATA_SIZE} bytes
+                  {t("max_transaction_size_is_xxx_byte", {
+                    size: PACKET_DATA_SIZE,
+                  })}
                 </span>
               </div>
             </td>
@@ -338,7 +345,9 @@ function OverviewCard({
               <div className="d-flex align-items-end flex-column">
                 <SolBalance lamports={fee} />
                 <span className="text-muted">
-                  {`Each signature costs ${DEFAULT_FEES.lamportsPerSignature} lamports`}
+                  {t("each_signature_costs_xxx_lamports", {
+                    lamport: DEFAULT_FEES.lamportsPerSignature,
+                  })}
                 </span>
               </div>
             </td>
@@ -346,16 +355,18 @@ function OverviewCard({
           <tr>
             <td>
               <div className="d-flex align-items-start flex-column">
-                Fee payer
+                {t("fee_payer")}
                 <span className="mt-1">
-                  <span className="badge bg-info-soft me-2">Signer</span>
-                  <span className="badge bg-danger-soft me-2">Writable</span>
+                  <span className="badge bg-info-soft me-2">{t("signer")}</span>
+                  <span className="badge bg-danger-soft me-2">
+                    {t("writable")}
+                  </span>
                 </span>
               </div>
             </td>
             <td className="text-end">
               {message.accountKeys.length === 0 ? (
-                "No Fee Payer"
+                t("no_fee_payer")
               ) : (
                 <AddressWithContext
                   pubkey={message.accountKeys[0]}

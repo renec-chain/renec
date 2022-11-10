@@ -1,5 +1,7 @@
 import React from "react";
 import { ConfirmedSignatureInfo, TransactionError } from "@solana/web3.js";
+import i18n from "../../i18n";
+import { useTranslation } from "react-i18next";
 
 export type TransactionRow = {
   slot: number;
@@ -20,6 +22,8 @@ export function HistoryCardHeader({
   refresh: Function;
   fetching: boolean;
 }) {
+  const { t } = useTranslation();
+
   return (
     <div className="card-header align-items-center">
       <h3 className="card-header-title">{title}</h3>
@@ -31,12 +35,12 @@ export function HistoryCardHeader({
         {fetching ? (
           <>
             <span className="spinner-grow spinner-grow-sm me-2"></span>
-            Loading
+            {t("loading")}
           </>
         ) : (
           <>
             <span className="fe fe-refresh-cw me-2"></span>
-            Refresh
+            {t("refresh")}
           </>
         )}
       </button>
@@ -53,10 +57,13 @@ export function HistoryCardFooter({
   foundOldest: boolean;
   loadMore: Function;
 }) {
+  const { t } = useTranslation();
   return (
     <div className="card-footer">
       {foundOldest ? (
-        <div className="text-muted text-center">Fetched full history</div>
+        <div className="text-muted text-center">
+          {t("fetched_full_history")}
+        </div>
       ) : (
         <button
           className="btn btn-primary w-100"
@@ -66,10 +73,10 @@ export function HistoryCardFooter({
           {fetching ? (
             <>
               <span className="spinner-grow spinner-grow-sm me-2"></span>
-              Loading
+              {t("loading")}
             </>
           ) : (
-            "Load More"
+            t("load_more")
           )}
         </button>
       )}
@@ -95,10 +102,10 @@ export function getTransactionRows(
       let statusClass;
       if (slotTransaction.err) {
         statusClass = "warning";
-        statusText = "Failed";
+        statusText = i18n.t("failed");
       } else {
         statusClass = "success";
-        statusText = "Success";
+        statusText = i18n.t("success");
       }
       transactionRows.push({
         slot,

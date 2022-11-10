@@ -6,6 +6,7 @@ import { AddressWithContext, programValidator } from "./AddressWithContext";
 import { useCluster } from "providers/cluster";
 import { programLabel } from "utils/tx";
 import { HexData } from "components/common/HexData";
+import { useTranslation } from "react-i18next";
 
 export function InstructionsSection({ message }: { message: Message }) {
   return (
@@ -28,6 +29,7 @@ function InstructionCard({
 }) {
   const [expanded, setExpanded] = React.useState(false);
   const { cluster } = useCluster();
+  const { t } = useTranslation();
   const programId = message.accountKeys[ix.programIdIndex];
   const programName = programLabel(programId.toBase58(), cluster) || "Unknown";
 
@@ -36,7 +38,7 @@ function InstructionCard({
       <div className={`card-header${!expanded ? " border-bottom-none" : ""}`}>
         <h3 className="card-header-title mb-0 d-flex align-items-center">
           <span className={`badge bg-info-soft me-2`}>#{index + 1}</span>
-          {programName} Instruction
+          {t("program_instruction", { programName })}
         </h3>
 
         <button
@@ -45,13 +47,13 @@ function InstructionCard({
           }`}
           onClick={() => setExpanded((e) => !e)}
         >
-          {expanded ? "Collapse" : "Expand"}
+          {t(expanded ? "collapse" : "expand")}
         </button>
       </div>
       {expanded && (
         <TableCardBody>
           <tr>
-            <td>Program</td>
+            <td>{t("program")}</td>
             <td className="text-lg-end">
               <AddressWithContext
                 pubkey={message.accountKeys[ix.programIdIndex]}
@@ -64,14 +66,14 @@ function InstructionCard({
               <tr key={index}>
                 <td>
                   <div className="d-flex align-items-start flex-column">
-                    Account #{index + 1}
+                    {t("account")} #{index + 1}
                     <span className="mt-1">
                       {accountIndex < message.header.numRequiredSignatures && (
                         <span className="badge bg-info-soft me-2">Signer</span>
                       )}
                       {message.isAccountWritable(accountIndex) && (
                         <span className="badge bg-danger-soft me-2">
-                          Writable
+                          {t("writable")}
                         </span>
                       )}
                     </span>
@@ -87,7 +89,7 @@ function InstructionCard({
           })}
           <tr>
             <td>
-              Instruction Data <span className="text-muted">(Hex)</span>
+              {t("instruction_data")} <span className="text-muted">(Hex)</span>
             </td>
             <td className="text-lg-end">
               <HexData raw={bs58.decode(ix.data)} />

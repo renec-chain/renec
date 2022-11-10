@@ -4,6 +4,7 @@ import { Connection, Message, Transaction } from "@solana/web3.js";
 import { useCluster } from "providers/cluster";
 import { InstructionLogs, prettyProgramLogs } from "utils/program-logs";
 import { ProgramLogsCardBody } from "components/ProgramLogsCardBody";
+import { useTranslation } from "react-i18next";
 
 const DEFAULT_SIGNATURE = bs58.encode(Buffer.alloc(64).fill(0));
 
@@ -15,15 +16,17 @@ export function SimulatorCard({ message }: { message: Message }) {
     simulationLogs: logs,
     simulationError,
   } = useSimulator(message);
+  const { t } = useTranslation();
+
   if (simulating) {
     return (
       <div className="card">
         <div className="card-header">
-          <h3 className="card-header-title">Transaction Simulation</h3>
+          <h3 className="card-header-title">{t("transaction_simulation")}</h3>
         </div>
         <div className="card-body text-center">
           <span className="spinner-grow spinner-grow-sm me-2"></span>
-          Simulating
+          {t("simulating")}
         </div>
       </div>
     );
@@ -31,27 +34,21 @@ export function SimulatorCard({ message }: { message: Message }) {
     return (
       <div className="card">
         <div className="card-header">
-          <h3 className="card-header-title">Transaction Simulation</h3>
+          <h3 className="card-header-title">{t("transaction_simulation")}</h3>
           <button className="btn btn-sm d-flex btn-white" onClick={simulate}>
             Simulate
           </button>
         </div>
         {simulationError ? (
           <div className="card-body">
-            Failed to run simulation:
+            {t("failed_to_run_simulation")}:
             <span className="text-warning ms-2">{simulationError}</span>
           </div>
         ) : (
           <div className="card-body text-muted">
             <ul>
-              <li>
-                Simulation is free and will run this transaction against the
-                latest confirmed ledger state.
-              </li>
-              <li>
-                No state changes will be persisted and all signature checks will
-                be disabled.
-              </li>
+              <li>{t("simulation_note_0")}</li>
+              <li>{t("simulation_note_1")}</li>
             </ul>
           </div>
         )}
@@ -62,7 +59,7 @@ export function SimulatorCard({ message }: { message: Message }) {
   return (
     <div className="card">
       <div className="card-header">
-        <h3 className="card-header-title">Transaction Simulation</h3>
+        <h3 className="card-header-title">{t("transaction_simulation")}</h3>
         <button className="btn btn-sm d-flex btn-white" onClick={simulate}>
           Retry
         </button>

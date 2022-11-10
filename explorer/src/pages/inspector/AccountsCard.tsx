@@ -3,9 +3,11 @@ import { Message, PublicKey } from "@solana/web3.js";
 import { TableCardBody } from "components/common/TableCardBody";
 import { AddressWithContext } from "./AddressWithContext";
 import { ErrorCard } from "components/common/ErrorCard";
+import { useTranslation } from "react-i18next";
 
 export function AccountsCard({ message }: { message: Message }) {
   const [expanded, setExpanded] = React.useState(true);
+  const { t } = useTranslation();
 
   const { validMessage, error } = React.useMemo(() => {
     const {
@@ -15,18 +17,18 @@ export function AccountsCard({ message }: { message: Message }) {
     } = message.header;
 
     if (numReadonlySignedAccounts >= numRequiredSignatures) {
-      return { validMessage: undefined, error: "Invalid header" };
+      return { validMessage: undefined, error: t("invalid_header") };
     } else if (numReadonlyUnsignedAccounts >= message.accountKeys.length) {
-      return { validMessage: undefined, error: "Invalid header" };
+      return { validMessage: undefined, error: t("invalid_header") };
     } else if (message.accountKeys.length === 0) {
-      return { validMessage: undefined, error: "Message has no accounts" };
+      return { validMessage: undefined, error: t("message_has_no_accounts") };
     }
 
     return {
       validMessage: message,
       error: undefined,
     };
-  }, [message]);
+  }, [message, t]);
 
   const accountRows = React.useMemo(() => {
     const message = validMessage;
@@ -64,7 +66,7 @@ export function AccountsCard({ message }: { message: Message }) {
   }, [validMessage]);
 
   if (error) {
-    return <ErrorCard text={`Unable to display accounts. ${error}`} />;
+    return <ErrorCard text={`${t("unable_to_display_account")} ${error}`} />;
   }
 
   return (
@@ -79,7 +81,7 @@ export function AccountsCard({ message }: { message: Message }) {
           }`}
           onClick={() => setExpanded((e) => !e)}
         >
-          {expanded ? "Collapse" : "Expand"}
+          {t(expanded ? "collapse" : "expand")}
         </button>
       </div>
       {expanded && <TableCardBody>{accountRows}</TableCardBody>}
@@ -98,15 +100,19 @@ function AccountRow({
   signer: boolean;
   readOnly: boolean;
 }) {
+  const { t } = useTranslation();
+
   return (
     <tr>
       <td>
         <div className="d-flex align-items-start flex-column">
-          Account #{accountIndex + 1}
+          {t("account")} #{accountIndex + 1}
           <span className="mt-1">
-            {signer && <span className="badge bg-info-soft me-1">Signer</span>}
+            {signer && (
+              <span className="badge bg-info-soft me-1">{t("signer")}</span>
+            )}
             {!readOnly && (
-              <span className="badge bg-danger-soft">Writable</span>
+              <span className="badge bg-danger-soft">{t("writable")}</span>
             )}
           </span>
         </div>

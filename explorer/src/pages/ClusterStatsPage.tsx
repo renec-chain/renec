@@ -50,6 +50,7 @@ function StakingComponent() {
   const supply = useSupply();
   const fetchSupply = useFetchSupply();
   const coinInfo = useCoinGecko("solana");
+  const { t } = useTranslation();
   const { fetchVoteAccounts, voteAccounts } = useVoteAccounts();
 
   function fetchData() {
@@ -90,7 +91,7 @@ function StakingComponent() {
   }
 
   if (supply === Status.Idle || supply === Status.Connecting || !coinInfo) {
-    return <LoadingCard message="Loading supply and price data" />;
+    return <LoadingCard message={t("loading_supply_and_price_data")} />;
   } else if (typeof supply === "string") {
     return <ErrorCard text={supply} retry={fetchData} />;
   }
@@ -112,21 +113,25 @@ function StakingComponent() {
       <div className="col-12 col-lg-6 col-xl">
         <div className="card">
           <div className="card-body">
-            <h4>Circulating Supply</h4>
+            <h4>{t("circulating_supply")}</h4>
             <h1>
               <em>{displayLamports(supply.circulating)}</em> /{" "}
               {displayLamports(supply.total)}
             </h1>
-            <h5>
-              <em>{circulatingPercentage}%</em> is circulating
-            </h5>
+            <h5
+              dangerouslySetInnerHTML={{
+                __html: t("percentage_is_circulating", {
+                  percentage: circulatingPercentage,
+                }),
+              }}
+            />
           </div>
         </div>
       </div>
       <div className="col-12 col-lg-6 col-xl">
         <div className="card">
           <div className="card-body">
-            <h4>Active Stake</h4>
+            <h4>{t("active_stake")}</h4>
             {activeStake && (
               <h1>
                 <em>{displayLamports(activeStake)}</em> /{" "}
@@ -154,6 +159,7 @@ function StatsCardBody() {
   const performanceInfo = usePerformanceInfo();
   const { setActive } = useStatsProvider();
   const { cluster } = useCluster();
+  const { t } = useTranslation();
 
   React.useEffect(() => {
     setActive(true);
@@ -185,14 +191,14 @@ function StatsCardBody() {
   return (
     <TableCardBody>
       <tr>
-        <td className="w-100">Slot</td>
+        <td className="w-100">{t("slot")}</td>
         <td className="text-lg-end font-monospace">
           <Slot slot={absoluteSlot} link />
         </td>
       </tr>
       {blockHeight !== undefined && (
         <tr>
-          <td className="w-100">Block height</td>
+          <td className="w-100">{t("block_height")}</td>
           <td className="text-lg-end font-monospace">
             <Slot slot={blockHeight} />
           </td>
@@ -200,32 +206,32 @@ function StatsCardBody() {
       )}
       {blockTime && (
         <tr>
-          <td className="w-100">Cluster time</td>
+          <td className="w-100">{t("cluster_time")}</td>
           <td className="text-lg-end font-monospace">
             {displayTimestampUtc(blockTime)}
           </td>
         </tr>
       )}
       <tr>
-        <td className="w-100">Slot time (1min average)</td>
+        <td className="w-100">{t("slot_time_1_min")}</td>
         <td className="text-lg-end font-monospace">{averageSlotTime}ms</td>
       </tr>
       <tr>
-        <td className="w-100">Slot time (1hr average)</td>
+        <td className="w-100">{t("slot_time_1_hour")}</td>
         <td className="text-lg-end font-monospace">{hourlySlotTime}ms</td>
       </tr>
       <tr>
-        <td className="w-100">Epoch</td>
+        <td className="w-100">{t("epoch")}</td>
         <td className="text-lg-end font-monospace">
           <Epoch epoch={epochInfo.epoch} link />
         </td>
       </tr>
       <tr>
-        <td className="w-100">Epoch progress</td>
+        <td className="w-100">{t("epoch_progress")}</td>
         <td className="text-lg-end font-monospace">{epochProgress}</td>
       </tr>
       <tr>
-        <td className="w-100">Epoch time remaining (approx.)</td>
+        <td className="w-100">{t("epoch_time_remaining")}</td>
         <td className="text-lg-end font-monospace">~{epochTimeRemaining}</td>
       </tr>
     </TableCardBody>
@@ -235,6 +241,7 @@ function StatsCardBody() {
 export function StatsNotReady({ error }: { error: boolean }) {
   const { setTimedOut, retry, active } = useStatsProvider();
   const { cluster } = useCluster();
+  const { t } = useTranslation();
 
   React.useEffect(() => {
     let timedOut = 0;
@@ -251,7 +258,7 @@ export function StatsNotReady({ error }: { error: boolean }) {
   if (error || !active) {
     return (
       <div className="card-body text-center">
-        There was a problem loading cluster stats.{" "}
+        {t("loading_cluster_problem")}
         <button
           className="btn btn-white btn-sm"
           onClick={() => {
@@ -259,7 +266,7 @@ export function StatsNotReady({ error }: { error: boolean }) {
           }}
         >
           <span className="fe fe-refresh-cw me-2"></span>
-          Try Again
+          {t("try_again")}
         </button>
       </div>
     );
@@ -268,7 +275,7 @@ export function StatsNotReady({ error }: { error: boolean }) {
   return (
     <div className="card-body text-center">
       <span className="spinner-grow spinner-grow-sm me-2"></span>
-      Loading
+      {t("loading")}
     </div>
   );
 }

@@ -4,6 +4,8 @@ import type { TransactionData } from "./InspectorPage";
 import { useQuery } from "utils/url";
 import { useHistory, useLocation } from "react-router";
 import base58 from "bs58";
+import { useTranslation } from "react-i18next";
+import i18n from "../../i18n";
 
 function deserializeTransaction(bytes: Uint8Array): {
   message: Message;
@@ -22,7 +24,7 @@ function deserializeTransaction(bytes: Uint8Array): {
 
     const requiredSignatures = bytes[0];
     if (requiredSignatures !== signaturesLen) {
-      throw new Error("Signature length mismatch");
+      throw new Error(i18n.t("signature_length_mismatch"));
     }
   } catch (err) {
     // Errors above indicate that the bytes do not encode a transaction.
@@ -56,6 +58,7 @@ export function RawInput({
   setTransactionData: (param: TransactionData | undefined) => void;
 }) {
   const rawTransactionInput = React.useRef<HTMLTextAreaElement>(null);
+  const { t } = useTranslation();
   const [error, setError] = React.useState<string>();
   const [rows, setRows] = React.useState(3);
   const query = useQuery();
@@ -82,15 +85,17 @@ export function RawInput({
         buffer = Uint8Array.from(atob(base64), (c) => c.charCodeAt(0));
       } catch (err) {
         console.error(err);
-        setError("Input must be base64 encoded");
+        setError(t("input_must_be_base64") || "");
         return;
       }
 
       try {
         if (buffer.length < MIN_MESSAGE_LENGTH) {
-          throw new Error("Input is not long enough to be valid.");
+          throw new Error(t("input_is_not_long_enough"));
         } else if (buffer[0] > MAX_TRANSACTION_SIGNATURES) {
-          throw new Error(`Input starts with invalid byte: "${buffer[0]}"`);
+          throw new Error(
+            `${t("input_starts_with_invalid_byte")}: "${buffer[0]}"`
+          );
         }
 
         const tx = deserializeTransaction(buffer);
@@ -118,7 +123,7 @@ export function RawInput({
     } else {
       setError(undefined);
     }
-  }, [setTransactionData, history, query, location]);
+  }, [setTransactionData, history, query, location, t]);
 
   React.useEffect(() => {
     const input = rawTransactionInput.current;
@@ -128,11 +133,14 @@ export function RawInput({
     }
   }, [value]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const placeholder = "Paste raw base64 encoded transaction message";
+  const placeholder = t("paste_raw_base64_message");
+
   return (
     <div className="card">
       <div className="card-header">
-        <h3 className="card-header-title">Encoded Transaction Message</h3>
+        <h3 className="card-header-title">
+          {t("encoded_transaction_message")}
+        </h3>
       </div>
       <div className="card-body">
         <textarea
@@ -157,20 +165,22 @@ export function RawInput({
         </div>
       </div>
       <div className="card-footer">
-        <h3>Instructions</h3>
+        <h3>{t("instructions")}</h3>
         <ul>
           <li className="mb-2">
-            <strong>CLI: </strong>Use <code>--dump-transaction-message</code>{" "}
-            flag
+            <strong>CLI: </strong>
+            {t("use")} <code>--dump-transaction-message</code> flag
           </li>
           <li className="mb-2">
-            <strong>Rust: </strong>Add <code>base64</code> crate dependency and{" "}
+            <strong>Rust: </strong>
+            {t("add")} <code>base64</code> create dependency and{" "}
             <code>
               println!("{}", base64::encode(&transaction.message_data()));
             </code>
           </li>
           <li>
-            <strong>JavaScript: </strong>Add{" "}
+            <strong>JavaScript: </strong>
+            {t("add")}
             <code>console.log(tx.serializeMessage().toString("base64"));</code>
           </li>
         </ul>

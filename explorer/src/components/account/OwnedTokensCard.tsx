@@ -15,6 +15,7 @@ import { Location } from "history";
 import { useTokenRegistry } from "providers/mints/token-registry";
 import { BigNumber } from "bignumber.js";
 import { Identicon } from "components/common/Identicon";
+import { useTranslation } from "react-i18next";
 
 type Display = "summary" | "detail" | null;
 
@@ -37,6 +38,7 @@ export function OwnedTokensCard({ pubkey }: { pubkey: PublicKey }) {
   const refresh = () => fetchAccountTokens(pubkey);
   const [showDropdown, setDropdown] = React.useState(false);
   const display = useQueryDisplay();
+  const { t } = useTranslation();
 
   // Fetch owned tokens
   React.useEffect(() => {
@@ -51,17 +53,19 @@ export function OwnedTokensCard({ pubkey }: { pubkey: PublicKey }) {
   const tokens = ownedTokens.data?.tokens;
   const fetching = status === FetchStatus.Fetching;
   if (fetching && (tokens === undefined || tokens.length === 0)) {
-    return <LoadingCard message="Loading token holdings" />;
+    return <LoadingCard message={t("loading_token_holdings")} />;
   } else if (tokens === undefined) {
-    return <ErrorCard retry={refresh} text="Failed to fetch token holdings" />;
+    return (
+      <ErrorCard retry={refresh} text={t("failed_to_fetch_token_holdings")} />
+    );
   }
 
   if (tokens.length === 0) {
     return (
       <ErrorCard
         retry={refresh}
-        retryText="Try Again"
-        text={"No token holdings found"}
+        retryText={t("try_again")}
+        text={t("no_token_holdings_found")}
       />
     );
   }
@@ -74,7 +78,7 @@ export function OwnedTokensCard({ pubkey }: { pubkey: PublicKey }) {
 
       <div className="card">
         <div className="card-header align-items-center">
-          <h3 className="card-header-title">Token Holdings</h3>
+          <h3 className="card-header-title">{t("token_holdings")}</h3>
           <DisplayDropdown
             display={display}
             toggle={() => setDropdown((show) => !show)}
@@ -94,6 +98,7 @@ export function OwnedTokensCard({ pubkey }: { pubkey: PublicKey }) {
 function HoldingsDetailTable({ tokens }: { tokens: TokenInfoWithPubkey[] }) {
   const detailsList: React.ReactNode[] = [];
   const { tokenRegistry } = useTokenRegistry();
+  const { t } = useTranslation();
   const showLogos = tokens.some(
     (t) => tokenRegistry.get(t.info.mint.toBase58())?.logoURI !== undefined
   );
@@ -142,9 +147,9 @@ function HoldingsDetailTable({ tokens }: { tokens: TokenInfoWithPubkey[] }) {
             {showLogos && (
               <th className="text-muted w-1 p-0 text-center">Logo</th>
             )}
-            <th className="text-muted">Account Address</th>
-            <th className="text-muted">Mint Address</th>
-            <th className="text-muted">Balance</th>
+            <th className="text-muted">{t("account_address")}</th>
+            <th className="text-muted">{t("mint_address")}</th>
+            <th className="text-muted">{t("balance")}</th>
           </tr>
         </thead>
         <tbody className="list">{detailsList}</tbody>
@@ -156,6 +161,8 @@ function HoldingsDetailTable({ tokens }: { tokens: TokenInfoWithPubkey[] }) {
 function HoldingsSummaryTable({ tokens }: { tokens: TokenInfoWithPubkey[] }) {
   const { tokenRegistry } = useTokenRegistry();
   const mappedTokens = new Map<string, string>();
+  const { t } = useTranslation();
+
   for (const { info: token } of tokens) {
     const mintAddress = token.mint.toBase58();
     const totalByMint = mappedTokens.get(mintAddress);
@@ -213,8 +220,8 @@ function HoldingsSummaryTable({ tokens }: { tokens: TokenInfoWithPubkey[] }) {
             {showLogos && (
               <th className="text-muted w-1 p-0 text-center">Logo</th>
             )}
-            <th className="text-muted">Mint Address</th>
-            <th className="text-muted">Total Balance</th>
+            <th className="text-muted">{t("mint_address")}</th>
+            <th className="text-muted">{t("total_balance")}</th>
           </tr>
         </thead>
         <tbody className="list">{detailsList}</tbody>
@@ -230,6 +237,8 @@ type DropdownProps = {
 };
 
 const DisplayDropdown = ({ display, toggle, show }: DropdownProps) => {
+  const { t } = useTranslation();
+
   const buildLocation = (location: Location, display: Display) => {
     const params = new URLSearchParams(location.search);
     if (display === null) {
@@ -251,7 +260,7 @@ const DisplayDropdown = ({ display, toggle, show }: DropdownProps) => {
         type="button"
         onClick={toggle}
       >
-        {display === "detail" ? "Detailed" : "Summary"}
+        {t(display === "detail" ? "detailed" : "summary")}
       </button>
       <div className={`dropdown-menu-end dropdown-menu${show ? " show" : ""}`}>
         {DISPLAY_OPTIONS.map((displayOption) => {
@@ -264,7 +273,7 @@ const DisplayDropdown = ({ display, toggle, show }: DropdownProps) => {
               }`}
               onClick={toggle}
             >
-              {displayOption === "detail" ? "Detailed" : "Summary"}
+              {t(displayOption === "detail" ? "detailed" : "summary")}
             </Link>
           );
         })}

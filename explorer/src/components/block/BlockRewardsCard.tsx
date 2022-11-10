@@ -2,11 +2,13 @@ import React from "react";
 import { SolBalance } from "utils";
 import { BlockResponse, PublicKey } from "@solana/web3.js";
 import { Address } from "components/common/Address";
+import { useTranslation } from "react-i18next";
 
 const PAGE_SIZE = 10;
 
 export function BlockRewardsCard({ block }: { block: BlockResponse }) {
   const [rewardsDisplayed, setRewardsDisplayed] = React.useState(PAGE_SIZE);
+  const { t } = useTranslation();
 
   if (!block.rewards || block.rewards.length < 1) {
     return null;
@@ -15,18 +17,18 @@ export function BlockRewardsCard({ block }: { block: BlockResponse }) {
   return (
     <div className="card">
       <div className="card-header align-items-center">
-        <h3 className="card-header-title">Block Rewards</h3>
+        <h3 className="card-header-title">{t("block_rewards")}</h3>
       </div>
 
       <div className="table-responsive mb-0">
         <table className="table table-sm table-nowrap card-table">
           <thead>
             <tr>
-              <th className="text-muted">Address</th>
-              <th className="text-muted">Type</th>
-              <th className="text-muted">Amount</th>
-              <th className="text-muted">New Balance</th>
-              <th className="text-muted">Percent Change</th>
+              <th className="text-muted">{t("address")}</th>
+              <th className="text-muted">{t("type")}</th>
+              <th className="text-muted">{t("amount")}</th>
+              <th className="text-muted">{t("new_balance")}</th>
+              <th className="text-muted">{t("percent_change")}</th>
             </tr>
           </thead>
           <tbody>
@@ -75,7 +77,7 @@ export function BlockRewardsCard({ block }: { block: BlockResponse }) {
               setRewardsDisplayed((displayed) => displayed + PAGE_SIZE)
             }
           >
-            Load More
+            {t("load_more")}
           </button>
         </div>
       )}

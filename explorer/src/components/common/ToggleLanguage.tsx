@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { OverlayTrigger } from "react-bootstrap";
 import classes from "classnames";
-import { toUpper } from "lodash"
+import { toUpper } from "lodash";
 
 const LanguageSelectItem = ({
   value,
@@ -66,7 +66,11 @@ const ToggleLanguage = () => {
     return (
       <div className="toggle-language--menu shadow-sm py-1 rounded">
         {options.map((option) => (
-          <LanguageSelectItem {...option} onChangeLanguage={onChangeLanguage} />
+          <LanguageSelectItem
+            {...option}
+            key={option.value}
+            onChangeLanguage={onChangeLanguage}
+          />
         ))}
       </div>
     );

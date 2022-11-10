@@ -51,7 +51,8 @@ export function clusterName(cluster: Cluster): string {
   }
 }
 
-export const MAINNET_BETA_URL = "https://api-mainnet-beta.renec.foundation:8899";
+export const MAINNET_BETA_URL =
+  "https://api-mainnet-beta.renec.foundation:8899";
 export const TESTNET_URL = "https://api-testnet.renec.foundation:8899";
 export const DEVNET_URL = clusterApiUrl("devnet");
 

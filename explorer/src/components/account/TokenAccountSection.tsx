@@ -26,6 +26,7 @@ import { displayTimestampWithoutDate } from "utils/date";
 import { LoadingCard } from "components/common/LoadingCard";
 import { PublicKey } from "@solana/web3.js";
 import isMetaplexNFT from "providers/accounts/utils/isMetaplexNFT";
+import { useTranslation } from "react-i18next";
 
 const getEthAddress = (link?: string) => {
   let address = "";
@@ -97,6 +98,7 @@ function FungibleTokenMintAccountCard({
   const fetchInfo = useFetchAccountInfo();
   const refresh = () => fetchInfo(account.pubkey);
   const tokenInfo = tokenRegistry.get(mintAddress);
+  const { t } = useTranslation();
 
   const bridgeContractAddress = getEthAddress(
     tokenInfo?.extensions?.bridgeContract
@@ -128,10 +130,10 @@ function FungibleTokenMintAccountCard({
             <div className="card">
               <div className="card-body">
                 <h4>
-                  Price{" "}
+                  {t("price")}{" "}
                   {tokenPriceInfo.market_cap_rank && (
                     <span className="ms-2 badge bg-primary rank">
-                      Rank #{tokenPriceInfo.market_cap_rank}
+                      {t("rank")} #{tokenPriceInfo.market_cap_rank}
                     </span>
                   )}
                 </h4>
@@ -159,7 +161,7 @@ function FungibleTokenMintAccountCard({
           <div className="col-12 col-lg-4 col-xl">
             <div className="card">
               <div className="card-body">
-                <h4>24 Hour Volume</h4>
+                <h4>{t("hours_volume", { hour: 24 })}</h4>
                 <h1 className="mb-0">
                   ${abbreviatedNumber(tokenPriceInfo.volume_24)}
                 </h1>
@@ -169,12 +171,12 @@ function FungibleTokenMintAccountCard({
           <div className="col-12 col-lg-4 col-xl">
             <div className="card">
               <div className="card-body">
-                <h4>Market Cap</h4>
+                <h4>{t("market_cap")}</h4>
                 <h1 className="mb-0">
                   ${abbreviatedNumber(tokenPriceInfo.market_cap)}
                 </h1>
                 <p className="updated-time text-muted">
-                  Updated at{" "}
+                  {t("updated_at")}{" "}
                   {displayTimestampWithoutDate(
                     tokenPriceInfo.last_updated.getTime()
                   )}
@@ -191,12 +193,12 @@ function FungibleTokenMintAccountCard({
           </h3>
           <button className="btn btn-white btn-sm" onClick={refresh}>
             <span className="fe fe-refresh-cw me-2"></span>
-            Refresh
+            {t("refresh")}
           </button>
         </div>
         <TableCardBody>
           <tr>
-            <td>Address</td>
+            <td>{t("address")}</td>
             <td className="text-lg-end">
               <Address pubkey={account.pubkey} alignRight raw />
             </td>
@@ -231,7 +233,7 @@ function FungibleTokenMintAccountCard({
           )}
           {info.mintAuthority && (
             <tr>
-              <td>Mint Authority</td>
+              <td>{t("mint_authority")}</td>
               <td className="text-lg-end">
                 <Address pubkey={info.mintAuthority} alignRight link />
               </td>
@@ -239,20 +241,20 @@ function FungibleTokenMintAccountCard({
           )}
           {info.freezeAuthority && (
             <tr>
-              <td>Freeze Authority</td>
+              <td>{t("freeze_authority")}</td>
               <td className="text-lg-end">
                 <Address pubkey={info.freezeAuthority} alignRight link />
               </td>
             </tr>
           )}
           <tr>
-            <td>Decimals</td>
+            <td>{t("decimals")}</td>
             <td className="text-lg-end">{info.decimals}</td>
           </tr>
           {!info.isInitialized && (
             <tr>
-              <td>Status</td>
-              <td className="text-lg-end">Uninitialized</td>
+              <td>{t("status")}</td>
+              <td className="text-lg-end">{t("uninitialized")}</td>
             </tr>
           )}
           {tokenInfo?.extensions?.bridgeContract && bridgeContractAddress && (
@@ -304,6 +306,7 @@ function NonFungibleTokenMintAccountCard({
 }) {
   const fetchInfo = useFetchAccountInfo();
   const refresh = () => fetchInfo(account.pubkey);
+  const { t } = useTranslation();
 
   return (
     <div className="card">
@@ -313,7 +316,7 @@ function NonFungibleTokenMintAccountCard({
         </h3>
         <button className="btn btn-white btn-sm" onClick={refresh}>
           <span className="fe fe-refresh-cw me-2"></span>
-          Refresh
+          {t("refresh")}
         </button>
       </div>
       <TableCardBody>
@@ -400,6 +403,7 @@ function TokenAccountCard({
   const { cluster } = useCluster();
   const { tokenRegistry } = useTokenRegistry();
   const label = addressLabel(account.pubkey.toBase58(), cluster, tokenRegistry);
+  const { t } = useTranslation();
 
   let unit, balance;
   if (info.isNative) {
@@ -421,50 +425,52 @@ function TokenAccountCard({
     <div className="card">
       <div className="card-header">
         <h3 className="card-header-title mb-0 d-flex align-items-center">
-          Token Account
+          {t("token_account")}
         </h3>
         <button
           className="btn btn-white btn-sm"
           onClick={() => refresh(account.pubkey)}
         >
           <span className="fe fe-refresh-cw me-2"></span>
-          Refresh
+          {t("refresh")}
         </button>
       </div>
 
       <TableCardBody>
         <tr>
-          <td>Address</td>
+          <td>{t("address")}</td>
           <td className="text-lg-end">
             <Address pubkey={account.pubkey} alignRight raw />
           </td>
         </tr>
         {label && (
           <tr>
-            <td>Address Label</td>
+            <td>{t("address_label")}</td>
             <td className="text-lg-end">{label}</td>
           </tr>
         )}
         <tr>
-          <td>Mint</td>
+          <td>{t("mint")}</td>
           <td className="text-lg-end">
             <Address pubkey={info.mint} alignRight link />
           </td>
         </tr>
         <tr>
-          <td>Owner</td>
+          <td>{t("owner")}</td>
           <td className="text-lg-end">
             <Address pubkey={info.owner} alignRight link />
           </td>
         </tr>
         <tr>
-          <td>Token balance ({unit})</td>
+          <td>
+            {t("token_balance")} ({unit})
+          </td>
           <td className="text-lg-end">{balance}</td>
         </tr>
         {info.state === "uninitialized" && (
           <tr>
-            <td>Status</td>
-            <td className="text-lg-end">Uninitialized</td>
+            <td>{t("status")}</td>
+            <td className="text-lg-end">{t("uninitialized")}</td>
           </tr>
         )}
         {info.rentExemptReserve && (
@@ -495,35 +501,36 @@ function MultisigAccountCard({
   info: MultisigAccountInfo;
 }) {
   const refresh = useFetchAccountInfo();
+  const { t } = useTranslation();
 
   return (
     <div className="card">
       <div className="card-header">
         <h3 className="card-header-title mb-0 d-flex align-items-center">
-          Multisig Account
+          {t("multisig_account")}
         </h3>
         <button
           className="btn btn-white btn-sm"
           onClick={() => refresh(account.pubkey)}
         >
           <span className="fe fe-refresh-cw me-2"></span>
-          Refresh
+          {t("refresh")}
         </button>
       </div>
 
       <TableCardBody>
         <tr>
-          <td>Address</td>
+          <td>{t("address")}</td>
           <td className="text-lg-end">
             <Address pubkey={account.pubkey} alignRight raw />
           </td>
         </tr>
         <tr>
-          <td>Required Signers</td>
+          <td>{t("require_signers")}</td>
           <td className="text-lg-end">{info.numRequiredSigners}</td>
         </tr>
         <tr>
-          <td>Valid Signers</td>
+          <td>{t("valid_signers")}</td>
           <td className="text-lg-end">{info.numValidSigners}</td>
         </tr>
         {info.signers.map((signer) => (
@@ -536,8 +543,8 @@ function MultisigAccountCard({
         ))}
         {!info.isInitialized && (
           <tr>
-            <td>Status</td>
-            <td className="text-lg-end">Uninitialized</td>
+            <td>{t("status")}</td>
+            <td className="text-lg-end">{t("uninitialized")}</td>
           </tr>
         )}
       </TableCardBody>

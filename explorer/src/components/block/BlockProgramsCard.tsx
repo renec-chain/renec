@@ -2,12 +2,14 @@ import React from "react";
 import { BlockResponse, PublicKey } from "@solana/web3.js";
 import { Address } from "components/common/Address";
 import { TableCardBody } from "components/common/TableCardBody";
+import { useTranslation } from "react-i18next";
 
 export function BlockProgramsCard({ block }: { block: BlockResponse }) {
   const totalTransactions = block.transactions.length;
   const txSuccesses = new Map<string, number>();
   const txFrequency = new Map<string, number>();
   const ixFrequency = new Map<string, number>();
+  const { t } = useTranslation();
 
   let totalInstructions = 0;
   block.transactions.forEach((tx) => {
@@ -57,36 +59,36 @@ export function BlockProgramsCard({ block }: { block: BlockResponse }) {
     <>
       <div className="card">
         <div className="card-header align-items-center">
-          <h3 className="card-header-title">Block Program Stats</h3>
+          <h3 className="card-header-title">{t("block_program_stats")}</h3>
         </div>
         <TableCardBody>
           <tr>
-            <td className="w-100">Unique Programs Count</td>
+            <td className="w-100">{t("unique_program_count")}</td>
             <td className="text-lg-end font-monospace">
               {programEntries.length}
             </td>
           </tr>
           <tr>
-            <td className="w-100">Total Instructions</td>
+            <td className="w-100">{t("total_instructions")}</td>
             <td className="text-lg-end font-monospace">{totalInstructions}</td>
           </tr>
         </TableCardBody>
       </div>
       <div className="card">
         <div className="card-header align-items-center">
-          <h3 className="card-header-title">Block Programs</h3>
+          <h3 className="card-header-title">{t("block_programs")}</h3>
         </div>
 
         <div className="table-responsive mb-0">
           <table className="table table-sm table-nowrap card-table">
             <thead>
               <tr>
-                <th className="text-muted">Program</th>
-                <th className="text-muted">Transaction Count</th>
-                <th className="text-muted">% of Total</th>
-                <th className="text-muted">Instruction Count</th>
-                <th className="text-muted">% of Total</th>
-                <th className="text-muted">Success Rate</th>
+                <th className="text-muted">{t("program")}</th>
+                <th className="text-muted">{t("transaction_count")}</th>
+                <th className="text-muted">{t("percent_of_total")}</th>
+                <th className="text-muted">{t("instruction_count")}</th>
+                <th className="text-muted">{t("percent_of_total")}</th>
+                <th className="text-muted">{t("success_rate")}</th>
               </tr>
             </thead>
             <tbody>

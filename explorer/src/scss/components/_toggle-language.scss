@@ -1,0 +1,16 @@
+.toggle-language {
+  & > i {
+    margin-right: 4px;
+    font-size: 20px;
+  }
+
+  &--menu {
+    background: $gray-800-dark;
+  }
+
+  &__item {
+    &.selected {
+      background: $gray-500-dark;
+    }
+  }
+}

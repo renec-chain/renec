@@ -17,10 +17,13 @@ import { LoadingCard } from "components/common/LoadingCard";
 import { useVoteAccounts } from "providers/accounts/vote-accounts";
 import { useCoinGecko } from "utils/coingecko";
 import { Epoch } from "components/common/Epoch";
+import { useTranslation } from "react-i18next";
 
 const CLUSTER_STATS_TIMEOUT = 5000;
 
 export function ClusterStatsPage() {
+  const { t } = useTranslation();
+
   return (
     <div className="cluster-stats-page mt-4">
       <div className="cluster-stats-page__gradient-bg" />
@@ -30,7 +33,7 @@ export function ClusterStatsPage() {
           <div className="card-header">
             <div className="row align-items-center">
               <div className="col">
-                <h4 className="card-header-title">Live Cluster Stats</h4>
+                <h4 className="card-header-title">{t("cluster_page_title")}</h4>
               </div>
             </div>
           </div>

@@ -6,10 +6,13 @@ import { DialogContentText } from '@material-ui/core';
 import DialogActions from '@material-ui/core/DialogActions';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { useTranslation } from 'react-i18next';
 
 export default function DeleteMnemonicDialog({ open, onClose }) {
   const [seedCheck, setSeedCheck] = useState('');
   const [mnemKey] = useUnlockedMnemonicAndSeed();
+  const { t } = useTranslation();
+
   return (
     <>
       <DialogForm
@@ -21,7 +24,7 @@ export default function DeleteMnemonicDialog({ open, onClose }) {
         }}
         fullWidth
       >
-        <DialogTitle>{'Delete Mnemonic & Log Out'}</DialogTitle>
+        <DialogTitle>{t('delete_mnemonic_and_log_out')}</DialogTitle>
         <DialogContentText style={{ margin: 20 }}>
           <div
             style={{
@@ -29,19 +32,15 @@ export default function DeleteMnemonicDialog({ open, onClose }) {
               flexDirection: 'column',
             }}
           >
-            You will not be able to recover the current accounts without the
-            seed phrase, and the account private key. This action will delete
-            all current accounts from your browser.
+            {t('delete_mnemonic_warn_0')}
             <br />
             <br />
             <strong>
-              To prevent loss of funds, please ensure you have the seed phrase
-              and the private key for all current accounts. You can view it by selecting
-              "Export Mnemonic" in the user menu.
+              {t('delete_mnemonic_warn_1')}
             </strong>
           </div>
           <TextField
-            label={`Please type your seed phrase to confirm`}
+            label={t('please_type_your_secret_key')}
             fullWidth
             variant="outlined"
             margin="normal"
@@ -50,13 +49,13 @@ export default function DeleteMnemonicDialog({ open, onClose }) {
           />
         </DialogContentText>
         <DialogActions>
-          <Button onClick={onClose}>Close</Button>
+          <Button onClick={onClose}>{t('close')}</Button>
           <Button
             type="submit"
             color="secondary"
             disabled={normalizeMnemonic(seedCheck) !== mnemKey.mnemonic}
           >
-            Delete
+            {t('delete')}
           </Button>
         </DialogActions>
       </DialogForm>

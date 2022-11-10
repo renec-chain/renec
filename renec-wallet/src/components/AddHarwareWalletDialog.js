@@ -14,6 +14,7 @@ import {
 } from '../pages/LoginPage.js';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { useSnackbar } from 'notistack';
+import { useTranslation } from 'react-i18next';
 
 const AddHardwareView = {
   Splash: 0,
@@ -59,6 +60,8 @@ export default function AddHardwareWalletDialog({ open, onAdd, onClose }) {
 
 function ConfirmHardwareWallet({ account, onDone, onBack }) {
   const [didConfirm, setDidConfirm] = useState(false);
+  const {t} = useTranslation();
+
   useEffect(() => {
     if (!didConfirm) {
       account.provider
@@ -84,10 +87,10 @@ function ConfirmHardwareWallet({ account, onDone, onBack }) {
       </DialogContent>
       <DialogActions>
         <Button color="primary" onClick={onBack}>
-          Back
+          {t('back')}
         </Button>
         <Button color="primary" onClick={onDone} disabled={!didConfirm}>
-          Done
+          {t('done')}
         </Button>
       </DialogActions>
     </>
@@ -95,9 +98,11 @@ function ConfirmHardwareWallet({ account, onDone, onBack }) {
 }
 
 function AddHardwareWalletSplash({ onContinue, onClose }) {
+  const { t } = useTranslation();
+
   return (
     <>
-      <DialogTitle>Add hardware wallet</DialogTitle>
+      <DialogTitle>{t('add_hardware_wallet')}</DialogTitle>
       <DialogContent style={{ paddingTop: 16 }}>
         <div
           style={{
@@ -106,17 +111,16 @@ function AddHardwareWalletSplash({ onContinue, onClose }) {
           }}
         >
           <b>
-            Connect your ledger and open the Remitano Network application. When you are
-            ready, click "continue".
+            {t('confirm_your_ledger')}
           </b>
         </div>
       </DialogContent>
       <DialogActions>
         <Button color="primary" onClick={onClose}>
-          Cancel
+          {t('cancel')}
         </Button>
         <Button color="primary" onClick={onContinue}>
-          Continue
+          {t('continue')}
         </Button>
       </DialogActions>
     </>

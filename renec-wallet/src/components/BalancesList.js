@@ -42,6 +42,7 @@ import DebugButtons from './DebugButtons';
 import { RButton, Icon, Alert } from './base';
 import Card from '@material-ui/core/Card';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
+import { useTranslation } from 'react-i18next';
 
 const balanceFormat = new Intl.NumberFormat(undefined, {
   minimumFractionDigits: 4,
@@ -175,6 +176,7 @@ export const useStyles = makeStyles((theme) => ({
 }));
 
 export default function BalancesList() {
+  const { t } = useTranslation();
   const [publicKeys, loaded] = useWalletPublicKeys();
   const [showAddTokenDialog, setShowAddTokenDialog] = useState(false);
   const [showEditAccountNameDialog, setShowEditAccountNameDialog] = useState(
@@ -285,7 +287,7 @@ export default function BalancesList() {
               </>
             )}
           </div>
-          <div className="text-14">TOTAL BALANCE</div>
+          <div className="text-14">{t('total_balance').toUpperCase()}</div>
         </div>
         <div className="flex">
           <div className="mr-16">
@@ -294,7 +296,7 @@ export default function BalancesList() {
               icon={<Icon icon="send" />}
               onClick={() => setSendDialogOpen(true)}
             >
-              Send
+              {t('send')}
             </RButton>
           </div>
           <div>
@@ -304,7 +306,7 @@ export default function BalancesList() {
               icon={<Icon icon="receive" />}
               onClick={() => setDepositDialogOpen(true)}
             >
-              Receive
+              {t('receive')}
             </RButton>
           </div>
           <DepositDialog
@@ -325,11 +327,11 @@ export default function BalancesList() {
       {cluster?.name === 'testnet' && (
         <div className="mt-16">
           <Alert variant="warning">
-            You are currently on Testnet, the tokens on Testnet is worthless.
+            {t('testnet_worthless_warning')}
           </Alert>
         </div>
       )}
-      <div className={classes.textHeader}>Assets</div>
+      <div className={classes.textHeader}>{t('assets')}</div>
       <List disablePadding>
         {balanceListItemsMemo.map((Memoized) => (
           <Memoized />
@@ -563,6 +565,7 @@ function BalanceListItemDetails({
     setCloseTokenAccountDialogOpen,
   ] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
+  const { t } = useTranslation();
   const wallet = useWallet();
   const isProdNetwork = useIsProdNetwork();
   const [swapInfo] = useAsyncData(async () => {
@@ -620,7 +623,7 @@ function BalanceListItemDetails({
               icon={<Icon icon="send" />}
               onClick={() => setSendDialogOpen(true)}
             >
-              Send
+              {t('send')}
             </RButton>
           </div>
           <div>
@@ -630,7 +633,7 @@ function BalanceListItemDetails({
               icon={<Icon icon="receive-black" />}
               onClick={() => setDepositDialogOpen(true)}
             >
-              <div className={classes.normalText}>Receive</div>
+              <div className={classes.normalText}>{t('receive')}</div>
             </RButton>
           </div>
           {tokenSymbol === 'RENEC' && <DebugButtons />}
@@ -646,7 +649,7 @@ function BalanceListItemDetails({
           >
             <div className="flex">
               <Icon icon="external-link" />
-              <span className="ml-8 color-primary">View on explorer</span>
+              <span className="ml-8 color-primary">{t('view_on_explorer')}</span>
             </div>
           </Link>
         </Typography>

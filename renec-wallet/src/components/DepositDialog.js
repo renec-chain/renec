@@ -32,6 +32,7 @@ import {
   Alert,
   Icon
  } from './base';
+import { useTranslation } from 'react-i18next';
 
 const DISABLED_MINTS = new Set([
   'ABE7D8RU1eHfCJWzHYZZeymeE8k9nPPXfqge2NQYyKoL',
@@ -48,6 +49,7 @@ export default function DepositDialog({
   const ethAccount = useEthAccount();
   const { mint, tokenName, tokenSymbol, owner } = balanceInfo;
   const [tab, setTab] = useState(0);
+  const { t } = useTranslation();
 
   // SwapInfos to ignore.
   if (
@@ -96,7 +98,7 @@ export default function DepositDialog({
     <DialogForm data-testid="deposit-dialog" open={open} onClose={onClose} maxWidth="sm" fullWidth>
       <DialogTitle>
         <div className="flex space-between">
-          Receive {tokenSymbol ?? tokenName ?? mint.toBase58()}
+          {t('receive_token', {token: tokenSymbol ?? tokenName ?? mint.toBase58()})}
           {ethAccount && (
             <div>
               <Typography color="textSecondary" style={{ fontSize: '14px' }}>
@@ -113,28 +115,25 @@ export default function DepositDialog({
           <div className="flex-column align-center">
             {!displaySolAddress && isAssociatedToken === false ? (
               <div>
-                Your deposit address:
+                {t('your_deposit_address')}:
                 <br />
-                <b style={{ color: 'red' }}>WARNING</b>: You are using a
-                deprecated account type. Please migrate your tokens. Ideally,
-                create a new wallet. If you send to this address from a poorly
-                implemented wallet, you may burn tokens.
+                <b style={{ color: 'red' }}>{t('warning')}</b>: {t('deprecated_account_type_warning')}
               </div>
             ) : (
               <div className="text-16">
-                Your deposit address:
+                {t('your_deposit_address')}:
               </div>
             )}
             <QRCode value={depositAddressStr} size={256} includeMargin />
             <CopyableDisplay
               value={depositAddressStr}
-              label={'Deposit Address'}
+              label={t('deposit_address')}
               autoFocus
             />
             <div className="mt-16">
               <Alert variant="warning">
-                <span className="bold">Note: </span>
-                <span>This address can only be used to receive RENEC and tokens on Remitano Network</span>
+                <span className="bold">{t('note')}: </span>
+                <span>{t('address_can_only_receive_renec_on_remitano')}</span>
               </Alert>
             </div>
           </div>

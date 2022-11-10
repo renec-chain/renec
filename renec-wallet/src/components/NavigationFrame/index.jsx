@@ -25,24 +25,30 @@ import { COLORS_PALETTE } from '../base/variables';
 import MobileNavMenu from '../MobileNavMenu';
 import { useStyles, useFooterStyles } from './styles';
 import NavigationButtons, { ThemeSwitcher } from './NavigationButtons';
+import ToggleLanguage from '../base/molecules/toggle-language';
+import { useTranslation } from 'react-i18next';
 
-export const pages = [
-  {
-    label: 'Wallet',
-    value: 'wallet',
-    icon: AccountBalanceWalletOutlined,
-  },
-  {
-    label: 'Staking',
-    value: 'staking',
-    icon: HowToVote,
-  },
-];
+export const usePagesMenu = () => {
+  const {t} = useTranslation()
+  return [
+    {
+      label: t('wallet'),
+      value: 'wallet',
+      icon: AccountBalanceWalletOutlined,
+    },
+    {
+      label: t('staking'),
+      value: 'staking',
+      icon: HowToVote,
+    },
+  ]
+}
 
 const HeaderBar = () => {
   const classes = useStyles();
   const [page, setPage] = usePage();
   const [menuOpen, setMenuOpen] = React.useState();
+  const pages = usePagesMenu()
 
   const handleCloseNavMenu = () => {
     setMenuOpen(false);
@@ -78,6 +84,7 @@ const HeaderBar = () => {
                 <Tab value={page.value} label={page.label} />
               ))}
             </Tabs>
+            <ToggleLanguage />
           </Hidden>
           <Hidden mdUp>
             <IconButton
@@ -92,7 +99,7 @@ const HeaderBar = () => {
             </IconButton>
             <MobileNavMenu onClose={handleCloseNavMenu} open={menuOpen} />
             <img className={classes.mdLogo} src={logo} alt="Remitano logo" />
-            <ThemeSwitcher />
+            <ToggleLanguage />
           </Hidden>
           <Hidden smDown>
             <NavigationButtons />
@@ -105,6 +112,7 @@ const HeaderBar = () => {
 
 export default function Index({ children }) {
   const classes = useStyles();
+  const { t } = useTranslation()
   const isExtensionWidth = useIsExtensionWidth();
   const [page] = usePage();
   const { accounts } = useWalletSelector();
@@ -113,7 +121,7 @@ export default function Index({ children }) {
 
   const onCopyAddress = () => {
     navigator.clipboard.writeText(selectedAccount.address.toBase58());
-    enqueueSnackbar(`Copied address`, {
+    enqueueSnackbar(t('copied_address'), {
       variant: 'info',
       autoHideDuration: 2500,
     });
@@ -125,7 +133,7 @@ export default function Index({ children }) {
       {selectedAccount && page === 'wallet' && (
         <div className={classes.header}>
           <Container fixed maxWidth="md">
-            <div className="bold text-32 mt-48">Main account</div>
+            <div className="bold text-32 mt-48">{t('main_account')}</div>
             {isExtensionWidth
               ? shortenAddress(selectedAccount.address.toBase58())
               : selectedAccount.address.toBase58()}

@@ -27,6 +27,7 @@ import { isExtension } from './utils/utils';
 import { PageProvider, usePage } from './utils/page';
 import StakingPage from './pages/StakingPage';
 import MyStaking from './pages/MyStaking';
+import './i18n'
 
 const getDesignTokens = (mode) => ({
   palette: {

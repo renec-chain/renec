@@ -9,11 +9,12 @@ import {
 import { usePage } from '../../utils/page';
 import NavigationButtons from '../NavigationFrame/NavigationButtons';
 import { useStyles } from './styles';
-import { pages } from '../NavigationFrame';
+import {usePagesMenu} from "../NavigationFrame";
 
 const MobileNavMenu = ({ open, onClose }) => {
   const [, setPage] = usePage();
   const classes = useStyles();
+  const pages = usePagesMenu()
 
   const handleMenuPageClick = (pageValue) => {
     onClose();
@@ -42,7 +43,7 @@ const MobileNavMenu = ({ open, onClose }) => {
             ))}
           </List>
           <div className={classes.navigateButtons}>
-            <NavigationButtons withoutThemeSwitch />
+            <NavigationButtons />
           </div>
         </div>
       </Container>

@@ -31,6 +31,7 @@ import { useUnlockedMnemonicAndSeed, walletSeedChanged } from './wallet-seed';
 import { WalletProviderFactory } from './walletProvider/factory';
 import { getAccountFromSeed } from './walletProvider/localStorage';
 import { useSnackbar } from 'notistack';
+import { useTranslation } from 'react-i18next';
 
 const DEFAULT_WALLET_SELECTOR = {
   walletIndex: 0,
@@ -215,7 +216,7 @@ export function WalletProvider({ children }) {
   const { enqueueSnackbar } = useSnackbar();
   const connection = useConnection();
   const [wallet, setWallet] = useState();
-
+  const { t } = useTranslation()
   // `privateKeyImports` are accounts imported *in addition* to HD wallets
   const [privateKeyImports, setPrivateKeyImports] = useLocalStorageState(
     'walletPrivateKeyImports',
@@ -257,7 +258,7 @@ export function WalletProvider({ children }) {
           wallet = await Wallet.create(connection, 'ledger', args);
         } catch (e) {
           console.log(`received error using ledger wallet: ${e}`);
-          let message = 'Received error unlocking ledger';
+          let message = t('received_error_unlocking_ledger');
           if (e.statusCode) {
             message += `: ${e.statusCode}`;
           }
@@ -357,7 +358,7 @@ export function WalletProvider({ children }) {
         },
         isSelected: walletSelector.walletIndex === idx,
         address,
-        name: idx === 0 ? 'Main account' : name || `Account ${idx}`,
+        name: idx === 0 ? t('main_account') : name || `${t('account')} ${idx}`,
       };
     });
 

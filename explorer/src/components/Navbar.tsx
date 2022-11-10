@@ -3,6 +3,8 @@ import Logo from "img/logos/logo.png";
 import { clusterPath } from "utils/url";
 import { Link, NavLink } from "react-router-dom";
 import { ClusterStatusButton } from "components/ClusterStatusButton";
+import ToggleLanguage from "./common/ToggleLanguage";
+import { Dropdown } from "react-bootstrap";
 
 export function Navbar() {
   // TODO: use `collapsing` to animate collapsible navbar
@@ -41,8 +43,14 @@ export function Navbar() {
               </NavLink>
             </li>
           </ul>
+          <Dropdown.Divider />
+          <div className="d-md-none d-flex justify-content-start px-3">
+            <ToggleLanguage />
+          </div>
         </div>
-
+        <div className="d-none d-md-flex">
+          <ToggleLanguage />
+        </div>
         <div className="d-none d-md-block">
           <ClusterStatusButton />
         </div>

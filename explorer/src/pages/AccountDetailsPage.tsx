@@ -40,6 +40,8 @@ import { MetaplexMetadataCard } from "components/account/MetaplexMetadataCard";
 import { NFTHeader } from "components/account/MetaplexNFTHeader";
 import { DomainsCard } from "components/account/DomainsCard";
 import isMetaplexNFT from "providers/accounts/utils/isMetaplexNFT";
+import { useTranslation } from "react-i18next";
+import i18n from "../i18n";
 
 const IDENTICON_WIDTH = 64;
 
@@ -165,6 +167,7 @@ export function AccountHeader({
   const account = info?.data;
   const data = account?.details?.data;
   const isToken = data?.program === "spl-token" && data?.parsed.type === "mint";
+  const { t } = useTranslation();
 
   if (isMetaplexNFT(data, mintInfo)) {
     return (
@@ -208,8 +211,8 @@ export function AccountHeader({
 
   return (
     <>
-      <h6 className="header-pretitle">Details</h6>
-      <h2 className="header-title">Account</h2>
+      <h6 className="header-pretitle">{t("details")}</h6>
+      <h2 className="header-title">{t("account")}</h2>
     </>
   );
 }
@@ -395,7 +398,7 @@ function getTabs(data?: ProgramData): Tab[] {
   const tabs: Tab[] = [
     {
       slug: "history",
-      title: "History",
+      title: i18n.t("history"),
       path: "",
     },
   ];
@@ -431,12 +434,12 @@ function getTabs(data?: ProgramData): Tab[] {
   ) {
     tabs.push({
       slug: "tokens",
-      title: "Tokens",
+      title: i18n.t("tokens"),
       path: "/tokens",
     });
     tabs.push({
       slug: "domains",
-      title: "Domains",
+      title: i18n.t("domains"),
       path: "/domains",
     });
   }

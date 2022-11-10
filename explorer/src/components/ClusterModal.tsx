@@ -15,11 +15,13 @@ import {
 import { assertUnreachable, localStorageIsAvailable } from "../utils";
 import { Overlay } from "./common/Overlay";
 import { useQuery } from "utils/url";
+import { useTranslation } from "react-i18next";
 
 export function ClusterModal() {
   const [show, setShow] = useClusterModal();
   const onClose = () => setShow(false);
   const showDeveloperSettings = localStorageIsAvailable();
+  const { t } = useTranslation();
   const enableCustomUrl =
     showDeveloperSettings && localStorage.getItem("enableCustomUrl") !== null;
   const onToggleCustomUrlFeature = (e: ChangeEvent<HTMLInputElement>) => {
@@ -38,16 +40,18 @@ export function ClusterModal() {
             &times;
           </span>
 
-          <h2 className="text-center mb-4 mt-4">Choose a Cluster</h2>
+          <h2 className="text-center mb-4 mt-4">{t("choose_a_cluster")}</h2>
           <ClusterToggle />
 
           {showDeveloperSettings && (
             <>
               <hr />
 
-              <h2 className="text-center mb-4 mt-4">Developer Settings</h2>
+              <h2 className="text-center mb-4 mt-4">
+                {t("developer_setting")}
+              </h2>
               <div className="d-flex justify-content-between">
-                <span className="me-3">Enable custom url param</span>
+                <span className="me-3">{t("enable_custom_url_param")}</span>
                 <div className="form-check form-switch">
                   <input
                     type="checkbox"
@@ -63,8 +67,7 @@ export function ClusterModal() {
                 </div>
               </div>
               <p className="text-muted font-size-sm mt-3">
-                Enable this setting to easily connect to a custom cluster via
-                the "customUrl" url param.
+                {t("enable_custom_param_description")}
               </p>
             </>
           )}
@@ -86,6 +89,7 @@ function CustomClusterInput({ activeSuffix, active }: InputProps) {
   const query = useQuery();
   const history = useHistory();
   const location = useLocation();
+  const { t } = useTranslation();
 
   const btnClass = active
     ? `border-${activeSuffix} text-${activeSuffix}`
@@ -114,7 +118,7 @@ function CustomClusterInput({ activeSuffix, active }: InputProps) {
   return (
     <>
       <Link className={`btn col-12 mb-3 ${btnClass}`} to={clusterLocation}>
-        Custom RPC URL
+        {t("custom_rpc_url")}
       </Link>
       {active && (
         <input

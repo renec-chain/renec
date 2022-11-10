@@ -5,10 +5,12 @@ import { Link, NavLink } from "react-router-dom";
 import { ClusterStatusButton } from "components/ClusterStatusButton";
 import ToggleLanguage from "./common/ToggleLanguage";
 import { Dropdown } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 
 export function Navbar() {
   // TODO: use `collapsing` to animate collapsible navbar
   const [collapse, setCollapse] = React.useState(false);
+  const { t } = useTranslation();
 
   return (
     <nav className="navbar navbar-expand-md navbar-light">
@@ -29,17 +31,17 @@ export function Navbar() {
           <ul className="navbar-nav me-auto">
             <li className="nav-item">
               <NavLink className="nav-link" to={clusterPath("/")} exact>
-                Cluster Stats
+                {t("cluster_stats")}
               </NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to={clusterPath("/supply")}>
-                Supply
+                {t("supply")}
               </NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to={clusterPath("/tx/inspector")}>
-                Inspector
+                {t("inspector")}
               </NavLink>
             </li>
           </ul>

@@ -15,11 +15,13 @@ import {
 import { FetchStatus } from "providers/cache";
 import { LoadingCard } from "components/common/LoadingCard";
 import { ErrorCard } from "components/common/ErrorCard";
+import { useTranslation } from "react-i18next";
 
 export function TransactionHistoryCard({ pubkey }: { pubkey: PublicKey }) {
   const address = pubkey.toBase58();
   const history = useAccountHistory(address);
   const fetchAccountHistory = useFetchAccountHistory();
+  const { t } = useTranslation();
   const refresh = () => fetchAccountHistory(pubkey, false, true);
   const loadMore = () => fetchAccountHistory(pubkey, false);
 
@@ -42,11 +44,14 @@ export function TransactionHistoryCard({ pubkey }: { pubkey: PublicKey }) {
 
   if (history?.data === undefined) {
     if (history.status === FetchStatus.Fetching) {
-      return <LoadingCard message="Loading history" />;
+      return <LoadingCard message={t("loading_history")} />;
     }
 
     return (
-      <ErrorCard retry={refresh} text="Failed to fetch transaction history" />
+      <ErrorCard
+        retry={refresh}
+        text={t("failed_to_fetch_transaction_history")}
+      />
     );
   }
 
@@ -83,16 +88,16 @@ export function TransactionHistoryCard({ pubkey }: { pubkey: PublicKey }) {
       <HistoryCardHeader
         fetching={fetching}
         refresh={() => refresh()}
-        title="Transaction History"
+        title={t("transaction_history")}
       />
       <div className="table-responsive mb-0">
         <table className="table table-sm table-nowrap card-table">
           <thead>
             <tr>
-              <th className="text-muted w-1">Transaction Signature</th>
-              <th className="text-muted w-1">Slot</th>
-              {hasTimestamps && <th className="text-muted w-1">Age</th>}
-              <th className="text-muted">Result</th>
+              <th className="text-muted w-1">{t("transaction_signature")}</th>
+              <th className="text-muted w-1">{t("slot")}</th>
+              {hasTimestamps && <th className="text-muted w-1">{t("age")}</th>}
+              <th className="text-muted">{t("result")}</th>
             </tr>
           </thead>
           <tbody className="list">{detailsList}</tbody>

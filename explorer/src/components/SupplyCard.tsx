@@ -4,9 +4,11 @@ import { LoadingCard } from "./common/LoadingCard";
 import { ErrorCard } from "./common/ErrorCard";
 import { SolBalance } from "utils";
 import { TableCardBody } from "./common/TableCardBody";
+import { useTranslation } from "react-i18next";
 
 export function SupplyCard() {
   const supply = useSupply();
+  const { t } = useTranslation();
   const fetchSupply = useFetchSupply();
 
   // Fetch supply on load
@@ -15,7 +17,7 @@ export function SupplyCard() {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (supply === Status.Disconnected) {
-    return <ErrorCard text="Not connected to the cluster" />;
+    return <ErrorCard text={t("not_connected_to_the_cluster")} />;
   }
 
   if (supply === Status.Idle || supply === Status.Connecting)
@@ -27,18 +29,18 @@ export function SupplyCard() {
 
   return (
     <div className="card">
-      {renderHeader()}
+      <Header />
 
       <TableCardBody>
         <tr>
-          <td className="w-100">Total Supply (RENEC)</td>
+          <td className="w-100">{t("total_supply")} (RENEC)</td>
           <td className="text-lg-end">
             <SolBalance lamports={supply.total} maximumFractionDigits={0} />
           </td>
         </tr>
 
         <tr>
-          <td className="w-100">Circulating Supply (RENEC)</td>
+          <td className="w-100">{t("circulating_supply")} (RENEC)</td>
           <td className="text-lg-end">
             <SolBalance
               lamports={supply.circulating}
@@ -48,7 +50,7 @@ export function SupplyCard() {
         </tr>
 
         <tr>
-          <td className="w-100">Non-Circulating Supply (RENEC)</td>
+          <td className="w-100">{t("non_circulating_supply")} (RENEC)</td>
           <td className="text-lg-end">
             <SolBalance
               lamports={supply.nonCirculating}
@@ -61,12 +63,14 @@ export function SupplyCard() {
   );
 }
 
-const renderHeader = () => {
+const Header = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="card-header">
       <div className="row align-items-center">
         <div className="col">
-          <h4 className="card-header-title">Supply Overview</h4>
+          <h4 className="card-header-title">{t("supply_overview")}</h4>
         </div>
       </div>
     </div>

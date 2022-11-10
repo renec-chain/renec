@@ -9,6 +9,7 @@ import { lamportsToSolString } from "utils";
 import { useAccountInfo } from "providers/accounts";
 import BN from "bn.js";
 import { Epoch } from "components/common/Epoch";
+import { useTranslation } from "react-i18next";
 
 const MAX_EPOCH = new BN(2).pow(new BN(64)).sub(new BN(1));
 
@@ -17,6 +18,7 @@ export function RewardsCard({ pubkey }: { pubkey: PublicKey }) {
   const info = useAccountInfo(address);
   const account = info?.data;
   const data = account?.details?.data?.parsed.info;
+  const { t } = useTranslation();
 
   const highestEpoch = React.useMemo(() => {
     if (data.stake && !data.stake.delegation.deactivationEpoch.eq(MAX_EPOCH)) {
@@ -40,10 +42,10 @@ export function RewardsCard({ pubkey }: { pubkey: PublicKey }) {
 
   if (rewards?.data === undefined) {
     if (rewards.status === FetchStatus.Fetching) {
-      return <LoadingCard message="Loading rewards" />;
+      return <LoadingCard message={t("loading_rewards")} />;
     }
 
-    return <ErrorCard retry={loadMore} text="Failed to fetch rewards" />;
+    return <ErrorCard retry={loadMore} text={t("failed_to_fetch_rewards")} />;
   }
 
   const rewardsList = rewards.data.rewards.map((reward) => {
@@ -74,7 +76,7 @@ export function RewardsCard({ pubkey }: { pubkey: PublicKey }) {
         <div className="card-header">
           <div className="row align-items-center">
             <div className="col">
-              <h3 className="card-header-title">Rewards</h3>
+              <h3 className="card-header-title">{t("rewards")}</h3>
             </div>
           </div>
         </div>
@@ -84,10 +86,10 @@ export function RewardsCard({ pubkey }: { pubkey: PublicKey }) {
             <table className="table table-sm table-nowrap card-table">
               <thead>
                 <tr>
-                  <th className="w-1 text-muted">Epoch</th>
-                  <th className="text-muted">Effective Slot</th>
-                  <th className="text-muted">Reward Amount</th>
-                  <th className="text-muted">Post Balance</th>
+                  <th className="w-1 text-muted">{t("epoch")}</th>
+                  <th className="text-muted">{t("effective_slot")}</th>
+                  <th className="text-muted">{t("reward_amount")}</th>
+                  <th className="text-muted">{t("post_balance")}</th>
                 </tr>
               </thead>
               <tbody className="list">{rewardsList}</tbody>
@@ -95,15 +97,17 @@ export function RewardsCard({ pubkey }: { pubkey: PublicKey }) {
           </div>
         ) : (
           <div className="card-body">
-            No rewards issued between epochs {lowestFetchedEpoch} and{" "}
-            {highestFetchedEpoch}
+            {t("no_rewards_issued_between_epochs", {
+              lowerEpoch: lowestFetchedEpoch,
+              higherEpoch: highestFetchedEpoch,
+            })}
           </div>
         )}
 
         <div className="card-footer">
           {foundOldest ? (
             <div className="text-muted text-center">
-              Fetched full reward history
+              {t("fetched_full_reward_history")}
             </div>
           ) : (
             <button
@@ -114,10 +118,10 @@ export function RewardsCard({ pubkey }: { pubkey: PublicKey }) {
               {fetching ? (
                 <>
                   <span className="spinner-grow spinner-grow-sm me-2"></span>
-                  Loading
+                  {t("loading")}
                 </>
               ) : (
-                "Load More"
+                t("load_more")
               )}
             </button>
           )}

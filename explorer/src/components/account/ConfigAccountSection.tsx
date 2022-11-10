@@ -13,6 +13,7 @@ import {
 } from "components/common/Account";
 import { PublicKey } from "@solana/web3.js";
 import { Address } from "components/common/Address";
+import { useTranslation } from "react-i18next";
 
 const MAX_SLASH_PENALTY = Math.pow(2, 8);
 
@@ -87,6 +88,8 @@ function ValidatorInfoCard({
   configAccount: ValidatorInfoAccount;
 }) {
   const refresh = useFetchAccountInfo();
+  const { t } = useTranslation();
+
   return (
     <div className="card">
       <AccountHeader
@@ -133,7 +136,7 @@ function ValidatorInfoCard({
 
         {configAccount.info.configData.details && (
           <tr>
-            <td>Details</td>
+            <td>{t("details")}</td>
             <td className="text-lg-end">
               {configAccount.info.configData.details}
             </td>

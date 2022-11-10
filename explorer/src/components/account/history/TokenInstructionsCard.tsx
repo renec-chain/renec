@@ -23,11 +23,13 @@ import {
 } from "../HistoryCardComponents";
 import { extractMintDetails, MintDetails } from "./common";
 import Moment from "react-moment";
+import { useTranslation } from "react-i18next";
 
 export function TokenInstructionsCard({ pubkey }: { pubkey: PublicKey }) {
   const address = pubkey.toBase58();
   const history = useAccountHistory(address);
   const fetchAccountHistory = useFetchAccountHistory();
+  const { t } = useTranslation();
   const refresh = () => fetchAccountHistory(pubkey, true, true);
   const loadMore = () => fetchAccountHistory(pubkey, true);
 
@@ -132,11 +134,14 @@ export function TokenInstructionsCard({ pubkey }: { pubkey: PublicKey }) {
 
   if (history?.data === undefined) {
     if (history.status === FetchStatus.Fetching) {
-      return <LoadingCard message="Loading token instructions" />;
+      return <LoadingCard message={t("loading_token_instructions")} />;
     }
 
     return (
-      <ErrorCard retry={refresh} text="Failed to fetch token instructions" />
+      <ErrorCard
+        retry={refresh}
+        text={t("failed_to_fetch_token_instructions")}
+      />
     );
   }
 
@@ -152,11 +157,11 @@ export function TokenInstructionsCard({ pubkey }: { pubkey: PublicKey }) {
         <table className="table table-sm table-nowrap card-table">
           <thead>
             <tr>
-              <th className="text-muted w-1">Transaction Signature</th>
-              {hasTimestamps && <th className="text-muted">Age</th>}
-              <th className="text-muted">Instruction</th>
-              <th className="text-muted">Program</th>
-              <th className="text-muted">Result</th>
+              <th className="text-muted w-1">{t("transaction_signature")}</th>
+              {hasTimestamps && <th className="text-muted">{t("age")}</th>}
+              <th className="text-muted">{t("instruction")}</th>
+              <th className="text-muted">{t("program")}</th>
+              <th className="text-muted">{t("result")}</th>
             </tr>
           </thead>
           <tbody className="list">{detailsList}</tbody>

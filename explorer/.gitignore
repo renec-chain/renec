@@ -12,6 +12,7 @@
 # production
 /build
 /wasm/target
+/.idea
 
 # misc
 .DS_Store

@@ -22,7 +22,6 @@
       }
     }
   },
-  "default_locale": "en",
   "host_permissions": ["file://*/*", "http://*/*", "https://*/*"],
   "permissions": ["storage", "scripting", "activeTab"],
   "background": {

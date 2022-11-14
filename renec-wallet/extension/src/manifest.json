@@ -15,10 +15,10 @@
   "commands": {
     "_execute_browser_action": {
       "suggested_key": {
-        "windows": "Alt+Shift+M",
-        "mac": "Alt+Shift+M",
-        "chromeos": "Alt+Shift+M",
-        "linux": "Alt+Shift+M"
+        "windows": "Alt+Shift+R",
+        "mac": "Alt+Shift+R",
+        "chromeos": "Alt+Shift+R",
+        "linux": "Alt+Shift+R"
       }
     }
   },
@@ -44,5 +44,5 @@
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'"
   },
-  "minimum_chrome_version": "66"
+  "minimum_chrome_version": "88"
 }

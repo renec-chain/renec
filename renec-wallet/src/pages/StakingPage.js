@@ -3,6 +3,8 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core';
 import { useIsExtensionWidth } from '../utils/utils';
 import StakingList from '../components/StakingList';
+import {useAsyncData} from "../utils/fetch-loop";
+import {useConnection} from "../utils/connection";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -39,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
 export default function StakingPage() {
   const classes = useStyles();
   const isExtensionWidth = useIsExtensionWidth();
+
   return (
     <>
       <div className={classes.header}>
@@ -55,7 +58,7 @@ export default function StakingPage() {
         <Grid container spacing={isExtensionWidth ? 0 : 3}>
           <Grid md={2} />
           <Grid item xs={12} md={8} className={classes.balancesContainer}>
-            <StakingList />
+            <StakingList  />
           </Grid>
         </Grid>
       </Container>

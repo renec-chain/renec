@@ -1,7 +1,7 @@
 {
   "name": "RENEC wallet",
-  "description": "Remitano Network SPL Token Wallet",
-  "version": "0.0.4",
+  "description": "RENEC Blockchain SPL Token Wallet",
+  "version": "0.0.5",
   "action": {
     "default_popup": "index.html",
     "default_title": "RENEC Wallet"

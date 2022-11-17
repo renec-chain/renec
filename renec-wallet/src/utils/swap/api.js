@@ -52,3 +52,14 @@ export function useSwapApiGet(path, options) {
     options,
   );
 }
+
+export async function getRenecPriceFromRemitano() {
+  try {
+    const resp = await fetch("https://api.remitano.com/api/v1/amm_pool_states");
+    const tokensPrice = await resp.json();
+    return tokensPrice['amm_pool_states'][793].price;
+  } catch (error) {
+    console.error(error);
+    return 0;
+  }
+}

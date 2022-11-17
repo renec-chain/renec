@@ -29,7 +29,7 @@ import {
 } from '../utils/connection';
 import { clusterForEndpoint } from '../utils/clusters';
 import { serumMarkets, priceStore } from '../utils/markets';
-import { swapApiRequest } from '../utils/swap/api';
+import { swapApiRequest, getRenecPriceFromRemitano } from '../utils/swap/api';
 import { showSwapAddress } from '../utils/config';
 import { useAsyncData } from '../utils/fetch-loop';
 import { useConnection } from '../utils/connection';
@@ -195,6 +195,7 @@ export default function BalancesList() {
   const allTokensLoaded = loaded && fairsIsLoaded(publicKeys);
   const { endpoint, setEndpoint } = useConnectionConfig();
   const cluster = useMemo(() => clusterForEndpoint(endpoint), [endpoint]);
+  const [renecPrice, setRenecPrice] = useState(0);
 
   let sortedPublicKeys = publicKeys;
   if (allTokensLoaded && sortAccounts !== SortAccounts.None) {
@@ -271,6 +272,20 @@ export default function BalancesList() {
   const classes = useStyles();
   const mainPubkey = publicKeys[0];
   const balanceInfo = useBalanceInfo(mainPubkey);
+
+  useEffect(() => {
+    const fetchRenecPrice = async () => {
+      const rPrice = await getRenecPriceFromRemitano();
+      setRenecPrice(rPrice)
+    }
+    fetchRenecPrice();
+  }, []);
+
+  const renecBalanceUsdValuation = useMemo(() => {
+    const renecAmount = balanceInfo?.amount || 0.0;
+    return (renecPrice * renecAmount / LAMPORTS_PER_SOL).toFixed(4)
+  }, [balanceInfo, renecPrice]);
+
   if (!balanceInfo) {
     return <LoadingIndicator delay={0} />;
   }
@@ -280,12 +295,7 @@ export default function BalancesList() {
       <div className={classes.mainWallet}>
         <div>
           <div className="mb-8">
-            {(
-              <>
-                <span data-testid="wallet-total-balance" className="bold text-20">{(balanceInfo.amount / LAMPORTS_PER_SOL).toFixed(4)}</span>
-                <span>{' RENEC'}</span>
-              </>
-            )}
+            <span data-testid="wallet-total-balance" className="bold text-20">{renecBalanceUsdValuation} USD</span>
           </div>
           <div className="text-14">{t('total_balance').toUpperCase()}</div>
         </div>
@@ -437,7 +447,7 @@ export function BalanceListItem({ publicKey, expandable, setUsdValue }) {
     if (
       associatedTokensCache[wallet.publicKey.toString()] === undefined ||
       associatedTokensCache[wallet.publicKey.toString()][mint.toString()] ===
-        undefined
+      undefined
     ) {
       findAssociatedTokenAddress(wallet.publicKey, mint).then((assocTok) => {
         let walletAccounts = Object.assign(
@@ -492,8 +502,8 @@ export function BalanceListItem({ publicKey, expandable, setUsdValue }) {
     price === undefined // Not yet loaded.
       ? undefined
       : price === null // Loaded and empty.
-      ? null
-      : ((amount / Math.pow(10, decimals)) * price).toFixed(2); // Loaded.
+        ? null
+        : ((amount / Math.pow(10, decimals)) * price).toFixed(2); // Loaded.
   if (setUsdValue && usdValue !== undefined) {
     setUsdValue(publicKey, usdValue === null ? null : parseFloat(usdValue));
   }

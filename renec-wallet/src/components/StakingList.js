@@ -8,18 +8,34 @@ import {
   useWalletVoteAccounts,
 } from '../utils/wallet';
 import LoadingIndicator from './LoadingIndicator';
-import { Button, Tooltip } from '@material-ui/core';
+import { Button, Tooltip, Link } from '@material-ui/core';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Card from '@material-ui/core/Card';
 import CreateStakingDialog from './CreateStakingDialog';
 import { usePage } from '../utils/page';
 import { useStyles } from './BalancesList';
-import {calculateEstimatedApr, computeHash} from '../utils/utils';
+import { calculateEstimatedApr, computeHash } from '../utils/utils';
 import { stakingFormat } from '../utils/utils';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 import ErrorOutline from '@material-ui/icons/ErrorOutline';
 import { useTranslation } from 'react-i18next';
+import { useSolanaExplorerUrlSuffix } from '../utils/connection';
+
 const DEFAULT_ICONS_COUNT = 17;
+const EXPLORER_ADDRESS = "https://explorer.renec.foundation/address";
+const NODE_NAME = {
+  "8eHFrtkeZ7dAjRKWN9m9Y8k8f8GbVu4goytXjTKRCSc6": "Pegasus",
+  "DE6tC1q22h5R1H42dxGxVRYx8RRgmVqJq3BYUAnh4Lbv": "Mole Antonelliana",
+  "GypVEZgmmRiCLATx2p96XGMGsdzyRucCAeR2XyMYoM6S": "Milky Way",
+  "7pgxXXsnZoCLAwXn3kvVrvskmc2keULrJQ3i7iaGEiLE": "Dragonball",
+  "3WsvssMpgNezCGLBQrS6Eb9ostA8AAvTtdnqNyvQQaxH": "Titan",
+  "8zmnqf8e1eDX51adYyomxvBWn7bk8bzFb1yBW8m1yqFC": "Turing",
+  "j2Udo3QHvbpB44RD7NSYKZhWL8SVuZXzVwbQ6KFnHDa": "Automata",
+}
+
+const generateNodePubkey = (nodePubkey) => {
+  return `${nodePubkey.substring(0, 6)}... ${nodePubkey.substring(nodePubkey.length - 6, nodePubkey.length - 1)}`;
+};
 
 export default function StakingList() {
   const classes = useStyles();
@@ -76,6 +92,7 @@ export default function StakingList() {
 }
 
 export const StakingListItem = ({ voteAccount, totalSupply, totalActiveStake }) => {
+  const urlSuffix = useSolanaExplorerUrlSuffix();
   const classes = useStyles();
   const { t } = useTranslation();
   const { votePubkey, nodePubkey, commission } = voteAccount;
@@ -93,7 +110,7 @@ export const StakingListItem = ({ voteAccount, totalSupply, totalActiveStake }) 
 
   const estimatedAPR = useMemo(
     () => {
-      return calculateEstimatedApr({totalSupply, totalActiveStake, commission})
+      return calculateEstimatedApr({ totalSupply, totalActiveStake, commission })
     },
     [totalSupply, totalActiveStake, commission],
   )
@@ -119,13 +136,21 @@ export const StakingListItem = ({ voteAccount, totalSupply, totalActiveStake }) 
         <div className={classes.stakingItemContainer}>
           <div className={classes.stakingItem}>
             <div className={classes.text}>
-              {`NodePubKey:  ${nodePubkey.substring(
-                0,
-                6,
-              )}... ${nodePubkey.substring(
-                nodePubkey.length - 6,
-                nodePubkey.length - 1,
-              )}` || ''}
+              <Link
+                href={`${EXPLORER_ADDRESS}/${nodePubkey}${urlSuffix}`}
+                target="_blank"
+                rel="noopener"
+              >
+                <div
+                  className={`${classes.normalText}`}
+                  style={{
+                    fontSize: 16,
+                    color: '#9B59B6',
+                  }}
+                >
+                  {NODE_NAME[nodePubkey] || generateNodePubkey(nodePubkey)}
+                </div>
+              </Link>
             </div>
             <div className={classes.normalText}>{colappsedAddress}</div>
           </div>

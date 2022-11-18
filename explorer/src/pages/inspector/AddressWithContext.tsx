@@ -9,6 +9,8 @@ import {
 import { ClusterStatus, useCluster } from "providers/cluster";
 import { addressLabel } from "utils/tx";
 import { lamportsToSolString } from "utils";
+import { useTranslation } from "react-i18next";
+import i18n from "../../i18n";
 
 type AccountValidator = (account: Account) => string | undefined;
 
@@ -16,23 +18,23 @@ export const createFeePayerValidator = (
   feeLamports: number
 ): AccountValidator => {
   return (account: Account): string | undefined => {
-    if (account.details === undefined) return "Account doesn't exist";
+    if (account.details === undefined) return i18n.t("account_doesnot_exists");
     if (!account.details.owner.equals(SystemProgram.programId))
-      return "Only system-owned accounts can pay fees";
+      return i18n.t("only_system_account_can_pay_fees");
     // TODO: Actually nonce accounts can pay fees too
     if (account.details.space > 0)
-      return "Only unallocated accounts can pay fees";
+      return i18n.t("only_unallocated_accounts_can_pay_fees");
     if (account.lamports < feeLamports) {
-      return "Insufficient funds for fees";
+      return i18n.t("insufficient_funds_for_fees");
     }
     return;
   };
 };
 
 export const programValidator = (account: Account): string | undefined => {
-  if (account.details === undefined) return "Account doesn't exist";
+  if (account.details === undefined) return i18n.t("account_doesnot_exists");
   if (!account.details.executable)
-    return "Only executable accounts can be invoked";
+    return i18n.t("only_executable_accounts_can_be_invoked");
   return;
 };
 
@@ -62,6 +64,7 @@ function AccountInfo({
   const fetchAccount = useFetchAccountInfo();
   const info = useAccountInfo(address);
   const { cluster, status } = useCluster();
+  const { t } = useTranslation();
 
   // Fetch account on load
   React.useEffect(() => {
@@ -92,10 +95,11 @@ function AccountInfo({
   return (
     <span className="text-muted">
       {ownerAddress
-        ? `Owned by ${
-            ownerLabel || ownerAddress
-          }. Balance is ${lamportsToSolString(info.data.lamports)} RENEC`
-        : "Account doesn't exist"}
+        ? t("owned_by_xxx_address_balance_is_yyy", {
+            owner: ownerLabel || ownerAddress,
+            balance: lamportsToSolString(info.data.lamports),
+          })
+        : t("account_doesnot_exists")}
     </span>
   );
 }

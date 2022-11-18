@@ -13,6 +13,7 @@ import { useMintAccountInfo } from "providers/accounts";
 import { normalizeTokenAmount } from "utils";
 import { useTokenRegistry } from "providers/mints/token-registry";
 import BigNumber from "bignumber.js";
+import { useTranslation } from "react-i18next";
 
 export function TokenLargestAccountsCard({ pubkey }: { pubkey: PublicKey }) {
   const mintAddress = pubkey.toBase58();
@@ -23,6 +24,7 @@ export function TokenLargestAccountsCard({ pubkey }: { pubkey: PublicKey }) {
     () => fetchLargestAccounts(pubkey),
     [pubkey, fetchLargestAccounts]
   );
+  const { t } = useTranslation();
   const { tokenRegistry } = useTokenRegistry();
   const unit = tokenRegistry.get(mintAddress)?.symbol;
   const unitLabel = unit ? `(${unit})` : "";
@@ -39,22 +41,22 @@ export function TokenLargestAccountsCard({ pubkey }: { pubkey: PublicKey }) {
 
   if (largestAccounts?.data === undefined) {
     if (largestAccounts.status === FetchStatus.Fetching) {
-      return <LoadingCard message="Loading largest accounts" />;
+      return <LoadingCard message={t("loading_largest_accounts")} />;
     }
 
     return (
       <ErrorCard
         retry={refreshLargest}
-        text="Failed to fetch largest accounts"
+        text={t("failed_to_fetch_largest_accounts")}
       />
     );
   } else if (largestAccounts.status === FetchStatus.Fetching) {
-    return <LoadingCard message="Refreshing largest accounts" />;
+    return <LoadingCard message={t("refreshing_largest_accounts")} />;
   }
 
   const accounts = largestAccounts.data.largest;
   if (accounts.length === 0) {
-    return <ErrorCard text="No holders found" />;
+    return <ErrorCard text={t("no_holders_found")} />;
   }
 
   // Find largest fixed point in accounts array
@@ -79,7 +81,7 @@ export function TokenLargestAccountsCard({ pubkey }: { pubkey: PublicKey }) {
         <div className="card-header">
           <div className="row align-items-center">
             <div className="col">
-              <h4 className="card-header-title">Largest Accounts</h4>
+              <h4 className="card-header-title">{t("largest_accounts")}</h4>
             </div>
           </div>
         </div>
@@ -88,11 +90,15 @@ export function TokenLargestAccountsCard({ pubkey }: { pubkey: PublicKey }) {
           <table className="table table-sm card-table">
             <thead>
               <tr>
-                <th className="text-muted">Rank</th>
-                <th className="text-muted">Address</th>
-                <th className="text-muted">Owner</th>
-                <th className="text-muted text-end">Balance {unitLabel}</th>
-                <th className="text-muted text-end">% of Total Supply</th>
+                <th className="text-muted">{t("rank")}</th>
+                <th className="text-muted">{t("address")}</th>
+                <th className="text-muted">{t("owner")}</th>
+                <th className="text-muted text-end">
+                  {t("balance")} {unitLabel}
+                </th>
+                <th className="text-muted text-end">
+                  {t("percent_of_total_supply")}
+                </th>
               </tr>
             </thead>
             <tbody className="list">

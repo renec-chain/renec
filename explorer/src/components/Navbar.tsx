@@ -3,10 +3,14 @@ import Logo from "img/logos/logo.png";
 import { clusterPath } from "utils/url";
 import { Link, NavLink } from "react-router-dom";
 import { ClusterStatusButton } from "components/ClusterStatusButton";
+import ToggleLanguage from "./common/ToggleLanguage";
+import { Dropdown } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 
 export function Navbar() {
   // TODO: use `collapsing` to animate collapsible navbar
   const [collapse, setCollapse] = React.useState(false);
+  const { t } = useTranslation();
 
   return (
     <nav className="navbar navbar-expand-md navbar-light">
@@ -27,22 +31,28 @@ export function Navbar() {
           <ul className="navbar-nav me-auto">
             <li className="nav-item">
               <NavLink className="nav-link" to={clusterPath("/")} exact>
-                Cluster Stats
+                {t("cluster_stats")}
               </NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to={clusterPath("/supply")}>
-                Supply
+                {t("supply")}
               </NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to={clusterPath("/tx/inspector")}>
-                Inspector
+                {t("inspector")}
               </NavLink>
             </li>
           </ul>
+          <Dropdown.Divider />
+          <div className="d-md-none d-flex justify-content-start px-3">
+            <ToggleLanguage />
+          </div>
         </div>
-
+        <div className="d-none d-md-flex">
+          <ToggleLanguage />
+        </div>
         <div className="d-none d-md-block">
           <ClusterStatusButton />
         </div>

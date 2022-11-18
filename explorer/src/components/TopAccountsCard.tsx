@@ -9,11 +9,13 @@ import { SolBalance } from "utils";
 import { useQuery } from "utils/url";
 import { useSupply } from "providers/supply";
 import { Address } from "./common/Address";
+import { useTranslation } from "react-i18next";
 
 type Filter = "circulating" | "nonCirculating" | "all" | null;
 
 export function TopAccountsCard() {
   const supply = useSupply();
+  const { t } = useTranslation();
   const richList = useRichList();
   const fetchRichList = useFetchRichList();
   const [showDropdown, setDropdown] = React.useState(false);
@@ -22,7 +24,7 @@ export function TopAccountsCard() {
   if (typeof supply !== "object") return null;
 
   if (richList === Status.Disconnected) {
-    return <ErrorCard text="Not connected to the cluster" />;
+    return <ErrorCard text={t("loading_supply_and_price_data")} />;
   }
 
   if (richList === Status.Connecting) {
@@ -41,20 +43,20 @@ export function TopAccountsCard() {
       case "nonCirculating": {
         accounts = richList.nonCirculating;
         supplyCount = supply.nonCirculating;
-        header = "Non-Circulating";
+        header = t("non_circulating");
         break;
       }
       case "all": {
         accounts = richList.total;
         supplyCount = supply.total;
-        header = "Total";
+        header = t("total");
         break;
       }
       case "circulating":
       default: {
         accounts = richList.circulating;
         supplyCount = supply.circulating;
-        header = "Circulating";
+        header = t("circulating");
         break;
       }
     }
@@ -70,7 +72,7 @@ export function TopAccountsCard() {
         <div className="card-header">
           <div className="row align-items-center">
             <div className="col">
-              <h4 className="card-header-title">Largest Accounts</h4>
+              <h4 className="card-header-title">{t("largest_accounts")}</h4>
             </div>
 
             <div className="col-auto">
@@ -89,7 +91,7 @@ export function TopAccountsCard() {
               className="btn btn-white ms-3 d-none d-md-inline"
               onClick={fetchRichList}
             >
-              Load Largest Accounts
+              {t("load_largest_accounts")}
             </span>
           </div>
         )}
@@ -99,10 +101,14 @@ export function TopAccountsCard() {
             <table className="table table-sm table-nowrap card-table">
               <thead>
                 <tr>
-                  <th className="text-muted">Rank</th>
-                  <th className="text-muted">Address</th>
-                  <th className="text-muted text-end">Balance (RENEC)</th>
-                  <th className="text-muted text-end">% of {header} Supply</th>
+                  <th className="text-muted">{t("rank")}</th>
+                  <th className="text-muted">{t("address")}</th>
+                  <th className="text-muted text-end">
+                    {t("balance")} (RENEC)
+                  </th>
+                  <th className="text-muted text-end">
+                    {t("percent_of_header_supply", { header })}
+                  </th>
                 </tr>
               </thead>
               <tbody className="list">
@@ -155,21 +161,6 @@ const useQueryFilter = (): Filter => {
   }
 };
 
-const filterTitle = (filter: Filter): string => {
-  switch (filter) {
-    case "nonCirculating": {
-      return "Non-Circulating";
-    }
-    case "all": {
-      return "All";
-    }
-    case "circulating":
-    default: {
-      return "Circulating";
-    }
-  }
-};
-
 type DropdownProps = {
   filter: Filter;
   toggle: () => void;
@@ -177,6 +168,8 @@ type DropdownProps = {
 };
 
 const FilterDropdown = ({ filter, toggle, show }: DropdownProps) => {
+  const { t } = useTranslation();
+
   const buildLocation = (location: Location, filter: Filter) => {
     const params = new URLSearchParams(location.search);
     if (filter === null) {
@@ -190,7 +183,20 @@ const FilterDropdown = ({ filter, toggle, show }: DropdownProps) => {
     };
   };
 
+  const filterTitle = (filter: Filter): string => {
+    switch (filter) {
+      case "nonCirculating":
+        return t("non_circulating");
+      case "all":
+        return t("all");
+      case "circulating":
+      default:
+        return t("circulating");
+    }
+  };
+
   const FILTERS: Filter[] = ["all", null, "nonCirculating"];
+
   return (
     <div className="dropdown">
       <button className="btn border-base dropdown-toggle" onClick={toggle}>

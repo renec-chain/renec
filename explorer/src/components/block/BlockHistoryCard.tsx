@@ -13,6 +13,7 @@ import { Address } from "components/common/Address";
 import { useQuery } from "utils/url";
 import { useCluster } from "providers/cluster";
 import { displayAddress } from "utils/tx";
+import { useTranslation } from "react-i18next";
 
 const PAGE_SIZE = 25;
 
@@ -33,6 +34,7 @@ export function BlockHistoryCard({ block }: { block: BlockResponse }) {
   const [numDisplayed, setNumDisplayed] = React.useState(PAGE_SIZE);
   const [showDropdown, setDropdown] = React.useState(false);
   const filter = useQueryFilter();
+  const { t } = useTranslation();
 
   const { transactions, invokedPrograms } = React.useMemo(() => {
     const invokedPrograms = new Map<string, number>();
@@ -90,16 +92,16 @@ export function BlockHistoryCard({ block }: { block: BlockResponse }) {
   if (filteredTransactions.length === 0) {
     const errorMessage =
       filter === ALL_TRANSACTIONS
-        ? "This block has no transactions"
-        : "No transactions found with this filter";
+        ? t("this_block_has_no_transactions")
+        : t("no_transactions_found_with_filter");
     return <ErrorCard text={errorMessage} />;
   }
 
   let title: string;
   if (filteredTransactions.length === transactions.length) {
-    title = `Block Transactions (${filteredTransactions.length})`;
+    title = `${t("block_transactions")} (${filteredTransactions.length})`;
   } else {
-    title = `Block Transactions`;
+    title = t("block_transactions");
   }
 
   return (
@@ -120,9 +122,9 @@ export function BlockHistoryCard({ block }: { block: BlockResponse }) {
           <thead>
             <tr>
               <th className="text-muted">#</th>
-              <th className="text-muted">Result</th>
-              <th className="text-muted">Transaction Signature</th>
-              <th className="text-muted">Invoked Programs</th>
+              <th className="text-muted">{t("result")}</th>
+              <th className="text-muted">{t("transaction_signature")}</th>
+              <th className="text-muted">{t("invoked_programs")}</th>
             </tr>
           </thead>
           <tbody className="list">
@@ -132,10 +134,10 @@ export function BlockHistoryCard({ block }: { block: BlockResponse }) {
               let signature: React.ReactNode;
               if (tx.meta?.err || !tx.signature) {
                 statusClass = "warning";
-                statusText = "Failed";
+                statusText = t("failed");
               } else {
                 statusClass = "success";
-                statusText = "Success";
+                statusText = t("success");
               }
 
               if (tx.signature) {
@@ -184,7 +186,7 @@ export function BlockHistoryCard({ block }: { block: BlockResponse }) {
               setNumDisplayed((displayed) => displayed + PAGE_SIZE)
             }
           >
-            Load More
+            {t("load_more")}
           </button>
         </div>
       )}
@@ -216,6 +218,7 @@ const FilterDropdown = ({
   totalTransactionCount,
 }: FilterProps) => {
   const { cluster } = useCluster();
+  const { t } = useTranslation();
   const buildLocation = (location: Location, filter: string) => {
     const params = new URLSearchParams(location.search);
     if (filter === ALL_TRANSACTIONS) {
@@ -230,7 +233,7 @@ const FilterDropdown = ({
   };
 
   let currentFilterOption = {
-    name: "All Transactions",
+    name: t("all_transactions"),
     programId: ALL_TRANSACTIONS,
     transactionCount: totalTransactionCount,
   };
@@ -242,7 +245,7 @@ const FilterDropdown = ({
     if (filter === programId) {
       currentFilterOption = {
         programId,
-        name: `${name} Transactions (${transactionCount})`,
+        name: `${name} ${t("transactions")} (${transactionCount})`,
         transactionCount,
       };
     }

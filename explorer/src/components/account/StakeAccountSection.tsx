@@ -12,6 +12,7 @@ import {
 import BN from "bn.js";
 import { StakeActivationData } from "@solana/web3.js";
 import { Epoch } from "components/common/Epoch";
+import { useTranslation } from "react-i18next";
 
 const MAX_EPOCH = new BN(2).pow(new BN(64)).sub(new BN(1));
 
@@ -101,6 +102,8 @@ function OverviewCard({
   hideDelegation: boolean;
 }) {
   const refresh = useFetchAccountInfo();
+  const { t } = useTranslation();
+
   return (
     <div className="card">
       <div className="card-header">
@@ -112,32 +115,32 @@ function OverviewCard({
           onClick={() => refresh(account.pubkey)}
         >
           <span className="fe fe-refresh-cw me-2"></span>
-          Refresh
+          {t("refresh")}
         </button>
       </div>
 
       <TableCardBody>
         <tr>
-          <td>Address</td>
+          <td>{t("address")}</td>
           <td className="text-lg-end">
             <Address pubkey={account.pubkey} alignRight raw />
           </td>
         </tr>
         <tr>
-          <td>Balance (RENEC)</td>
+          <td>{t("balance")} (RENEC)</td>
           <td className="text-lg-end text-uppercase">
             <SolBalance lamports={account.lamports || 0} />
           </td>
         </tr>
         <tr>
-          <td>Rent Reserve (RENEC)</td>
+          <td>{t("rent_reserve")} (RENEC)</td>
           <td className="text-lg-end">
             <SolBalance lamports={stakeAccount.meta.rentExemptReserve} />
           </td>
         </tr>
         {hideDelegation && (
           <tr>
-            <td>Status</td>
+            <td>{t("status")}</td>
             <td className="text-lg-end">
               {isFullyInactivated(stakeAccount, activation)
                 ? "Not delegated"
@@ -171,16 +174,17 @@ function DelegationCard({
     }
   }
   const { stake } = stakeAccount;
+  const { t } = useTranslation();
   return (
     <div className="card">
       <div className="card-header">
         <h3 className="card-header-title mb-0 d-flex align-items-center">
-          Stake Delegation
+          {t("stake_delegation")}
         </h3>
       </div>
       <TableCardBody>
         <tr>
-          <td>Status</td>
+          <td>{t("status")}</td>
           <td className="text-lg-end">
             {displayStatus(stakeAccountType, activation)}
           </td>
@@ -189,7 +193,7 @@ function DelegationCard({
         {stake && (
           <>
             <tr>
-              <td>Delegated Stake (RENEC)</td>
+              <td>{t("delegated_stake")} (RENEC)</td>
               <td className="text-lg-end">
                 <SolBalance lamports={stake.delegation.stake} />
               </td>
@@ -198,14 +202,14 @@ function DelegationCard({
             {activation && (
               <>
                 <tr>
-                  <td>Active Stake (RENEC)</td>
+                  <td>{t("active_stake")} (RENEC)</td>
                   <td className="text-lg-end">
                     <SolBalance lamports={activation.active} />
                   </td>
                 </tr>
 
                 <tr>
-                  <td>Inactive Stake (RENEC)</td>
+                  <td>{t("inactive_stake")} (RENEC)</td>
                   <td className="text-lg-end">
                     <SolBalance lamports={activation.inactive} />
                   </td>
@@ -215,7 +219,7 @@ function DelegationCard({
 
             {voterPubkey && (
               <tr>
-                <td>Delegated Vote Address</td>
+                <td>{t("delegated_vote_address")}</td>
                 <td className="text-lg-end">
                   <Address pubkey={voterPubkey} alignRight link />
                 </td>
@@ -223,7 +227,7 @@ function DelegationCard({
             )}
 
             <tr>
-              <td>Activation Epoch</td>
+              <td>{t("activation_epoch")}</td>
               <td className="text-lg-end">
                 {activationEpoch !== undefined ? (
                   <Epoch epoch={activationEpoch} link />
@@ -233,7 +237,7 @@ function DelegationCard({
               </td>
             </tr>
             <tr>
-              <td>Deactivation Epoch</td>
+              <td>{t("activation_epoch")}</td>
               <td className="text-lg-end">
                 {deactivationEpoch !== undefined ? (
                   <Epoch epoch={deactivationEpoch} link />
@@ -251,23 +255,25 @@ function DelegationCard({
 
 function AuthoritiesCard({ meta }: { meta: StakeMeta }) {
   const hasLockup = meta.lockup.unixTimestamp > 0 || meta.lockup.epoch > 0;
+  const { t } = useTranslation();
+
   return (
     <div className="card">
       <div className="card-header">
         <h3 className="card-header-title mb-0 d-flex align-items-center">
-          Authorities
+          {t("authorities")}
         </h3>
       </div>
       <TableCardBody>
         <tr>
-          <td>Stake Authority Address</td>
+          <td>{t("stake_authorities_address")}</td>
           <td className="text-lg-end">
             <Address pubkey={meta.authorized.staker} alignRight link />
           </td>
         </tr>
 
         <tr>
-          <td>Withdraw Authority Address</td>
+          <td>{t("withdraw_authority_address")}</td>
           <td className="text-lg-end">
             <Address pubkey={meta.authorized.withdrawer} alignRight link />
           </td>
@@ -276,22 +282,18 @@ function AuthoritiesCard({ meta }: { meta: StakeMeta }) {
         {hasLockup && (
           <>
             <tr>
-              <td>Lockup Authority Address</td>
+              <td>{t("lockup_authority_address")}</td>
               <td className="text-lg-end">
                 <Address pubkey={meta.lockup.custodian} alignRight link />
               </td>
             </tr>
             <tr>
-              <td>Activation Epoch</td>
-              <td className="text-lg-end">
-                {meta.lockup.epoch}
-              </td>
+              <td>{t("activation_epoch")}</td>
+              <td className="text-lg-end">{meta.lockup.epoch}</td>
             </tr>
             <tr>
-              <td>Activation Time</td>
-              <td className="text-lg-end">
-                {meta.lockup.unixTimestamp}
-              </td>
+              <td>{t("activation_time")}</td>
+              <td className="text-lg-end">{meta.lockup.unixTimestamp}</td>
             </tr>
           </>
         )}

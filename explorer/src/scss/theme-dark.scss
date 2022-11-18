@@ -40,3 +40,5 @@ $path-to-fonts: "/fonts" !default;
 
 // Dark mode overrides
 @import 'solana-dark-overrides';
+
+@import "./components/index.scss";

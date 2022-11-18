@@ -9,12 +9,15 @@ import { Slot } from "components/common/Slot";
 import { useEpoch, useFetchEpoch } from "providers/epoch";
 import { displayTimestampUtc } from "utils/date";
 import { FetchStatus } from "providers/cache";
+import { useTranslation } from "react-i18next";
 
 type Props = { epoch: string };
 export function EpochDetailsPage({ epoch }: Props) {
+  const { t } = useTranslation();
+
   let output;
   if (isNaN(Number(epoch))) {
-    output = <ErrorCard text={`Epoch ${epoch} is not valid`} />;
+    output = <ErrorCard text={t("epoch_is_not_valid", { epoch })} />;
   } else {
     output = <EpochOverviewCard epoch={Number(epoch)} />;
   }
@@ -23,8 +26,7 @@ export function EpochDetailsPage({ epoch }: Props) {
     <div className="container mt-n3">
       <div className="header">
         <div className="header-body">
-          <h6 className="header-pretitle">Details</h6>
-          <h2 className="header-title">Epoch</h2>
+          <h2 className="header-title">{t("details")}</h2>
         </div>
       </div>
       {output}
@@ -35,7 +37,7 @@ export function EpochDetailsPage({ epoch }: Props) {
 type OverviewProps = { epoch: number };
 function EpochOverviewCard({ epoch }: OverviewProps) {
   const { status, clusterInfo } = useCluster();
-
+  const { t } = useTranslation();
   const epochState = useEpoch(epoch);
   const fetchEpoch = useFetchEpoch();
 
@@ -53,18 +55,18 @@ function EpochOverviewCard({ epoch }: OverviewProps) {
   }, [epoch, epochState, clusterInfo, status, fetchEpoch]);
 
   if (!clusterInfo) {
-    return <LoadingCard message="Connecting to cluster" />;
+    return <LoadingCard message={t("connecting_to_cluster")} />;
   }
 
   const { epochInfo, epochSchedule } = clusterInfo;
   const currentEpoch = epochInfo.epoch;
   if (epoch > currentEpoch) {
-    return <ErrorCard text={`Epoch ${epoch} hasn't started yet`} />;
+    return <ErrorCard text={t("epoch_has_not_started", { epoch })} />;
   } else if (!epochState?.data) {
     if (epochState?.status === FetchStatus.FetchFailed) {
-      return <ErrorCard text={`Failed to fetch details for epoch ${epoch}`} />;
+      return <ErrorCard text={t("failed_to_load_details_epoch", { epoch })} />;
     }
-    return <LoadingCard message="Loading epoch" />;
+    return <LoadingCard message={t("loading_epoch")} />;
   }
 
   const firstSlot = epochSchedule.getFirstSlotInEpoch(epoch);
@@ -75,49 +77,49 @@ function EpochOverviewCard({ epoch }: OverviewProps) {
       <div className="card">
         <div className="card-header">
           <h3 className="card-header-title mb-0 d-flex align-items-center">
-            Overview
+            {t("overview")}
           </h3>
         </div>
         <TableCardBody>
           <tr>
-            <td className="w-100">Epoch</td>
+            <td className="w-100">{t("epoch")}</td>
             <td className="text-lg-end font-monospace">
               <Epoch epoch={epoch} />
             </td>
           </tr>
           {epoch > 0 && (
             <tr>
-              <td className="w-100">Previous Epoch</td>
+              <td className="w-100">{t("previous_epoch")}</td>
               <td className="text-lg-end font-monospace">
                 <Epoch epoch={epoch - 1} link />
               </td>
             </tr>
           )}
           <tr>
-            <td className="w-100">Next Epoch</td>
+            <td className="w-100">{t("next_epoch")}</td>
             <td className="text-lg-end font-monospace">
               {currentEpoch > epoch ? (
                 <Epoch epoch={epoch + 1} link />
               ) : (
-                <span className="text-muted">Epoch in progress</span>
+                <span className="text-muted">{t("epoch_in_progress")}</span>
               )}
             </td>
           </tr>
           <tr>
-            <td className="w-100">First Slot</td>
+            <td className="w-100">{t("first_slot")}</td>
             <td className="text-lg-end font-monospace">
               <Slot slot={firstSlot} />
             </td>
           </tr>
           <tr>
-            <td className="w-100">Last Slot</td>
+            <td className="w-100">{t("last_slot")}</td>
             <td className="text-lg-end font-monospace">
               <Slot slot={lastSlot} />
             </td>
           </tr>
           {epochState.data.firstTimestamp && (
             <tr>
-              <td className="w-100">First Block Timestamp</td>
+              <td className="w-100">{t("first_block_timestamp")}</td>
               <td className="text-lg-end">
                 <span className="font-monospace">
                   {displayTimestampUtc(
@@ -129,24 +131,24 @@ function EpochOverviewCard({ epoch }: OverviewProps) {
             </tr>
           )}
           <tr>
-            <td className="w-100">First Block</td>
+            <td className="w-100">{t("first_block")}</td>
             <td className="text-lg-end font-monospace">
               <Slot slot={epochState.data.firstBlock} link />
             </td>
           </tr>
           <tr>
-            <td className="w-100">Last Block</td>
+            <td className="w-100">{t("last_block")}</td>
             <td className="text-lg-end font-monospace">
               {epochState.data.lastBlock !== undefined ? (
                 <Slot slot={epochState.data.lastBlock} link />
               ) : (
-                <span className="text-muted">Epoch in progress</span>
+                <span className="text-muted">{t("epoch_in_progress")}</span>
               )}
             </td>
           </tr>
           {epochState.data.lastTimestamp && (
             <tr>
-              <td className="w-100">Last Block Timestamp</td>
+              <td className="w-100">{t("last_block_timestamp")}</td>
               <td className="text-lg-end">
                 <span className="font-monospace">
                   {displayTimestampUtc(

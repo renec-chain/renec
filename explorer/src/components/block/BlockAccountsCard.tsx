@@ -1,6 +1,7 @@
 import React from "react";
 import { BlockResponse, PublicKey } from "@solana/web3.js";
 import { Address } from "components/common/Address";
+import { useTranslation } from "react-i18next";
 
 type AccountStats = {
   reads: number;
@@ -12,6 +13,7 @@ const PAGE_SIZE = 25;
 export function BlockAccountsCard({ block }: { block: BlockResponse }) {
   const [numDisplayed, setNumDisplayed] = React.useState(10);
   const totalTransactions = block.transactions.length;
+  const { t } = useTranslation();
 
   const accountStats = React.useMemo(() => {
     const statsMap = new Map<string, AccountStats>();
@@ -55,18 +57,18 @@ export function BlockAccountsCard({ block }: { block: BlockResponse }) {
   return (
     <div className="card">
       <div className="card-header align-items-center">
-        <h3 className="card-header-title">Block Account Usage</h3>
+        <h3 className="card-header-title">{t("block_account_usage")}</h3>
       </div>
 
       <div className="table-responsive mb-0">
         <table className="table table-sm table-nowrap card-table">
           <thead>
             <tr>
-              <th className="text-muted">Account</th>
-              <th className="text-muted">Read-Write Count</th>
-              <th className="text-muted">Read-Only Count</th>
-              <th className="text-muted">Total Count</th>
-              <th className="text-muted">% of Transactions</th>
+              <th className="text-muted">{t("account")}</th>
+              <th className="text-muted">{t("read_write_count")}</th>
+              <th className="text-muted">{t("read_only_count")}</th>
+              <th className="text-muted">{t("total_count")}</th>
+              <th className="text-muted">{t("percent_of_transaction")}</th>
             </tr>
           </thead>
           <tbody>
@@ -102,7 +104,7 @@ export function BlockAccountsCard({ block }: { block: BlockResponse }) {
               setNumDisplayed((displayed) => displayed + PAGE_SIZE)
             }
           >
-            Load More
+            {t("load_more")}
           </button>
         </div>
       )}

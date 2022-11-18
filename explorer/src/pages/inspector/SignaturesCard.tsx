@@ -4,6 +4,7 @@ import * as nacl from "tweetnacl";
 import { Message, PublicKey } from "@solana/web3.js";
 import { Signature } from "components/common/Signature";
 import { Address } from "components/common/Address";
+import { useTranslation } from "react-i18next";
 
 export function TransactionSignatures({
   signatures,
@@ -14,6 +15,8 @@ export function TransactionSignatures({
   message: Message;
   rawMessage: Uint8Array;
 }) {
+  const { t } = useTranslation();
+
   const signatureRows = React.useMemo(() => {
     return signatures.map((signature, index) => {
       const publicKey = message.accountKeys[index];
@@ -43,17 +46,17 @@ export function TransactionSignatures({
   return (
     <div className="card">
       <div className="card-header">
-        <h3 className="card-header-title">Signatures</h3>
+        <h3 className="card-header-title">{t("signatures")}</h3>
       </div>
       <div className="table-responsive mb-0">
         <table className="table table-sm table-nowrap card-table">
           <thead>
             <tr>
               <th className="text-muted">#</th>
-              <th className="text-muted">Signature</th>
-              <th className="text-muted">Signer</th>
-              <th className="text-muted">Validity</th>
-              <th className="text-muted">Details</th>
+              <th className="text-muted">{t("signature")}</th>
+              <th className="text-muted">{t("signer")}</th>
+              <th className="text-muted">{t("validity")}</th>
+              <th className="text-muted">{t("details")}</th>
             </tr>
           </thead>
           <tbody className="list">{signatureRows}</tbody>
@@ -86,6 +89,8 @@ function SignatureRow({
   verified?: boolean;
   index: number;
 }) {
+  const { t } = useTranslation();
+
   return (
     <tr>
       <td>
@@ -95,7 +100,7 @@ function SignatureRow({
         {signature ? (
           <Signature signature={signature} truncateChars={40} />
         ) : (
-          "Missing Signature"
+          t("missing_signature")
         )}
       </td>
       <td>
@@ -105,14 +110,14 @@ function SignatureRow({
         {verified === undefined ? (
           "N/A"
         ) : verified ? (
-          <span className="badge bg-success-soft me-1">Valid</span>
+          <span className="badge bg-success-soft me-1">{t("valid")}</span>
         ) : (
-          <span className="badge bg-warning-soft me-1">Invalid</span>
+          <span className="badge bg-warning-soft me-1">{t("invalid")}</span>
         )}
       </td>
       <td>
         {index === 0 && (
-          <span className="badge bg-info-soft me-1">Fee Payer</span>
+          <span className="badge bg-info-soft me-1">{t("fee_payer")}</span>
         )}
       </td>
     </tr>

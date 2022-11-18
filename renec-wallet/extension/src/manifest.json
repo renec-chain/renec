@@ -1,10 +1,10 @@
 {
   "name": "RENEC wallet",
-  "description": "Remitano Network SPL Token Wallet",
-  "version": "0.0.3",
+  "description": "RENEC Blockchain SPL Token Wallet",
+  "version": "0.0.5",
   "action": {
     "default_popup": "index.html",
-    "default_title": "Open the popup"
+    "default_title": "RENEC Wallet"
   },
   "manifest_version": 3,
   "icons": {
@@ -12,37 +12,37 @@
     "192": "logo192.png",
     "512": "logo512.png"
   },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Alt+Shift+R",
+        "mac": "Alt+Shift+R",
+        "chromeos": "Alt+Shift+R",
+        "linux": "Alt+Shift+R"
+      }
+    }
+  },
+  "host_permissions": ["file://*/*", "http://*/*", "https://*/*"],
+  "permissions": ["storage", "scripting", "activeTab"],
   "background": {
     "service_worker": "background.js"
   },
-  "permissions": [
-    "storage"
-  ],
   "content_scripts": [
     {
-      "matches": [
-        "file://*/*",
-        "http://*/*",
-        "https://*/*"
-      ],
-      "js": [
-        "contentscript.js"
-      ],
+      "matches": ["file://*/*", "http://*/*", "https://*/*"],
+      "js": ["contentscript.js"],
       "run_at": "document_start",
       "all_frames": true
     }
   ],
   "web_accessible_resources": [
     {
-      "resources": [
-        "script.js"
-      ],
-      "matches": [
-        "<all_urls>"
-      ]
+      "resources": ["script.js"],
+      "matches": ["<all_urls>"]
     }
   ],
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'"
-  }
+  },
+  "minimum_chrome_version": "88"
 }

@@ -237,7 +237,7 @@ function DelegationCard({
               </td>
             </tr>
             <tr>
-              <td>{t("activation_epoch")}</td>
+              <td>{t("deactivation_epoch")}</td>
               <td className="text-lg-end">
                 {deactivationEpoch !== undefined ? (
                   <Epoch epoch={deactivationEpoch} link />

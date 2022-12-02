@@ -1,5 +1,5 @@
 ---
-title: Install the Renec Tool Suite
+title: Install Renec Tool Suite
 ---
 
 There are multiple ways to install the Renec tools on your computer

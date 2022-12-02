@@ -97,6 +97,7 @@ module.exports = {
     Validating: [
       "running-validator",
       "running-validator/validator-reqs",
+      "running-validator/validator-auto-deployment",
       "cli/install-renec-cli-tools",
       "running-validator/validator-start",
       "running-validator/vote-accounts",

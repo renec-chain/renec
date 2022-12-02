@@ -108,7 +108,7 @@ releases at [solanalabs/solana](https://hub.docker.com/r/solanalabs/solana). -->
 
 ## Software
 
-- We build and run on Ubuntu 20.04.
+- We build and run on Ubuntu 22.04.
 - See [Installing Renec](../cli/install-renec-cli-tools.md) for the current Renec software release.
 
 Prebuilt binaries are available for Linux x86_64 on CPUs supporting AVX2 \(Ubuntu 20.04 recommended\).

@@ -1,5 +1,5 @@
 ---
-title: Starting a Validator
+title: Starting Validator
 ---
 
 ## Configure Renec CLI

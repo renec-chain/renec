@@ -47,7 +47,7 @@ export default function StakingList() {
   const totalSupply = supplyData?.value?.total
 
   const voteAccounts = React.useMemo(
-    () => voteAccountsData?.current || [],
+    () => (voteAccountsData?.current || []).sort((a, b) => b.activatedStake - a.activatedStake),
     [voteAccountsData]
   );
 

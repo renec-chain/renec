@@ -413,6 +413,7 @@ pub struct RpcConfirmedTransactionStatusWithSignature {
 pub struct RpcPerfSample {
     pub slot: Slot,
     pub num_transactions: u64,
+    pub num_non_vote_transactions: Option<u64>,
     pub num_slots: u64,
     pub sample_period_secs: u16,
 }

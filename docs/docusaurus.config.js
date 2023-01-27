@@ -52,16 +52,16 @@ module.exports = {
         "srcDark": "img/logo-horizontal.png"
       },
       items: [
-        {
-          to: "rpl-token",
-          label: "Renec Program Library",
-          position: "left",
-        },
         // {
         //   to: "developing/programming-model/overview",
         //   label: "Develop",
         //   position: "left",
         // },
+        {
+          to: "staking",
+          label: "Staking",
+          position: "left",
+        },
         {
           to: "running-validator",
           label: "Validate",
@@ -70,6 +70,11 @@ module.exports = {
         {
           to: "renec-wallet",
           label: "Renec wallet",
+          position: "left",
+        },
+        {
+          to: "rpl-token",
+          label: "Renec Program Library",
           position: "left",
         },
         // {

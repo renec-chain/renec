@@ -52,16 +52,16 @@ module.exports = {
         "srcDark": "img/logo-horizontal.png"
       },
       items: [
-        {
-          to: "rpl-token",
-          label: "Renec Program Library",
-          position: "left",
-        },
         // {
         //   to: "developing/programming-model/overview",
         //   label: "Develop",
         //   position: "left",
         // },
+        {
+          to: "staking",
+          label: "Staking",
+          position: "left",
+        },
         {
           to: "running-validator",
           label: "Validate",
@@ -70,6 +70,11 @@ module.exports = {
         {
           to: "renec-wallet",
           label: "Renec wallet",
+          position: "left",
+        },
+        {
+          to: "rpl-token",
+          label: "Renec Program Library",
           position: "left",
         },
         // {
@@ -121,31 +126,21 @@ module.exports = {
           items: [
             {
               label: "Homepage",
-              href: "https://remitano.com",
-            },
-            {
-              label: "Facebook",
-              href: "https://facebook.com/remitano",
+              href: "https://renec.foundation/",
             },
             {
               label: "Twitter",
-              href: "https://twitter.com/remitano",
-            },
-            {
-              label: "LinkedIn",
-              href: "https://linkedin.com/company/remitano",
-            },
-            {
-              label: "Instagram",
-              href: "https://instagram.com/remitano",
-            },
-            {
-              label: "Youtube",
-              href: "https://youtube.com/remitano",
+              href: "https://twitter.com/RenecBlockchain",
             },
             {
               label: "Telegram",
-              href: "https://t.me/RemitanoTinTuc",
+              href: "https://t.me/renecblockchain",
+            },            {
+              label: "Reddit",
+              href: "https://www.reddit.com/r/renecblockchain",
+            },            {
+              label: "Discord",
+              href: "https://discord.gg/3DcncaVwxR",
             },
           ],
         },

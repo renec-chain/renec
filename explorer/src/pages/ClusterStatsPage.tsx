@@ -42,8 +42,7 @@ export function ClusterStatsPage() {
         </div>
         <TpsCard />
       </div>
-      <TpsCard />
-      <SolanaPingCard />
+      {/* <SolanaPingCard /> */}
     </div>
   );
 }

@@ -35,7 +35,7 @@ solana-core = { path = "../core", version = "=1.13.6" }
 solana-download-utils = { path = "../download-utils", version = "=1.13.6" }
 solana-entry = { path = "../entry", version = "=1.13.6" }
 solana-faucet = { path = "../faucet", version = "=1.13.6" }
-solana-genesis-utils = { path = "../genesis-utils", version = "=1.13.6" }
+renec-genesis-utils = { path = "../genesis-utils", version = "=1.13.6" }
 solana-gossip = { path = "../gossip", version = "=1.13.6" }
 solana-ledger = { path = "../ledger", version = "=1.13.6" }
 solana-logger = { path = "../logger", version = "=1.13.6" }

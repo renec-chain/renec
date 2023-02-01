@@ -113,9 +113,9 @@ else
     )
   fi
 
-  #XXX: Ensure `solana-genesis` is built LAST!
+  #XXX: Ensure `renec-genesis` is built LAST!
   # See https://github.com/solana-labs/solana/issues/5826
-  BINS+=(solana-genesis)
+  BINS+=(renec-genesis)
 fi
 
 binArgs=()

@@ -4,7 +4,7 @@ use {
     solana_client::rpc_client::RpcClient,
     solana_core::validator::{ValidatorConfig, ValidatorStartProgress},
     solana_download_utils::{download_snapshot_archive, DownloadProgressRecord},
-    solana_genesis_utils::download_then_check_genesis_hash,
+    renec_genesis_utils::download_then_check_genesis_hash,
     solana_gossip::{
         cluster_info::{ClusterInfo, Node},
         contact_info::ContactInfo,

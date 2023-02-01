@@ -11,7 +11,7 @@ use {
         rpc_client::RpcClient,
         tpu_client::{TpuClient, TpuClientConfig},
     },
-    solana_genesis::Base64Account,
+    renec_genesis::Base64Account,
     solana_gossip::gossip_service::{discover_cluster, get_client, get_multi_client},
     solana_sdk::{
         commitment_config::CommitmentConfig, fee_calculator::FeeRateGovernor, system_program,

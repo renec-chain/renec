@@ -20,7 +20,7 @@ solana-cli-config = { path = "../cli-config", version = "=1.13.6" }
 solana-client = { path = "../client", version = "=1.13.6" }
 solana-core = { path = "../core", version = "=1.13.6" }
 solana-faucet = { path = "../faucet", version = "=1.13.6" }
-solana-genesis = { path = "../genesis", version = "=1.13.6" }
+renec-genesis = { path = "../genesis", version = "=1.13.6" }
 solana-gossip = { path = "../gossip", version = "=1.13.6" }
 solana-logger = { path = "../logger", version = "=1.13.6" }
 solana-measure = { path = "../measure", version = "=1.13.6" }

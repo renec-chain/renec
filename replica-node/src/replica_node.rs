@@ -4,7 +4,7 @@ use {
     log::*,
     solana_client::connection_cache::ConnectionCache,
     solana_download_utils::download_snapshot_archive,
-    solana_genesis_utils::download_then_check_genesis_hash,
+    renec_genesis_utils::download_then_check_genesis_hash,
     solana_gossip::{cluster_info::ClusterInfo, contact_info::ContactInfo},
     solana_ledger::{
         blockstore::Blockstore, blockstore_db::BlockstoreOptions, blockstore_processor,

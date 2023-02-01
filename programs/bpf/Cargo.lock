@@ -4899,7 +4899,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-genesis-utils"
+name = "renec-genesis-utils"
 version = "1.14.17"
 dependencies = [
  "solana-download-utils",
@@ -5756,7 +5756,7 @@ dependencies = [
  "solana-download-utils",
  "solana-entry",
  "solana-faucet",
- "solana-genesis-utils",
+ "renec-genesis-utils",
  "solana-gossip",
  "solana-ledger",
  "solana-logger 1.14.17",

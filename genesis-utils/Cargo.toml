@@ -1,5 +1,5 @@
 [package]
-name = "solana-genesis-utils"
+name = "renec-genesis-utils"
 version = "1.14.17"
 description = "Solana Genesis Utils"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
@@ -16,7 +16,7 @@ solana-sdk = { path = "../sdk", version = "=1.14.17" }
 
 [lib]
 crate-type = ["lib"]
-name = "solana_genesis_utils"
+name = "renec_genesis_utils"
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

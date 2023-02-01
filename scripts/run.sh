@@ -75,7 +75,7 @@ else
   fi
 
   # shellcheck disable=SC2086
-  solana-genesis \
+  renec-genesis \
     --hashes-per-tick sleep \
     --faucet-lamports 500000000000000000 \
     --bootstrap-validator \

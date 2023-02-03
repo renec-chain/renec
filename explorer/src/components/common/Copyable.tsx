@@ -45,7 +45,7 @@ export function Copyable({
   let textColor = "";
   if (state === "copied") {
     message = "Copied";
-    textColor = "text-info";
+    textColor = "text-primary";
   } else if (state === "errored") {
     message = "Copy Failed";
     textColor = "text-danger";

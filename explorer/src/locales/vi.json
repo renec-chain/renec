@@ -258,5 +258,9 @@
   "effective_slot": "Slot hiệu quả",
   "reward_amount": "Số lượng giải thưởng",
   "fetched_full_reward_history": "Đã tải đầy đủ lịch sử trao thưởng",
-  "no_rewards_issued_between_epochs": "Không có phần thưởng được trao ở giữa epoch {{lowerEpoch}} và epoch {{higherEpoch}}"
+  "no_rewards_issued_between_epochs": "Không có phần thưởng được trao ở giữa epoch {{lowerEpoch}} và epoch {{higherEpoch}}",
+  "resources": "Tài nguyên",
+  "get_connected": "Kết nối",
+  "about_us": "Về chúng tôi",
+  "terms": "Chính sách"
 }

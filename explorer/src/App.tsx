@@ -15,8 +15,8 @@ import { TransactionDetailsPage } from "pages/TransactionDetailsPage";
 import { BlockDetailsPage } from "pages/BlockDetailsPage";
 import { EpochDetailsPage } from "pages/EpochDetailsPage";
 import Footer from "./components/Footer";
-import "./i18n";
 import { useTranslation } from "react-i18next";
+import "./i18n";
 
 const ADDRESS_ALIASES = ["account", "accounts", "addresses"];
 const TX_ALIASES = ["txs", "txn", "txns", "transaction", "transactions"];

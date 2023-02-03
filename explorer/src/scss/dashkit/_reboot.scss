@@ -11,6 +11,9 @@ body {
   min-height: 100%;
 }
 
+#root {
+  background-color: $renec-primary-bg;
+}
 
 // Lists
 
@@ -46,7 +49,7 @@ ul, ol {
   }
 }
 
-a, .fe.fe-copy {
+a {
   color: $primary;
 }
 
@@ -88,3 +91,10 @@ a {
   border-color: $border-color;
 }
 
+.modal-body {
+  background-color: $renec-secondary-bg;
+}
+
+.btn-primary {
+  color: #12193D !important;
+}

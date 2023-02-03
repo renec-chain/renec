@@ -26,8 +26,7 @@ export function ClusterStatsPage() {
 
   return (
     <div className="cluster-stats-page mt-4">
-      <div className="cluster-stats-page__gradient-bg" />
-      <div className="container" style={{ marginTop: "-74px" }}>
+      <div className="container">
         <StakingComponent />
         <div className="card">
           <div className="card-header">
@@ -273,7 +272,7 @@ export function StatsNotReady({ error }: { error: boolean }) {
   }
 
   return (
-    <div className="card-body text-center">
+    <div className="loading-card card-body text-center">
       <span className="spinner-grow spinner-grow-sm me-2"></span>
       {t("loading")}
     </div>

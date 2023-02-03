@@ -50,11 +50,12 @@ export function Navbar() {
             <ToggleLanguage />
           </div>
         </div>
-        <div className="d-none d-md-flex">
-          <ToggleLanguage />
-        </div>
         <div className="d-none d-md-block">
-          <ClusterStatusButton />
+          <div className="d-flex">
+            <ClusterStatusButton />
+            <div className="m-lg-3" />
+            <ToggleLanguage />
+          </div>
         </div>
       </div>
     </nav>

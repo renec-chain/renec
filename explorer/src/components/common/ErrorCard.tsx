@@ -13,7 +13,7 @@ export function ErrorCard({
 }) {
   const buttonText = retryText || "Try Again";
   return (
-    <div className="card">
+    <div className="card loading-card">
       <div className="card-body text-center">
         {text}
         {retry && (

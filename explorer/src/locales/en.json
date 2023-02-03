@@ -258,5 +258,9 @@
   "effective_slot": "Effective Slot",
   "reward_amount": "Reward Amount",
   "fetched_full_reward_history": "Fetched full reward history",
-  "no_rewards_issued_between_epochs": "No rewards issued between epochs {{lowerEpoch}} and {{higherEpoch}}"
+  "no_rewards_issued_between_epochs": "No rewards issued between epochs {{lowerEpoch}} and {{higherEpoch}}",
+  "resources": "Resources",
+  "get_connected": "Get connected",
+  "about_us": "About us",
+  "terms": "Terms"
 }

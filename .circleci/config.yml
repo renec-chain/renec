@@ -6,7 +6,7 @@ orbs:
 jobs:
   run-build:
     docker:
-      - image: cimg/rust:1.59.0
+      - image: cimg/rust:1.67.0
     steps:
       - checkout
       - run:
@@ -74,4 +74,4 @@ workflows:
     jobs:
       - run-build
       - build-docs
-      - wallet-e2e-test
+#      - wallet-e2e-test

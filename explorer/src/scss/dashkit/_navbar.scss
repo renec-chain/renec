@@ -108,7 +108,7 @@
 
 .navbar-dark.navbar-vibrant .nav-item.active .nav-link,
 .navbar-dark.navbar-vibrant .nav-item .nav-link.active {
-  color: $navbar-vibrant-active-color;
+  color: $renec-primary;
 }
 
 .navbar-dark.navbar-vibrant .navbar-heading {
@@ -172,11 +172,6 @@
 }
 
 // Navbar light
-
-.navbar-light {
-  background-color: $navbar-light-bg;
-  border-color: $navbar-light-border-color;
-}
 
 .navbar-light .navbar-heading {
   color: $navbar-light-heading-color;
@@ -250,12 +245,12 @@
 .navbar-nav .nav-link {
   padding-left: $navbar-padding-x;
   padding-right: $navbar-padding-x;
-  color: $gray-600-dark !important;
+  color: white !important;
+  font-weight: bold;
 
   &.active {
-    color: $white !important;
+    color: $renec-primary !important;
     border-radius: 4px;
-    background: $gray-500-dark;
   }
 }
 
@@ -700,7 +695,7 @@
 }
 
 .nav-tabs .nav-link {
-  color: $white;
+  //color: $white;
   font-weight: bold;
 }
 

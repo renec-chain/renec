@@ -11,9 +11,11 @@
 
 .card {
   margin-bottom: $card-margin-bottom;
-  border-color: $border-color;
-  box-shadow: $card-box-shadow;
-  background-color: transparent;
+  border-color: $renec-border-color;
+}
+
+.loading-card {
+  background-color: $renec-secondary-bg !important;
 }
 
 .card > * {
@@ -27,7 +29,7 @@
   flex-direction: row;
   align-items: center;
   align-items: center;
-  background-color: #22232E;
+  background-color: $renec-primary-bg;
   height: $card-header-height;
   padding-top: math.div($card-spacer-y, 2);
   padding-bottom: math.div($card-spacer-y, 2);
@@ -48,6 +50,10 @@
   border-top-width: 0;
 }
 
+.card-footer {
+  border-top: 1px solid $renec-border-color;
+}
+
 //
 // Theme ===================================
 //
@@ -61,20 +67,14 @@
   margin-bottom: 0;
 }
 
-.card-header-tabs {
-  margin-top: math.div(-$card-spacer-y, 2);
-  margin-bottom: math.div(-$card-spacer-y, 2);
-  margin-left: 0;
-  margin-right: 0;
+
+.header-tabs .nav-link {
+  color: white;
 }
 
-.card-header-tabs .nav-link {
-  padding-top: calc((#{$card-header-height} - 1em * #{$line-height-base}) / 2) !important;
-  padding-bottom: calc((#{$card-header-height} - 1em * #{$line-height-base}) / 2) !important;
-}
-
-.card-header-tabs .nav-link.active {
-  border-bottom-color: $primary;
+.header-tabs .nav-link.active, .nav-tabs .nav-link.active {
+  border-bottom-color: white;
+  color: white;
 }
 
 
@@ -179,7 +179,7 @@
 // Adds dashed border and removes background
 
 .card-inactive {
-  border-color: $border-color;
+  border-color: $renec-border-color;
   border-style: dashed;
   background-color: transparent;
   box-shadow: none;

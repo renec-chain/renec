@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { OverlayTrigger } from "react-bootstrap";
 import classes from "classnames";
-import { toUpper } from "lodash";
 
 const LanguageSelectItem = ({
   value,
@@ -90,7 +89,6 @@ const ToggleLanguage = () => {
         className="toggle-language d-flex align-items-center"
       >
         <i className="fe fe-globe" />
-        <span className="ml-8">{toUpper(language)}</span>
       </span>
     </OverlayTrigger>
   );

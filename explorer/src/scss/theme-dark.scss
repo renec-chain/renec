@@ -7,6 +7,7 @@
 
 $path-to-img: "/img/dashkit" !default;
 $path-to-fonts: "/fonts" !default;
+@import "dashkit/renec-theme";
 
  // Icon font
 @import "../fonts/feather/feather";
@@ -42,3 +43,4 @@ $path-to-fonts: "/fonts" !default;
 @import 'solana-dark-overrides';
 
 @import "./components/index.scss";
+

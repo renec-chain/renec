@@ -63,7 +63,33 @@ Optional parameters to consider:
 - `--private-rpc` prevents your RPC port from being published for use by other nodes
 - `--rpc-bind-address` allows you to specify a different IP address to bind the RPC port
 
-### Automatic Restarts and Monitoring
+Here is an example of validator command for mainnet-beta cluster
+```
+/home/ubuntu/.local/share/renec/install/active_release/bin/renec-validator \
+    --identity /home/ubuntu/renec-validator/validator-keypair.json \
+    --known-validator 7pgxXXsnZoCLAwXn3kvVrvskmc2keULrJQ3i7iaGEiLE \
+    --known-validator j2Udo3QHvbpB44RD7NSYKZhWL8SVuZXzVwbQ6KFnHDa \
+    --only-known-rpc \
+    --ledger /home/ubuntu/renec-validator/ledger \
+    --no-port-check \
+    --no-voting \
+    --enable-rpc-transaction-history \
+    --private-rpc \
+    --rpc-port 8888 \
+    --no-os-network-limits-test \
+    --dynamic-port-range 8000-8020 \
+    --snapshot-interval-slots 500 \
+    --incremental-snapshots \
+    --entrypoint 52.6.207.113:8001 \
+    --entrypoint 34.236.126.253:8001 \
+    --expected-genesis-hash 7PNFRHLxT9FcAxSUcg3P8BraJnnUBnjuy8LwRbRJvVkX \
+    --wal-recovery-mode skip_any_corrupted_record \
+    --full-rpc-api \
+    --log /home/ubuntu/renec-validator/renec-validator.log \
+    --limit-ledger-size
+```
+
+<!-- ### Automatic Restarts and Monitoring
 
 We recommend configuring each of your nodes to restart automatically on exit, to
 ensure you miss as little data as possible. Running the renec software as a
@@ -77,9 +103,9 @@ Discord, or Twillio. For details, run `solana-watchtower --help`.
 
 ```bash
 solana-watchtower --validator-identity <YOUR VALIDATOR IDENTITY>
-```
+``` -->
 
-#### New Software Release Announcements
+<!-- #### New Software Release Announcements
 
 We release new software frequently (around 1 release / week).
 Sometimes newer versions include incompatible protocol changes, which
@@ -92,7 +118,7 @@ security) are communicated via a discord channel called
 
 Like staked validators, we expect any exchange-operated validators to be updated
 at your earliest convenience within a business day or two after a normal release
-announcement. For security-related releases, more urgent action may be needed.
+announcement. For security-related releases, more urgent action may be needed. -->
 
 ### Ledger Continuity
 
@@ -580,86 +606,86 @@ curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc": "2.0","id":1,"m
 {"jsonrpc":"2.0","result":890880,"id":1}
 ```
 
-## Supporting the SPL Token Standard
+## Supporting the RPL Token Standard
 
-[SPL Token](https://spl.solana.com/token) is the standard for wrapped/synthetic
+[RPL Token](../rpl-token.md) is the standard for wrapped/synthetic
 token creation and exchange on the Renec blockchain.
 
-The SPL Token workflow is similar to that of native RENEC tokens, but there are a
+The RPL Token workflow is similar to that of native RENEC tokens, but there are a
 few differences which will be discussed in this section.
 
 ### Token Mints
 
-Each _type_ of SPL Token is declared by creating a _mint_ account. This account
+Each _type_ of RPL Token is declared by creating a _mint_ account. This account
 stores metadata describing token features like the supply, number of decimals, and
-various authorities with control over the mint. Each SPL Token account references
-its associated mint and may only interact with SPL Tokens of that type.
+various authorities with control over the mint. Each RPL Token account references
+its associated mint and may only interact with RPL Tokens of that type.
 
-### Installing the `spl-token` CLI Tool
+### Installing the `rpl-token` CLI Tool
 
-SPL Token accounts are queried and modified using the `spl-token` command line
+RPL Token accounts are queried and modified using the `rpl-token` command line
 utility. The examples provided in this section depend upon having it installed
 on the local system.
 
-`spl-token` is distributed from Rust [crates.io](https://crates.io/crates/spl-token)
+`rpl-token` is distributed from Rust [crates.io](https://crates.io/crates/rpl-token)
 via the Rust `cargo` command line utility. The latest version of `cargo` can be
 installed using a handy one-liner for your platform at [rustup.rs](https://rustup.rs).
-Once `cargo` is installed, `spl-token` can be obtained with the following command:
+Once `cargo` is installed, `rpl-token` can be obtained with the following command:
 
 ```
-cargo install spl-token-cli
+cargo install rpl-token-cli
 ```
 
 You can then check the installed version to verify
 
 ```
-spl-token --version
+rpl-token --version
 ```
 
 Which should result in something like
 
 ```text
-spl-token-cli 2.0.1
+rpl-token-cli 2.0.16
 ```
 
 ### Account Creation
 
-SPL Token accounts carry additional requirements that native System Program
+RPL Token accounts carry additional requirements that native System Program
 accounts do not:
 
-1. SPL Token accounts must be created before an amount of tokens can be
+1. RPL Token accounts must be created before an amount of tokens can be
    deposited. Token accounts can be created explicitly with the
-   `spl-token create-account` command, or implicitly by the
-   `spl-token transfer --fund-recipient ...` command.
-1. SPL Token accounts must remain [rent-exempt](developing/programming-model/accounts.md#rent-exemption)
+   `rpl-token create-account` command, or implicitly by the
+   `rpl-token transfer --fund-recipient ...` command.
+1. RPL Token accounts must remain [rent-exempt](developing/programming-model/accounts.md#rent-exemption)
    for the duration of their existence and therefore require a small amount of
-   native RENEC tokens be deposited at account creation. For SPL Token v2 accounts,
+   native RENEC tokens be deposited at account creation. For RPL Token v2 accounts,
    this amount is 0.00203928 RENEC (2,039,280 lamports).
 
 #### Command Line
 
-To create an SPL Token account with the following properties:
+To create an RPL Token account with the following properties:
 
 1. Associated with the given mint
 1. Owned by the funding account's keypair
 
 ```
-spl-token create-account <TOKEN_MINT_ADDRESS>
+rpl-token create-account <TOKEN_MINT_ADDRESS>
 ```
 
 #### Example
 
 ```
-$ spl-token create-account AkUFCWTXb3w9nY2n6SFJvBV6VwvFUCe4KBMCcgLsa2ir
+$ rpl-token create-account AkUFCWTXb3w9nY2n6SFJvBV6VwvFUCe4KBMCcgLsa2ir
 Creating account 6VzWGL51jLebvnDifvcuEDec17sK6Wupi4gYhm5RzfkV
 Signature: 4JsqZEPra2eDTHtHpB4FMWSfk3UgcCVmkKkP7zESZeMrKmFFkDkNd91pKP3vPVVZZPiu5XxyJwS73Vi5WsZL88D7
 ```
 
-Or to create an SPL Token account with a specific keypair:
+Or to create an RPL Token account with a specific keypair:
 
 ```
 $ renec-keygen new -o token-account.json
-$ spl-token create-account AkUFCWTXb3w9nY2n6SFJvBV6VwvFUCe4KBMCcgLsa2ir token-account.json
+$ rpl-token create-account AkUFCWTXb3w9nY2n6SFJvBV6VwvFUCe4KBMCcgLsa2ir token-account.json
 Creating account 6VzWGL51jLebvnDifvcuEDec17sK6Wupi4gYhm5RzfkV
 Signature: 4JsqZEPra2eDTHtHpB4FMWSfk3UgcCVmkKkP7zESZeMrKmFFkDkNd91pKP3vPVVZZPiu5XxyJwS73Vi5WsZL88D7
 ```
@@ -669,7 +695,7 @@ Signature: 4JsqZEPra2eDTHtHpB4FMWSfk3UgcCVmkKkP7zESZeMrKmFFkDkNd91pKP3vPVVZZPiu5
 #### Command Line
 
 ```
-spl-token balance <TOKEN_ACCOUNT_ADDRESS>
+rpl-token balance <TOKEN_ACCOUNT_ADDRESS>
 ```
 
 #### Example
@@ -692,13 +718,13 @@ provided.
 #### Command Line
 
 ```
-spl-token transfer <SENDER_ACCOUNT_ADDRESS> <AMOUNT> <RECIPIENT_WALLET_ADDRESS> --fund-recipient
+rpl-token transfer <SENDER_ACCOUNT_ADDRESS> <AMOUNT> <RECIPIENT_WALLET_ADDRESS> --fund-recipient
 ```
 
 #### Example
 
 ```
-$ spl-token transfer 6B199xxzw3PkAm25hGJpjj3Wj3WNYNHzDAnt1tEqg5BN 1 6VzWGL51jLebvnDifvcuEDec17sK6Wupi4gYhm5RzfkV
+$ rpl-token transfer 6B199xxzw3PkAm25hGJpjj3Wj3WNYNHzDAnt1tEqg5BN 1 6VzWGL51jLebvnDifvcuEDec17sK6Wupi4gYhm5RzfkV
 Transfer 1 tokens
   Sender: 6B199xxzw3PkAm25hGJpjj3Wj3WNYNHzDAnt1tEqg5BN
   Recipient: 6VzWGL51jLebvnDifvcuEDec17sK6Wupi4gYhm5RzfkV
@@ -741,26 +767,26 @@ From the withdrawal address, the [Associated Token Account](https://spl.solana.c
 (ATA) for the correct mint is derived and the transfer issued to that account via a
 [TransferChecked](https://github.com/remitano/renec-program-library/blob/fc0d6a2db79bd6499f04b9be7ead0c400283845e/token/program/src/instruction.rs#L268)
 instruction. Note that it is possible that the ATA address does not yet exist, at which point the
-exchange should fund the account on behalf of the user. For SPL Token v2
+exchange should fund the account on behalf of the user. For RPL Token v2
 accounts, funding the withdrawal account will require 0.00203928 RENEC (2,039,280
 lamports).
 
-Template `spl-token transfer` command for a withdrawal:
+Template `rpl-token transfer` command for a withdrawal:
 
 ```
-$ spl-token transfer --fund-recipient <exchange token account> <withdrawal amount> <withdrawal address>
+$ rpl-token transfer --fund-recipient <exchange token account> <withdrawal amount> <withdrawal address>
 ```
 
 ### Other Considerations
 
 #### Freeze Authority
 
-For regulatory compliance reasons, an SPL Token issuing entity may optionally
+For regulatory compliance reasons, an RPL Token issuing entity may optionally
 choose to hold "Freeze Authority" over all accounts created in association with
 its mint. This allows them to [freeze](https://spl.solana.com/token#freezing-accounts)
 the assets in a given account at will, rendering the account unusable until thawed.
 If this feature is in use, the freeze authority's pubkey will be registered in
-the SPL Token's mint account.
+the RPL Token's mint account.
 
 ## Testing the Integration
 

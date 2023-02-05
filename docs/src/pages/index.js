@@ -30,7 +30,7 @@ function Home() {
                     <div className="card__body">
                       <p>
                         <Translate description="validate-transactions">
-                          Delegate RENEC to validators and get rewards
+                          Delegate RENEC to validators and get rewards.
                         </Translate>
                       </p>
                     </div>
@@ -52,6 +52,26 @@ function Home() {
                         <Translate description="validate-transactions">
                           Validate transactions, secure the network, and earn
                           rewards.
+                        </Translate>
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+              <div className={clsx("col col--4", styles.feature)}>
+                <Link className="navbar__link" to="integrations/exchange">
+                  <div className="card">
+                    <div className="card__header">
+                      <h3>
+                        <Translate description="run-validator">
+                          Integrate to exchanges
+                        </Translate>
+                      </h3>
+                    </div>
+                    <div className="card__body">
+                      <p>
+                        <Translate description="validate-transactions">
+                          Add Renec's native token RENEC to your cryptocurrency exchange.
                         </Translate>
                       </p>
                     </div>

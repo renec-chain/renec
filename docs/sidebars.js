@@ -93,7 +93,7 @@ module.exports = {
     //   "developing/backwards-compatibility",
     //   "developing/plugins/accountsdb_plugin"
     // ],
-    // Integrating: ["integrations/exchange"],
+    Integrating: ["integrations/exchange"],
     Validating: [
       "running-validator",
       "running-validator/validator-reqs",

@@ -22,7 +22,7 @@ ul.log-messages {
 }
 
 .navbar {
-  border-bottom: 1px solid $card-outline-color;
+  border-bottom: 1px solid $renec-border-color;
 }
 
 .search-bar__placeholder {
@@ -35,9 +35,8 @@ ul.log-messages {
 }
 
 .search-bar__control {
-  background-color: $gray-800-dark !important;
-  border-color: $border-color !important;
-  box-shadow: $card-box-shadow !important;
+  background-color: $renec-secondary-bg !important;
+  border-color: $renec-border-color !important;
   min-height: 52px !important;
 
   .search-bar__input {

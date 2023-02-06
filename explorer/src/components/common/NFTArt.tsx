@@ -8,7 +8,6 @@ import {
   MetadataJsonFile,
 } from "@metaplex/js";
 import ContentLoader from "react-content-loader";
-import ErrorLogo from "img/logos/dark-solana-logo.svg";
 import { getLast } from "utils";
 
 const MAX_TIME_LOADING_IMAGE = 5000; /* 5 seconds */
@@ -24,10 +23,6 @@ const LoadingPlaceholder = () => (
     <circle cx="106" cy="100" r="8" />
     <circle cx="126" cy="100" r="8" />
   </ContentLoader>
-);
-
-const ErrorPlaceHolder = () => (
-  <img src={ErrorLogo} width="120" height="120" alt="Solana Logo" />
 );
 
 const ViewOriginalArtContentLink = ({ src }: { src: string }) => {
@@ -71,7 +66,6 @@ const CachedImageContent = ({ uri }: { uri?: string }) => {
     <>
       {showError ? (
         <div className={"art-error-image-placeholder"}>
-          <ErrorPlaceHolder />
           <h6 className={"header-pretitle mt-2"}>Error Loading Image</h6>
         </div>
       ) : (
@@ -205,7 +199,6 @@ const HTMLContent = ({
     <>
       {showError ? (
         <div className={"art-error-image-placeholder"}>
-          <ErrorPlaceHolder />
           <h6 className={"header-pretitle mt-2"}>Error Loading Image</h6>
         </div>
       ) : (

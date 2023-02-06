@@ -1,6 +1,49 @@
 .footer {
   font-size: 0.825rem;
-  height: 56px;
   margin-top: auto;
-  background: $footer-bg;
+  background: $renec-secondary-bg;
+  padding-top: 72px;
+  padding-bottom: 60px;
+
+  &__logo {
+    margin-bottom: 32px;
+  }
+
+  & .container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &--resources {
+    margin-top: 32px;
+
+    &__item {
+      width: 186px;
+      .text-primary {
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin-bottom: 4px;
+      }
+
+      &--link {
+        margin-top: 12px;
+        font-weight: bold;
+      }
+    }
+
+    a {
+      color: white;
+    }
+  }
+
+  @media only screen and (min-width: 768px) {
+    .container {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .footer--resources {
+      margin-top: 0;
+    }
+  }
 }

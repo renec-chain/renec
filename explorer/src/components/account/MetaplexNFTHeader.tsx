@@ -63,7 +63,7 @@ export function NFTHeader({
         <div className="mb-3 mt-2">{getIsMutablePill(metadata.isMutable)}</div>
         <div className="btn-group">
           <button
-            className="btn btn-dark btn-sm dropdown-toggle creators-dropdown-button-width"
+            className="btn btn-dark text-second dropdown-toggle creators-dropdown-button-width"
             type="button"
             data-bs-toggle="dropdown"
             aria-haspopup="true"

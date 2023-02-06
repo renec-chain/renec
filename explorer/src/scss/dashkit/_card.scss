@@ -86,47 +86,6 @@
   margin-bottom: 0;
 }
 
-.card-table thead th {
-  border-top-width: 0;
-}
-
-.card-table thead th,
-.card-table tbody td {
-
-  &:first-child {
-    padding-left: $card-spacer-x !important;
-  }
-
-  &:last-child {
-    padding-right: $card-spacer-x !important;
-  }
-}
-
-.card > .card-table:first-child,
-.card > .table-responsive:first-child > .card-table {
-
-  > thead, > tbody, > tfoot {
-
-    &:first-child {
-
-      > tr:first-child {
-
-        > th, > td {
-
-          &:first-child {
-            border-top-left-radius: $card-border-radius;
-          }
-
-          &:last-child {
-            border-top-right-radius: $card-border-radius;
-          }
-        }
-      }
-    }
-  }
-}
-
-
 // Card avatar
 //
 // Moves card avatar up by 50%

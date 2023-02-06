@@ -1,6 +1,4 @@
 import React from "react";
-import { TableCardBody } from "components/common/TableCardBody";
-import { Slot } from "components/common/Slot";
 import {
   ClusterStatsStatus,
   useDashboardInfo,
@@ -19,27 +17,21 @@ import { Epoch } from "components/common/Epoch";
 import { TimestampToggle } from "components/common/TimestampToggle";
 import { SolanaPingCard } from "components/SolanaPingCard";
 import { useTranslation } from "react-i18next";
+import ActiveStakeIcon from "img/active-stake.png";
+import CircumlatingSupply from "img/circumlating_supply.png";
+import { TransactionsCard } from "../components/TransactionsCard";
 
 const CLUSTER_STATS_TIMEOUT = 5000;
 
 export function ClusterStatsPage() {
-  const { t } = useTranslation();
-
   return (
-    <div className="cluster-stats-page mt-4">
-      <div className="container">
-        <StakingComponent />
-        <div className="card">
-          <div className="card-header">
-            <div className="row align-items-center">
-              <div className="col">
-                <h4 className="card-header-title">{t("cluster_page_title")}</h4>
-              </div>
-            </div>
-          </div>
-          <StatsCardBody />
-        </div>
+    <div className="cluster-stats-page">
+      <div className="container mb-6">
+        <StatsCardBody />
+        <div className="mt-4" />
         <TpsCard />
+        <StakingComponent />
+        <TransactionsCard />
       </div>
       {/* <SolanaPingCard /> */}
     </div>
@@ -102,6 +94,11 @@ function StakingComponent() {
     100
   ).toFixed(1);
 
+  const activeStakingPercentage = (
+    ((activeStake || 0) / supply.total) *
+    100
+  ).toFixed(1);
+
   let delinquentStakePercentage;
   if (delinquentStake && activeStake) {
     delinquentStakePercentage = ((delinquentStake / activeStake) * 100).toFixed(
@@ -110,40 +107,58 @@ function StakingComponent() {
   }
 
   return (
-    <div className="row staking-card">
-      <div className="col-12 col-lg-6 col-xl">
-        <div className="card">
-          <div className="card-body">
-            <h4>{t("circulating_supply")}</h4>
-            <h1>
-              <em>{displayLamports(supply.circulating)}</em> /{" "}
-              {displayLamports(supply.total)}
-            </h1>
-            <h5
-              dangerouslySetInnerHTML={{
-                __html: t("percentage_is_circulating", {
-                  percentage: circulatingPercentage,
-                }),
-              }}
-            />
+    <div className="row staking-cards">
+      <div className="col-12 col-lg-6 col-xl mb-4 mb-lg-0">
+        <div className="custom-card">
+          <div className="text-second text-sm">
+            {t("active_stake")} <i className="fe fe-alert-circle" />{" "}
           </div>
+          {activeStake && (
+            <div>
+              <h1 className="d-flex align-items-center">
+                <img width={32} src={ActiveStakeIcon} alt="active-stake" />
+                <span className="text-primary font-weight-bold">
+                  {displayLamports(activeStake)}{" "}
+                </span>
+              </h1>
+              <div className="text-xs">
+                <span className="text-second">
+                  of {displayLamports(supply.total)}:
+                </span>
+                <span className="text-primary">
+                  {" "}
+                  {activeStakingPercentage}%
+                </span>
+              </div>
+            </div>
+          )}
+          {delinquentStakePercentage && (
+            <div>
+              Delinquent stake: <em>{delinquentStakePercentage}%</em>
+            </div>
+          )}
         </div>
       </div>
       <div className="col-12 col-lg-6 col-xl">
-        <div className="card">
-          <div className="card-body">
-            <h4>{t("active_stake")}</h4>
-            {activeStake && (
-              <h1>
-                <em>{displayLamports(activeStake)}</em> /{" "}
-                {displayLamports(supply.total)}
-              </h1>
-            )}
-            {delinquentStakePercentage && (
-              <h5>
-                Delinquent stake: <em>{delinquentStakePercentage}%</em>
-              </h5>
-            )}
+        <div className="custom-card">
+          <div className="text-second text-sm">{t("circulating_supply")}</div>
+          <div>
+            <h1 className="d-flex align-items-center">
+              <img
+                width={32}
+                src={CircumlatingSupply}
+                alt="circumlating-supply"
+              />
+              <span className="text-primary font-weight-bold">
+                {displayLamports(supply.circulating)}
+              </span>
+            </h1>
+            <div className="text-xs">
+              <span className="text-second">
+                of {displayLamports(supply.total)}:
+              </span>
+              <span className="text-primary"> {circulatingPercentage}%</span>
+            </div>
           </div>
         </div>
       </div>
@@ -177,17 +192,16 @@ function StatsCardBody() {
     return <StatsNotReady error={error} />;
   }
 
-  const { avgSlotTime_1h, avgSlotTime_1min, epochInfo, blockTime } =
-    dashboardInfo;
+  const { avgSlotTime_1h, avgSlotTime_1min, epochInfo } = dashboardInfo;
   const hourlySlotTime = Math.round(1000 * avgSlotTime_1h);
-  const averageSlotTime = Math.round(1000 * avgSlotTime_1min);
+  const averageSlotTime = avgSlotTime_1min.toFixed(3);
   const { slotIndex, slotsInEpoch } = epochInfo;
   const epochProgress = ((100 * slotIndex) / slotsInEpoch).toFixed(1) + "%";
   const epochTimeRemaining = slotsToHumanString(
     slotsInEpoch - slotIndex,
     hourlySlotTime
   );
-  const { blockHeight, absoluteSlot } = epochInfo;
+  const { absoluteSlot } = epochInfo;
 
   return (
     <TableCardBody>
@@ -258,7 +272,7 @@ export function StatsNotReady({ error }: { error: boolean }) {
 
   if (error || !active) {
     return (
-      <div className="card-body text-center">
+      <div className="custom-card text-center mb-4">
         {t("loading_cluster_problem")}
         <button
           className="btn btn-white btn-sm"
@@ -274,7 +288,7 @@ export function StatsNotReady({ error }: { error: boolean }) {
   }
 
   return (
-    <div className="loading-card card-body text-center">
+    <div className="custom-card text-center mb-4">
       <span className="spinner-grow spinner-grow-sm me-2"></span>
       {t("loading")}
     </div>

@@ -25,6 +25,10 @@ ul.log-messages {
   border-bottom: 1px solid $renec-border-color;
 }
 
+.search-bar {
+  margin: 32px auto;
+}
+
 .search-bar__placeholder {
   color: $input-placeholder-color !important;
   margin-left: 34px !important;
@@ -37,7 +41,7 @@ ul.log-messages {
 .search-bar__control {
   background-color: $renec-secondary-bg !important;
   border-color: $renec-border-color !important;
-  min-height: 52px !important;
+  min-height: 48px !important;
 
   .search-bar__input {
     color: $white !important;

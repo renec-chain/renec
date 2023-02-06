@@ -15,7 +15,7 @@ export function Navbar() {
   return (
     <nav className="navbar navbar-expand-md navbar-light">
       <div className="container">
-        <Link to={clusterPath("/")} className="mr-2">
+        <Link to={clusterPath("/")} className="navbar--logo">
           <img height={28} src={Logo} alt="RENEC Explorer" />
         </Link>
 
@@ -28,10 +28,10 @@ export function Navbar() {
         </button>
 
         <div className={`collapse navbar-collapse ${collapse ? "show" : ""}`}>
-          <ul className="navbar-nav me-auto">
+          <ul className="navbar-nav">
             <li className="nav-item">
               <NavLink className="nav-link" to={clusterPath("/")} exact>
-                {t("cluster_stats")}
+                {t("dashboard")}
               </NavLink>
             </li>
             <li className="nav-item">
@@ -50,10 +50,10 @@ export function Navbar() {
             <ToggleLanguage />
           </div>
         </div>
-        <div className="d-none d-md-block">
+        <div className="d-none d-md-block navbar--status">
           <div className="d-flex">
             <ClusterStatusButton />
-            <div className="m-lg-3" />
+            <div className="m-lg-3 m-sm-2" />
             <ToggleLanguage />
           </div>
         </div>

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { TransactionSignature } from "@solana/web3.js";
 import { clusterPath } from "utils/url";
 import { Copyable } from "./Copyable";
+import { simplizeAddress } from "../../utils";
 
 type Props = {
   signature: TransactionSignature;
@@ -10,6 +11,7 @@ type Props = {
   link?: boolean;
   truncate?: boolean;
   truncateChars?: number;
+  minimized?: boolean;
 };
 
 export function Signature({
@@ -18,11 +20,16 @@ export function Signature({
   link,
   truncate,
   truncateChars,
+  minimized = false,
 }: Props) {
   let signatureLabel = signature;
 
   if (truncateChars) {
     signatureLabel = signature.slice(0, truncateChars) + "…";
+  }
+
+  if (minimized) {
+    signatureLabel = simplizeAddress(signature);
   }
 
   return (

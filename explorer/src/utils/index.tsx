@@ -145,3 +145,7 @@ export const getLast = (arr: string[]) => {
 
   return arr[arr.length - 1];
 };
+
+export const simplizeAddress = (address: string) => {
+  return `${address.slice(0, 4)}....${address.slice(address.length - 4)}`;
+};

@@ -1,58 +1,29 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
-import CountUp from "react-countup";
 import {
   usePerformanceInfo,
-  PERF_UPDATE_SEC,
   ClusterStatsStatus,
 } from "providers/stats/solanaClusterStats";
-import classNames from "classnames";
-import { TableCardBody } from "components/common/TableCardBody";
 import { ChartOptions, ChartTooltipModel } from "chart.js";
 import { PerformanceInfo } from "providers/stats/solanaPerformanceInfo";
 import { StatsNotReady } from "pages/ClusterStatsPage";
 import { useTranslation } from "react-i18next";
+import classes from "classnames";
 
 export function TpsCard() {
   const performanceInfo = usePerformanceInfo();
   const isStatusNotReady = performanceInfo.status !== ClusterStatsStatus.Ready;
-  const { avgTps } = performanceInfo;
-  const averageTps = Math.round(avgTps).toLocaleString("en-US");
-  const transactionCount = <AnimatedTransactionCount info={performanceInfo} />;
-  const { t } = useTranslation();
+
+  if (isStatusNotReady) return <StatsNotReady error={false} />;
 
   return (
-    <>
-      <div className="card">
-        <div className="card-header">
-          <h4 className="card-header-title">{t("live_transaction_stats")}</h4>
-        </div>
-        {isStatusNotReady && (
-          <StatsNotReady
-            error={performanceInfo.status === ClusterStatsStatus.Error}
-          />
-        )}
-        {!isStatusNotReady && (
-          <TableCardBody>
-            <tr>
-              <td className="w-100">{t("transaction_count")}</td>
-              <td className="text-lg-end font-monospace">
-                {transactionCount}{" "}
-              </td>
-            </tr>
-            <tr>
-              <td className="w-100">{t("transaction_per_second")}</td>
-              <td className="text-lg-end font-monospace">{averageTps} </td>
-            </tr>
-          </TableCardBody>
-        )}
-      </div>
-      {!isStatusNotReady && (
-        <div className="card">
-          <TpsBarChart performanceInfo={performanceInfo} />
-        </div>
+    <div className="custom-card mb-4">
+      {isStatusNotReady ? (
+        <StatsNotReady error={false} />
+      ) : (
+        <TpsBarChart performanceInfo={performanceInfo} />
       )}
-    </>
+    </div>
   );
 }
 
@@ -149,6 +120,7 @@ const CHART_OPTIONS = (historyMaxTps: number): ChartOptions => {
         },
       ],
     },
+    maintainAspectRatio: false,
     animation: {
       duration: 0, // general animation time
     },
@@ -187,82 +159,41 @@ function TpsBarChart({ performanceInfo }: TpsBarChartProps) {
   };
 
   return (
-    <div className="card-body py-4">
-      <div className="align-box-row align-items-start justify-content-between">
-        <div className="d-flex justify-content-between w-100">
-          <h3 className="mb-0 card-header-title">{t("tps_history")}</h3>
-          <div className="font-size-sm">
-            {SERIES.map((key) => (
-              <button
-                key={key}
-                onClick={() => setSeries(key)}
-                className={classNames("btn btn-sm border-base ms-2", {
-                  active: series === key,
-                })}
-              >
-                {SERIES_INFO[key].interval}
-              </button>
-            ))}
+    <div className="tps-card">
+      <div className="d-flex">
+        <div className="tps-card__amount">
+          <div className="text-second text-sm mb-2">{t("current_tps")}</div>
+          <h1 className="text-primary mb-4 font-weight-bold">
+            {Math.round(performanceInfo.avgTps).toLocaleString()}
+          </h1>
+          <div className="text-second text-sm mb-2 ">
+            {t("total_transactions")}
           </div>
+          <h1 className="text-primary mb-4 font-weight-bold">
+            {performanceInfo.transactionCount.toLocaleString()}
+          </h1>
         </div>
-
-        <div
-          id="perf-history"
-          className="mt-3 d-flex justify-content-end flex-row w-100"
-        >
-          <div className="w-100">
-            <Bar data={chartData} options={chartOptions} height={80} />
+        <div className="tps-card__chart">
+          <div className="font-size-sm">
+            <div className="d-flex justify-content-end mb-3">
+              {SERIES.map((key) => (
+                <button
+                  key={key}
+                  onClick={() => setSeries(key)}
+                  className={classes("btn btn-sm border-base ms-2", {
+                    active: series === key,
+                  })}
+                >
+                  {SERIES_INFO[key].interval}
+                </button>
+              ))}
+            </div>
+            <div style={{ height: "120px" }}>
+              <Bar data={chartData} options={chartOptions} height={80} />
+            </div>
           </div>
         </div>
       </div>
     </div>
-  );
-}
-
-function AnimatedTransactionCount({ info }: { info: PerformanceInfo }) {
-  const txCountRef = React.useRef(0);
-  const countUpRef = React.useRef({ start: 0, period: 0, lastUpdate: 0 });
-  const countUp = countUpRef.current;
-
-  const { transactionCount: txCount, avgTps } = info;
-
-  // Track last tx count to reset count up options
-  if (txCount !== txCountRef.current) {
-    if (countUp.lastUpdate > 0) {
-      // Since we overshoot below, calculate the elapsed value
-      // and start from there.
-      const elapsed = Date.now() - countUp.lastUpdate;
-      const elapsedPeriods = elapsed / (PERF_UPDATE_SEC * 1000);
-      countUp.start = Math.floor(
-        countUp.start + elapsedPeriods * countUp.period
-      );
-
-      // if counter gets ahead of actual count, just hold for a bit
-      // until txCount catches up (this will sometimes happen when a tab is
-      // sent to the background and/or connection drops)
-      countUp.period = Math.max(txCount - countUp.start, 1);
-    } else {
-      // Since this is the first tx count value, estimate the previous
-      // tx count in order to have a starting point for our animation
-      countUp.period = PERF_UPDATE_SEC * avgTps;
-      countUp.start = txCount - countUp.period;
-    }
-    countUp.lastUpdate = Date.now();
-    txCountRef.current = txCount;
-  }
-
-  // Overshoot the target tx count in case the next update is delayed
-  const COUNT_PERIODS = 3;
-  const countUpEnd = countUp.start + COUNT_PERIODS * countUp.period;
-  return (
-    <CountUp
-      start={countUp.start}
-      end={countUpEnd}
-      duration={PERF_UPDATE_SEC * COUNT_PERIODS}
-      delay={0}
-      useEasing={false}
-      preserveValue={true}
-      separator=","
-    />
   );
 }

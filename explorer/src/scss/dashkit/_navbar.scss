@@ -12,11 +12,21 @@
 .navbar {
   border-width: 0 0 $border-width 0;
   border-style: solid;
+
+  &--logo {
+    display: inline-block;
+    margin-right: 64px;
+  }
+
+  .navbar-toggler, .navbar--status {
+    margin-left: auto;
+  }
 }
 
 .navbar > [class*="container"] {
   padding-left: 0;
   padding-right: 0;
+  justify-content: initial;
 }
 
 

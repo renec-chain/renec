@@ -31,6 +31,7 @@ const NODE_NAME = {
   "3WsvssMpgNezCGLBQrS6Eb9ostA8AAvTtdnqNyvQQaxH": "Titan",
   "8zmnqf8e1eDX51adYyomxvBWn7bk8bzFb1yBW8m1yqFC": "Turing",
   "j2Udo3QHvbpB44RD7NSYKZhWL8SVuZXzVwbQ6KFnHDa": "Automata",
+  "8CYptZ6CNCmrMz88vkDzyoasM3amhYkvkEyrhf347xBu": "ONUS",
 }
 
 const generateNodePubkey = (nodePubkey) => {

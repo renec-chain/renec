@@ -75,7 +75,7 @@ const PerformanceContext = React.createContext<PerformanceState | undefined>(
 
 type Props = { children: React.ReactNode };
 
-function getConnection(url: string): Connection | undefined {
+export function getConnection(url: string): Connection | undefined {
   try {
     return new Connection(url);
   } catch (error) {}

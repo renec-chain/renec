@@ -1,8 +1,7 @@
 {
-  "explore_renec_blockchain": "Explorer RENEC Blockchain",
   "main_searchbar_title": "Search for blocks, accounts, transactions, programs, and tokens",
   "cluster_page_title": "Live Cluster Stats",
-  "cluster_stats": "Cluster Stats",
+  "dashboard": "Dashboard",
   "supply": "Supply",
   "inspector": "Inspector",
   "total_supply": "Total Supply",
@@ -138,7 +137,7 @@
   "clear": "Clear",
   "reset": "Reset",
   "transaction_was_not_found": "Transaction was not found",
-  "failed_to_fetch_transaction": "Failed to fetch transaction",
+  "failed_to_fetch_tratransaction": "Failed to fetch transaction",
   "transaction_inspector": "Transaction Inspector",
   "message_buffer_too_short": "message buffer is too short",
   "signature_param_is_not_valid_json": "Signatures param is not valid JSON",
@@ -262,5 +261,11 @@
   "resources": "Resources",
   "get_connected": "Get connected",
   "about_us": "About us",
-  "terms": "Terms"
+  "terms": "Terms",
+  "current_slot_time": "Current slot time",
+  "slot_height": "Slot Height",
+  "current_tps": "Current TPS",
+  "total_transactions": "Total Transactions",
+  "recent_transaction": "Recent Transactions",
+  "time": "Time"
 }

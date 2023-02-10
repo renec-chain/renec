@@ -377,37 +377,14 @@ pre.json-wrap {
   flex: 1;
 }
 
-.staking-card {
+.staking-cards {
   h1 {
-    margin-bottom: 0.5rem;
-    line-height: 36px;
+    margin: 8px 0;
+    font-size: 36px;
 
-    small {
-      font-size: 1rem;
+    img {
+      margin-right: 8px;
     }
-  }
-
-  h5 {
-    margin-bottom: 0;
-  }
-
-  h4 {
-    color: #6E6E7C;
-    margin-bottom: 0.5rem;
-  }
-
-  h4, h5 {
-    line-height: 24px;
-  }
-
-  em {
-    font-style: normal;
-    color: $primary;
-  }
-
-  .card {
-    min-height: 148px;
-    background-color: $renec-secondary-bg;
   }
 }
 

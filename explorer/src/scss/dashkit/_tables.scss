@@ -1,32 +1,45 @@
-//
-// tables.scss
-// Extended from Bootstrap
-//
+.table {
+  tbody {
+    background-color: $renec-secondary-bg;
 
-//
-// Bootstrap Overrides =====================================
-//
+    tr, td, th {
+      border: none;
+    }
+  }
 
-.table thead th {
-  background-color: $table-head-bg;
-  text-transform: uppercase;
-  font-size: $font-size-sm;
-  font-weight: $font-weight-bold;
-  letter-spacing: .08em;
-  color: $table-head-color;
-}
+  thead th, tbody th {
+    text-transform: uppercase;
+    color: $renec-text-second !important;
+    font-weight: normal !important;
+  }
 
-.table thead th, tbody th, tbody td {
-  vertical-align: middle;
-}
+  thead th, tbody th, tbody td {
+    vertical-align: middle;
+  }
 
-.table td, .table th {
-  border-top: $table-border-width solid $table-border-color;
-  border-bottom: 0;
-}
+  tr:last-child td:first-child {
+    border-bottom-left-radius: 8px;
+  }
 
-.table td {
-  background-color: $renec-secondary-bg;
+  tr:last-child td:last-child {
+    border-bottom-right-radius: 8px;
+  }
+
+  tr:first-child th:first-child {
+    border-top-left-radius: 8px;
+  }
+
+  tr:first-child th:last-child {
+    border-top-right-radius: 8px;
+  }
+
+  a[class*="text-reset"]:hover {
+    color: $link-color !important;
+  }
+
+  tr:nth-child(even) {
+    background-color: $renec-black-700;
+  }
 }
 
 .table-sm {
@@ -37,26 +50,11 @@
   font-size: $font-size-xs;
 }
 
-
-//
-// Theme =====================================
-//
-
-// No wrap
-//
-// Prevents table content from wrapping to the next line
-
 .table-nowrap {
-
   th, td {
     white-space: nowrap;
   }
 }
-
-
-// Sort
-//
-// Adds sorting icons
 
 .table [data-sort] {
   white-space: nowrap;
@@ -68,8 +66,3 @@
 }
 
 
-// Links
-
-.table a[class*="text-reset"]:hover {
-  color: $link-color !important;
-}

@@ -11,6 +11,7 @@ import { AccountDetailsPage } from "pages/AccountDetailsPage";
 import { TransactionInspectorPage } from "pages/inspector/InspectorPage";
 import { ClusterStatsPage } from "pages/ClusterStatsPage";
 import { SupplyPage } from "pages/SupplyPage";
+import { TransactionPage } from "pages/TransactionPage";
 import { TransactionDetailsPage } from "pages/TransactionDetailsPage";
 import { BlockDetailsPage } from "pages/BlockDetailsPage";
 import { EpochDetailsPage } from "pages/EpochDetailsPage";
@@ -49,6 +50,9 @@ function App() {
                 <TransactionInspectorPage signature={match.params.signature} />
               )}
             />
+            <Route exact path={"/transactions"}>
+              <TransactionPage />
+            </Route>
             <Route
               exact
               path={"/tx/:signature"}

@@ -124,6 +124,7 @@ pub struct ExecuteAndCommitTransactionsOutput {
     // The number of transactions of that were executed. See description of in `ProcessTransactionsSummary`
     // for possible outcomes of execution.
     executed_transactions_count: usize,
+    executed_non_vote_transactions_count: usize,
     // Total number of the executed transactions that returned success/not
     // an error.
     executed_with_successful_result_count: usize,
@@ -1194,6 +1195,7 @@ impl BankingStage {
             execution_results,
             mut retryable_transaction_indexes,
             executed_transactions_count,
+            executed_non_vote_transactions_count,
             executed_with_successful_result_count,
             signature_count,
             error_counters,
@@ -1260,6 +1262,7 @@ impl BankingStage {
             return ExecuteAndCommitTransactionsOutput {
                 transactions_attempted_execution_count,
                 executed_transactions_count,
+                executed_non_vote_transactions_count,
                 executed_with_successful_result_count,
                 retryable_transaction_indexes,
                 commit_transactions_result: Err(e),
@@ -1284,6 +1287,7 @@ impl BankingStage {
                         lamports_per_signature,
                         CommitTransactionCounts {
                             committed_transactions_count: executed_transactions_count as u64,
+                            committed_non_vote_transactions_count: executed_non_vote_transactions_count as u64,
                             committed_with_failure_result_count: executed_transactions_count
                                 .saturating_sub(executed_with_successful_result_count)
                                 as u64,
@@ -1351,6 +1355,7 @@ impl BankingStage {
         ExecuteAndCommitTransactionsOutput {
             transactions_attempted_execution_count,
             executed_transactions_count,
+            executed_non_vote_transactions_count,
             executed_with_successful_result_count,
             retryable_transaction_indexes,
             commit_transactions_result: Ok(transactions_execute_and_record_status),
@@ -2802,6 +2807,7 @@ mod tests {
             let ExecuteAndCommitTransactionsOutput {
                 transactions_attempted_execution_count,
                 executed_transactions_count,
+                executed_non_vote_transactions_count,
                 executed_with_successful_result_count,
                 commit_transactions_result,
                 ..
@@ -2809,6 +2815,7 @@ mod tests {
 
             assert_eq!(transactions_attempted_execution_count, 1);
             assert_eq!(executed_transactions_count, 1);
+            assert_eq!(executed_non_vote_transactions_count, 1);
             assert_eq!(executed_with_successful_result_count, 1);
             assert!(commit_transactions_result.is_ok());
 
@@ -2854,6 +2861,7 @@ mod tests {
             let ExecuteAndCommitTransactionsOutput {
                 transactions_attempted_execution_count,
                 executed_transactions_count,
+                executed_non_vote_transactions_count,
                 executed_with_successful_result_count,
                 retryable_transaction_indexes,
                 commit_transactions_result,
@@ -2862,6 +2870,7 @@ mod tests {
             assert_eq!(transactions_attempted_execution_count, 1);
             // Transactions was still executed, just wasn't committed, so should be counted here.
             assert_eq!(executed_transactions_count, 1);
+            assert_eq!(executed_non_vote_transactions_count, 1);
             assert_eq!(executed_with_successful_result_count, 1);
             assert_eq!(retryable_transaction_indexes, vec![0]);
             assert_matches!(
@@ -3090,6 +3099,7 @@ mod tests {
             let ExecuteAndCommitTransactionsOutput {
                 transactions_attempted_execution_count,
                 executed_transactions_count,
+                executed_non_vote_transactions_count,
                 retryable_transaction_indexes,
                 commit_transactions_result,
                 ..
@@ -3097,6 +3107,7 @@ mod tests {
 
             assert_eq!(transactions_attempted_execution_count, 2);
             assert_eq!(executed_transactions_count, 1);
+            assert_eq!(executed_non_vote_transactions_count, 1);
             assert_eq!(retryable_transaction_indexes, vec![1],);
             assert!(commit_transactions_result.is_ok());
         }

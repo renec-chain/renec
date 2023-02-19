@@ -58,7 +58,7 @@ const BlockRow = ({ block }: any) => {
   return (
     <tr>
       <td>
-        <Slot slot={block.slot} link />
+        <Slot slot={block.blockHeight} link />
       </td>
       <td className="forced-truncate">
         <Address pubkey={new PublicKey(block.blockhash)} link truncate />
@@ -114,12 +114,7 @@ export const BlockCard = () => {
       const data = await Promise.all(
         slots.map((slot: number) => connection?.getBlock(slot))
       );
-
-      const blocksList = data.map((elm, index) => {
-        return { ...elm, slot: slots[index] };
-      });
-
-      setBlocks([...blocks, ...blocksList.reverse()]);
+      setBlocks([...blocks, ...data.reverse()]);
     } catch (err) {
       throw err;
     } finally {

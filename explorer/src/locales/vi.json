@@ -2,6 +2,7 @@
   "main_searchbar_title": "Tìm kiếm khối, tài khoản, giao dịch, chương trình hoặc token",
   "cluster_page_title": "Thống Kê Cluster",
   "dashboard": "Bảng Điều Khiển",
+  "blocks": "Chuỗi khối",
   "supply": "Nguồn Cung",
   "inspector": "Kiểm Tra",
   "total_supply": "Tổng Cung",
@@ -267,5 +268,6 @@
   "current_tps": "TPS Gần Đây",
   "total_transactions": "Tổng Giao Dịch",
   "recent_transaction": "Giao Dịch Gần Đây",
-  "time": "Thời gian"
+  "time": "Thời gian",
+  "total_fee": "Tổng phí"
 }

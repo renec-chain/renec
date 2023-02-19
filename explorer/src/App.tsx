@@ -1,20 +1,18 @@
-import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
-
 import { ClusterModal } from "components/ClusterModal";
+import { ClusterStatusBanner } from "components/ClusterStatusButton";
 import { MessageBanner } from "components/MessageBanner";
 import { Navbar } from "components/Navbar";
-import { ClusterStatusBanner } from "components/ClusterStatusButton";
 import { SearchBar } from "components/SearchBar";
-
 import { AccountDetailsPage } from "pages/AccountDetailsPage";
-import { TransactionInspectorPage } from "pages/inspector/InspectorPage";
+import { BlockDetailsPage } from "pages/BlockDetailsPage";
 import { ClusterStatsPage } from "pages/ClusterStatsPage";
+import { EpochDetailsPage } from "pages/EpochDetailsPage";
+import { TransactionInspectorPage } from "pages/inspector/InspectorPage";
 import { SupplyPage } from "pages/SupplyPage";
 import { TransactionPage } from "pages/TransactionPage";
 import { TransactionDetailsPage } from "pages/TransactionDetailsPage";
-import { BlockDetailsPage } from "pages/BlockDetailsPage";
-import { EpochDetailsPage } from "pages/EpochDetailsPage";
+import { BlocksPage } from "pages/BlocksPage";
+import { Redirect, Route, Switch } from "react-router-dom";
 import Footer from "./components/Footer";
 import "./i18n";
 
@@ -103,6 +101,9 @@ function App() {
             />
             <Route exact path="/">
               <ClusterStatsPage />
+            </Route>
+            <Route exact path="/blocks">
+              <BlocksPage />
             </Route>
             <Route
               render={({ location }) => (

@@ -1,11 +1,11 @@
-import React from "react";
-import Logo from "img/logos/logo.png";
-import { clusterPath } from "utils/url";
-import { Link, NavLink } from "react-router-dom";
 import { ClusterStatusButton } from "components/ClusterStatusButton";
-import ToggleLanguage from "./common/ToggleLanguage";
+import Logo from "img/logos/logo.png";
+import React from "react";
 import { Dropdown } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
+import { Link, NavLink } from "react-router-dom";
+import { clusterPath } from "utils/url";
+import ToggleLanguage from "./common/ToggleLanguage";
 
 export function Navbar() {
   // TODO: use `collapsing` to animate collapsible navbar
@@ -35,13 +35,18 @@ export function Navbar() {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to={clusterPath("/supply")}>
-                {t("supply")}
+              <NavLink className="nav-link" to={clusterPath("/blocks")}>
+                {t("blocks")}
               </NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to={clusterPath("/transactions")}>
                 {t("transactions")}
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to={clusterPath("/supply")}>
+                {t("supply")}
               </NavLink>
             </li>
             <li className="nav-item">

@@ -2,6 +2,7 @@
   "main_searchbar_title": "Search for blocks, accounts, transactions, programs, and tokens",
   "cluster_page_title": "Live Cluster Stats",
   "dashboard": "Dashboard",
+  "blocks": "Blocks",
   "supply": "Supply",
   "inspector": "Inspector",
   "total_supply": "Total Supply",
@@ -267,5 +268,7 @@
   "current_tps": "Current TPS",
   "total_transactions": "Total Transactions",
   "recent_transaction": "Recent Transactions",
-  "time": "Time"
+  "recent_block": "Recent block",
+  "time": "Time",
+  "total_fee": "Total fee"
 }

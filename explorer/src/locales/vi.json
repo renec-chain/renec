@@ -269,5 +269,16 @@
   "total_transactions": "Tổng Giao Dịch",
   "recent_transaction": "Giao Dịch Gần Đây",
   "time": "Thời gian",
-  "total_fee": "Tổng phí"
+  "total_fee": "Tổng phí",
+  "validators": "Người xác thực",
+  "validator": "Người xác thực",
+  "superminority": "Thiểu số",
+  "weighted_skip_rate": "Trọng số bỏ qua",
+  "non_weighted": "Không trọng số",
+  "nominal_staking_apy": "APY trung bình",
+  "node_versions": "Phiên bản node",
+  "cummulative_stake": "Cổ phần tích lũy",
+  "last_vote": "Bình chọn cuối cùng",
+  "commission": "Hoa hồng",
+  "stake": "Cổ phần"
 }

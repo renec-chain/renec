@@ -5,13 +5,14 @@ import { Navbar } from "components/Navbar";
 import { SearchBar } from "components/SearchBar";
 import { AccountDetailsPage } from "pages/AccountDetailsPage";
 import { BlockDetailsPage } from "pages/BlockDetailsPage";
+import { BlocksPage } from "pages/BlocksPage";
 import { ClusterStatsPage } from "pages/ClusterStatsPage";
 import { EpochDetailsPage } from "pages/EpochDetailsPage";
 import { TransactionInspectorPage } from "pages/inspector/InspectorPage";
 import { SupplyPage } from "pages/SupplyPage";
-import { TransactionPage } from "pages/TransactionPage";
 import { TransactionDetailsPage } from "pages/TransactionDetailsPage";
-import { BlocksPage } from "pages/BlocksPage";
+import { TransactionPage } from "pages/TransactionPage";
+import { ValidatorsPage } from "pages/ValidatorsPage";
 import { Redirect, Route, Switch } from "react-router-dom";
 import Footer from "./components/Footer";
 import "./i18n";
@@ -104,6 +105,9 @@ function App() {
             </Route>
             <Route exact path="/blocks">
               <BlocksPage />
+            </Route>
+            <Route exact path="/validators">
+              <ValidatorsPage />
             </Route>
             <Route
               render={({ location }) => (

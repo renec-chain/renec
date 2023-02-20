@@ -4,6 +4,7 @@ import { getConnection } from "providers/stats/solanaClusterStats";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { SolBalance } from "utils";
+import { displayTimestampUtc } from "utils/date";
 import { Address } from "./common/Address";
 import { Slot } from "./common/Slot";
 import { TableCardBody } from "./common/TableCardBody";
@@ -58,7 +59,7 @@ const BlockRow = ({ block }: any) => {
   return (
     <tr>
       <td>
-        <Slot slot={block.blockHeight} link />
+        <Slot slot={block.slot} link />
       </td>
       <td className="forced-truncate">
         <Address pubkey={new PublicKey(block.blockhash)} link truncate />
@@ -78,7 +79,7 @@ const BlockRow = ({ block }: any) => {
           <SolBalance lamports={totalFee} />
         </span>
       </td>
-      <td>{new Date(block.blockTime).toLocaleString()}</td>
+      <td>{displayTimestampUtc(block.blockTime * 1000, true)}</td>
     </tr>
   );
 };
@@ -114,7 +115,12 @@ export const BlockCard = () => {
       const data = await Promise.all(
         slots.map((slot: number) => connection?.getBlock(slot))
       );
-      setBlocks([...blocks, ...data.reverse()]);
+
+      const blocksList = data.map((elm, index) => {
+        return { ...elm, slot: slots[index] };
+      });
+
+      setBlocks([...blocks, ...blocksList.reverse()]);
     } catch (err) {
       throw err;
     } finally {

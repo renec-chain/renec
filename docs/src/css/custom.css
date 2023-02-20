@@ -83,3 +83,7 @@ footer .text--center {
 .footer--dark {
   background-color: #060814 !important;
 }
+
+.cards__container .card {
+  height: 158px;
+}

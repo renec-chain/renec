@@ -117,6 +117,9 @@ module.exports = {
       "rpl-token/token-program",
       "rpl-token/associated-token-account",
     ],
+    "RENEC Dollar (reUSD)": [
+      "re-usd",
+    ]
     // Clusters: [
     //   "clusters",
     //   "cluster/rpc-endpoints",

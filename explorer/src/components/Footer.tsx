@@ -22,7 +22,7 @@ const Footer = () => {
     {
       id: 1,
       label: t("about_us"),
-      link: "whitepaper",
+      link: "https://renec.foundation/about-us",
     },
     {
       id: 2,

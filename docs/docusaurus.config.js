@@ -77,6 +77,11 @@ module.exports = {
           label: "Renec Program Library",
           position: "left",
         },
+        {
+          to: "re-usd",
+          label: "RENEC Dollar (reUSD)",
+          position: "left",
+        },
         // {
         //   to: "integrations/exchange",
         //   label: "Integrate",

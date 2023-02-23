@@ -1,7 +1,6 @@
 import React, { Suspense, useState } from 'react';
 import { makeStyles, List, ListItem } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 import {
   ThemeProvider,
   unstable_createMuiStrictModeTheme as createMuiTheme,
@@ -100,7 +99,9 @@ export default function App() {
   if (isExtension) {
     appElement = (
       <ConnectedWalletsProvider>
-        <PageProvider>{appElement}</PageProvider>
+        <PageProvider>
+          {appElement}
+        </PageProvider>
       </ConnectedWalletsProvider>
     );
   }
@@ -114,7 +115,9 @@ export default function App() {
             <PageProvider>
               <TokenRegistryProvider>
                 <SnackbarProvider maxSnack={5} autoHideDuration={8000}>
-                  <WalletProvider>{appElement}</WalletProvider>
+                  <WalletProvider>
+                    {appElement}
+                  </WalletProvider>
                 </SnackbarProvider>
               </TokenRegistryProvider>
             </PageProvider>
@@ -133,9 +136,7 @@ function PageContents() {
   const ignoreSuggestion = window.localStorage.getItem(suggestionKey);
   if (!wallet) {
     return (
-      <>
-        <LoginPage />
-      </>
+      <LoginPage />
     );
   }
   if (window.opener) {

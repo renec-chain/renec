@@ -4,6 +4,7 @@ import BalancesList from '../components/BalancesList';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core';
 import { useIsExtensionWidth } from '../utils/utils';
+import { DemonWalletPromoteBanner } from '../components/DemonWalletPromoteBanner';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -30,6 +31,12 @@ export default function WalletPage() {
         <Grid md={2} />
         <Grid item xs={12} md={8} className={classes.balancesContainer}>
           <BalancesList />
+        </Grid>
+      </Grid>
+      <Grid container spacing={isExtensionWidth ? 0 : 3}>
+        <Grid md={2} />
+        <Grid item xs={12} md={8} className={classes.balancesContainer}>
+          <DemonWalletPromoteBanner />
         </Grid>
       </Grid>
     </Container>

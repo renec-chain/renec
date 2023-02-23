@@ -1,5 +1,5 @@
 ---
-title: Renec Test Validator
+title: Test Validator
 ---
 
 During early stage development, it is often convenient to target a cluster with

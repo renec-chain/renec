@@ -2,7 +2,7 @@
 title: Rust API
 ---
 
-Renec's Rust crates are [published to crates.io][crates.io] and can be found
+Rust crates are [published to crates.io][crates.io] and can be found
 [on docs.rs with the "solana-" prefix][docs.rs].
 
 [crates.io]: https://crates.io/search?q=solana-

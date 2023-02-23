@@ -32,7 +32,6 @@ general.
 Renec's programming model and the definitions of the Renec terms used in this
 document are available at:
 
-- https://docs.renec.foundation/apps
 - https://docs.renec.foundation/terminology
 
 ## Source

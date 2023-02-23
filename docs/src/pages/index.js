@@ -139,6 +139,26 @@ function Home() {
                   </div>
                 </Link>
               </div>
+              <div className={clsx("col col--4", styles.feature)}>
+                <Link className="navbar__link" to="developing/programming-model/overview">
+                  <div className="card">
+                    <div className="card__header">
+                      <h3>
+                        <Translate description="create-spl">
+                          Developing
+                        </Translate>
+                      </h3>
+                    </div>
+                    <div className="card__body">
+                      <p>
+                        <Translate description="erc-20">
+                          Creating secure, distributed smart contracts on Renec blockchain.
+                        </Translate>
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              </div>
             </div>
           </div>
         </section>

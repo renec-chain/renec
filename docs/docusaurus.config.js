@@ -7,7 +7,7 @@ module.exports = {
   url: "https://docs.renec.foundation",
   baseUrl: "/",
   favicon: "img/favicon.ico",
-  organizationName: "remitano", // Usually your GitHub org/user name.
+  organizationName: "Renec Foundation", // Usually your GitHub org/user name.
   projectName: "renec", // Usually your repo name.
   onBrokenLinks: "throw",
   stylesheets: [
@@ -75,6 +75,11 @@ module.exports = {
         {
           to: "rpl-token",
           label: "Renec Program Library",
+          position: "left",
+        },
+        {
+          to: "developing/programming-model/overview",
+          label: "Developing",
           position: "left",
         },
         {

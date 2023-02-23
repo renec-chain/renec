@@ -992,8 +992,8 @@ Result:
 
 ### getFeeForMessage
 
-**NEW: This method is only available in solana-core v1.9 or newer. Please use
-[getFees](jsonrpc-api.md#getfees) for solana-core v1.8**
+**NEW: This method is only available in renec v1.9 or newer. Please use
+[getFees](jsonrpc-api.md#getfees) for renec v1.8**
 
 Get the fee the network will charge for a particular Message
 
@@ -1148,8 +1148,8 @@ Unhealthy Result (if additional information is available)
 
 ### getHighestSnapshotSlot
 
-**NEW: This method is only available in solana-core v1.9 or newer. Please use
-[getSnapshotSlot](jsonrpc-api.md#getsnapshotslot) for solana-core v1.8**
+**NEW: This method is only available in renec v1.9 or newer. Please use
+[getSnapshotSlot](jsonrpc-api.md#getsnapshotslot) for renec v1.8**
 
 Returns the highest slot information that the node has snapshots for.
 
@@ -1457,8 +1457,8 @@ Result:
 
 ### getLatestBlockhash
 
-**NEW: This method is only available in solana-core v1.9 or newer. Please use
-[getRecentBlockhash](jsonrpc-api.md#getrecentblockhash) for solana-core v1.8**
+**NEW: This method is only available in renec v1.9 or newer. Please use
+[getRecentBlockhash](jsonrpc-api.md#getrecentblockhash) for renec v1.8**
 
 Returns the latest blockhash
 
@@ -3065,8 +3065,8 @@ Result:
 
 ### isBlockhashValid
 
-**NEW: This method is only available in solana-core v1.9 or newer. Please use
-[getFeeCalculatorForBlockhash](jsonrpc-api.md#getfeecalculatorforblockhash) for solana-core v1.8**
+**NEW: This method is only available in renec v1.9 or newer. Please use
+[getFeeCalculatorForBlockhash](jsonrpc-api.md#getfeecalculatorforblockhash) for renec v1.8**
 
 Returns whether a blockhash is still valid or not
 
@@ -4441,7 +4441,7 @@ Response:
 ### getConfirmedBlock
 
 **DEPRECATED: Please use [getBlock](jsonrpc-api.md#getblock) instead**
-This method is expected to be removed in solana-core v2.0
+This method is expected to be removed in renec v2.0
 
 Returns identity and transaction information about a confirmed block in the ledger
 
@@ -4635,7 +4635,7 @@ For more details on returned data:
 ### getConfirmedBlocks
 
 **DEPRECATED: Please use [getBlocks](jsonrpc-api.md#getblocks) instead**
-This method is expected to be removed in solana-core v2.0
+This method is expected to be removed in renec v2.0
 
 Returns a list of confirmed blocks between two slots
 
@@ -4669,7 +4669,7 @@ Result:
 ### getConfirmedBlocksWithLimit
 
 **DEPRECATED: Please use [getBlocksWithLimit](jsonrpc-api.md#getblockswithlimit) instead**
-This method is expected to be removed in solana-core v2.0
+This method is expected to be removed in renec v2.0
 
 Returns a list of confirmed blocks starting at the given slot
 
@@ -4701,7 +4701,7 @@ Result:
 ### getConfirmedSignaturesForAddress2
 
 **DEPRECATED: Please use [getSignaturesForAddress](jsonrpc-api.md#getsignaturesforaddress) instead**
-This method is expected to be removed in solana-core v2.0
+This method is expected to be removed in renec v2.0
 
 Returns signatures for confirmed transactions that include the given address in
 their `accountKeys` list. Returns signatures backwards in time from the
@@ -4765,7 +4765,7 @@ Result:
 ### getConfirmedTransaction
 
 **DEPRECATED: Please use [getTransaction](jsonrpc-api.md#gettransaction) instead**
-This method is expected to be removed in solana-core v2.0
+This method is expected to be removed in renec v2.0
 
 Returns transaction details for a confirmed transaction
 
@@ -4939,7 +4939,7 @@ Result:
 ### getFeeCalculatorForBlockhash
 
 **DEPRECATED: Please use [isBlockhashValid](jsonrpc-api.md#isblockhashvalid) or [getFeeForMessage](jsonrpc-api.md#getfeeformessage) instead**
-This method is expected to be removed in solana-core v2.0
+This method is expected to be removed in renec v2.0
 
 Returns the fee calculator associated with the query blockhash, or `null` if the blockhash has expired
 
@@ -5042,7 +5042,7 @@ Result:
 ### getFees
 
 **DEPRECATED: Please use [getFeeForMessage](jsonrpc-api.md#getfeeformessage) instead**
-This method is expected to be removed in solana-core v2.0
+This method is expected to be removed in renec v2.0
 
 Returns a recent block hash from the ledger, a fee schedule that can be used to
 compute the cost of submitting a transaction using it, and the last slot in
@@ -5094,7 +5094,7 @@ Result:
 ### getRecentBlockhash
 
 **DEPRECATED: Please use [getLatestBlockhash](jsonrpc-api.md#getlatestblockhash) instead**
-This method is expected to be removed in solana-core v2.0
+This method is expected to be removed in renec v2.0
 
 Returns a recent block hash from the ledger, and a fee schedule that can be used to compute the cost of submitting a transaction using it.
 
@@ -5141,7 +5141,7 @@ Result:
 ### getSnapshotSlot
 
 **DEPRECATED: Please use [getHighestSnapshotSlot](jsonrpc-api.md#gethighestsnapshotslot) instead**
-This method is expected to be removed in solana-core v2.0
+This method is expected to be removed in renec v2.0
 
 Returns the highest slot that the node has a snapshot for
 

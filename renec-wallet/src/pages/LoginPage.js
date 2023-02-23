@@ -32,6 +32,7 @@ import { validateMnemonic } from 'bip39';
 import { Alert } from '@material-ui/lab';
 import { RButton, Icon, TextInput, Message } from '../components/base';
 import { useTranslation } from 'react-i18next';
+import { DemonWalletPromoteBanner } from '../components/DemonWalletPromoteBanner';
 
 const useStyles = makeStyles((theme) => ({
   walletButtons: {
@@ -61,6 +62,7 @@ export default function LoginPage() {
   if (!restore && !newWallet) {
     return (
       <Container maxWidth="sm">
+        <DemonWalletPromoteBanner />
         <Card>
           <CardContent>
             <h1>{t('renec_wallet')}</h1>

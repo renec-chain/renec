@@ -4,6 +4,7 @@ import { getConnection } from "providers/stats/solanaClusterStats";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { SolBalance } from "utils";
+import { displayTimestampUtc } from "utils/date";
 import { Address } from "./common/Address";
 import { Slot } from "./common/Slot";
 import { TableCardBody } from "./common/TableCardBody";
@@ -78,7 +79,7 @@ const BlockRow = ({ block }: any) => {
           <SolBalance lamports={totalFee} />
         </span>
       </td>
-      <td>{new Date(block.blockTime).toLocaleString()}</td>
+      <td>{displayTimestampUtc(block.blockTime * 1000, true)}</td>
     </tr>
   );
 };

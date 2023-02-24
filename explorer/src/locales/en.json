@@ -270,5 +270,16 @@
   "recent_transaction": "Recent Transactions",
   "recent_block": "Recent block",
   "time": "Time",
-  "total_fee": "Total fee"
+  "total_fee": "Total fee",
+  "validators": "Validators",
+  "validator": "Validator",
+  "superminority": "Superminority",
+  "weighted_skip_rate": "Weighted Skip Rate",
+  "non_weighted": "Non-Weighted",
+  "nominal_staking_apy": "Nominal Staking APY",
+  "node_versions": "Node Versions",
+  "cummulative_stake": "Cummulative Stake",
+  "last_vote": "Last Vote",
+  "commission": "Commission",
+  "stake": "Stake"
 }

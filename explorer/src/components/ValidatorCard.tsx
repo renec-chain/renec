@@ -6,6 +6,7 @@ import { getConnection } from "providers/stats/solanaClusterStats";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { SolBalance } from "utils";
+import { LoadingCard } from "./common/LoadingCard";
 import { Slot } from "./common/Slot";
 import { TableCardBody } from "./common/TableCardBody";
 
@@ -134,6 +135,7 @@ export const ValidatorCard = () => {
   const [apy, setApy] = useState<any>(null);
   const [totalSupply, setTotalSupply] = useState<any>(null);
   const [superminority, setSuperminority] = useState<any>(0);
+  const [loading, setLoading] = useState<any>(true);
   const connection = getConnection(url);
   let lastCummulativePercentage = 0;
 
@@ -181,7 +183,7 @@ export const ValidatorCard = () => {
       }
     };
 
-    if (status === 0) {
+    if (status === ClusterStatus.Connected) {
       fetchSupply();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -201,12 +203,11 @@ export const ValidatorCard = () => {
   }, [voteAccounts, clusterNodes]);
 
   useEffect(() => {
-    axios
-      .get("https://hub.renec.foundation/api/v1/validators")
-      .then((response) => {
-        setVoteAccountsInfo(response.data);
-
-        if (voteAccounts?.current) {
+    if (voteAccounts?.current && status === ClusterStatus.Connected) {
+      axios
+        .get("https://hub.renec.foundation/api/v1/validators")
+        .then((response) => {
+          setVoteAccountsInfo(response.data);
           voteAccounts?.current.forEach((account: any) => {
             const info = response.data.find(
               (accountInfo: { voteAddress: any }) =>
@@ -215,9 +216,11 @@ export const ValidatorCard = () => {
 
             account.info = info;
           });
-        }
-      });
-  }, [voteAccounts]);
+
+          setLoading(false);
+        });
+    }
+  }, [voteAccounts, status]);
 
   const delinquentStake = useMemo(() => {
     if (voteAccounts) {
@@ -343,6 +346,10 @@ export const ValidatorCard = () => {
       setSortOrder(order);
     }
   };
+
+  if (loading) {
+    return <LoadingCard />;
+  }
 
   return (
     <div className="mt-4 mb-4 transaction-card">

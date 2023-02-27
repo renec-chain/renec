@@ -33,6 +33,7 @@ use {
     solana_ledger::{
         blockstore::{Blockstore, SignatureInfosForAddress},
         blockstore_db::BlockstoreError,
+        blockstore_meta::{PerfSample, PerfSampleV1, PerfSampleV2},
         get_tmp_ledger_path,
         leader_schedule_cache::LeaderScheduleCache,
     },
@@ -3306,13 +3307,8 @@ pub mod rpc_full {
                     warn!("get_recent_performance_samples failed: {:?}", err);
                     Error::invalid_request()
                 })?
-                .iter()
-                .map(|(slot, sample)| RpcPerfSample {
-                    slot: *slot,
-                    num_transactions: sample.num_transactions,
-                    num_slots: sample.num_slots,
-                    sample_period_secs: sample.sample_period_secs,
-                })
+                .into_iter()
+                .map(|(slot, sample)| rpc_perf_sample_from_perf_sample(slot, sample))
                 .collect())
         }
 
@@ -3808,6 +3804,34 @@ pub mod rpc_full {
             })?;
             Ok(meta.get_fee_for_message(&sanitized_message, commitment))
         }
+    }
+}
+
+fn rpc_perf_sample_from_perf_sample(slot: u64, sample: PerfSample) -> RpcPerfSample {
+    match sample {
+        PerfSample::V1(PerfSampleV1 {
+            num_transactions,
+            num_slots,
+            sample_period_secs,
+        }) => RpcPerfSample {
+            slot,
+            num_transactions,
+            num_non_vote_transactions: None,
+            num_slots,
+            sample_period_secs,
+        },
+        PerfSample::V2(PerfSampleV2 {
+            num_transactions,
+            num_non_vote_transactions,
+            num_slots,
+            sample_period_secs,
+        }) => RpcPerfSample {
+            slot,
+            num_transactions,
+            num_non_vote_transactions: Some(num_non_vote_transactions),
+            num_slots,
+            sample_period_secs,
+        },
     }
 }
 
@@ -4382,7 +4406,7 @@ pub mod tests {
         solana_client::rpc_filter::{Memcmp, MemcmpEncodedBytes},
         solana_gossip::{contact_info::ContactInfo, socketaddr},
         solana_ledger::{
-            blockstore_meta::PerfSample,
+            blockstore_meta::PerfSampleV2,
             blockstore_processor::fill_blockstore_slot_with_ticks,
             genesis_utils::{create_genesis_config, GenesisConfigInfo},
         },
@@ -4567,9 +4591,10 @@ pub mod tests {
             &socketaddr!("127.0.0.1:1234"),
         ));
 
-        let sample1 = PerfSample {
+        let sample1 = PerfSampleV2 {
             num_slots: 1,
             num_transactions: 4,
+            num_non_vote_transactions: 1,
             sample_period_secs: 60,
         };
 

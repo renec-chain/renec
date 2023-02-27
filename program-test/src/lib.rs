@@ -446,6 +446,7 @@ fn setup_fees(bank: Bank) -> Bank {
         lamports_per_signature,
         CommitTransactionCounts {
             committed_transactions_count: 0,
+            committed_non_vote_transactions_count: 0,
             committed_with_failure_result_count: 0,
             signature_count: 1,
         },

@@ -124,7 +124,7 @@ pub fn create_account(
 
 Which can be found here:
 
-https://github.com/remitano/renec/blob/6606590b8132e56dab9e60b3f7d20ba7412a736c/sdk/program/src/system_instruction.rs#L220
+https://github.com/renec-chain/renec/blob/6606590b8132e56dab9e60b3f7d20ba7412a736c/sdk/program/src/system_instruction.rs#L220
 
 ### Program Id
 

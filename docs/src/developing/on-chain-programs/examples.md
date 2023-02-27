@@ -19,14 +19,14 @@ The project comprises of:
 First fetch the latest version of the example code:
 
 ```bash
-$ git clone https://github.com/solana-labs/example-helloworld.git
+$ git clone https://github.com/renec-chain/example-helloworld.git
 $ cd example-helloworld
 ```
 
 Next, follow the steps in the git repository's
-[README](https://github.com/solana-labs/example-helloworld/blob/master/README.md).
+[README](https://github.com/renec-chain/example-helloworld/blob/master/README.md).
 
-## Break
+<!-- ## Break
 
 [Break](https://break.solana.com/) is a React app that gives users a visceral
 feeling for just how fast and high-performance the Renec network really is. Can
@@ -53,7 +53,7 @@ $ cd break
 ```
 
 Next, follow the steps in the git repository's
-[README](https://github.com/solana-labs/break/blob/master/README.md).
+[README](https://github.com/solana-labs/break/blob/master/README.md). -->
 
 ## Language Specific
 

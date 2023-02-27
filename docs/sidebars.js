@@ -46,53 +46,53 @@ module.exports = {
     //   "offline-signing/durable-nonce",
     //   // "cli/usage",
     // ],
-    // Developing: [
-    //   {
-    //     type: "category",
-    //     label: "Programming Model",
-    //     items: [
-    //       "developing/programming-model/overview",
-    //       "developing/programming-model/transactions",
-    //       "developing/programming-model/accounts",
-    //       "developing/programming-model/runtime",
-    //       "developing/programming-model/calling-between-programs",
-    //     ],
-    //   },
-    //   {
-    //     type: "category",
-    //     label: "Clients",
-    //     items: [
-    //       "developing/clients/jsonrpc-api",
-    //       "developing/clients/javascript-api",
-    //       "developing/clients/javascript-reference",
-    //       "developing/clients/rust-api",
-    //     ],
-    //   },
-    //   {
-    //     type: "category",
-    //     label: "Runtime Facilities",
-    //     items: [
-    //       "developing/runtime-facilities/programs",
-    //       "developing/runtime-facilities/sysvars",
-    //     ],
-    //   },
-    //   {
-    //     type: "category",
-    //     label: "On-chain Programs",
-    //     items: [
-    //       "developing/on-chain-programs/overview",
-    //       "developing/on-chain-programs/developing-rust",
-    //       "developing/on-chain-programs/developing-c",
-    //       "developing/on-chain-programs/deploying",
-    //       "developing/on-chain-programs/debugging",
-    //       "developing/on-chain-programs/examples",
-    //       "developing/on-chain-programs/faq",
-    //     ],
-    //   },
-    //   "developing/test-validator",
-    //   "developing/backwards-compatibility",
-    //   "developing/plugins/accountsdb_plugin"
-    // ],
+    Developing: [
+      {
+        type: "category",
+        label: "Programming Model",
+        items: [
+          "developing/programming-model/overview",
+          "developing/programming-model/transactions",
+          "developing/programming-model/accounts",
+          "developing/programming-model/runtime",
+          "developing/programming-model/calling-between-programs",
+        ],
+      },
+      {
+        type: "category",
+        label: "Clients",
+        items: [
+          "developing/clients/jsonrpc-api",
+          "developing/clients/javascript-api",
+          "developing/clients/javascript-reference",
+          "developing/clients/rust-api",
+        ],
+      },
+      {
+        type: "category",
+        label: "Runtime Facilities",
+        items: [
+          "developing/runtime-facilities/programs",
+          "developing/runtime-facilities/sysvars",
+        ],
+      },
+      {
+        type: "category",
+        label: "On-chain Programs",
+        items: [
+          "developing/on-chain-programs/overview",
+          "developing/on-chain-programs/developing-rust",
+          "developing/on-chain-programs/developing-c",
+          "developing/on-chain-programs/deploying",
+          "developing/on-chain-programs/debugging",
+          "developing/on-chain-programs/examples",
+          "developing/on-chain-programs/faq",
+        ],
+      },
+      "developing/test-validator",
+      "developing/backwards-compatibility",
+      // "developing/plugins/accountsdb_plugin"
+    ],
     Integrating: ["integrations/exchange"],
     Validating: [
       "running-validator",

@@ -7,11 +7,11 @@ export const DemonWalletPromoteBanner = () => {
 
   const src = resolvedLanguage === "en" ? DemonBannerEn : DemonBannerVi
 
-  const handleClick = () => window.open("demon.wallet.foundation")
+  const handleClick = () => window.open("https://demon.renec.foundation")
 
   return (
     <div onClick={handleClick} style={{width:"100%"}}>
-      <img width="100%" src={src} />
+      <img style={{cursor: "pointer"}} width="100%" src={src} />
     </div>
   )
 }

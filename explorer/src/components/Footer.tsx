@@ -1,6 +1,8 @@
 import React from "react";
 import Logo from "../img/logos/logo.png";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import { clusterPath } from "../utils/url";
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -64,6 +66,9 @@ const Footer = () => {
                 </a>
               </div>
             ))}
+            <div className="footer--resources__item--link">
+              <Link to={clusterPath("/tx/inspector")}>Inspector</Link>
+            </div>
           </div>
           <div className="footer--resources__item">
             <div className="text-primary">{t("get_connected")}</div>

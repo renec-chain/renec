@@ -54,11 +54,6 @@ export function Navbar() {
                 {t("supply")}
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to={clusterPath("/tx/inspector")}>
-                {t("inspector")}
-              </NavLink>
-            </li>
           </ul>
           <Dropdown.Divider />
           <div className="d-md-none d-flex justify-content-start px-3">

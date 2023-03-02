@@ -216,7 +216,8 @@ export const ValidatorCard = () => {
 
             account.info = info;
           });
-
+        })
+        .finally(() => {
           setLoading(false);
         });
     }
@@ -269,8 +270,9 @@ export const ValidatorCard = () => {
         account.stakePercent = stakePercent;
       });
 
-      const accountsSorted: any = voteAccounts?.current.sort((a: any, b: any) =>
-        a.stakePercent > b.stakePercent ? a : b
+      let accountsSorted: any = [...voteAccounts?.current];
+      accountsSorted.sort(
+        (a: any, b: any) => Number(b.stakePercent) - Number(a.stakePercent)
       );
 
       let superminority: number = 0;

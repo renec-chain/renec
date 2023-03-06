@@ -133,7 +133,7 @@ mkdir -p "$installDir/bin"
   # Exclude `rpl-token` binary for net.sh builds
   if [[ -z "$validatorOnly" ]]; then
     # shellcheck disable=SC2086 # Don't want to double quote $rust_version
-    "$cargo" $maybeRustVersion install --locked rpl-token-cli --root "$installDir" --version 2.0.17
+    "$cargo" $maybeRustVersion install --locked rpl-token-cli --root "$installDir" --version 2.0.16
   fi
 )
 

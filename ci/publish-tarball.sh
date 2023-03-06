@@ -46,7 +46,11 @@ osx)
   TARGET=${_cputype}-apple-darwin
   ;;
 linux)
-  TARGET=x86_64-unknown-linux-gnu
+  _cputype="$(uname -m)"
+  if [[ $_cputype = arm64 ]]; then
+    _cputype=aarch64
+  fi
+  TARGET=${_cputype}-unknown-linux-gnu
   ;;
 windows)
   TARGET=x86_64-pc-windows-msvc

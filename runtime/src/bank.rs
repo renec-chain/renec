@@ -3839,7 +3839,7 @@ impl Bank {
         next_durable_nonce: &DurableNonce,
     ) -> Option<TransactionAccount> {
         let durable_nonces_enabled = enable_durable_nonce
-            || self.slot() <= 135986379
+            || self.slot() <= 33778599
             || self.cluster_type() != ClusterType::MainnetBeta;
         let nonce_must_be_advanceable = self
             .feature_set

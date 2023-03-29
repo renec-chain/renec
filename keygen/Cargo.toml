@@ -2,10 +2,10 @@
 name = "renec-keygen"
 version = "1.13.6"
 description = "RENEC key generation utility"
-authors = ["RENEC Maintainers <dev@remitano.com>"]
-repository = "https://github.com/remitano/renec"
+authors = ["RENEC Maintainers <dev@renec.foundation>"]
+repository = "https://github.com/renec-chain/renec"
 license = "Apache-2.0"
-homepage = "https://remitano.com/"
+homepage = "https://renec.foundation/"
 documentation = "https://docs.rs/renec-keygen"
 edition = "2021"
 

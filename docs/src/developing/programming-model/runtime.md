@@ -69,7 +69,7 @@ parent. If an invoked program consumes the budget or exceeds a bound, the entire
 invocation chain and the parent are halted.
 
 The current [compute
-budget](https://github.com/remitano/renec/blob/0224a8b127ace4c6453dd6492a38c66cb999abd2/sdk/src/compute_budget.rs#L102)
+budget](https://github.com/renec-chain/renec/blob/0224a8b127ace4c6453dd6492a38c66cb999abd2/sdk/src/compute_budget.rs#L102)
 can be found in the Renec SDK.
 
 For example, if the current budget is:
@@ -140,7 +140,7 @@ existing per-instruction cap to avoid breaking existing client behavior.
 
 There are a lot of uses cases that require more than 200k units
 transaction-wide.  To enable these uses cases transactions can include a
-[``ComputeBudgetInstruction`](https://github.com/remitano/renec/blob/0224a8b127ace4c6453dd6492a38c66cb999abd2/sdk/src/compute_budget.rs#L44)
+[``ComputeBudgetInstruction`](https://github.com/renec-chain/renec/blob/0224a8b127ace4c6453dd6492a38c66cb999abd2/sdk/src/compute_budget.rs#L44)
 requesting a higher compute unit cap.  Higher compute caps will be charged
 higher fees.
 

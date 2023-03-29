@@ -38,7 +38,7 @@ document are available at:
 ## Source
 
 The Associated Token Account Program's source is available on
-[github](https://github.com/remitano/renec-program-library).
+[github](https://github.com/renec-chain/renec-program-library).
 
 
 ## Interface

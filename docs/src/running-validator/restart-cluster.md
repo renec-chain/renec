@@ -4,7 +4,7 @@
 
 The highest optimistically confirmed slot is the best slot to start from, which
 can be found by looking for
-[this](https://github.com/remitano/renec/blob/0264147d42d506fb888f5c4c021a998e231a3e74/core/src/optimistic_confirmation_verifier.rs#L71)
+[this](https://github.com/renec-chain/renec/blob/0264147d42d506fb888f5c4c021a998e231a3e74/core/src/optimistic_confirmation_verifier.rs#L71)
 metrics datapoint. Otherwise use the last root.
 
 Call this slot `SLOT_X`
@@ -46,7 +46,7 @@ Post something like the following to #announcements (adjusting the text as appro
 >
 > Steps:
 >
-> 1. Install the v1.1.12 release: https://github.com/remitano/renec/releases/tag/v1.1.12
+> 1. Install the v1.1.12 release: https://github.com/renec-chain/renec/releases/tag/v1.1.12
 > 2. a. Preferred method, start from your local ledger with:
 >
 > ```bash

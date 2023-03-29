@@ -28,7 +28,7 @@ downloading v1.9.29 installer
 Configuration: /home/renec/.config/renec/install/config.yml
 Active release directory: /home/renec/.local/share/renec/install/active_release
 * Release version: v1.9.29
-* Release URL: https://github.com/remitano/renec/releases/download/v1.9.29/renec-release-x86_64-unknown-linux-gnu.tar.bz2
+* Release URL: https://github.com/renec-chain/renec/releases/download/v1.9.29/renec-release-x86_64-unknown-linux-gnu.tar.bz2
 Update successful
 ```
 
@@ -54,7 +54,7 @@ renec --version
 ### Linux
 
 Download the binaries by navigating to
-[https://github.com/remitano/renec/releases/latest](https://github.com/remitano/renec/releases/latest),
+[https://github.com/renec-chain/renec/releases/latest](https://github.com/renec-chain/renec/releases/latest),
 download **renec-release-x86_64-unknown-linux-msvc.tar.bz2**, then extract the
 archive:
 
@@ -67,7 +67,7 @@ export PATH=$PWD/bin:$PATH
 ### MacOS
 
 Download the binaries by navigating to
-[https://github.com/remitano/renec/releases/latest](https://github.com/remitano/renec/releases/latest),
+[https://github.com/renec-chain/renec/releases/latest](https://github.com/renec-chain/renec/releases/latest),
 download **renec-release-x86_64-apple-darwin.tar.bz2**, then extract the
 archive:
 
@@ -81,7 +81,7 @@ export PATH=$PWD/bin:$PATH
 
 If you are unable to use the prebuilt binaries or prefer to build it yourself
 from source, navigate to
-[https://github.com/remitano/renec/releases/latest](https://github.com/remitano/renec/releases/latest),
+[https://github.com/renec-chain/renec/releases/latest](https://github.com/renec-chain/renec/releases/latest),
 and download the **Source Code** archive. Extract the code and build the
 binaries with:
 

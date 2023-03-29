@@ -6,7 +6,7 @@ description = "Blockchain, Rebuilt for Scale"
 version = "1.13.6"
 repository = "https://github.com/solana-labs/solana"
 license = "Apache-2.0"
-homepage = "https://remitano.com/"
+homepage = "https://renec.foundation/"
 documentation = "https://docs.rs/renec-validator"
 default-run = "renec-validator"
 

@@ -6,16 +6,16 @@ The Renec git repository contains all the scripts you might need to spin up your
 
 For all four variations, you'd need the latest Rust toolchain and the Renec source code:
 
-First, setup Rust, Cargo and system packages as described in the Renec [README](https://github.com/remitano/renec#1-install-rustc-cargo-and-rustfmt)
+First, setup Rust, Cargo and system packages as described in the Renec [README](https://github.com/renec-chain/renec#1-install-rustc-cargo-and-rustfmt)
 
 Now checkout the code from github:
 
 ```bash
-git clone https://github.com/remitano/renec.git
+git clone https://github.com/renec-chain/renec.git
 cd renec
 ```
 
-The demo code is sometimes broken between releases as we add new low-level features, so if this is your first time running the demo, you'll improve your odds of success if you check out the [latest release](https://github.com/remitano/renec/releases) before proceeding:
+The demo code is sometimes broken between releases as we add new low-level features, so if this is your first time running the demo, you'll improve your odds of success if you check out the [latest release](https://github.com/renec-chain/renec/releases) before proceeding:
 
 ```bash
 TAG=$(git describe --tags $(git rev-list --tags --max-count=1))

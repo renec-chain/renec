@@ -71,7 +71,7 @@ Verify ed25519 signature program. This program takes an ed25519 signature, publi
 Multiple signatures can be verified. If any of the signatures fail to verify, an error is returned.
 
 - Program id: `Ed25519SigVerify111111111111111111111111111`
-- Instructions: [new_ed25519_instruction](https://github.com/remitano/renec/blob/master/sdk/src/ed25519_instruction.rs#L45)
+- Instructions: [new_ed25519_instruction](https://github.com/renec-chain/renec/blob/master/sdk/src/ed25519_instruction.rs#L45)
 
 The ed25519 program processes an instruction. The first `u8` is a count of the number of
 signatures to check, which is followed by a single byte padding. After that, the
@@ -115,7 +115,7 @@ process_instruction() {
 Verify secp256k1 public key recovery operations (ecrecover).
 
 - Program id: `KeccakSecp256k11111111111111111111111111111`
-- Instructions: [new_secp256k1_instruction](https://github.com/remitano/renec/blob/1a658c7f31e1e0d2d39d9efbc0e929350e2c2bcb/sdk/src/secp256k1_instruction.rs#L31)
+- Instructions: [new_secp256k1_instruction](https://github.com/renec-chain/renec/blob/1a658c7f31e1e0d2d39d9efbc0e929350e2c2bcb/sdk/src/secp256k1_instruction.rs#L31)
 
 The secp256k1 program processes an instruction which takes in as the first byte
 a count of the following struct serialized in the instruction data:

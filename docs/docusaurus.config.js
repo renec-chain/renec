@@ -149,7 +149,7 @@ module.exports = {
           items: [
             {
               label: "GitHub",
-              href: "https://github.com/remitano/renec",
+              href: "https://github.com/renec-chain/renec",
             },
           ],
         },

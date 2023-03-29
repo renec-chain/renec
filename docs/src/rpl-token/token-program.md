@@ -9,17 +9,17 @@ This program defines a common implementation for Fungible and Non Fungible token
 ## Source
 
 The Token Program's source is available on
-[github](https://github.com/remitano/renec-program-library)
+[github](https://github.com/renec-chain/renec-program-library)
 
 ## Interface
 
 The Token Program is written in Rust and available on [crates.io](https://crates.io/crates/rpl-token-cli) and [docs.rs](https://docs.rs/rpl-token-cli).
 
 Auto-generated C bindings are also available
-[here](https://github.com/remitano/renec-program-library/blob/master/token/program/inc/token.h)
+[here](https://github.com/renec-chain/renec-program-library/blob/master/token/program/inc/token.h)
 
 [JavaScript
-bindings](https://github.com/remitano/renec-program-library/blob/master/token/js/client/token.js)
+bindings](https://github.com/renec-chain/renec-program-library/blob/master/token/js/client/token.js)
 are available that support loading the Token Program on to a chain and issue
 instructions.
 
@@ -585,9 +585,9 @@ curl http://api.mainnet-beta.renec.com -X POST -H "Content-Type: application/jso
 ```
 
 The `"dataSize": 165` filter selects all [Token
-Account](https://github.com/remitano/renec-program-library/blob/08d9999f997a8bf38719679be9d572f119d0d960/token/program/src/state.rs#L86-L106)s,
+Account](https://github.com/renec-chain/renec-program-library/blob/08d9999f997a8bf38719679be9d572f119d0d960/token/program/src/state.rs#L86-L106)s,
 and then the `"memcmp": ...` filter selects based on the
-[mint](https://github.com/remitano/renec-program-library/blob/08d9999f997a8bf38719679be9d572f119d0d960/token/program/src/state.rs#L88)
+[mint](https://github.com/renec-chain/renec-program-library/blob/08d9999f997a8bf38719679be9d572f119d0d960/token/program/src/state.rs#L88)
 address within each token account.
 
 ### Finding all token accounts for a wallet
@@ -620,9 +620,9 @@ curl http://api.mainnet-beta.renec.com -X POST -H "Content-Type: application/jso
 ```
 
 The `"dataSize": 165` filter selects all [Token
-Account](https://github.com/remitano/renec-program-library/blob/08d9999f997a8bf38719679be9d572f119d0d960/token/program/src/state.rs#L86-L106)s,
+Account](https://github.com/renec-chain/renec-program-library/blob/08d9999f997a8bf38719679be9d572f119d0d960/token/program/src/state.rs#L86-L106)s,
 and then the `"memcmp": ...` filter selects based on the
-[owner](https://github.com/remitano/renec-program-library/blob/08d9999f997a8bf38719679be9d572f119d0d960/token/program/src/state.rs#L90)
+[owner](https://github.com/renec-chain/renec-program-library/blob/08d9999f997a8bf38719679be9d572f119d0d960/token/program/src/state.rs#L90)
 address within each token account.
 
 ## Operational overview

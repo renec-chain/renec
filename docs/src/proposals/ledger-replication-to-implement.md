@@ -4,7 +4,7 @@ title: Ledger Replication
 
 Note: this ledger replication solution was partially implemented, but not
 completed. The partial implementation was removed by
-https://github.com/remitano/renec/pull/9992 in order to prevent the security
+https://github.com/renec-chain/renec/pull/9992 in order to prevent the security
 risk of unused code. The first part of this design document reflects the
 once-implemented parts of ledger replication. The
 [second part of this document](#ledger-replication-not-implemented) describes the

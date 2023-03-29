@@ -1,12 +1,12 @@
 [package]
-authors = ["RENEC Maintainers <dev@remitano.com>"]
+authors = ["RENEC Maintainers <dev@renec.foundation>"]
 edition = "2021"
 name = "renec-cli-output"
 description = "Blockchain, Rebuilt for Scale"
 version = "1.13.6"
-repository = "https://github.com/remitano/renec"
+repository = "https://github.com/renec-chain/renec"
 license = "Apache-2.0"
-homepage = "https://remitano.com/"
+homepage = "https://renec.foundation/"
 documentation = "https://docs.rs/renec-cli-output"
 
 [dependencies]

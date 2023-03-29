@@ -124,8 +124,8 @@ mod tests {
                 total,
                 inflation.validator(*year) + inflation.foundation(*year)
             );
-            assert!(total < last);
-            assert!(total >= inflation.terminal);
+            assert_eq!(total, last);
+            assert_eq!(total, inflation.terminal);
             last = total;
         }
         assert_eq!(last, inflation.terminal);

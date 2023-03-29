@@ -53,7 +53,6 @@ fn load_accounts(path: &Path) -> Result<Input> {
 
 fn main() {
     solana_logger::setup();
-    let max_u64 = std::i64::MAX.to_string();
     let matches = Command::new("Solana BPF CLI")
         .version(crate_version!())
         .author("Solana Maintainers <maintainers@solana.foundation>")
@@ -139,7 +138,7 @@ native machine code before execting it in the virtual machine.",
                 .long("limit")
                 .takes_value(true)
                 .value_name("COUNT")
-                .default_value(&max_u64),
+                .default_value(&std::i64::MAX.to_string()),
         )
         .arg(
             Arg::new("trace")

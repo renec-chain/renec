@@ -118,8 +118,9 @@ impl fmt::Debug for Packet {
 #[allow(clippy::uninit_assumed_init)]
 impl Default for Packet {
     fn default() -> Packet {
-        Packet {
-            buffer: unsafe { std::mem::MaybeUninit::uninit().assume_init() },
+        let buffer = std::mem::MaybeUninit::<[u8; PACKET_DATA_SIZE]>::uninit();
+        Self {
+            buffer: unsafe { buffer.assume_init() },
             meta: Meta::default(),
         }
     }

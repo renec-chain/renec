@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Rust Debug Launch",
+            // "program": "${workspaceRoot}/target/debug/renec-genesis",
+            // "args": ["--slots-per-epoch", "200", "--bootstrap-validator-lamports","500000000000","--bootstrap-validator-stake-lamports","500000000000000","--cluster-type","mainnet-beta","--rent-burn-percentage","50","--fee-burn-percentage","50","--inflation","full","--ledger","ledger","--bootstrap-validator","keypairs/validator-identity.json","keypairs/validator-vote-account.json","keypairs/validator-stake-account.json","--faucet-lamports","1"],
+            "program": "${workspaceRoot}/target/debug/renec-validator",
+            "args": ["--identity","keypairs/validator-identity.json","--vote-account","keypairs/validator-vote-account.json","--no-genesis-fetch","--ledger","ledger","--gossip-port","8001","--rpc-port","8899","--rpc-faucet-address","127.0.0.1:9900","--enable-rpc-transaction-history","--enable-cpi-and-log-storage","--init-complete-file","init-completed","--require-tower","--log","-","--no-wait-for-vote-to-start-leader","--no-poh-speed-test"],
+
+            // "args": ["program", "deploy", "/Users/ngocbach/code/remitano/renec-on-chain/anchor/examples/tutorial/basic-0/target/deploy/basic_0.so"],
+            // "args": ["--file", "${workspaceRoot}/validator/src/main.rs"],
+            "cwd": "${workspaceRoot}/target/lldb",
+            "sourceLanguages": ["rust"]
+        }
+    ]
+}

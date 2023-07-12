@@ -7552,10 +7552,13 @@ impl Bank {
     }
 
     fn reconfigure_token2_native_mint(&mut self) {
+        warn!("Custom Version: 1.0.1");
+        warn!("reconfigure_token2_native_mint: {:?}", self.cluster_type());
+
         let reconfigure_token2_native_mint = match self.cluster_type() {
             ClusterType::Development => true,
             ClusterType::Devnet => true,
-            ClusterType::Testnet => self.epoch() == 93,
+            ClusterType::Testnet => self.epoch() == 2,
             ClusterType::MainnetBeta => self.epoch() == 75,
         };
 

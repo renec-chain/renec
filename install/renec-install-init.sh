@@ -1,5 +1,5 @@
-# RENEC_RELEASE=v1.8.14
-# RENEC_INSTALL_INIT_ARGS=v1.8.14
+RENEC_RELEASE=v1.13.6
+RENEC_INSTALL_INIT_ARGS=v1.13.6
 #!/bin/sh
 # Copyright 2016 The Rust Project Developers. See the COPYRIGHT
 # file at the top-level directory of this distribution and at
@@ -18,9 +18,9 @@
 { # this ensures the entire script is downloaded #
 
 if [ -z "$RENEC_DOWNLOAD_ROOT" ]; then
-    RENEC_DOWNLOAD_ROOT="https://github.com/ngocbv/renec/releases/download"
+    RENEC_DOWNLOAD_ROOT="https://github.com/renec-chain/renec/releases/download"
 fi
-GH_LATEST_RELEASE="https://api.github.com/repos/ngocbv/renec/releases/latest"
+GH_LATEST_RELEASE="https://api.github.com/repos/renec-chain/renec/releases/latest"
 
 set -e
 

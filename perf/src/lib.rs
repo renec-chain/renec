@@ -42,6 +42,7 @@ fn is_rosetta_emulated() -> bool {
 }
 
 pub fn report_target_features() {
+    warn!("Custom Version: 1.0.1");
     warn!(
         "CUDA is {}abled",
         if crate::perf_libs::api().is_some() {

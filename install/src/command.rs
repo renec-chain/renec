@@ -568,9 +568,8 @@ pub fn init(
 }
 
 fn github_release_download_url(release_semver: &str) -> String {
-    // TODO Change repo ngocbv/renec to remitano/renec
     format!(
-        "https://github.com/ngocbv/renec/releases/download/v{}/renec-release-{}.tar.bz2",
+        "https://github.com/renec-chain/renec/releases/download/v{}/renec-release-{}.tar.bz2",
         release_semver,
         crate::build_env::TARGET
     )
@@ -578,7 +577,7 @@ fn github_release_download_url(release_semver: &str) -> String {
 
 fn release_channel_download_url(release_channel: &str) -> String {
     format!(
-        "https://github.com/ngocbv/renec/releases/download/v{}/renec-release-{}.tar.bz2",
+        "https://github.com/renec-chain/renec/releases/download/v{}/renec-release-{}.tar.bz2",
         release_channel,
         crate::build_env::TARGET
     )
@@ -586,7 +585,7 @@ fn release_channel_download_url(release_channel: &str) -> String {
 
 fn release_channel_version_url(release_channel: &str) -> String {
     format!(
-        "https://github.com/ngocbv/renec/releases/download/v{}/renec-release-{}.yml",
+        "https://github.com/renec-chain/renec/releases/download/v{}/renec-release-{}.yml",
         release_channel,
         crate::build_env::TARGET
     )
@@ -877,9 +876,8 @@ fn check_for_newer_github_release(
     let mut releases = vec![];
 
     while page == 1 || releases.len() == PER_PAGE {
-        // TODO Change repo ngocbv/renec to remitano/renec
         let url = reqwest::Url::parse_with_params(
-            "https://api.github.com/repos/ngocbv/renec/releases",
+            "https://api.github.com/repos/renec-chain/renec/releases",
             &[
                 ("per_page", &format!("{}", PER_PAGE)),
                 ("page", &format!("{}", page)),

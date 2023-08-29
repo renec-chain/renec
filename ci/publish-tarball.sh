@@ -37,16 +37,16 @@ if [[ -z $CHANNEL_OR_TAG ]]; then
   exit 0
 fi
 
+_cputype="$(uname -m)"
 case "$CI_OS_NAME" in
 osx)
-  _cputype="$(uname -m)"
   if [[ $_cputype = arm64 ]]; then
     _cputype=aarch64
   fi
   TARGET=${_cputype}-apple-darwin
   ;;
 linux)
-  TARGET=x86_64-unknown-linux-gnu
+  TARGET=${_cputype}-unknown-linux-gnu
   ;;
 windows)
   TARGET=x86_64-pc-windows-msvc

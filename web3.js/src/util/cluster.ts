@@ -2,12 +2,12 @@ const endpoint = {
   http: {
     devnet: 'http://api-devnet.renec.foundation:8899',
     testnet: 'http://api-testnet.renec.foundation:8899',
-    'mainnet-beta': 'http://api-mainnet-beta.renec.foundation:8899',
+    'mainnet-beta': 'http://api-mainnet.renec.foundation',
   },
   https: {
     devnet: 'https://api-devnet.renec.foundation:8899',
     testnet: 'https://api-testnet.renec.foundation:8899',
-    'mainnet-beta': 'https://api-mainnet-beta.renec.foundation:8899',
+    'mainnet-beta': 'https://api-mainnet.renec.foundation',
   },
 };
 

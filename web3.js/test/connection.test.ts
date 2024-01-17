@@ -3446,7 +3446,7 @@ describe('Connection', () => {
 
     it('https request', async () => {
       const connection = new Connection(
-        'https://api-mainnet-beta.renec.foundation:8899',
+        'https://api-mainnet.renec.foundation',
       );
       const version = await connection.getVersion();
       expect(version['solana-core']).to.be.ok;

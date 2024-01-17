@@ -2,5 +2,5 @@
 solana_sdk::declare_id!("ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL");
 
 pub(crate) mod program_v1_1_0 {
-    solana_sdk::declare_id!("NatA1Zyo48dJ7yuwR7cGURwhskKA8ywUyxb9GvG7mTC");
+    solana_sdk::declare_id!("79izbm3oYCcCezWPCwK49J3c6eGUpRDRimd4pLGm2iAJ");
 }

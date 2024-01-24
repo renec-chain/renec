@@ -343,6 +343,14 @@ pub mod spl_associated_token_account_v1_1_0 {
     solana_sdk::declare_id!("4gMoNQr1kXWpG1X8HpmP3mBV7Jnu4712M5HGEUuVX1QJ");
 }
 
+pub mod spl_token_v3_5_0 {
+    solana_sdk::declare_id!("3tfhrqU8KYpjYfXrdsf2YhznzTQtU9RTJT13WKXxZxdf");
+}
+
+pub mod spl_associated_token_account_v1_1_1 {
+    solana_sdk::declare_id!("HpMAmF5qsKrbty7dRZn1VGiHMWBU6BT4RNgPjnEzP1x1");
+}
+
 pub mod default_units_per_instruction {
     solana_sdk::declare_id!("ESabkx13zh1mrGLGa5gJtD19w7p6S8bz6svfbm2wjnNq");
 }

@@ -6671,20 +6671,20 @@ impl Bank {
             self.rent_collector.rent.burn_percent = 50; // 50% rent burn
         }
 
-        if new_feature_activations.contains(&feature_set::spl_token_v3_5_0::id()) {
+        if new_feature_activations.contains(&feature_set::spl_token_v3_4_0_reactivate::id()) {
             self.replace_program_account(
                 &inline_spl_token::id(),
-                &inline_spl_token::program_v3_5_0::id(),
-                "bank-apply_spl_token_v3_5_0",
+                &inline_spl_token::program_v3_4_0::id(),
+                "bank-apply_spl_token_v3_4_0",
             );
         }
 
-        if new_feature_activations.contains(&feature_set::spl_associated_token_account_v1_1_1::id())
+        if new_feature_activations.contains(&feature_set::spl_associated_token_account_v1_1_0_reactivate::id())
         {
             self.replace_program_account(
                 &inline_spl_associated_token_account::id(),
-                &inline_spl_associated_token_account::program_v1_1_1::id(),
-                "bank-apply_spl_associated_token_account_v1_1_1",
+                &inline_spl_associated_token_account::program_v1_1_0::id(),
+                "bank-apply_spl_associated_token_account_v1_1_0",
             );
         }
 

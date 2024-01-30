@@ -3,8 +3,9 @@ use solana_sdk::pubkey::{Pubkey, PUBKEY_BYTES};
 
 solana_sdk::declare_id!("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA");
 
-pub(crate) mod program_v3_5_0 {
-    solana_sdk::declare_id!("71m5XRQGLq3bSxsDji2uQkqQSU49cmz782dGXPoDtTYn");
+pub(crate) mod program_v3_4_0 {
+    // testnet
+    solana_sdk::declare_id!("3LQBYaTfzYoeYnxew7P64whr4V2mJBWa2ZmhZiRQ5Svt");
 }
 
 /*

@@ -7,6 +7,10 @@ pub(crate) mod program_v3_5_0 {
     solana_sdk::declare_id!("71m5XRQGLq3bSxsDji2uQkqQSU49cmz782dGXPoDtTYn");
 }
 
+pub(crate) mod program_v3_5_1 {
+    solana_sdk::declare_id!("HNiPhjHqgSsf6uxwGnxRse72VEfYJA1zLHmw6BjdLjbR");
+}
+
 /*
     spl_token::state::Account {
         mint: Pubkey,

@@ -7428,6 +7428,14 @@ impl Bank {
             const ACCOUNTS_DATA_LEN: u64 = 50_000_000_000;
             self.accounts_data_size_initial = ACCOUNTS_DATA_LEN;
         }
+
+        if new_feature_activations.contains(&feature_set::spl_token_v3_5_1::id()) {
+            self.replace_program_account(
+                &inline_spl_token::id(),
+                &inline_spl_token::program_v3_5_1::id(),
+                "bank-apply_spl_token_v3_5_1",
+            );
+        }
     }
 
     fn adjust_sysvar_balance_for_rent(&self, account: &mut AccountSharedData) {

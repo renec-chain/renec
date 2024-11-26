@@ -28,6 +28,10 @@ use {
     std::collections::{HashMap, HashSet},
 };
 
+pub mod spl_token_v3_5_1 {
+    solana_sdk::declare_id!("7L7yTa2EKbFxJtipsDGu9duQissw4o7v2UNuyKF7sr43");
+}
+
 pub mod deprecate_rewards_sysvar {
     solana_sdk::declare_id!("A3Wtikt95SmCiyeUV7NJxdcqMLLHadfvZz1z4XMR3XdK");
 }
@@ -692,6 +696,7 @@ lazy_static! {
         (keep_merkle_shreds::id(), "keep merkle shreds #29711"),
         (move_serialized_len_ptr_in_cpi::id(), "cpi ignore serialized_len_ptr #29592"),
         (enable_request_heap_frame_ix::id(), "Enable transaction to request heap frame using compute budget instruction #30076"),
+        (spl_token_v3_5_1::id(), "SPL Token Program version 3.5.1, enable freeze for tokens of the foundation"),
         /*************** ADD NEW FEATURES HERE ***************/
     ]
     .iter()
